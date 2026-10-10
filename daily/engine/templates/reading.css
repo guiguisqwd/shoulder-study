@@ -162,3 +162,7 @@ body.mode-recall .acu-card dd:not(.reveal){filter:blur(6px);cursor:pointer;user-
 .pron-term .say{margin:3px 0 0}
 body.mode-recall .term.reveal .pron,body.mode-recall .term .pron{filter:none}
 .before-terms .term-list:has(.acu-term){grid-template-columns:1fr 1fr}
+.flow-steps li{margin-bottom:10px}.dialogue{display:grid;gap:10px}.dialogue-line{display:grid;grid-template-columns:auto auto 1fr;gap:8px;align-items:start}.dialogue-line .bilingual-pair{margin:0}
+.spell-item{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}.spell-item label{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.spell-item input{font:inherit;padding:4px 8px;border:1px solid var(--rule);border-radius:6px;min-width:0;max-width:100%}
+.spell-result.is-ok{color:var(--accent)}.spell-result.is-wrong{color:var(--red)}.typed-notes{width:100%;font:inherit;padding:10px;border:1px solid var(--rule);border-radius:8px;margin:8px 0}.paper-card h4{margin:16px 0 4px}.chapter-link{font-size:1.05em}
+.spell-check{border:1px solid var(--rule);background:#fffdf7;border-radius:8px;padding:7px 13px;font:500 13px -apple-system,"PingFang SC",sans-serif;color:#41504a;cursor:pointer}

@@ -307,7 +307,7 @@
       "structure": "trapezius-muscles-ascending-part-of-trapezius-muscle",
       "showAs": "Lower trapezius (ascending part)",
       "zAnatomyName": "Descending part of trapezius muscle",
-      "why": "Renamed before export (renameSourceObjects). Guarded by 'topBelow Vertebra C7', 'bottomBelow Vertebra T7' and 'overlaps Scapula'."
+      "why": "Renamed before export (renameSourceObjects). Guarded by 'topBelow Vertebra C7', 'bottomBelow Vertebra T7' and 'overlaps Scapula'. Part boundary only approximate (measured 2026-10-09 in this GLB and the bundled skeletal GLB): at the midline this mesh runs from y 1.120 m (T12 spinous tip 1.120) up to y 1.414 m, between the T1 (1.426) and T2 (1.405) spinous tips, so it starts at about T2, while Kenhub gives T4–T12 and Elsevier T5–T12 for the ascending part; the transverse mesh spans y 1.370–1.451 m at the midline. Laterally this mesh lies over part of the supraspinatus in the supraspinous fossa, where the SI12 depth probe enters it 0.3 cm from the transverse mesh; acupoint-depth.json therefore names that layer Trapezius."
     },
     {
       "structure": "trapezius-muscles-transverse-part-of-trapezius-muscle",

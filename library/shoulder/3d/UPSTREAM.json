@@ -17,5 +17,38 @@
     "public/ATTRIBUTION.txt",
     "public/atlas/demo-1.4.0/muscular.metadata.json",
     "public/atlas/demo-1.4.0/skeletal.metadata.json"
+  ],
+  "localChanges": {
+    "ASSET-LICENSE.md": "Kept as public/licenses/ASSET-LICENSE.md. 2026-10-09: the Z-Anatomy source link https://github.com/Z-Anatomy/Models (does not resolve) replaced by https://github.com/Z-Anatomy/Models-of-human-anatomy; section for the shoulder add-on model added.",
+    "public/ATTRIBUTION.txt": "Kept as public/licenses/ATTRIBUTION.txt. 2026-10-09: same link correction; section for the shoulder add-on model added."
+  },
+  "addons": [
+    {
+      "id": "shoulder",
+      "note": "Chapter add-on model built in this repository (not a Vanatome file): shoulder-region muscles missing from the bundled demo model. Inputs pinned in site/build/atlas/source.json; mesh list, renames and position checks in library/shoulder/3d/atlas-addon.json; per-build record in the provenance file. Paths in files are relative to library/shoulder/3d; config and vendoredAs are relative to the repository root.",
+      "config": "library/shoulder/3d/atlas-addon.json",
+      "files": [
+        "public/models/z-anatomy-1.4.0-shoulder-addon.glb",
+        "public/models/shoulder-addon.metadata.json",
+        "public/models/shoulder-addon.provenance.json"
+      ],
+      "source": {
+        "repository": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+        "commit": "bb293be456f6d2245191f37752d14ec76894740d",
+        "zip": "Z-Anatomy.zip",
+        "zipSha256": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+        "blendMember": "Z-Anatomy/Startup.blend",
+        "blendSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+        "license": "CC BY-SA 4.0 (Z-Anatomy; derived from BodyParts3D, CC BY-SA 2.1 JP)"
+      },
+      "exporter": {
+        "repository": "https://github.com/vixotic/Vanatome",
+        "commit": "8185b3fa46a1dbefdd907390918c57954fd9b816",
+        "file": "tools/anatomy/blender/export_batch.py",
+        "vendoredAs": "site/build/atlas/export_batch.py",
+        "sha256": "bee6407e659a3da8b1abe66ef14914295f729d891533201f2eee2fb96ca09783",
+        "license": "MIT (Vanatome contributors); vendored unchanged"
+      }
+    }
   ]
 }

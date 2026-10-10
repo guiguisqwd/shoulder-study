@@ -14,6 +14,7 @@ ST-5 核验时逐条过。自动项由脚本检查；人工项要留截图或记
 | QC-06 | 读音覆盖所有英文关键术语 | AN-07 | `daily/engine/qa/qa.js`；主题包由 `topiclib.py` 检查：ST-1 结构清单里每个肌肉、神经、骨、骨性标志、关节在 `library/<id>/pronunciation.json` 有 IPA、重音拼读和词典链接，每个穴位有带声调拼音（草稿记为待办，`published` 时报错） |
 | QC-07 | SVG 文字出界、重叠；手机宽度显示 | AN-16 | `daily/engine/qa/qa.js` |
 | QC-08 | ST-1 结构清单存在；每一项在它所列的章节正文里出现；3D ID 真实存在；正文里每条肌肉记录都在清单里 | ST-1、AN-40、AN-41 | `site/build/platform/topiclib.py`（草稿记为待办，`published` 时报错） |
+| QC-09 | 3D 附加模型检查通过（有 `library/<id>/3d/atlas-addon.json` 的章节）：`python3 site/build/atlas/check-addon.py` 无报错退出——与自带模型同一 `atlasVersion` 和 `buildId`、metadata 与 GLB 一致、ID 不与自带模型重复、左右侧位置正确且互为镜像、清单 `checks` 的位置检查全过 | AN-42、AN-44 | `site/build/atlas/check-addon.py`；CI 由 `tests/test_atlas_addon.py` 运行它，并核对导出脚本未改动、provenance 记录的 GLB 摘要与发布的文件一致；附加模型的 ID 只能由它所属的章节使用，由 `topiclib.py` 检查 |
 
 ## 人工检查
 

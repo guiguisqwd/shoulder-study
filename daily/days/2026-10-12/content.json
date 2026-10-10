@@ -1,0 +1,644 @@
+{
+ "schema": "dpt-daily-pack/2",
+ "date": "2026-10-12",
+ "kind": "supplement",
+ "week": 1,
+ "chapter": "shoulder",
+ "chapter_name": "肩袖 Rotator cuff",
+ "slug_zh": "试用-肩带四穴与肩袖四肌",
+ "title": {
+  "zh": "试用版：肩带四穴与肩袖四肌",
+  "en": "Trial: SI14, SI15, TE15, LI14 · the rotator cuff"
+ },
+ "description": "DPT 每日包提前试用版（新周计划格式）：第 1 周周一（10-12）的包，10-09 先放出。新：肩外俞、肩中俞、天髎、臂臑；夯实：肩袖四肌。",
+ "brand_sub": "提前试用版 · 第 1 周周一 · 10/12",
+ "today_line": "提前试用版（新格式）：4 个新穴位（肩外俞、肩中俞、天髎、臂臑）· 夯实肩袖四肌 · 自测 8 题 + 记忆卡",
+ "study_plan": [
+  [
+   "新穴位（20 分钟）",
+   "01 章：看图 01、02，在自己背上和臂上找穴，再读层次"
+  ],
+  [
+   "夯实（15 分钟）",
+   "02 章：先答 8 道自测，再看答案"
+  ],
+  [
+   "记忆卡（10 分钟）",
+   "02 章末：新穴位和肩袖四肌混在一起刷"
+  ]
+ ],
+ "footer": "DPT 每日包 · 提前试用版（第 1 周周一 10-12 的内容，10-09 先放出来试）· 定位依据 GB/T 12346-2021 与 WHO 2008；层次为学习用的简化描述，不代表进针方向或深度。",
+ "tags": {
+  "vertical": [
+   "解剖学/上肢/肩带/肩袖",
+   "解剖学/背部/肩胛提肌与菱形肌",
+   "中医针灸对照/经络/手太阳小肠经",
+   "中医针灸对照/经络/手少阳三焦经",
+   "中医针灸对照/经络/手阳明大肠经"
+  ],
+  "horizontal": [
+   "中西医对照/穴位-触发点",
+   "体表定位/骨度分寸",
+   "针刺安全/危险结构",
+   "记忆法"
+  ]
+ },
+ "muscles": [
+  {
+   "id": "supraspinatus",
+   "en": "Supraspinatus",
+   "zh": "冈上肌",
+   "o": [
+    "Supraspinous fossa of the scapula",
+    "肩胛骨冈上窝"
+   ],
+   "i": [
+    "Superior facet of the greater tubercle of the humerus",
+    "肱骨大结节上小面"
+   ],
+   "n": [
+    "Suprascapular nerve (usually C5–C6)",
+    "肩胛上神经（通常为 C5–C6）"
+   ],
+   "a": [
+    "It contributes to shoulder abduction and helps stabilize the humeral head in the glenoid cavity.",
+    "它参与肩关节外展，并帮助将肱骨头稳定在关节盂内。"
+   ],
+   "sentence": [
+    "The supraspinatus originates from the supraspinous fossa of the scapula, passes laterally beneath the acromion as a tendon, and inserts onto the superior facet of the greater tubercle of the humerus.",
+    "冈上肌起自肩胛骨冈上窝，以肌腱向外侧经肩峰下方走行，止于肱骨大结节上小面。"
+   ],
+   "acu": "天髎（深层是冈上肌）",
+   "acu_en": "TE15 (supraspinatus lies deep)",
+   "source": "https://www.elsevier.com/resources/anatomy/muscular-system/muscles-of-upper-limb/supraspinatus-muscle/21166"
+  },
+  {
+   "id": "infraspinatus",
+   "en": "Infraspinatus",
+   "zh": "冈下肌",
+   "o": [
+    "Infraspinous fossa of the scapula",
+    "肩胛骨冈下窝"
+   ],
+   "i": [
+    "Middle facet of the greater tubercle of the humerus",
+    "肱骨大结节中小面"
+   ],
+   "n": [
+    "Suprascapular nerve (usually C5–C6)",
+    "肩胛上神经（通常为 C5–C6）"
+   ],
+   "a": [
+    "It externally rotates the humerus and contributes to dynamic stability of the glenohumeral joint.",
+    "它使肱骨外旋，并参与盂肱关节的动态稳定。"
+   ],
+   "sentence": [
+    "The infraspinatus originates from the infraspinous fossa of the scapula, passes laterally behind the glenohumeral joint as its fibers converge into a tendon, and inserts onto the middle facet of the greater tubercle of the humerus.",
+    "冈下肌起自肩胛骨冈下窝，肌纤维汇聚成肌腱，向外侧经盂肱关节后方走行，止于肱骨大结节中小面。"
+   ],
+   "acu": "天宗 SI11",
+   "acu_en": "SI11 Tianzong",
+   "source": "https://www.elsevier.com/resources/anatomy/muscular-system/muscles-of-upper-limb/infraspinatus-muscle/20380"
+  },
+  {
+   "id": "teres-minor",
+   "en": "Teres minor",
+   "zh": "小圆肌",
+   "o": [
+    "Upper part of the lateral border of the scapula",
+    "肩胛骨外侧缘上部"
+   ],
+   "i": [
+    "Inferior facet of the greater tubercle of the humerus",
+    "肱骨大结节下小面"
+   ],
+   "n": [
+    "Axillary nerve (mainly C5–C6)",
+    "腋神经（主要为 C5–C6）"
+   ],
+   "a": [
+    "It assists external rotation of the humerus and helps stabilize the humeral head. Teres major is a separate muscle and is not part of the rotator cuff.",
+    "它协助肱骨外旋并帮助稳定肱骨头。大圆肌是另一块肌肉，不属于肩袖。"
+   ],
+   "sentence": [
+    "The teres minor originates from the upper part of the lateral border of the scapula, passes superolaterally along the inferior border of the infraspinatus, and inserts onto the inferior facet of the greater tubercle of the humerus.",
+    "小圆肌起自肩胛骨外侧缘上部，沿冈下肌下缘向上外侧走行，止于肱骨大结节下小面。"
+   ],
+   "acu": "肩贞 SI9 附近",
+   "acu_en": "near SI9 Jianzhen",
+   "source": "https://www.elsevier.com/resources/anatomy/muscular-system/muscles-of-upper-limb/teres-minor-muscle/19335"
+  },
+  {
+   "id": "subscapularis",
+   "en": "Subscapularis",
+   "zh": "肩胛下肌",
+   "o": [
+    "Subscapular fossa on the anterior surface of the scapula",
+    "肩胛骨前面的肩胛下窝"
+   ],
+   "i": [
+    "Lesser tubercle of the humerus",
+    "肱骨小结节"
+   ],
+   "n": [
+    "Upper and lower subscapular nerves (C5–C6; some sources include C7)",
+    "上、下肩胛下神经（C5–C6；部分资料还包括 C7）"
+   ],
+   "a": [
+    "It internally rotates the humerus and contributes to anterior stability of the glenohumeral joint.",
+    "它使肱骨内旋，并参与盂肱关节前方的稳定。"
+   ],
+   "sentence": [
+    "The subscapularis originates from the subscapular fossa on the anterior surface of the scapula, passes laterally in front of the glenohumeral joint, and inserts onto the lesser tubercle of the humerus.",
+    "肩胛下肌起自肩胛骨前面的肩胛下窝，经盂肱关节前方向外侧走行，止于肱骨小结节。"
+   ],
+   "acu": "（前面，没有今天的穴位）",
+   "acu_en": "(anterior; none of today's points)",
+   "source": "https://www.elsevier.com/resources/anatomy/muscular-system/muscles-of-upper-limb/subscapularis-muscle/16597"
+  }
+ ],
+ "acupoints": [
+  {
+   "name": "肩外俞",
+   "pinyin": "Jiānwàishū",
+   "code": "SI14",
+   "meridian": "手太阳小肠经",
+   "loc": "在背部，第1胸椎棘突下，后正中线旁开3寸（GB/T 12346-2021）",
+   "loc_en": "In the upper back region, at the same level as the inferior border of the spinous process of the first thoracic vertebra (T1), 3 B-cun lateral to the posterior median line. (WHO 2008)",
+   "loc_short": "Below T1 spinous process, 3 cun lateral to the posterior midline",
+   "layers": "皮肤 → 皮下组织（第1胸神经后支内侧皮支）→ 斜方肌（副神经）→ 肩胛提肌、小菱形肌（肩胛背神经；颈横动、静脉）→ 深面胸壁、胸膜与肺",
+   "safety": "深面是胸壁和胸膜、肺尖附近，不可深刺；教材刺法为斜刺 0.3～0.5 寸",
+   "muscles": "斜方肌（浅层）；肩胛提肌、小菱形肌（深层）",
+   "find": "先摸到 C7（低头时最突出的棘突），往下一个是 T1；从 T1 棘突下缘水平向外，到肩胛骨内侧缘（后正中线到肩胛骨内侧缘 = 3 寸）。WHO 注：在肩胛冈内侧端的垂线上，与陶道（GV13）、大杼（BL11）同高（见图 01）",
+   "sources": [
+    "https://zynj.shutcm.edu.cn/_upload/article/files/66/b4/b34a95604d04b0bf686251b2d317/368ea8b0-187c-48a7-a402-ffdf1e11bb99.pdf",
+    "https://medbox.org/dl/627a4de115110145a1723f64",
+    "https://www.gmzyjx.com/books/zjs/zjs-zjs3.1.4-6-0.0.3.3.14/"
+   ]
+  },
+  {
+   "name": "肩中俞",
+   "pinyin": "Jiānzhōngshū",
+   "code": "SI15",
+   "meridian": "手太阳小肠经",
+   "loc": "在背部，第7颈椎棘突下，后正中线旁开2寸（GB/T 12346-2021）",
+   "loc_en": "In the upper back region, at the same level as the inferior border of the spinous process of the seventh cervical vertebra (C7), 2 B-cun lateral to the posterior median line. (WHO 2008)",
+   "loc_short": "Below C7 spinous process, 2 cun lateral to the posterior midline",
+   "layers": "皮肤 → 皮下组织（第1胸神经后支内侧皮支）→ 斜方肌（副神经）→ 肩胛提肌（肩胛背神经；颈横动、静脉）→ 深面胸壁上口、胸膜顶",
+   "safety": "深面接近胸膜顶和肺尖，不可直刺、深刺；教材刺法为斜刺 0.3～0.5 寸",
+   "muscles": "斜方肌（浅层）；肩胛提肌（深层）",
+   "find": "大椎（GV14，C7 棘突下）水平，向外 2 寸；WHO 注：在后正中线到肩胛骨内侧缘连线的外 1/3 与内 2/3 交点。教材另一取法：大椎与肩井连线的中点（见图 01）",
+   "sources": [
+    "https://zynj.shutcm.edu.cn/_upload/article/files/66/b4/b34a95604d04b0bf686251b2d317/368ea8b0-187c-48a7-a402-ffdf1e11bb99.pdf",
+    "https://medbox.org/dl/627a4de115110145a1723f64",
+    "https://www.gmzyjx.com/books/zjs/zjs-zjs3.1.4-6-0.0.3.3.15/"
+   ]
+  },
+  {
+   "name": "天髎",
+   "pinyin": "Tiānliáo",
+   "code": "TE15",
+   "meridian": "手少阳三焦经",
+   "loc": "在肩带部，肩胛骨上角骨际凹陷中（GB/T 12346-2021）",
+   "loc_short": "In the depression at the superior angle of the scapula",
+   "layers": "皮肤 → 皮下组织（第1胸神经后支外侧皮支）→ 斜方肌（副神经；颈横动脉降支）→ 冈上肌（肩胛上动脉、肩胛上神经肌支）→ 肩胛骨上角附近骨面",
+   "safety": "深层有肩胛上动脉和肩胛上神经的肌支；教材刺法为直刺 0.5～0.8 寸。WHO 2008 原文本次没有打开到，英文定位暂缺",
+   "muscles": "斜方肌（浅层）；冈上肌（深层）；肩胛提肌止于肩胛骨上角，就在旁边",
+   "find": "手放到对侧肩上，沿肩胛骨内侧缘往上摸到最高的角（上角），角的上方骨边的凹陷就是天髎；教材：肩井下 1 寸（见图 01）",
+   "sources": [
+    "https://zynj.shutcm.edu.cn/_upload/article/files/66/b4/b34a95604d04b0bf686251b2d317/368ea8b0-187c-48a7-a402-ffdf1e11bb99.pdf",
+    "https://www.gmzyjx.com/books/zjs/zjs-zjs3.1.9-12-0.0.2.3.15/"
+   ]
+  },
+  {
+   "name": "臂臑",
+   "pinyin": "Bìnào",
+   "code": "LI14",
+   "meridian": "手阳明大肠经",
+   "loc": "在臂外侧，在曲池（LI11）与肩髃（LI15）连线上，三角肌前缘处（GB/T 12346-2021）",
+   "loc_en": "On the lateral aspect of the arm, just anterior to the border of the deltoid muscle, 7 B-cun superior to LI11. (WHO 2008)",
+   "loc_short": "Lateral arm on the LI11–LI15 line, 7 cun above LI11, just anterior to the deltoid border",
+   "layers": "皮肤 → 皮下组织（前臂后皮神经等，教材）→ 三角肌下端前缘（腋神经）→ 深层有桡神经本干（教材）",
+   "safety": "深层有桡神经（教材），不要反复强刺；教材刺法为直刺或向上斜刺 0.5～1.5 寸",
+   "muscles": "三角肌（下端前缘）；肱二头肌在其前方",
+   "find": "手臂抗阻外展，三角肌下端的前缘鼓起来，在曲池与肩髃的连线上、曲池上 7 寸处（见图 02）",
+   "sources": [
+    "https://zynj.shutcm.edu.cn/_upload/article/files/66/b4/b34a95604d04b0bf686251b2d317/368ea8b0-187c-48a7-a402-ffdf1e11bb99.pdf",
+    "https://medbox.org/dl/627a4de115110145a1723f64",
+    "https://www.gmzyjx.com/books/zjs/zjs-zjs3.1.1-3-0.1.2.3.14/"
+   ]
+  }
+ ],
+ "figures": {
+  "01": "肩外俞肩中俞天髎-叠加图",
+  "02": "臂臑-上臂外侧",
+  "03": "肩外俞天髎-层次示意",
+  "04": "肩袖四肌-后面观与前面观"
+ },
+ "pronunciation": {
+  "Levator scapulae": [
+   "/lɪˈveɪtər ˈskæpjəˌli/",
+   "li-VAY-ter SKAP-yuh-lee",
+   "https://www.merriam-webster.com/medical/levator%20scapulae"
+  ],
+  "Rhomboid minor": [
+   "/ˈrɑmˌbɔɪd ˈmaɪnər/",
+   "ROM-boyd MY-ner",
+   "https://www.merriam-webster.com/dictionary/rhomboid"
+  ]
+ },
+ "sources": [
+  [
+   "https://zynj.shutcm.edu.cn/_upload/article/files/66/b4/b34a95604d04b0bf686251b2d317/368ea8b0-187c-48a7-a402-ffdf1e11bb99.pdf",
+   "GB/T 12346-2021 经穴名称与定位"
+  ],
+  [
+   "https://medbox.org/dl/627a4de115110145a1723f64",
+   "WHO Standard Acupuncture Point Locations (2008)"
+  ],
+  [
+   "https://www.gmzyjx.com/books/zjs/zjs-zjs3.1.4-6-0.0.3.3.14/",
+   "《针灸学》肩外俞"
+  ],
+  [
+   "https://www.gmzyjx.com/books/zjs/zjs-zjs3.1.4-6-0.0.3.3.15/",
+   "《针灸学》肩中俞"
+  ],
+  [
+   "https://www.gmzyjx.com/books/zjs/zjs-zjs3.1.9-12-0.0.2.3.15/",
+   "《针灸学》天髎"
+  ],
+  [
+   "https://www.gmzyjx.com/books/zjs/zjs-zjs3.1.1-3-0.1.2.3.14/",
+   "《针灸学》臂臑"
+  ],
+  [
+   "https://www.ncbi.nlm.nih.gov/books/NBK513255/",
+   "StatPearls: Infraspinatus"
+  ],
+  [
+   "https://www.ncbi.nlm.nih.gov/books/NBK513324/",
+   "StatPearls: Teres minor"
+  ],
+  [
+   "https://www.ncbi.nlm.nih.gov/books/NBK513344/",
+   "StatPearls: Subscapularis"
+  ],
+  [
+   "https://www.ncbi.nlm.nih.gov/books/NBK557880/",
+   "StatPearls: Suprascapular nerve"
+  ]
+ ],
+ "chapters": [
+  {
+   "num": 1,
+   "id": "new-acupoints",
+   "content": "N-1",
+   "items": [
+    "SI14 肩外俞 · 手太阳小肠经",
+    "SI15 肩中俞 · 手太阳小肠经",
+    "TE15 天髎 · 手少阳三焦经",
+    "LI14 臂臑 · 手阳明大肠经"
+   ],
+   "forms": [
+    "F-1"
+   ],
+   "title": [
+    "New: four acupoints around the shoulder girdle",
+    "新内容：肩带周围的四个穴位"
+   ],
+   "toc": [
+    "New acupoints",
+    "新穴位"
+   ],
+   "goals": [
+    [
+     "Locate SI14, SI15, TE15 and LI14 on a back and an arm, using C7, T1, the scapula and the deltoid.",
+     "用 C7、T1、肩胛骨和三角肌，在背上和臂上找到肩外俞、肩中俞、天髎、臂臑。"
+    ],
+    [
+     "Name the muscle layers under each point and the meridian it belongs to.",
+     "说出每个穴位所属的经脉和它下面的肌肉层次。"
+    ],
+    [
+     "Explain why SI14 and SI15 are needled obliquely and shallowly.",
+     "解释为什么肩外俞、肩中俞要斜刺、浅刺。"
+    ]
+   ],
+   "terms": [
+    [
+     "肩外俞",
+     "Jiānwàishū",
+     "zh"
+    ],
+    [
+     "肩中俞",
+     "Jiānzhōngshū",
+     "zh"
+    ],
+    [
+     "天髎",
+     "Tiānliáo",
+     "zh"
+    ],
+    [
+     "臂臑",
+     "Bìnào",
+     "zh"
+    ],
+    [
+     "Levator scapulae",
+     "肩胛提肌"
+    ],
+    [
+     "Rhomboid minor",
+     "小菱形肌"
+    ],
+    [
+     "Trapezius",
+     "斜方肌"
+    ],
+    [
+     "Deltoid",
+     "三角肌"
+    ],
+    [
+     "Spinous process",
+     "棘突"
+    ]
+   ],
+   "blocks": [
+    {
+     "t": "p",
+     "en": "<b>Trial pack.</b> This is a trial run of the new weekly model. It is the pack planned for Monday 12 October (week 1, rotator cuff), published early on 9 October so you can test the new format now.",
+     "zh": "<b>试用版。</b>这是新的周计划模式的试运行，这是第 1 周（肩袖周）周一 10 月 12 日的包，10 月 9 日提前放出来，方便先试新格式。"
+    },
+    {
+     "t": "p",
+     "en": "This week's chapter is the rotator cuff. Today's four new points sit on the muscles around it: SI14 and SI15 on the upper back over levator scapulae and the rhomboids, TE15 at the superior angle of the scapula over supraspinatus, and LI14 on the lateral arm at the lower end of the deltoid. All four lie under trapezius or deltoid, so the first layer you press through is a muscle you already know.",
+     "zh": "本周章节是肩袖。今天四个新穴位都在它周围的肌肉上：肩外俞、肩中俞在上背部，深面是肩胛提肌和菱形肌；天髎在肩胛骨上角，深面是冈上肌；臂臑在上臂外侧、三角肌下端。四个穴位的浅层都是斜方肌或三角肌，是你已经学过的肌肉。"
+    },
+    {
+     "t": "fig",
+     "n": "01",
+     "en": "Right side, posterior view. Red: small intestine points SI14 and SI15; purple: TE15. The ruler counts cun from the posterior midline to the medial border of the scapula (3 cun).",
+     "zh": "右侧后面观。红点为小肠经肩外俞、肩中俞，紫点为三焦经天髎。标尺从后正中线量到肩胛骨内侧缘（3 寸）。"
+    },
+    {
+     "t": "acu_cards",
+     "show_en_loc": true
+    },
+    {
+     "t": "h3",
+     "en": "How to find them",
+     "zh": "怎么找"
+    },
+    {
+     "t": "p",
+     "en": "Start from C7, the most prominent spinous process when the head is bent forward. SI15 is level with the lower border of C7, 2 cun out. Count one process down to T1: SI14 is level with its lower border, 3 cun out, which puts it on the vertical line through the medial end of the scapular spine. Then follow the medial border of the scapula up to its highest corner, the superior angle: TE15 sits in the depression just above that bone edge.",
+     "zh": "从 C7 开始：低头时最突出的棘突。肩中俞与 C7 棘突下缘同高，旁开 2 寸。往下数一个是 T1：肩外俞与 T1 棘突下缘同高，旁开 3 寸，正好在肩胛冈内侧端的垂线上。再沿肩胛骨内侧缘往上摸到最高的角（上角），天髎就在这个骨边上方的凹陷里。"
+    },
+    {
+     "t": "fig",
+     "n": "02",
+     "en": "Right arm, lateral view. LI14 lies on the line from LI11 to LI15, 7 cun above LI11, just in front of the lower deltoid border.",
+     "zh": "右臂外侧面观。臂臑在曲池与肩髃的连线上，曲池上 7 寸，紧贴三角肌下端前缘。"
+    },
+    {
+     "t": "pitfall",
+     "zh": "臂臑的定位有三种写法：GB/T 12346-2021 写「曲池与肩髃连线上，三角肌前缘处」，没有写 7 寸；WHO 2008 写「三角肌前缘稍前，曲池上 7 寸」；《针灸学》教材写「曲池上 7 寸，当三角肌下端」。考试以国标为准，找穴时三条可以一起用：先量 7 寸，再找三角肌下端的前缘。"
+    },
+    {
+     "t": "h3",
+     "en": "What lies beneath",
+     "zh": "深面有什么"
+    },
+    {
+     "t": "fig",
+     "n": "03",
+     "en": "Layers under SI14 and TE15, simplified from the textbook anatomy. Not to scale and not a needling depth or direction.",
+     "zh": "肩外俞、天髎的层次，按教材解剖简化。不按比例，不表示进针深度或方向。"
+    },
+    {
+     "t": "p",
+     "en": "Under SI14 and SI15, trapezius is the superficial layer and levator scapulae (with rhomboid minor at SI14) the deep one; the dorsal scapular nerve and the transverse cervical vessels run here. Deeper still are the chest wall and the pleura near the apex of the lung, which is why the textbook needles both points obliquely, 0.3–0.5 cun. At TE15 the deep muscle is supraspinatus, with muscular branches of the suprascapular artery and nerve.",
+     "zh": "肩外俞、肩中俞的浅层是斜方肌，深层是肩胛提肌（肩外俞还有小菱形肌），这里走着肩胛背神经和颈横动、静脉。再往深是胸壁和肺尖附近的胸膜，所以教材两穴都是斜刺 0.3～0.5 寸。天髎深层是冈上肌，有肩胛上动脉和肩胛上神经的肌支。"
+    },
+    {
+     "t": "p",
+     "en": "Link to the chapter: TE15 sits over supraspinatus, the cuff muscle that starts abduction, and LI14 sits at the lower end of deltoid, its force-couple partner. When you palpate these points, you are touching the two muscles that lift the arm together.",
+     "zh": "和本章的联系：天髎深面是冈上肌，也就是启动外展的那块肩袖肌；臂臑在三角肌下端，三角肌是它的力偶搭档。摸这两个穴位时，摸到的正是一起抬起手臂的两块肌肉。"
+    }
+   ],
+   "check": [
+    [
+     "Where is SI14 by GB/T 12346-2021, and how do you find T1?",
+     "按 GB/T 12346-2021，肩外俞在哪里？怎么找到 T1？",
+     "Below the T1 spinous process, 3 cun lateral to the posterior midline. Find C7 (most prominent when the head is bent forward) and count one process down.",
+     "第 1 胸椎棘突下，后正中线旁开 3 寸。先找低头时最突出的 C7，往下数一个就是 T1。"
+    ],
+    [
+     "Which muscles lie under SI15, and why is it needled obliquely?",
+     "肩中俞深面是哪些肌肉？为什么要斜刺？",
+     "Trapezius, then levator scapulae; deeper are the pleura and the apex of the lung, so the textbook needles it obliquely, 0.3–0.5 cun.",
+     "斜方肌，再深是肩胛提肌；更深是胸膜顶和肺尖，所以教材斜刺 0.3～0.5 寸。"
+    ],
+    [
+     "Which meridian does TE15 belong to, and which rotator cuff muscle lies beneath it?",
+     "天髎属于哪条经？深面是哪块肩袖肌？",
+     "The hand shaoyang triple energizer meridian; supraspinatus lies deep to trapezius there.",
+     "手少阳三焦经；斜方肌深面是冈上肌。"
+    ],
+    [
+     "How far above LI11 is LI14, and which muscle border marks it?",
+     "臂臑在曲池上几寸？以哪块肌肉的边缘为标志？",
+     "7 cun above LI11 (WHO, textbook), at the anterior border of the deltoid near its lower end.",
+     "曲池上 7 寸（WHO、教材），三角肌下端的前缘。"
+    ]
+   ],
+   "take": [
+    "SI15 below C7 at 2 cun, SI14 below T1 at 3 cun, TE15 at the superior angle, LI14 at the lower front edge of deltoid.",
+    "肩中俞：C7 下旁开 2 寸；肩外俞：T1 下旁开 3 寸；天髎：肩胛骨上角；臂臑：三角肌下端前缘。"
+   ],
+   "bridge": [
+    "consolidate-cuff",
+    "Next: the four rotator cuff muscles. 下一章：肩袖四肌。",
+    "02 Rotator cuff"
+   ]
+  },
+  {
+   "num": 2,
+   "id": "consolidate-cuff",
+   "content": "O-1",
+   "items": [
+    "Supraspinatus",
+    "Infraspinatus",
+    "Teres minor",
+    "Subscapularis"
+   ],
+   "forms": [
+    "F-6",
+    "F-7"
+   ],
+   "title": [
+    "Consolidate: the four rotator cuff muscles",
+    "夯实：肩袖四肌"
+   ],
+   "toc": [
+    "Rotator cuff",
+    "肩袖四肌"
+   ],
+   "goals": [
+    [
+     "Say origin, insertion, nerve (with segments) and action of each cuff muscle without looking.",
+     "不看书说出每块肩袖肌的起点、止点、神经（带节段）和动作。"
+    ],
+    [
+     "Say the course sentence for each muscle in English.",
+     "用英文说出每块肌肉的走行句。"
+    ]
+   ],
+   "terms": [
+    [
+     "Supraspinatus",
+     "冈上肌"
+    ],
+    [
+     "Infraspinatus",
+     "冈下肌"
+    ],
+    [
+     "Teres minor",
+     "小圆肌"
+    ],
+    [
+     "Subscapularis",
+     "肩胛下肌"
+    ],
+    [
+     "Greater tubercle",
+     "大结节"
+    ],
+    [
+     "Lesser tubercle",
+     "小结节"
+    ],
+    [
+     "Suprascapular nerve",
+     "肩胛上神经"
+    ],
+    [
+     "Axillary nerve",
+     "腋神经"
+    ]
+   ],
+   "blocks": [
+    {
+     "t": "p",
+     "en": "These facts come straight from this week's chapter (library: shoulder). First answer the questions, then run the flashcards: the deck mixes today's four new points with the four cuff muscles.",
+     "zh": "这些内容直接取自本周章节（知识库：肩部）。先答题，再刷记忆卡：卡组把今天的四个新穴位和四块肩袖肌混在一起。"
+    },
+    {
+     "t": "fig",
+     "n": "04",
+     "en": "From the shoulder chapter: right shoulder, posterior and anterior views with the four cuff muscles.",
+     "zh": "取自肩部章节：右肩后面观和前面观，标出四块肩袖肌。"
+    },
+    {
+     "t": "html",
+     "html": "<div class=\"table-scroll\"><table class=\"summary-table\"><thead><tr><th>Muscle<span class=\"translation\" lang=\"zh-Hans\">肌肉</span></th><th>Insertion<span class=\"translation\" lang=\"zh-Hans\">止点</span></th><th>Nerve<span class=\"translation\" lang=\"zh-Hans\">神经</span></th><th>Action<span class=\"translation\" lang=\"zh-Hans\">动作</span></th></tr></thead><tbody><tr><th><span lang=\"en\">Supraspinatus</span><span class=\"translation\" lang=\"zh-Hans\">冈上肌</span></th><td><span lang=\"en\">Superior facet of the greater tubercle of the humerus</span><span class=\"translation\" lang=\"zh-Hans\">肱骨大结节上小面</span></td><td><span lang=\"en\">Suprascapular nerve (usually C5–C6)</span><span class=\"translation\" lang=\"zh-Hans\">肩胛上神经（通常为 C5–C6）</span></td><td><span lang=\"en\">It contributes to shoulder abduction and helps stabilize the humeral head in the glenoid cavity.</span><span class=\"translation\" lang=\"zh-Hans\">它参与肩关节外展，并帮助将肱骨头稳定在关节盂内。</span></td></tr><tr><th><span lang=\"en\">Infraspinatus</span><span class=\"translation\" lang=\"zh-Hans\">冈下肌</span></th><td><span lang=\"en\">Middle facet of the greater tubercle of the humerus</span><span class=\"translation\" lang=\"zh-Hans\">肱骨大结节中小面</span></td><td><span lang=\"en\">Suprascapular nerve (usually C5–C6)</span><span class=\"translation\" lang=\"zh-Hans\">肩胛上神经（通常为 C5–C6）</span></td><td><span lang=\"en\">It externally rotates the humerus and contributes to dynamic stability of the glenohumeral joint.</span><span class=\"translation\" lang=\"zh-Hans\">它使肱骨外旋，并参与盂肱关节的动态稳定。</span></td></tr><tr><th><span lang=\"en\">Teres minor</span><span class=\"translation\" lang=\"zh-Hans\">小圆肌</span></th><td><span lang=\"en\">Inferior facet of the greater tubercle of the humerus</span><span class=\"translation\" lang=\"zh-Hans\">肱骨大结节下小面</span></td><td><span lang=\"en\">Axillary nerve (mainly C5–C6)</span><span class=\"translation\" lang=\"zh-Hans\">腋神经（主要为 C5–C6）</span></td><td><span lang=\"en\">It assists external rotation of the humerus and helps stabilize the humeral head. Teres major is a separate muscle and is not part of the rotator cuff.</span><span class=\"translation\" lang=\"zh-Hans\">它协助肱骨外旋并帮助稳定肱骨头。大圆肌是另一块肌肉，不属于肩袖。</span></td></tr><tr><th><span lang=\"en\">Subscapularis</span><span class=\"translation\" lang=\"zh-Hans\">肩胛下肌</span></th><td><span lang=\"en\">Lesser tubercle of the humerus</span><span class=\"translation\" lang=\"zh-Hans\">肱骨小结节</span></td><td><span lang=\"en\">Upper and lower subscapular nerves (C5–C6; some sources include C7)</span><span class=\"translation\" lang=\"zh-Hans\">上、下肩胛下神经（C5–C6；部分资料还包括 C7）</span></td><td><span lang=\"en\">It internally rotates the humerus and contributes to anterior stability of the glenohumeral joint.</span><span class=\"translation\" lang=\"zh-Hans\">它使肱骨内旋，并参与盂肱关节前方的稳定。</span></td></tr></tbody></table></div>",
+     "md": "| Muscle 肌肉 | Insertion 止点 | Nerve 神经 | Action 动作 |\n|---|---|---|---|\n| Supraspinatus 冈上肌 | Superior facet of the greater tubercle of the humerus<br>肱骨大结节上小面 | Suprascapular nerve (usually C5–C6)<br>肩胛上神经（通常为 C5–C6） | It contributes to shoulder abduction and helps stabilize the humeral head in the glenoid cavity.<br>它参与肩关节外展，并帮助将肱骨头稳定在关节盂内。 |\n| Infraspinatus 冈下肌 | Middle facet of the greater tubercle of the humerus<br>肱骨大结节中小面 | Suprascapular nerve (usually C5–C6)<br>肩胛上神经（通常为 C5–C6） | It externally rotates the humerus and contributes to dynamic stability of the glenohumeral joint.<br>它使肱骨外旋，并参与盂肱关节的动态稳定。 |\n| Teres minor 小圆肌 | Inferior facet of the greater tubercle of the humerus<br>肱骨大结节下小面 | Axillary nerve (mainly C5–C6)<br>腋神经（主要为 C5–C6） | It assists external rotation of the humerus and helps stabilize the humeral head. Teres major is a separate muscle and is not part of the rotator cuff.<br>它协助肱骨外旋并帮助稳定肱骨头。大圆肌是另一块肌肉，不属于肩袖。 |\n| Subscapularis 肩胛下肌 | Lesser tubercle of the humerus<br>肱骨小结节 | Upper and lower subscapular nerves (C5–C6; some sources include C7)<br>上、下肩胛下神经（C5–C6；部分资料还包括 C7） | It internally rotates the humerus and contributes to anterior stability of the glenohumeral joint.<br>它使肱骨内旋，并参与盂肱关节前方的稳定。 |\n"
+    },
+    {
+     "t": "h3",
+     "en": "Self-test",
+     "zh": "自测"
+    },
+    {
+     "t": "quiz",
+     "items": [
+      [
+       "Supraspinatus inserts onto which facet of the greater tubercle?",
+       "冈上肌止于大结节的哪一个小面？",
+       "The superior facet.",
+       "上小面。"
+      ],
+      [
+       "Infraspinatus and teres minor both externally rotate the humerus. Which nerve supplies each?",
+       "冈下肌和小圆肌都外旋肱骨，各由什么神经支配？",
+       "Infraspinatus: suprascapular nerve (usually C5–C6). Teres minor: axillary nerve (mainly C5–C6).",
+       "冈下肌：肩胛上神经（通常 C5–C6）；小圆肌：腋神经（主要 C5–C6）。"
+      ],
+      [
+       "Which cuff muscle inserts on the lesser tubercle, and what is its main action?",
+       "哪块肩袖肌止于小结节？主要动作是什么？",
+       "Subscapularis; internal rotation of the humerus.",
+       "肩胛下肌；使肱骨内旋。"
+      ],
+      [
+       "Is teres major part of the rotator cuff?",
+       "大圆肌属于肩袖吗？",
+       "No. Teres major is a separate muscle.",
+       "不属于，大圆肌是另一块肌肉。"
+      ],
+      [
+       "Fill in: The infraspinatus originates from the ____ fossa, passes behind the glenohumeral joint, and inserts onto the ____ facet of the greater tubercle.",
+       "填空：冈下肌起自____窝，经盂肱关节后方，止于大结节____小面。",
+       "Infraspinous; middle.",
+       "冈下窝；中。"
+      ],
+      [
+       "Look at figure 04: name the three muscles on the posterior view from top to bottom.",
+       "看图 04：后面观从上到下是哪三块肌肉？",
+       "Supraspinatus, infraspinatus, teres minor.",
+       "冈上肌、冈下肌、小圆肌。"
+      ],
+      [
+       "Which of today's new acupoints lies over a rotator cuff muscle, and which muscle?",
+       "今天的新穴位里，哪一个的深面是肩袖肌？是哪块？",
+       "TE15 Tianliao; supraspinatus lies deep to trapezius there.",
+       "天髎；斜方肌深面是冈上肌。"
+      ],
+      [
+       "Which spinal segments do all four cuff muscles share?",
+       "四块肩袖肌共同的脊髓节段是什么？",
+       "C5–C6 (subscapularis: some sources include C7).",
+       "C5–C6（肩胛下肌部分资料还包括 C7）。"
+      ]
+     ]
+    },
+    {
+     "t": "h3",
+     "en": "Flashcards",
+     "zh": "记忆卡"
+    },
+    {
+     "t": "flashcards",
+     "extra": [
+      [
+       "The rotator cuff: S I T S",
+       "肩袖四肌：S I T S",
+       "Supraspinatus, Infraspinatus, Teres minor, Subscapularis",
+       "冈上肌、冈下肌、小圆肌、肩胛下肌"
+      ],
+      [
+       "Greater tubercle: superior, middle, inferior facets",
+       "大结节的上、中、下三个小面",
+       "Supraspinatus, infraspinatus, teres minor (top to bottom)",
+       "从上到下：冈上肌、冈下肌、小圆肌"
+      ]
+     ]
+    },
+    {
+     "t": "sources",
+     "end": true,
+     "note": "肌肉内容取自 library/shoulder/content.json；穴位定位依据 GB/T 12346-2021 与 WHO 2008，层次与刺法依据《针灸学》教材"
+    }
+   ],
+   "take": [
+    "Three on the greater tubercle (S, I, T: top to bottom), one on the lesser (subscapularis); all C5–C6.",
+    "三块止于大结节（冈上、冈下、小圆，从上到下），一块止于小结节（肩胛下肌）；都是 C5–C6。"
+   ]
+  }
+ ]
+}

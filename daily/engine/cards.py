@@ -37,10 +37,10 @@ def all_cards(upto=None):
             add(_mus_card(m, d["date"], m.get("region", "")))
     for f in sorted(DAYS.glob("*/content.json")):
         c = json.loads(f.read_text(encoding="utf-8"))
-        if c.get("kind") != "learning" or (upto and c["date"] > upto):
+        if c.get("kind") not in ("learning", "supplement") or (upto and c["date"] > upto):
             continue
         info = plan.day_info(c["date"])
-        region = "、".join(info.get("regions", []))
+        region = "、".join(info.get("regions", [])) or c.get("chapter_name", "")
         for a in c.get("acupoints", []):
             add(_acu_card(a, c["date"], region))
         for m in c.get("muscles", []):

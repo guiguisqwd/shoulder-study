@@ -342,7 +342,7 @@
   "title": "冈上肌",
   "sub": "Supraspinatus",
   "meridian": "",
-  "region": "肩带与肩部",
+  "region": "肩袖 Rotator cuff",
   "fields": [
    [
     "英文名",
@@ -358,15 +358,15 @@
    ],
    [
     "神经 Nerve",
-    "Suprascapular nerve (C5–C6)｜肩胛上神经（C5–C6）"
+    "Suprascapular nerve (usually C5–C6)｜肩胛上神经（通常为 C5–C6）"
    ],
    [
     "动作 Action",
-    "Initiates abduction; compresses the humeral head into the glenoid｜启动外展；把肱骨头压向关节盂"
+    "It contributes to shoulder abduction and helps stabilize the humeral head in the glenoid cavity.｜它参与肩关节外展，并帮助将肱骨头稳定在关节盂内。"
    ],
    [
     "穴位锚点",
-    "秉风、巨骨、曲垣"
+    "天髎（深层是冈上肌）"
    ]
   ],
   "ask": "英文名？起点、止点、神经、动作？"
@@ -378,7 +378,7 @@
   "title": "冈下肌",
   "sub": "Infraspinatus",
   "meridian": "",
-  "region": "肩带与肩部",
+  "region": "肩袖 Rotator cuff",
   "fields": [
    [
     "英文名",
@@ -394,15 +394,15 @@
    ],
    [
     "神经 Nerve",
-    "Suprascapular nerve (C5–C6)｜肩胛上神经（C5–C6）"
+    "Suprascapular nerve (usually C5–C6)｜肩胛上神经（通常为 C5–C6）"
    ],
    [
     "动作 Action",
-    "External rotation; stabilizes the humeral head from behind｜外旋；从后方稳定肱骨头"
+    "It externally rotates the humerus and contributes to dynamic stability of the glenohumeral joint.｜它使肱骨外旋，并参与盂肱关节的动态稳定。"
    ],
    [
     "穴位锚点",
-    "天宗、臑俞"
+    "天宗 SI11"
    ]
   ],
   "ask": "英文名？起点、止点、神经、动作？"
@@ -414,7 +414,7 @@
   "title": "小圆肌",
   "sub": "Teres minor",
   "meridian": "",
-  "region": "肩带与肩部",
+  "region": "肩袖 Rotator cuff",
   "fields": [
    [
     "英文名",
@@ -430,15 +430,15 @@
    ],
    [
     "神经 Nerve",
-    "Axillary nerve (C5–C6)｜腋神经（C5–C6）"
+    "Axillary nerve (mainly C5–C6)｜腋神经（主要为 C5–C6）"
    ],
    [
     "动作 Action",
-    "External rotation｜外旋"
+    "It assists external rotation of the humerus and helps stabilize the humeral head. Teres major is a separate muscle and is not part of the rotator cuff.｜它协助肱骨外旋并帮助稳定肱骨头。大圆肌是另一块肌肉，不属于肩袖。"
    ],
    [
     "穴位锚点",
-    "肩贞"
+    "肩贞 SI9 附近"
    ]
   ],
   "ask": "英文名？起点、止点、神经、动作？"
@@ -450,7 +450,7 @@
   "title": "肩胛下肌",
   "sub": "Subscapularis",
   "meridian": "",
-  "region": "肩带与肩部",
+  "region": "肩袖 Rotator cuff",
   "fields": [
    [
     "英文名",
@@ -458,7 +458,7 @@
    ],
    [
     "起点 Origin",
-    "Subscapular fossa｜肩胛下窝"
+    "Subscapular fossa on the anterior surface of the scapula｜肩胛骨前面的肩胛下窝"
    ],
    [
     "止点 Insertion",
@@ -466,15 +466,15 @@
    ],
    [
     "神经 Nerve",
-    "Upper and lower subscapular nerves (C5–C6)｜上、下肩胛下神经（C5–C6）"
+    "Upper and lower subscapular nerves (C5–C6; some sources include C7)｜上、下肩胛下神经（C5–C6；部分资料还包括 C7）"
    ],
    [
     "动作 Action",
-    "Internal rotation; anterior stability｜内旋；前方稳定"
+    "It internally rotates the humerus and contributes to anterior stability of the glenohumeral joint.｜它使肱骨内旋，并参与盂肱关节前方的稳定。"
    ],
    [
     "穴位锚点",
-    "极泉方向"
+    "（前面，没有今天的穴位）"
    ]
   ],
   "ask": "英文名？起点、止点、神经、动作？"
@@ -1042,5 +1042,133 @@
    ]
   ],
   "ask": "英文名？起点、止点、神经、动作？"
+ },
+ {
+  "id": "acu-肩外俞",
+  "type": "acu",
+  "learned": "2026-10-12",
+  "title": "肩外俞",
+  "sub": "手太阳小肠经",
+  "meridian": "手太阳小肠经",
+  "region": "肩袖 Rotator cuff",
+  "fields": [
+   [
+    "定位",
+    "在背部，第1胸椎棘突下，后正中线旁开3寸（GB/T 12346-2021）"
+   ],
+   [
+    "层次（浅 → 深）",
+    "皮肤 → 皮下组织（第1胸神经后支内侧皮支）→ 斜方肌（副神经）→ 肩胛提肌、小菱形肌（肩胛背神经；颈横动、静脉）→ 深面胸壁、胸膜与肺"
+   ],
+   [
+    "安全提示",
+    "深面是胸壁和胸膜、肺尖附近，不可深刺；教材刺法为斜刺 0.3～0.5 寸"
+   ],
+   [
+    "相关肌肉",
+    "斜方肌（浅层）；肩胛提肌、小菱形肌（深层）"
+   ],
+   [
+    "怎么找",
+    "先摸到 C7（低头时最突出的棘突），往下一个是 T1；从 T1 棘突下缘水平向外，到肩胛骨内侧缘（后正中线到肩胛骨内侧缘 = 3 寸）。WHO 注：在肩胛冈内侧端的垂线上，与陶道（GV13）、大杼（BL11）同高（见图 01）"
+   ]
+  ],
+  "ask": "定位在哪里？从浅到深经过哪些肌肉？"
+ },
+ {
+  "id": "acu-肩中俞",
+  "type": "acu",
+  "learned": "2026-10-12",
+  "title": "肩中俞",
+  "sub": "手太阳小肠经",
+  "meridian": "手太阳小肠经",
+  "region": "肩袖 Rotator cuff",
+  "fields": [
+   [
+    "定位",
+    "在背部，第7颈椎棘突下，后正中线旁开2寸（GB/T 12346-2021）"
+   ],
+   [
+    "层次（浅 → 深）",
+    "皮肤 → 皮下组织（第1胸神经后支内侧皮支）→ 斜方肌（副神经）→ 肩胛提肌（肩胛背神经；颈横动、静脉）→ 深面胸壁上口、胸膜顶"
+   ],
+   [
+    "安全提示",
+    "深面接近胸膜顶和肺尖，不可直刺、深刺；教材刺法为斜刺 0.3～0.5 寸"
+   ],
+   [
+    "相关肌肉",
+    "斜方肌（浅层）；肩胛提肌（深层）"
+   ],
+   [
+    "怎么找",
+    "大椎（GV14，C7 棘突下）水平，向外 2 寸；WHO 注：在后正中线到肩胛骨内侧缘连线的外 1/3 与内 2/3 交点。教材另一取法：大椎与肩井连线的中点（见图 01）"
+   ]
+  ],
+  "ask": "定位在哪里？从浅到深经过哪些肌肉？"
+ },
+ {
+  "id": "acu-天髎",
+  "type": "acu",
+  "learned": "2026-10-12",
+  "title": "天髎",
+  "sub": "手少阳三焦经",
+  "meridian": "手少阳三焦经",
+  "region": "肩袖 Rotator cuff",
+  "fields": [
+   [
+    "定位",
+    "在肩带部，肩胛骨上角骨际凹陷中（GB/T 12346-2021）"
+   ],
+   [
+    "层次（浅 → 深）",
+    "皮肤 → 皮下组织（第1胸神经后支外侧皮支）→ 斜方肌（副神经；颈横动脉降支）→ 冈上肌（肩胛上动脉、肩胛上神经肌支）→ 肩胛骨上角附近骨面"
+   ],
+   [
+    "安全提示",
+    "深层有肩胛上动脉和肩胛上神经的肌支；教材刺法为直刺 0.5～0.8 寸。WHO 2008 原文本次没有打开到，英文定位暂缺"
+   ],
+   [
+    "相关肌肉",
+    "斜方肌（浅层）；冈上肌（深层）；肩胛提肌止于肩胛骨上角，就在旁边"
+   ],
+   [
+    "怎么找",
+    "手放到对侧肩上，沿肩胛骨内侧缘往上摸到最高的角（上角），角的上方骨边的凹陷就是天髎；教材：肩井下 1 寸（见图 01）"
+   ]
+  ],
+  "ask": "定位在哪里？从浅到深经过哪些肌肉？"
+ },
+ {
+  "id": "acu-臂臑",
+  "type": "acu",
+  "learned": "2026-10-12",
+  "title": "臂臑",
+  "sub": "手阳明大肠经",
+  "meridian": "手阳明大肠经",
+  "region": "肩袖 Rotator cuff",
+  "fields": [
+   [
+    "定位",
+    "在臂外侧，在曲池（LI11）与肩髃（LI15）连线上，三角肌前缘处（GB/T 12346-2021）"
+   ],
+   [
+    "层次（浅 → 深）",
+    "皮肤 → 皮下组织（前臂后皮神经等，教材）→ 三角肌下端前缘（腋神经）→ 深层有桡神经本干（教材）"
+   ],
+   [
+    "安全提示",
+    "深层有桡神经（教材），不要反复强刺；教材刺法为直刺或向上斜刺 0.5～1.5 寸"
+   ],
+   [
+    "相关肌肉",
+    "三角肌（下端前缘）；肱二头肌在其前方"
+   ],
+   [
+    "怎么找",
+    "手臂抗阻外展，三角肌下端的前缘鼓起来，在曲池与肩髃的连线上、曲池上 7 寸处（见图 02）"
+   ]
+  ],
+  "ask": "定位在哪里？从浅到深经过哪些肌肉？"
  }
 ]

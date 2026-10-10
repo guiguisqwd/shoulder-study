@@ -1,0 +1,230 @@
+{
+ "date": "2026-10-12",
+ "phases": {
+  "evening": {
+   "steps": {
+    "plan": {
+     "status": "done",
+     "at": "2026-10-09T14:21:23+00:00",
+     "evidence": {
+      "kind": "supplement",
+      "week": 1,
+      "chapter": "shoulder",
+      "entries": [
+       [
+        "N-1",
+        [
+         "SI14 肩外俞 · 手太阳小肠经",
+         "SI15 肩中俞 · 手太阳小肠经",
+         "TE15 天髎 · 手少阳三焦经",
+         "LI14 臂臑 · 手阳明大肠经"
+        ],
+        [
+         "F-1"
+        ]
+       ],
+       [
+        "O-1",
+        [
+         "Supraspinatus",
+         "Infraspinatus",
+         "Teres minor",
+         "Subscapularis"
+        ],
+        [
+         "F-6",
+         "F-7"
+        ]
+       ]
+      ]
+     }
+    },
+    "author": {
+     "status": "done",
+     "at": "2026-10-09T14:21:23+00:00",
+     "evidence": {
+      "content": "daily/days/2026-10-12/content.json",
+      "figures": "daily/days/2026-10-12/figures.py",
+      "fingerprint": "bb8c53ac5b082231"
+     }
+    },
+    "figures": {
+     "status": "done",
+     "at": "2026-10-09T14:21:23+00:00",
+     "evidence": {
+      "svgs": [
+       "01-肩外俞肩中俞天髎-叠加图.svg",
+       "02-臂臑-上臂外侧.svg",
+       "03-肩外俞天髎-层次示意.svg",
+       "04-肩袖四肌-后面观与前面观.svg"
+      ]
+     }
+    },
+    "validate": {
+     "status": "done",
+     "at": "2026-10-09T14:21:23+00:00",
+     "evidence": "schema dpt-daily-pack/2: 0 problems"
+    },
+    "build": {
+     "status": "done",
+     "at": "2026-10-09T14:21:23+00:00",
+     "evidence": {
+      "date": "2026-10-12",
+      "out": "2026-10-12-第1周-试用-肩带四穴与肩袖四肌",
+      "chapters": 2,
+      "figure_occurrences": 4,
+      "figures": [
+       "01",
+       "02",
+       "03",
+       "04"
+      ],
+      "model_links": [
+       "acromion",
+       "clavicle",
+       "deltoid",
+       "greater-tubercle",
+       "humeral-head",
+       "humerus",
+       "lesser-tubercle",
+       "scapula"
+      ],
+      "html_bytes": 138077
+     }
+    },
+    "qa": {
+     "status": "done",
+     "at": "2026-10-09T14:21:28+00:00",
+     "evidence": {
+      "figures": 4,
+      "say_buttons": 21,
+      "mobile_scroll_width": 390,
+      "flashcards": 10,
+      "views": 15
+     }
+    },
+    "visual_review": {
+     "status": "done",
+     "at": "2026-10-09T14:21:39+00:00",
+     "evidence": {
+      "viewed": 15,
+      "notes": "Same pack as reviewed under 2026-10-09 (figures byte-identical; text changed only in the trial notes). Re-viewed top.png: header now week 1 Monday 10-12, marked as early trial. Earlier full review: English first; 4 acupoint cards complete (TE15 WHO text not opened, stated on the card); fig 01 SI15/SI14/TE15 on levator, rhomboids, supraspinatus under dashed trapezius; fig 02 LI14 7 cun above LI11 at the anterior lower deltoid border; fig 03 layers say not needling depth or direction; fig 04 reuse",
+      "fixed": [
+       "moved from 2026-10-09 to its plan date 2026-10-12 so the committed-day test passes",
+       "fig 04 library figure: displacement filter removed and view titles put on one line (QA overlap)"
+      ]
+     }
+    },
+    "site": {
+     "status": "done",
+     "at": "2026-10-09T14:21:39+00:00",
+     "evidence": {
+      "entries": 3,
+      "learned_acupoints": 16,
+      "learned_muscles": 13,
+      "page": "site/public/daily/2026-10-12/index.html"
+     }
+    },
+    "cards": {
+     "status": "done",
+     "at": "2026-10-09T14:21:39+00:00",
+     "evidence": {
+      "cards": 37,
+      "acupoints": 28,
+      "muscles": 9,
+      "due_on_2026-10-12": 0
+     }
+    },
+    "publish": {
+     "status": "done",
+     "at": "2026-10-09T14:21:44+00:00",
+     "evidence": {
+      "commit": "0dc7892b7400f882af7f12f4ddc6df269751a36d",
+      "pushed_to": "origin/main",
+      "site": "https://guiguisqwd.github.io/dpt-study/daily/2026-10-12/index.html"
+     }
+    }
+   },
+   "started": "2026-10-09T14:21:23+00:00",
+   "fingerprint": "bb8c53ac5b082231",
+   "finished": "2026-10-09T14:21:44+00:00",
+   "verified": {
+    "at": "2026-10-09T14:21:44+00:00",
+    "ok": true,
+    "missing": []
+   }
+  }
+ },
+ "history": [
+  {
+   "at": "2026-10-09T14:21:23+00:00",
+   "phase": "evening",
+   "step": "plan",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-09T14:21:23+00:00",
+   "phase": "evening",
+   "step": "author",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-09T14:21:23+00:00",
+   "phase": "evening",
+   "step": "figures",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-09T14:21:23+00:00",
+   "phase": "evening",
+   "step": "validate",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-09T14:21:23+00:00",
+   "phase": "evening",
+   "step": "build",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-09T14:21:28+00:00",
+   "phase": "evening",
+   "step": "qa",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-09T14:21:28+00:00",
+   "phase": "evening",
+   "step": "visual_review",
+   "status": "waiting"
+  },
+  {
+   "at": "2026-10-09T14:21:39+00:00",
+   "phase": "evening",
+   "step": "visual_review",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-09T14:21:39+00:00",
+   "phase": "evening",
+   "step": "site",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-09T14:21:39+00:00",
+   "phase": "evening",
+   "step": "cards",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-09T14:21:44+00:00",
+   "phase": "evening",
+   "step": "publish",
+   "status": "done"
+  }
+ ],
+ "kind": "supplement",
+ "week": 1,
+ "chapter": "shoulder",
+ "out": "2026-10-12-第1周-试用-肩带四穴与肩袖四肌"
+}

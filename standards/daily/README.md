@@ -75,8 +75,8 @@
 
 新内容类型或新形式取下一个空编号，写进上面的表，并在 [CHANGELOG](../CHANGELOG.md) 记一笔。
 
-**现状（2026-10-09）**：按周计划从 2026-10-11（肩袖周）开始。每日生成流程（`daily/pipeline.py`）仍按旧的 `daily/plan/schedule.json` 和 CH-02 工作，要改成读 `weeks.json`、按「内容 × 形式」生成；改好之前生成任务保持暂停，由用户决定何时恢复。
+**现状（2026-10-09）**：按周计划从 2026-10-11（肩袖周）开始。每日生成流程（`daily/pipeline.py`）从这天起读 `weeks.json`，按「内容 × 形式」检查和生成（格式见 `daily/CONTENT_SCHEMA.md` 的 v2 部分）；周日章节日自动生成。定时生成任务仍暂停，它的提示要改成按本规程走，由用户决定何时恢复。DL-01、DL-03 仍是目标：旧的夯实目前由生成时照章节写，还没有直接引用章节数据。
 
 ## CH-02 短版变体（已废止，2026-10-09）
 
-原来每天固定六章（Muscles → Innervation → Movement → Acupoints → Review → English），配合 `schedule.json` 的 60 天计划。2026-10-09 起由上面的一周节奏和「内容 × 形式」取代。第 1、2 天（2026-10-07、10-08）是按它做的，保留为样板；生成流程改造前，`daily/engine/schema.py` 仍按它检查，字段定义见 `daily/CONTENT_SCHEMA.md`。
+原来每天固定六章（Muscles → Innervation → Movement → Acupoints → Review → English），配合 `schedule.json` 的 60 天计划。2026-10-09 起由上面的一周节奏和「内容 × 形式」取代。第 1、2 天（2026-10-07、10-08）是按它做的，保留为样板；2026-10-11 之前的日期仍按它检查（`daily/engine/schema.py`，字段见 `daily/CONTENT_SCHEMA.md` 的 v1 部分）。

@@ -7,7 +7,7 @@ Block types are documented in daily/CONTENT_SCHEMA.md.
 """
 import html, json, re
 from pathlib import Path
-from .paths import DATA
+from .paths import DATA, PAPERS, SITE_BASE, LIBRARY
 
 E = lambda s: html.escape(s, quote=False)
 EA = lambda s: html.escape(s, quote=True)
@@ -16,8 +16,12 @@ MEASURE_LABELS = [("Origin · 起点", "o"), ("Insertion · 止点", "i"), ("Ner
 MEASURE_LABELS_MD = [("Origin 起点", "o"), ("Insertion 止点", "i"), ("Nerve 神经", "n"), ("Action 动作", "a")]
 
 
-def load_pron(extra=None):
+def load_pron(extra=None, chapter=None):
+    """Daily pronunciation table, plus the week's library chapter table (weekly plan) and the pack's own extras."""
     p = json.loads((DATA / "pronunciation.json").read_text(encoding="utf-8"))["terms"]
+    lib = LIBRARY / str(chapter) / "pronunciation.json"
+    if chapter and lib.exists():
+        p = {**json.loads(lib.read_text(encoding="utf-8")).get("terms", {}), **p}
     if extra:
         p = {**p, **extra}
     return p
@@ -36,12 +40,113 @@ def say_btn(text, lang="en-US"):
     return f'<button type="button" class="say" data-say="{EA(text)}" data-lang="{lang}" aria-label="朗读 {EA(text)}"></button>'
 
 
-class Renderer:
-    def __init__(self, content, figs):
-        """figs: {"01": "01-xxx.svg", ...} — files present in the day's 资源/ folder."""
+def chapter_url(cid):
+    """Public page of a library chapter (shoulder keeps its original address)."""
+    return SITE_BASE + ("reading.html" if cid == "shoulder" else f"topics/{cid}/index.html")
+
+
+def _bi(en, zh, tag="p"):
+    return f'<div class="bilingual-pair"><{tag} lang="en">{en}</{tag}><{tag} class="translation" lang="zh-Hans">{zh}</{tag}></div>'
+
+
+class WeeklyBlocks:
+    """Blocks for the weekly plan's forms (standards/daily/README.md F-x); see CONTENT_SCHEMA.md."""
+
+    def b_chapter_link(self, b):
+        cid, name = self.c["chapter"], self.c.get("chapter_name", self.c["chapter"])
+        url = chapter_url(cid)
+        return (f'<p class="model-link-row chapter-link">{link(url, "Open this week&#39;s chapter · 打开本周章节：" + E(name))}</p>',
+                f"[Open this week's chapter · 打开本周章节：{name}]({url})\n")
+
+    def b_flow(self, b):
+        steps = "".join(f'<li><b lang="en">{st["title"][0]}</b> <b lang="zh-Hans">{st["title"][1]}</b>{_bi(*st["text"])}</li>' for st in b["steps"])
+        md = "".join(f"{i}. **{st['title'][0]}｜{st['title'][1]}**：{strip(st['text'][0])}<br>{strip(st['text'][1])}\n" for i, st in enumerate(b["steps"], 1))
+        return f'<ol class="memory-steps flow-steps">{steps}</ol>', md
+
+    def b_case(self, b):
+        labels = {"S": ("Subjective", "主观"), "O": ("Objective", "客观"), "A": ("Assessment", "评估"), "P": ("Plan", "计划")}
+        rows = "".join(f'<dt>{k} · {labels[k][0]} · {labels[k][1]}</dt><dd>{_bi(*b["soap"][k])}</dd>' for k in "SOAP")
+        note = b.get("note", ["Teaching case, not a real patient.", "教学案例，不是真实病人。"])
+        h = (f'<article class="muscle-card case-card"><div class="muscle-title"><span>✚</span><div><h4 lang="en">{b["title"][0]}</h4><small lang="zh-Hans">{b["title"][1]}</small></div></div>'
+             f'<dl class="attachment-facts">{rows}</dl>{_bi(*note)}</article>')
+        md = f"#### {b['title'][0]}｜{b['title'][1]}\n\n" + "".join(f"- **{k} {labels[k][0]} {labels[k][1]}**：{strip(b['soap'][k][0])}<br>{strip(b['soap'][k][1])}\n" for k in "SOAP") + f"\n*{note[0]} {note[1]}*\n"
+        return h, md
+
+    def b_dialogue(self, b):
+        lines = "".join(f'<div class="dialogue-line"><b>{E(sp)}</b>{say_btn(strip(en))}{_bi(en, zh)}</div>' for sp, en, zh in b["lines"])
+        md = "".join(f"- **{sp}**：{strip(en)}<br>{strip(zh)}\n" for sp, en, zh in b["lines"])
+        return f'<div class="dialogue">{lines}</div>', md
+
+    def b_paper(self, b):
+        rec = json.loads((PAPERS / f"{b['id']}.json").read_text(encoding="utf-8"))
+        p = rec["paper"]
+        parts = [("question", "Research question", "研究问题"), ("design", "Design", "设计"), ("population", "Population", "人群"),
+                 ("methods", "Methods", "方法"), ("results", "Results", "结果"), ("limitations", "Limitations", "局限"),
+                 ("applicability", "Applicability", "适用范围")]
+        h = [f'<article class="paper-card"><h3><span lang="en">{E(p["title"]["en"])}</span><span class="translation" lang="zh-Hans">{E(p["title"]["zh"])}</span></h3>'
+             f'<p class="paper-meta">{E(p.get("byline", p["citation"]))} · {link("https://doi.org/" + p["doi"], "DOI " + E(p["doi"]))}</p>']
+        md = [f"#### {p['title']['en']}｜{p['title']['zh']}\n\n{p.get('byline', p['citation'])} · [DOI {p['doi']}](https://doi.org/{p['doi']})\n"]
+        for key, en, zh in parts:
+            if p.get(key):
+                h.append(f'<h4><span lang="en">{en}</span> · <span lang="zh-Hans">{zh}</span></h4>' + _bi(p[key]["en"], p[key]["zh"]))
+                md.append(f"**{en}｜{zh}**\n\n{strip(p[key]['en'])}\n\n{strip(p[key]['zh'])}\n")
+        if p.get("terms"):
+            h.append('<dl class="attachment-facts">' + "".join(f'<dt>{E(t["term"]["en"])} · {E(t["term"]["zh"])}</dt><dd>{_bi(t["explanation"]["en"], t["explanation"]["zh"])}</dd>' for t in p["terms"]) + "</dl>")
+            md.append("".join(f"- **{t['term']['en']}｜{t['term']['zh']}**：{strip(t['explanation']['en'])}<br>{strip(t['explanation']['zh'])}\n" for t in p["terms"]))
+        srcs = " · ".join(link(s["url"], E(s["title"])) for s in rec.get("sources", [])[:4])
+        h.append(f'<p class="model-link-row">{srcs}</p></article>')
+        return "".join(h), "\n".join(md)
+
+    def b_quiz(self, b):
+        H, M = [], []
+        self._check(H, M, b["items"])
+        return "".join(H), "".join(M)
+
+    def b_listen(self, b):
+        items = "".join(f'<details class="quiz listen-item"><summary>{say_btn(en)}<span class="quiz-toggle">Listen, write it, then check · 听音写出，再展开</span></summary>'
+                        f'<div class="bilingual-pair"><p lang="en">{E(en)} {self.pron_html(en)}</p><p class="translation" lang="zh-Hans">{E(zh)}</p></div></details>' for en, zh in b["words"])
+        md = "".join(f"- 🔊 {en}（{zh}）\n" for en, zh in b["words"])
+        return f'<div class="checkpoint listen"><p class="kicker"><span lang="en">Listen and write</span> <span lang="zh-Hans">听音辨词</span></p>{items}</div>', md
+
+    def b_spell(self, b):
+        items = "".join(f'<div class="spell-item"><label><span lang="zh-Hans">{E(zh)}</span>{say_btn(en)}<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" data-answer="{EA(en)}" aria-label="拼写 {EA(zh)}"></label>'
+                        f'<button type="button" class="spell-check">Check · 核对</button><span class="spell-result" aria-live="polite"></span></div>' for en, zh in b["words"])
+        md = "".join(f"- {zh}：________（{en}）\n" for en, zh in b["words"])
+        return f'<div class="checkpoint spell"><p class="kicker"><span lang="en">Spell from memory</span> <span lang="zh-Hans">拼写默写</span></p>{items}</div>', md
+
+    def _prompt_answer(self, b, kind, label_en, label_zh, field):
+        pe, pz = b["prompt"]; ae, az = b["answer"]
+        key = b.get("id") or re.sub(r"\W+", "-", strip(pe).lower())[:40]
+        box = f'<textarea class="typed-notes" data-key="{EA(key)}" rows="6" aria-label="{EA(label_zh)}"></textarea>' if field else ""
+        h = (f'<div class="checkpoint {kind}"><p class="kicker"><span lang="en">{label_en}</span> <span lang="zh-Hans">{label_zh}</span></p>{_bi(pe, pz)}{box}'
+             f'<details class="quiz"><summary><span class="quiz-toggle">Compare with the reference · 对照原文</span></summary>{_bi(ae, az)}</details></div>')
+        md = f"**{label_en}｜{label_zh}**：{strip(pe)}<br>{strip(pz)}\n\n<details><summary>Reference 原文</summary>\n\n{strip(ae)}<br>{strip(az)}\n\n</details>\n"
+        return h, md
+
+    def b_notes(self, b):
+        return self._prompt_answer(b, "notes", "Type it from memory", "手敲笔记", True)
+
+    def b_oral(self, b):
+        return self._prompt_answer(b, "oral", "Say it aloud from memory", "口述", False)
+
+    def b_due_cards(self, b):
+        if not self.due:
+            return ('<div class="checkpoint due"><p lang="en">No earlier cards are due today.</p><p class="translation" lang="zh-Hans">今天没有到期的旧卡。</p></div>',
+                    "No earlier cards are due today. 今天没有到期的旧卡。\n")
+        items = "".join(f'<details class="quiz"><summary><span class="question-pair"><span lang="zh-Hans">{E(c["title"])} <small>{E(c.get("sub", ""))}</small></span><span lang="zh-Hans">{E(c["ask"])}</span></span>'
+                        f'<span class="quiz-toggle">Show answer · 展开答案</span></summary><dl>' + "".join(f"<dt>{E(k)}</dt><dd>{E(v)}</dd>" for k, v in c["fields"]) + f'</dl><p class="paper-meta">{E(c["learned"])}</p></details>' for c in self.due)
+        md = "".join(f"- **{c['title']}**（{c.get('sub', '')}，{c['learned']}）：{c['ask']}\n" for c in self.due)
+        return f'<div class="checkpoint due"><p class="kicker"><span lang="en">Spaced review: due today</span> <span lang="zh-Hans">间隔复习：今天到期</span></p>{items}</div>', md
+
+
+class Renderer(WeeklyBlocks):
+    def __init__(self, content, figs, due=None):
+        """figs: {"01": "01-xxx.svg", ...} — files present in the day's 资源/ folder.
+        due: review-center cards due on this date (F-10), filled in by the builder."""
         self.c = content
+        self.due = due or []
         self.figs = figs
-        self.pron = load_pron(content.get("pronunciation"))
+        self.pron = load_pron(content.get("pronunciation"), content.get("chapter"))
         self.mus = content.get("muscles", [])
         self.acu = content.get("acupoints", [])
 
@@ -245,10 +350,10 @@ class Renderer:
                 "**Sources 来源：** " + " · ".join(f"[{t}]({u})" for u, t in self.c.get("sources", [])) + f" · {strip(note)}\n")
 
 
-def render_sections(content, figs, out_dir):
+def render_sections(content, figs, out_dir, due=None):
     """Write NN-id.html / NN-id.md for every chapter. Returns list of (num, id)."""
     out_dir = Path(out_dir); out_dir.mkdir(parents=True, exist_ok=True)
-    r = Renderer(content, figs)
+    r = Renderer(content, figs, due)
     order = []
     for ch in content["chapters"]:
         h, m = r.chapter(ch)

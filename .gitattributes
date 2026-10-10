@@ -8,3 +8,5 @@
 *.html text
 # Markdown uses trailing double spaces for deliberate hard line breaks.
 *.md text whitespace=-blank-at-eol,-blank-at-eof
+# Run log: one JSON line per step; concurrent appends from two clones are both kept.
+daily/runs/log.jsonl merge=union

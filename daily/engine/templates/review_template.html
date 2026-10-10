@@ -58,6 +58,8 @@ dd.safe{color:var(--warn)}
 .pill.due{background:var(--warn-soft);color:var(--warn)}
 .row dl{margin-top:10px}
 .foot{font-size:12px;color:var(--muted);margin-top:30px;border-top:1px solid var(--rule);padding-top:12px}
+.sync{font-size:12.5px;color:var(--muted);margin:14px 0 0}
+.sync.warn{color:var(--warn)}
 @media(max-width:620px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}dl.fields{grid-template-columns:1fr}dl.fields dt{padding-top:6px}.study h2{font-size:28px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -78,7 +80,8 @@ dd.safe{color:var(--warn)}
   </div>
   <input class="search" id="q" type="search" placeholder="搜索穴名或肌肉名（中文或英文）" aria-label="搜索">
   <div id="view"></div>
-  <p class="foot">复习间隔：学完后第 1、3、7、14、30 天，之后每 60 天一次。点“记住了”进入下一档；点“没记住”明天再来。进度只保存在当前这台设备的浏览器里。定位依据 GB/T 12346；层次为学习用的简化描述，不代表进针方向或深度。</p>
+  <p class="sync" id="sync" role="status" hidden></p>
+  <p class="foot">复习间隔：学完后第 1、3、7、14、30 天，之后每 60 天一次。点“记住了”进入下一档；点“没记住”明天再来。每次作答都记进复习中心的共享记录，换设备也能接着复习；连不上时先存在本机，下次打开自动补上。定位依据 GB/T 12346；层次为学习用的简化描述，不代表进针方向或深度。</p>
 </div>
 <script type="application/json" id="cards">__CARDS__</script>
 <script>
@@ -127,12 +130,88 @@ document.addEventListener('click',function(e){
   var t=e.target.closest('[data-view]');if(t){view=t.dataset.view;document.querySelectorAll('[data-view]').forEach(function(b){b.setAttribute('aria-pressed',b===t?'true':'false');});queue=null;shown=false;render();return;}
   var a=e.target.closest('[data-act]');if(!a)return;var id=queue&&queue[0];if(!id)return;var c=CARDS.filter(function(x){return x.id===id;})[0];
   if(a.dataset.act==='show'){shown=true;render();return;}
-  var s=st(c);
-  if(a.dataset.act==='know'){var step=Math.min(s.step+1,INT.length-1);state[id]={step:step,next:addDays(TODAY,INT[step])};queue.shift();}
-  else{state[id]={step:0,next:addDays(TODAY,1)};queue.push(queue.shift());if(queue.length===1){}}
-  if(a.dataset.act==='again'&&queue.length>1){}
-  save();shown=false;render();});
+  TODAY=iso(new Date());   // the page may stay open past midnight
+  var s=st(c), n;
+  if(a.dataset.act==='know'){var step=Math.min(s.step+1,INT.length-1);n={step:step,next:addDays(TODAY,INT[step])};queue.shift();}
+  else{n={step:0,next:addDays(TODAY,1)};queue.push(queue.shift());}
+  state[id]=n;record(c,a.dataset.act,s,n);save();shown=false;render();});
 document.getElementById('q').addEventListener('input',function(e){q=e.target.value.trim().toLowerCase();queue=null;shown=false;render();});
+/* 作答记录。每次点“记住了”“没记住”记一条，写进复习中心的共享数据库：
+   answers/<id>  一次打开页面的作答（events，每份最多 MAXEV 条），push-hub 每天同步进 feedback/；
+   progress/c<卡片 id 的 UTF-8 十六进制>  每张卡的档位和下次日期，换设备时取较新的一份。
+   数据库用不了时先存在本机（PKEY；本机也存不了时只在内存里），下次打开再补写。 */
+var PKEY='dpt-cards-sync-v1', DEVKEY='dpt-cards-device', MAXEV=400;
+var LS=(function(){try{localStorage.setItem('dpt-cards-t','1');localStorage.removeItem('dpt-cards-t');return true;}catch(e){return false;}})();
+function load(k,d){try{var v=JSON.parse(localStorage.getItem(k)||'null');return v==null?d:v;}catch(e){return d;}}
+function put(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function rid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8);}
+var MEM={events:[],progress:{}};
+function pend(){if(!LS)return MEM;var p=load(PKEY,null);if(!p||typeof p!=='object')p={};if(!Array.isArray(p.events))p.events=[];if(!p.progress||typeof p.progress!=='object')p.progress={};return p;}
+function keep(p){if(LS)put(PKEY,p);else MEM=p;}
+var DEVICE=load(DEVKEY,'');if(!DEVICE){DEVICE='d'+rid();put(DEVKEY,DEVICE);}
+var backlog=pend().events.slice(), SESSION='s'+rid(), sess=[], db=null, ready=false, busy=false, more=false;
+var problem='', pullProblem='', pulled=false, answered=0;
+function hex(s){var u=unescape(encodeURIComponent(s)),o='';for(var i=0;i<u.length;i++)o+=('0'+u.charCodeAt(i).toString(16)).slice(-2);return o;}
+function record(c,act,before,after){
+  var now=new Date().toISOString();after.at=now;answered++;
+  var ev={id:'e'+rid(),card:c.id,title:c.title,kind:c.type,result:act,step_before:before.step,step_after:after.step,next:after.next,learned:c.learned,day:TODAY,at:now};
+  var p=pend();p.events.push(ev);p.progress[c.id]=after;keep(p);sess.push(ev);flush();}
+function wait(ms){return new Promise(function(r){setTimeout(r,ms);});}
+async function retry(fn){try{return await fn();}catch(e){if(!e||e.code!=='unavailable')throw e;await wait(800+Math.random()*1200);return await fn();}}
+function write(ref,data){return retry(function(){return ref.set(data);});}
+function idsOf(evs){var o={};evs.forEach(function(e){o[e.id]=1;});return o;}
+function dropEvents(ids){var p=pend();p.events=p.events.filter(function(e){return !ids[e.id];});keep(p);}
+function docOf(id,evs){return {schema:'dpt-answers/1',session:id,device:DEVICE,day:evs[0].day,updated:new Date().toISOString(),count:evs.length,events:evs};}
+async function flush(){
+  if(!db){showSync();return;}
+  if(busy){more=true;return;}
+  busy=true;problem='';
+  do{more=false;
+    try{
+      while(backlog.length){var chunk=backlog.slice(0,MAXEV), cid='s'+rid();   // answers left from earlier visits
+        await write(db.doc('answers/'+cid),docOf(cid,chunk));dropEvents(idsOf(chunk));backlog=backlog.slice(chunk.length);}
+      if(sess.length){var evs=sess.slice();
+        await write(db.doc('answers/'+SESSION),docOf(SESSION,evs));dropEvents(idsOf(evs));
+        if(sess.length>=MAXEV&&sess.length===evs.length){SESSION='s'+rid();sess=[];}}
+    }catch(e){problem=(e&&e.code)||'unavailable';}
+    try{
+      if(!pulled)await pull();
+      if(pulled){var todo=pend().progress;   // only after reading the other devices' progress
+        for(var id in todo){var v=todo[id];
+          await write(db.doc('progress/c'+hex(id)),{card:id,step:v.step,next:v.next,at:v.at||''});
+          var q=pend();if(q.progress[id]&&q.progress[id].at===v.at){delete q.progress[id];keep(q);}}}
+    }catch(e){problem=problem||(e&&e.code)||'unavailable';}
+  }while(more&&!problem);
+  busy=false;showSync();}
+function showSync(){
+  var el=document.getElementById('sync'), p=pend(), n=p.events.length||Object.keys(p.progress).length, msg='', ok=false;
+  if(!ready){el.hidden=true;return;}
+  if(!db&&!LS)msg='这个页面现在连不上共享记录，这个浏览器也不能在本机存数据，这次的作答不会被记录。';
+  else if(problem==='quota_exceeded')msg='共享记录已经存满，新的作答先存在本机（'+n+' 条）。请告诉 Claude 清理。';
+  else if(problem)msg='有 '+n+' 条作答还没写进共享记录，已先存在本机；下次作答或重新打开页面时再试。';
+  else if(!db&&n)msg='这个页面现在连不上共享记录，'+n+' 条作答先存在本机，下次打开自动补上。';
+  else if(!db)msg='这个页面现在连不上共享记录，作答先存在本机。';
+  else if(pullProblem)msg='没能读取其他设备的复习进度，这里的到期卡片可能不是最新的；作答照常记录。';
+  else if(n){msg='正在保存作答…';ok=true;}
+  else if(answered){msg='作答已记录。';ok=true;}
+  if(msg&&!LS&&db&&n)msg+=' 这个浏览器不能在本机存数据，关掉页面前没写进共享记录的作答会丢。';
+  el.textContent=msg;el.hidden=!msg;el.className='sync'+(ok?'':' warn');}
+function okStep(v){return v&&typeof v.card==='string'&&v.step===(v.step|0)&&v.step>=0&&v.step<INT.length&&/^\d{4}-\d{2}-\d{2}$/.test(v.next);}
+async function pull(){
+  var snap;
+  try{snap=await retry(function(){return db.collection('progress').limit(1000).get();});}
+  catch(e){pullProblem=(e&&e.code)||'unavailable';return;}
+  pulled=true;pullProblem='';
+  var remote={}, changed=false, p=pend();
+  snap.docs.forEach(function(doc){var v=doc.data();if(!okStep(v))return;remote[v.card]=v;var l=state[v.card];
+    if(!l||String(v.at||'')>String(l.at||'')){state[v.card]={step:v.step,next:v.next,at:String(v.at||'')};changed=true;
+      if(p.progress[v.card]&&String(p.progress[v.card].at||'')<=String(v.at||''))delete p.progress[v.card];}});
+  Object.keys(state).forEach(function(id){var l=state[id],r=remote[id];if(!r||String(l.at||'')>String(r.at||''))if(!p.progress[id])p.progress[id]=l;});
+  keep(p);
+  if(changed){save();if(!answered&&!shown)queue=null;render();}}
+var CL=window.claude;
+if(CL&&typeof CL.use==='function'){CL.use('db').then(function(d){db=d||null;ready=true;if(db)flush();else showSync();},function(){ready=true;showSync();});}
+else{ready=true;showSync();}
 render();
 })();
 </script>

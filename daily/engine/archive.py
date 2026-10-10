@@ -62,7 +62,8 @@ def day_markdown(c, run=None):
           f"pack: 每日学习包/{stem}/{stem}.html", f"pack_md: 每日学习包/{stem}/{stem}.md",
           f"site: https://guiguisqwd.github.io/dpt-study/daily/{date}/index.html",
           f"next_up: [{', '.join(a['name'] for a in (nxt[0]['acupoints'] if nxt else []))}{'; ' if nxt else ''}{', '.join(m['zh'] for m in (nxt[0]['muscles'] if nxt else []))}]", "---", ""]
-    L = fm + [f"# 每日学习包存档 · {date}（{plan.weekday_zh(date)}）· 第 {c.get('day')} 天", "",
+    when = f"第 {c['week']} 周 · {c.get('chapter_name', c['chapter'])}" if c.get("schema") == "dpt-daily-pack/2" else f"第 {c.get('day')} 天"
+    L = fm + [f"# 每日学习包存档 · {date}（{plan.weekday_zh(date)}）· {when}", "",
               f"> {c['title']['zh']}｜{c['title']['en']}。推送页是 `{stem}.html`；本文件比推送页多出每一条知识的检索标记（纵向/横向）、复习日期和资料来源，供后续 Agent 检索复用。", ""]
     L += ["## 肌肉 Muscles", ""]
     for m, it in zip(c.get("muscles", []), [i for i in its if i["kind"] == "muscle"]):
@@ -93,7 +94,7 @@ def catalog_lines():
     seen = {l["item_id"] for l in lines}
     for f in sorted(DAYS.glob("*/content.json")):
         c = json.loads(f.read_text(encoding="utf-8"))
-        if c.get("kind") != "learning" or not (build_dir(c["date"]) / f"{out_name(c)}.html").exists():
+        if c.get("kind") not in ("learning", "supplement") or not (build_dir(c["date"]) / f"{out_name(c)}.html").exists():
             continue
         for it in items(c):
             if it["item_id"] not in seen:

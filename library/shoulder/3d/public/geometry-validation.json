@@ -3,6 +3,7 @@
   "scope": "Geometric containment only; this does not establish clinical acupoint accuracy.",
   "referenceFile": "src/model-references.json",
   "method": "Shared GLB coordinates; 7 skew-ray parity checks plus signed solid-angle winding number; double-sided triangles; 1e-6 m boundary tolerance.",
+  "addonMeshesMethod": "addonMeshes: the same measurements for every z-anatomy-1.4.0-shoulder-addon.glb mesh of the same side whose surface lies within 3 cm of the reference (or contains it). Recorded so compute-acupoint-depth.mjs --check can reproduce them; they do not affect pass/fail.",
   "passedCount": 10,
   "totalCount": 10,
   "results": [
@@ -55,7 +56,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": -2.653e-06,
+        "windingNumber": -0.000002653,
         "rayIntersectionCounts": [
           0,
           0,
@@ -68,7 +69,43 @@
         "distanceToSurfaceMetres": 0.078939028,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            2,
+            0,
+            2,
+            0,
+            2,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.013651523
+        },
+        {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "distanceToSurfaceMetres": 0.014390207
+        }
+      ]
     },
     {
       "id": "SI11-left",
@@ -119,7 +156,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": 2.653e-06,
+        "windingNumber": 0.000002653,
         "rayIntersectionCounts": [
           0,
           0,
@@ -132,7 +169,43 @@
         "distanceToSurfaceMetres": 0.078938971,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            6,
+            0,
+            6,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.013651463
+        },
+        {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            2,
+            0,
+            2,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.014390264
+        }
+      ]
     },
     {
       "id": "SI12-right",
@@ -183,7 +256,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": -2.622e-06,
+        "windingNumber": -0.000002622,
         "rayIntersectionCounts": [
           0,
           0,
@@ -196,7 +269,77 @@
         "distanceToSurfaceMetres": 0.048887813,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "levator-scapulae-muscles-levator-scapulae-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.02964036
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            2,
+            0,
+            2,
+            0,
+            2,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.018732277
+        },
+        {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            2,
+            0,
+            2,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.008708155
+        },
+        {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            2,
+            0,
+            2,
+            0,
+            0,
+            2
+          ],
+          "distanceToSurfaceMetres": 0.013526608
+        }
+      ]
     },
     {
       "id": "SI12-left",
@@ -247,7 +390,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": 2.622e-06,
+        "windingNumber": 0.000002622,
         "rayIntersectionCounts": [
           0,
           0,
@@ -260,7 +403,77 @@
         "distanceToSurfaceMetres": 0.048887837,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "levator-scapulae-muscles-levator-scapulae-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.029640352
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            2,
+            4,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.01873227
+        },
+        {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.008708198
+        },
+        {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            2,
+            0,
+            2,
+            0,
+            0,
+            2
+          ],
+          "distanceToSurfaceMetres": 0.013526645
+        }
+      ]
     },
     {
       "id": "SI9-right",
@@ -311,7 +524,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": -7.603e-06,
+        "windingNumber": -0.000007603,
         "rayIntersectionCounts": [
           0,
           0,
@@ -324,7 +537,26 @@
         "distanceToSurfaceMetres": 0.026737464,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "triceps-brachii-muscles-long-head-of-triceps-brachii-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            2,
+            0,
+            2,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.005926879
+        }
+      ]
     },
     {
       "id": "SI9-left",
@@ -375,7 +607,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": 7.603e-06,
+        "windingNumber": 0.000007603,
         "rayIntersectionCounts": [
           0,
           0,
@@ -388,7 +620,26 @@
         "distanceToSurfaceMetres": 0.026737436,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "triceps-brachii-muscles-long-head-of-triceps-brachii-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            2,
+            0,
+            2,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.00592706
+        }
+      ]
     },
     {
       "id": "LI15-right",
@@ -439,7 +690,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": 3.3202e-05,
+        "windingNumber": 0.000033202,
         "rayIntersectionCounts": [
           0,
           0,
@@ -452,7 +703,43 @@
         "distanceToSurfaceMetres": 0.00225285,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "biceps-brachii-muscles-long-head-of-biceps-brachii-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.012295021
+        },
+        {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.025896589
+        }
+      ]
     },
     {
       "id": "LI15-left",
@@ -503,7 +790,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": -3.3202e-05,
+        "windingNumber": -0.000033202,
         "rayIntersectionCounts": [
           0,
           0,
@@ -516,7 +803,43 @@
         "distanceToSurfaceMetres": 0.002252925,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "biceps-brachii-muscles-long-head-of-biceps-brachii-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.0122952
+        },
+        {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.025896563
+        }
+      ]
     },
     {
       "id": "TE14-right",
@@ -567,7 +890,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": 4.388e-06,
+        "windingNumber": 0.000004388,
         "rayIntersectionCounts": [
           0,
           0,
@@ -580,7 +903,26 @@
         "distanceToSurfaceMetres": 0.018650462,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-right",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.017050187
+        }
+      ]
     },
     {
       "id": "TE14-left",
@@ -631,7 +973,7 @@
         "inside": false,
         "unanimousRays": true,
         "windingAgrees": true,
-        "windingNumber": -4.388e-06,
+        "windingNumber": -0.000004388,
         "rayIntersectionCounts": [
           0,
           0,
@@ -644,7 +986,26 @@
         "distanceToSurfaceMetres": 0.018650505,
         "onBoundary": false,
         "reliable": true
-      }
+      },
+      "addonMeshes": [
+        {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-left",
+          "inside": false,
+          "unanimousRays": true,
+          "windingAgrees": true,
+          "windingNumber": 0,
+          "rayIntersectionCounts": [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          "distanceToSurfaceMetres": 0.017050162
+        }
+      ]
     }
   ]
 }

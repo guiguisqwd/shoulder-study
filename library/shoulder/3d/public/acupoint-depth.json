@@ -11,6 +11,20 @@
     "positions": "original-model-metres-y-up (before modelScale 7 and modelPosition [0, -6.1, 0])",
     "distances": "centimetres = original model metres × 100, measured along the probe axis from the first modeled surface (depth 0)"
   },
+  "modelFiles": [
+    {
+      "file": "z-anatomy-1.4.0-muscular.glb",
+      "sha256": "8a31c34c1ee578714bcd8a9a950aced4aaf0bbbd6047ec3b57836a4df6e8121d"
+    },
+    {
+      "file": "z-anatomy-1.4.0-skeletal.glb",
+      "sha256": "8cbea4cc15fb2063853491634eb2c57b57cf7f104f7160c4eed82cf9e392ab0d"
+    },
+    {
+      "file": "z-anatomy-1.4.0-shoulder-addon.glb",
+      "sha256": "e10e0b0749aaafb54abd1cb5fdde32ccb3e20b6360cfce2b006eb5469a330d21"
+    }
+  ],
   "axisConventions": {
     "up": "+y",
     "anterior": "+z",
@@ -21,16 +35,17 @@
     "verifiedBy": [
       "Superior +y: manubrium of sternum (y 1.377) above body of sternum (y 1.299); vertebra C7 (y 1.452) above sacrum (y 0.923).",
       "Anterior +z: body of sternum z 0.091 versus vertebra T4 z -0.065; rectus abdominis z 0.082 versus gluteus maximus z -0.063.",
-      "Right side x < 0: all 320 sided meshes agree (Z-Anatomy source names ending \".r\" and anatomy IDs ending \"-right\" lie at x < 0; \".l\"/\"-left\" at x > 0). With +y up and +z anterior in a right-handed glTF frame, the subject's right is forward × up = -x, so names and geometry agree (no mirroring).",
+      "Right side x < 0: all 362 sided meshes agree (Z-Anatomy source names ending \".r\" and anatomy IDs ending \"-right\" lie at x < 0; \".l\"/\"-left\" at x > 0). With +y up and +z anterior in a right-handed glTF frame, the subject's right is forward × up = -x, so names and geometry agree (no mirroring).",
       "Anatomical position: on the right hand the first metacarpal (thumb, x -0.301) lies lateral to the fifth (x -0.243)."
     ]
   },
   "method": {
-    "axis": "For each point a documented approach direction (posterior for SI11, SI12, SI9; lateral for LI15, TE14; mirrored for the left side) is cast through the model reference. Where that line first meets a modeled surface, the area-weighted outward normal of that structure's outward-facing triangles within 2.5 cm (a skin-scale patch) sets the probe direction, and the probe passes exactly through the reference. This approximates \"perpendicular to the body surface\" using the outer muscle surface, because skin is not modeled. The same construction with 1.5–3 cm patches is recorded under axis.sensitivity.",
+    "axis": "For each point a documented approach direction (posterior for SI11, SI12, SI9; lateral for LI15, TE14; mirrored for the left side) is cast through the model reference. Where that line first meets a modeled surface, the area-weighted outward normal of that structure's outward-facing triangles within 2.5 cm (a skin-scale patch) sets the probe direction, and the probe passes exactly through the reference. For SI12 that first surface is the trapezius, which the source model splits into three meshes along a boundary that passes the point, so the patch takes all trapezius meshes of that side (axis.nominalSurface.patchStructures). This approximates \"perpendicular to the body surface\" using the outer muscle surface, because skin is not modeled. The same construction with 1.5–3 cm patches is recorded under axis.sensitivity.",
     "crossings": "Rays start 30 cm outside the reference. Every triangle of every muscle and bone mesh is tested double-sided (Möller–Trumbore); hits closer than 1e-6 m along the ray are merged; per-structure hits are paired into entry/exit by parity and checked against outward triangle normals.",
-    "layers": "Layers are listed from depth 0 until the axis crosses a rib (thoracic wall) or the humerus, or until the next modeled structure starts more than 1.5 cm beyond the deepest layer so far (after the reference), with an 8 cm limit.",
+    "layers": "Layers are listed from depth 0 until the axis crosses a rib (thoracic wall) or the humerus, or until the next modeled structure starts more than 1.5 cm beyond the deepest layer so far (after the reference), with an 8 cm limit. Where the axis enters one trapezius mesh within 0.5 cm of another, the layer is named as the whole trapezius (the source model's part boundaries are approximate) and its note names the mesh entered.",
+    "sourceComparison": "For SI11, SI12 and SI9 a published layer description (sources listed with each point, accessed 2026-10-09) is compared with the probe: each listed muscle is either on the probe, with its depth range, or not, with the closest approach of the axis between -1 cm and 8 cm depth (sampled every 0.05 cm) and its direction. The comparison is a study note; neither the sources nor the model are clinical measurements.",
     "nearby": "For every other structure, the nearest surface point to the reference (exhaustive triangle search) within 3 cm. Direction names use the components of the unit vector reference→nearest point: the largest anatomical component and a second one if it is at least 0.45; \"deeper/more superficial along the probe\" uses the component along the probe axis with the same threshold. A structure whose mesh also contains the reference (winding number) is listed as overlapping.",
-    "loaderCheck": "npm script test:depth reproduces every ray count and surface distance in public/geometry-validation.json (made with three.js) before checking this file."
+    "loaderCheck": "npm script test:depth reproduces every ray count and surface distance in public/geometry-validation.json (made with three.js, including the shoulder add-on meshes near each reference) before checking this file."
   },
   "points": {
     "SI11-right": {
@@ -48,8 +63,8 @@
           "zh": "后方"
         },
         "rationale": {
-          "en": "Tianzong lies in the infraspinous fossa; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the infraspinatus) over the fossa.",
-          "zh": "天宗位于冈下窝；探针自后方进入，并按模型外表面（冈下肌）法线调整为垂直于该处外表面。"
+          "en": "Tianzong lies in the infraspinous fossa; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the infraspinatus) over the fossa. In this model the edge of the lower trapezius lies just medial to the probe, so the probe meets the infraspinatus first.",
+          "zh": "天宗位于冈下窝；探针自后方进入，并按模型外表面（冈下肌）法线调整为垂直于该处外表面。本模型中斜方肌下部的边缘恰在探针内侧，因此探针首先遇到冈下肌。"
         },
         "method": "outer-surface-normal",
         "nominalOutward": [
@@ -65,7 +80,11 @@
             -0.1110994
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 242
+          "triangles": 242,
+          "patchScope": "part",
+          "patchStructures": [
+            "rotator-cuff-muscles-infraspinatus-muscle-right"
+          ]
         },
         "directionInward": [
           0.06158,
@@ -103,7 +122,7 @@
             "max": 1.35
           },
           "layerSequences": [
-            "Infraspinatus → Scapula → Subscapularis → Fifth rib"
+            "Infraspinatus → Scapula → Subscapularis → Serratus anterior → Fifth rib"
           ],
           "sameLayerSequence": true
         },
@@ -156,6 +175,19 @@
           "thicknessCm": 0.67,
           "gapBeforeCm": 0,
           "overlapsPreviousCm": 0.01,
+          "containsReference": false,
+          "normalsAgree": true
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-right",
+          "english": "Serratus anterior",
+          "chinese": "前锯肌",
+          "kind": "muscle",
+          "entryCm": 3.05,
+          "exitCm": 3.63,
+          "thicknessCm": 0.58,
+          "gapBeforeCm": 0,
+          "overlapsPreviousCm": 0.57,
           "containsReference": false,
           "normalsAgree": true
         },
@@ -237,6 +269,66 @@
             -0.0995141,
             1.3371022,
             -0.0851306
+          ]
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-right",
+          "english": "Serratus anterior",
+          "chinese": "前锯肌",
+          "kind": "muscle",
+          "distanceCm": 1.37,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "anterior",
+              "medial"
+            ],
+            "en": "Anterior, medial",
+            "zh": "前方、内侧",
+            "probeRelation": "deep",
+            "probeRelationEn": "deeper along the probe",
+            "probeRelationZh": "沿探针更深",
+            "components": {
+              "superior": -0.243,
+              "lateral": -0.533,
+              "anterior": 0.811,
+              "deep": 0.878
+            }
+          },
+          "closestPoint": [
+            -0.0984574,
+            1.3369083,
+            -0.0857791
+          ]
+        },
+        {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
+          "english": "Lower trapezius",
+          "chinese": "下斜方肌",
+          "kind": "muscle",
+          "distanceCm": 1.44,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "posterior",
+              "superior"
+            ],
+            "en": "Posterior, superior",
+            "zh": "后方、上方",
+            "probeRelation": "superficial",
+            "probeRelationEn": "more superficial along the probe",
+            "probeRelationZh": "沿探针更浅",
+            "components": {
+              "superior": 0.467,
+              "lateral": -0.235,
+              "anterior": -0.853,
+              "deep": -0.936
+            }
+          },
+          "closestPoint": [
+            -0.1023439,
+            1.3469422,
+            -0.1091155
           ]
         },
         {
@@ -377,14 +469,97 @@
           }
         }
       ],
+      "sourceComparison": {
+        "sequence": {
+          "en": "Skin → subcutaneous tissue → trapezius fascia → trapezius → infraspinatus",
+          "zh": "皮肤 → 皮下组织 → 斜方肌筋膜 → 斜方肌 → 冈下肌"
+        },
+        "agreement": "differs",
+        "muscles": [
+          {
+            "match": "trapezius-muscles-",
+            "english": "Trapezius",
+            "chinese": "斜方肌",
+            "anatomyIds": [
+              "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
+              "trapezius-muscles-descending-part-of-trapezius-muscle-right",
+              "trapezius-muscles-transverse-part-of-trapezius-muscle-right"
+            ],
+            "onProbe": false,
+            "closestPartId": "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
+            "closestPartEnglish": "Lower trapezius",
+            "distanceToProbeCm": 0.35,
+            "atProbeDepthCm": -0.4,
+            "direction": {
+              "terms": [
+                "medial"
+              ],
+              "en": "Medial",
+              "zh": "内侧",
+              "probeRelation": "level",
+              "probeRelationEn": "beside the probe",
+              "probeRelationZh": "探针侧旁",
+              "components": {
+                "superior": 0.327,
+                "lateral": -0.945,
+                "anterior": 0.024,
+                "deep": -0.015
+              }
+            }
+          },
+          {
+            "match": "rotator-cuff-muscles-infraspinatus-muscle",
+            "english": "Infraspinatus",
+            "chinese": "冈下肌",
+            "anatomyIds": [
+              "rotator-cuff-muscles-infraspinatus-muscle-right"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "rotator-cuff-muscles-infraspinatus-muscle-right"
+            ],
+            "entryCm": 0,
+            "exitCm": 2.67
+          }
+        ],
+        "modelOnlyMuscles": [],
+        "notes": [
+          {
+            "en": "In this model the probe meets the infraspinatus without crossing the trapezius: the border of the lower trapezius runs just medial to the probe, outside the first modeled surface. The sources list the trapezius over the infraspinatus at Tianzong, so here the modeled trapezius border falls just short of covering the probe.",
+            "zh": "本模型中探针未穿过斜方肌即到达冈下肌：斜方肌下部的边缘就在探针内侧、第一个建模表面之外。资料在天宗处把斜方肌列在冈下肌浅面，模型中的斜方肌边缘在这里恰好没有盖到探针。"
+          }
+        ],
+        "sources": [
+          {
+            "title": "天宗穴 · 穴位解剖",
+            "publisher": "医学百科 (yixue.com), revision 43196",
+            "url": "https://www.yixue.com/%E5%A4%A9%E5%AE%97%E7%A9%B4",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "Layers under the point: skin, subcutaneous tissue, trapezius fascia, trapezius, infraspinatus.",
+              "zh": "穴下为皮肤、皮下组织、斜方肌筋膜、斜方肌、冈下肌。"
+            }
+          },
+          {
+            "title": "Infraspinatus muscle",
+            "publisher": "Kenhub (Gordana Sendić; reviewed 2023-11-03)",
+            "url": "https://www.kenhub.com/en/library/anatomy/infraspinatus-muscle",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "The infraspinatus lies on the dorsal surface of the scapula, deep to the trapezius and to parts of the deltoid and latissimus dorsi.",
+              "zh": "冈下肌位于肩胛骨背面，在斜方肌及部分三角肌、背阔肌的深面。"
+            }
+          }
+        ]
+      },
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",
@@ -395,8 +570,8 @@
           "zh": "此探针是穿过模型参照点的几何学习轴线，不是进针路径、进针方向或进针深度。"
         },
         {
-          "en": "Source meshes interpenetrate here (Subscapularis); overlapping ranges are shown as modeled, not as real tissue sharing space.",
-          "zh": "此处原始网格存在互相穿插（肩胛下肌）；重叠范围按模型显示，不代表真实组织共占同一空间。"
+          "en": "Source meshes interpenetrate here (Subscapularis, Serratus anterior); overlapping ranges are shown as modeled, not as real tissue sharing space.",
+          "zh": "此处原始网格存在互相穿插（肩胛下肌、前锯肌）；重叠范围按模型显示，不代表真实组织共占同一空间。"
         }
       ]
     },
@@ -415,8 +590,8 @@
           "zh": "后方"
         },
         "rationale": {
-          "en": "Tianzong lies in the infraspinous fossa; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the infraspinatus) over the fossa.",
-          "zh": "天宗位于冈下窝；探针自后方进入，并按模型外表面（冈下肌）法线调整为垂直于该处外表面。"
+          "en": "Tianzong lies in the infraspinous fossa; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the infraspinatus) over the fossa. In this model the edge of the lower trapezius lies just medial to the probe, so the probe meets the infraspinatus first.",
+          "zh": "天宗位于冈下窝；探针自后方进入，并按模型外表面（冈下肌）法线调整为垂直于该处外表面。本模型中斜方肌下部的边缘恰在探针内侧，因此探针首先遇到冈下肌。"
         },
         "method": "outer-surface-normal",
         "nominalOutward": [
@@ -432,7 +607,11 @@
             -0.1110993
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 242
+          "triangles": 242,
+          "patchScope": "part",
+          "patchStructures": [
+            "rotator-cuff-muscles-infraspinatus-muscle-left"
+          ]
         },
         "directionInward": [
           -0.06158,
@@ -470,7 +649,7 @@
             "max": 1.35
           },
           "layerSequences": [
-            "Infraspinatus → Scapula → Subscapularis → Fifth rib"
+            "Infraspinatus → Scapula → Subscapularis → Serratus anterior → Fifth rib"
           ],
           "sameLayerSequence": true
         },
@@ -523,6 +702,19 @@
           "thicknessCm": 0.67,
           "gapBeforeCm": 0,
           "overlapsPreviousCm": 0.01,
+          "containsReference": false,
+          "normalsAgree": true
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-left",
+          "english": "Serratus anterior",
+          "chinese": "前锯肌",
+          "kind": "muscle",
+          "entryCm": 3.05,
+          "exitCm": 3.63,
+          "thicknessCm": 0.58,
+          "gapBeforeCm": 0,
+          "overlapsPreviousCm": 0.57,
           "containsReference": false,
           "normalsAgree": true
         },
@@ -604,6 +796,66 @@
             0.0995142,
             1.3371022,
             -0.0851306
+          ]
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-left",
+          "english": "Serratus anterior",
+          "chinese": "前锯肌",
+          "kind": "muscle",
+          "distanceCm": 1.37,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "anterior",
+              "medial"
+            ],
+            "en": "Anterior, medial",
+            "zh": "前方、内侧",
+            "probeRelation": "deep",
+            "probeRelationEn": "deeper along the probe",
+            "probeRelationZh": "沿探针更深",
+            "components": {
+              "superior": -0.243,
+              "lateral": -0.533,
+              "anterior": 0.811,
+              "deep": 0.878
+            }
+          },
+          "closestPoint": [
+            0.0984574,
+            1.3369084,
+            -0.0857791
+          ]
+        },
+        {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
+          "english": "Lower trapezius",
+          "chinese": "下斜方肌",
+          "kind": "muscle",
+          "distanceCm": 1.44,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "posterior",
+              "superior"
+            ],
+            "en": "Posterior, superior",
+            "zh": "后方、上方",
+            "probeRelation": "superficial",
+            "probeRelationEn": "more superficial along the probe",
+            "probeRelationZh": "沿探针更浅",
+            "components": {
+              "superior": 0.467,
+              "lateral": -0.235,
+              "anterior": -0.853,
+              "deep": -0.936
+            }
+          },
+          "closestPoint": [
+            0.1023439,
+            1.3469422,
+            -0.1091154
           ]
         },
         {
@@ -744,14 +996,97 @@
           }
         }
       ],
+      "sourceComparison": {
+        "sequence": {
+          "en": "Skin → subcutaneous tissue → trapezius fascia → trapezius → infraspinatus",
+          "zh": "皮肤 → 皮下组织 → 斜方肌筋膜 → 斜方肌 → 冈下肌"
+        },
+        "agreement": "differs",
+        "muscles": [
+          {
+            "match": "trapezius-muscles-",
+            "english": "Trapezius",
+            "chinese": "斜方肌",
+            "anatomyIds": [
+              "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
+              "trapezius-muscles-descending-part-of-trapezius-muscle-left",
+              "trapezius-muscles-transverse-part-of-trapezius-muscle-left"
+            ],
+            "onProbe": false,
+            "closestPartId": "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
+            "closestPartEnglish": "Lower trapezius",
+            "distanceToProbeCm": 0.35,
+            "atProbeDepthCm": -0.4,
+            "direction": {
+              "terms": [
+                "medial"
+              ],
+              "en": "Medial",
+              "zh": "内侧",
+              "probeRelation": "level",
+              "probeRelationEn": "beside the probe",
+              "probeRelationZh": "探针侧旁",
+              "components": {
+                "superior": 0.327,
+                "lateral": -0.945,
+                "anterior": 0.024,
+                "deep": -0.015
+              }
+            }
+          },
+          {
+            "match": "rotator-cuff-muscles-infraspinatus-muscle",
+            "english": "Infraspinatus",
+            "chinese": "冈下肌",
+            "anatomyIds": [
+              "rotator-cuff-muscles-infraspinatus-muscle-left"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "rotator-cuff-muscles-infraspinatus-muscle-left"
+            ],
+            "entryCm": 0,
+            "exitCm": 2.67
+          }
+        ],
+        "modelOnlyMuscles": [],
+        "notes": [
+          {
+            "en": "In this model the probe meets the infraspinatus without crossing the trapezius: the border of the lower trapezius runs just medial to the probe, outside the first modeled surface. The sources list the trapezius over the infraspinatus at Tianzong, so here the modeled trapezius border falls just short of covering the probe.",
+            "zh": "本模型中探针未穿过斜方肌即到达冈下肌：斜方肌下部的边缘就在探针内侧、第一个建模表面之外。资料在天宗处把斜方肌列在冈下肌浅面，模型中的斜方肌边缘在这里恰好没有盖到探针。"
+          }
+        ],
+        "sources": [
+          {
+            "title": "天宗穴 · 穴位解剖",
+            "publisher": "医学百科 (yixue.com), revision 43196",
+            "url": "https://www.yixue.com/%E5%A4%A9%E5%AE%97%E7%A9%B4",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "Layers under the point: skin, subcutaneous tissue, trapezius fascia, trapezius, infraspinatus.",
+              "zh": "穴下为皮肤、皮下组织、斜方肌筋膜、斜方肌、冈下肌。"
+            }
+          },
+          {
+            "title": "Infraspinatus muscle",
+            "publisher": "Kenhub (Gordana Sendić; reviewed 2023-11-03)",
+            "url": "https://www.kenhub.com/en/library/anatomy/infraspinatus-muscle",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "The infraspinatus lies on the dorsal surface of the scapula, deep to the trapezius and to parts of the deltoid and latissimus dorsi.",
+              "zh": "冈下肌位于肩胛骨背面，在斜方肌及部分三角肌、背阔肌的深面。"
+            }
+          }
+        ]
+      },
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",
@@ -762,8 +1097,8 @@
           "zh": "此探针是穿过模型参照点的几何学习轴线，不是进针路径、进针方向或进针深度。"
         },
         {
-          "en": "Source meshes interpenetrate here (Subscapularis); overlapping ranges are shown as modeled, not as real tissue sharing space.",
-          "zh": "此处原始网格存在互相穿插（肩胛下肌）；重叠范围按模型显示，不代表真实组织共占同一空间。"
+          "en": "Source meshes interpenetrate here (Subscapularis, Serratus anterior); overlapping ranges are shown as modeled, not as real tissue sharing space.",
+          "zh": "此处原始网格存在互相穿插（肩胛下肌、前锯肌）；重叠范围按模型显示，不代表真实组织共占同一空间。"
         }
       ]
     },
@@ -782,8 +1117,8 @@
           "zh": "后方"
         },
         "rationale": {
-          "en": "Bingfeng lies in the supraspinous fossa above the midpoint of the scapular spine; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the supraspinatus).",
-          "zh": "秉风位于肩胛冈中点上方的冈上窝；探针自后方进入，并按模型外表面（冈上肌）法线调整为垂直于该处外表面。"
+          "en": "Bingfeng lies in the supraspinous fossa above the midpoint of the scapular spine; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface, which is now the trapezius covering the supraspinatus. The source model splits the trapezius into three meshes and the split passes this spot, so the surface normal is taken from all trapezius meshes of that side rather than from one part.",
+          "zh": "秉风位于肩胛冈中点上方的冈上窝；探针自后方进入，并按模型外表面法线调整为垂直于该处外表面；现在该外表面是覆盖冈上肌的斜方肌。原始模型把斜方肌分成三个网格，分界线正好经过此处，因此表面法线取同侧全部斜方肌网格，而不是其中一部分。"
         },
         "method": "outer-surface-normal",
         "nominalOutward": [
@@ -792,24 +1127,30 @@
           -1
         ],
         "nominalSurface": {
-          "anatomyId": "rotator-cuff-muscles-supraspinatus-muscle-right",
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
           "point": [
             -0.1118321,
             1.393608,
-            -0.0806166
+            -0.092223
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 131
+          "triangles": 313,
+          "patchScope": "muscle",
+          "patchStructures": [
+            "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
+            "trapezius-muscles-descending-part-of-trapezius-muscle-right",
+            "trapezius-muscles-transverse-part-of-trapezius-muscle-right"
+          ]
         },
         "directionInward": [
-          0.367136,
-          -0.262843,
-          0.892258
+          0.444606,
+          -0.2456,
+          0.861398
         ],
         "origin": [
-          -0.1152458,
-          1.396052,
-          -0.0786865
+          -0.119738,
+          1.3979752,
+          -0.0857073
         ],
         "originDescription": {
           "en": "First modeled surface along the axis (depth 0)",
@@ -819,11 +1160,11 @@
           "en": "From posterior",
           "zh": "自后方"
         },
-        "angleFromNominalDeg": 26.8,
-        "angleToEntrySurfaceNormalDeg": 8.6,
+        "angleFromNominalDeg": 30.5,
+        "angleToEntrySurfaceNormalDeg": 6.4,
         "referenceOffsetMm": 0,
         "probeStartCm": -1,
-        "probeEndCm": 5.15,
+        "probeEndCm": 5.59,
         "layerStopReason": "thoracic-wall",
         "sensitivity": {
           "patchRadiiCm": [
@@ -833,13 +1174,14 @@
             3
           ],
           "referenceDepthCm": {
-            "min": 0.93,
-            "max": 0.93
+            "min": 1.72,
+            "max": 1.91
           },
           "layerSequences": [
-            "Supraspinatus → Scapula → Subscapularis → Third rib"
+            "Trapezius → Supraspinatus → Scapula → Serratus anterior → Third rib",
+            "Trapezius → Supraspinatus → Scapula → Subscapularis → Serratus anterior → Third rib"
           ],
-          "sameLayerSequence": true
+          "sameLayerSequence": false
         },
         "firstBoneSurface": {
           "anatomyId": "appendicular-skeleton-scapula-right",
@@ -847,7 +1189,7 @@
         },
         "irregularStructures": []
       },
-      "referenceDepthCm": 0.93,
+      "referenceDepthCm": 1.78,
       "referenceLayer": {
         "anatomyId": "rotator-cuff-muscles-supraspinatus-muscle-right",
         "english": "Supraspinatus",
@@ -855,15 +1197,32 @@
       },
       "layers": [
         {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
+          "english": "Trapezius",
+          "chinese": "斜方肌",
+          "kind": "muscle",
+          "entryCm": 0,
+          "exitCm": 0.87,
+          "thicknessCm": 0.87,
+          "gapBeforeCm": 0,
+          "overlapsPreviousCm": 0,
+          "containsReference": false,
+          "normalsAgree": true,
+          "note": {
+            "en": "The source model splits the trapezius into three meshes; here the probe enters the lower trapezius mesh 0.3 cm from the middle trapezius mesh. The model's part boundaries are approximate, so this layer is named as the whole trapezius. Standard descriptions attach the middle fibres to the acromion and the superior crest of the scapular spine and the lower fibres to the medial end of the spine (Kenhub).",
+            "zh": "原始模型把斜方肌分成三个网格；探针在距中斜方肌网格 0.3 cm 处进入下斜方肌网格。模型中各部分的分界只是近似，因此这一层按整块斜方肌命名。标准描述中，中部纤维止于肩峰和肩胛冈上嵴，下部纤维止于肩胛冈内侧端（Kenhub）。"
+          }
+        },
+        {
           "anatomyId": "rotator-cuff-muscles-supraspinatus-muscle-right",
           "english": "Supraspinatus",
           "chinese": "冈上肌",
           "kind": "muscle",
-          "entryCm": 0,
-          "exitCm": 1.82,
-          "thicknessCm": 1.82,
+          "entryCm": 0.86,
+          "exitCm": 2.66,
+          "thicknessCm": 1.8,
           "gapBeforeCm": 0,
-          "overlapsPreviousCm": 0,
+          "overlapsPreviousCm": 0.01,
           "containsReference": true,
           "normalsAgree": true
         },
@@ -872,10 +1231,10 @@
           "english": "Scapula",
           "chinese": "肩胛骨",
           "kind": "bone",
-          "entryCm": 2.43,
-          "exitCm": 2.71,
-          "thicknessCm": 0.28,
-          "gapBeforeCm": 0.61,
+          "entryCm": 3.25,
+          "exitCm": 3.51,
+          "thicknessCm": 0.27,
+          "gapBeforeCm": 0.58,
           "overlapsPreviousCm": 0,
           "containsReference": false,
           "normalsAgree": true
@@ -885,11 +1244,24 @@
           "english": "Subscapularis",
           "chinese": "肩胛下肌",
           "kind": "muscle",
-          "entryCm": 2.94,
-          "exitCm": 3.55,
-          "thicknessCm": 0.61,
-          "gapBeforeCm": 0.23,
+          "entryCm": 3.73,
+          "exitCm": 4.21,
+          "thicknessCm": 0.48,
+          "gapBeforeCm": 0.21,
           "overlapsPreviousCm": 0,
+          "containsReference": false,
+          "normalsAgree": true
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-right",
+          "english": "Serratus anterior",
+          "chinese": "前锯肌",
+          "kind": "muscle",
+          "entryCm": 3.86,
+          "exitCm": 4.57,
+          "thicknessCm": 0.72,
+          "gapBeforeCm": 0,
+          "overlapsPreviousCm": 0.35,
           "containsReference": false,
           "normalsAgree": true
         },
@@ -898,10 +1270,10 @@
           "english": "Third rib",
           "chinese": "第3肋",
           "kind": "bone",
-          "entryCm": 3.94,
-          "exitCm": 4.85,
-          "thicknessCm": 0.91,
-          "gapBeforeCm": 0.39,
+          "entryCm": 4.64,
+          "exitCm": 5.29,
+          "thicknessCm": 0.66,
+          "gapBeforeCm": 0.06,
           "overlapsPreviousCm": 0,
           "containsReference": false,
           "normalsAgree": true,
@@ -913,6 +1285,35 @@
       ],
       "alsoInsideReference": [],
       "nearby": [
+        {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
+          "english": "Lower trapezius",
+          "chinese": "下斜方肌",
+          "kind": "muscle",
+          "distanceCm": 0.87,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "posterior"
+            ],
+            "en": "Posterior",
+            "zh": "后方",
+            "probeRelation": "superficial",
+            "probeRelationEn": "more superficial along the probe",
+            "probeRelationZh": "沿探针更浅",
+            "components": {
+              "superior": 0.358,
+              "lateral": 0.263,
+              "anterior": -0.896,
+              "deep": -0.977
+            }
+          },
+          "closestPoint": [
+            -0.1141227,
+            1.3967258,
+            -0.0781918
+          ]
+        },
         {
           "anatomyId": "appendicular-skeleton-scapula-right",
           "english": "Scapula",
@@ -934,7 +1335,7 @@
               "superior": -0.665,
               "lateral": 0.545,
               "anterior": -0.51,
-              "deep": -0.481
+              "deep": -0.518
             }
           },
           "closestPoint": [
@@ -964,13 +1365,43 @@
               "superior": -0.725,
               "lateral": 0.355,
               "anterior": -0.591,
-              "deep": -0.467
+              "deep": -0.489
             }
           },
           "closestPoint": [
             -0.1165368,
             1.3840159,
             -0.0782095
+          ]
+        },
+        {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-right",
+          "english": "Middle trapezius",
+          "chinese": "中斜方肌",
+          "kind": "muscle",
+          "distanceCm": 1.35,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "posterior",
+              "superior"
+            ],
+            "en": "Posterior, superior",
+            "zh": "后方、上方",
+            "probeRelation": "superficial",
+            "probeRelationEn": "more superficial along the probe",
+            "probeRelationZh": "沿探针更浅",
+            "components": {
+              "superior": 0.681,
+              "lateral": 0.175,
+              "anterior": -0.711,
+              "deep": -0.858
+            }
+          },
+          "closestPoint": [
+            -0.1142008,
+            1.4028178,
+            -0.0800099
           ]
         },
         {
@@ -994,7 +1425,7 @@
               "superior": -0.649,
               "lateral": -0.559,
               "anterior": 0.516,
-              "deep": 0.836
+              "deep": 0.852
             }
           },
           "closestPoint": [
@@ -1024,7 +1455,7 @@
               "superior": -0.113,
               "lateral": -0.657,
               "anterior": 0.746,
-              "deep": 0.936
+              "deep": 0.962
             }
           },
           "closestPoint": [
@@ -1053,13 +1484,43 @@
               "superior": -0.443,
               "lateral": 0.32,
               "anterior": -0.838,
-              "deep": -0.749
+              "deep": -0.755
             }
           },
           "closestPoint": [
             -0.1175143,
             1.385745,
             -0.0852693
+          ]
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-right",
+          "english": "Serratus anterior",
+          "chinese": "前锯肌",
+          "kind": "muscle",
+          "distanceCm": 1.87,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "medial",
+              "anterior"
+            ],
+            "en": "Medial, anterior",
+            "zh": "内侧、前方",
+            "probeRelation": "deep",
+            "probeRelationEn": "deeper along the probe",
+            "probeRelationZh": "沿探针更深",
+            "components": {
+              "superior": -0.394,
+              "lateral": -0.674,
+              "anterior": 0.625,
+              "deep": 0.935
+            }
+          },
+          "closestPoint": [
+            -0.0992125,
+            1.3862281,
+            -0.0586778
           ]
         },
         {
@@ -1083,7 +1544,7 @@
               "superior": -0.098,
               "lateral": -0.675,
               "anterior": 0.731,
-              "deep": 0.926
+              "deep": 0.954
             }
           },
           "closestPoint": [
@@ -1113,7 +1574,7 @@
               "superior": -0.677,
               "lateral": -0.656,
               "anterior": 0.335,
-              "deep": 0.717
+              "deep": 0.746
             }
           },
           "closestPoint": [
@@ -1121,17 +1582,39 @@
             1.374845,
             -0.0611123
           ]
+        },
+        {
+          "anatomyId": "levator-scapulae-muscles-levator-scapulae-right",
+          "english": "Levator scapulae",
+          "chinese": "肩胛提肌",
+          "kind": "muscle",
+          "distanceCm": 2.96,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "medial",
+              "superior"
+            ],
+            "en": "Medial, superior",
+            "zh": "内侧、上方",
+            "probeRelation": "level",
+            "probeRelationEn": "beside the probe",
+            "probeRelationZh": "探针侧旁",
+            "components": {
+              "superior": 0.517,
+              "lateral": -0.85,
+              "anterior": -0.103,
+              "deep": 0.162
+            }
+          },
+          "closestPoint": [
+            -0.0866434,
+            1.4089294,
+            -0.0734452
+          ]
         }
       ],
       "notModeled": [
-        {
-          "english": "Trapezius",
-          "chinese": "斜方肌",
-          "note": {
-            "en": "Covers the supraspinatus superficially; absent from this atlas, so the supraspinatus is the first modeled layer here.",
-            "zh": "覆盖于冈上肌浅面；本模型未包含，因此此处第一层建模结构是冈上肌。"
-          }
-        },
         {
           "english": "Suprascapular nerve and vessels",
           "chinese": "肩胛上神经与血管",
@@ -1141,14 +1624,97 @@
           }
         }
       ],
+      "sourceComparison": {
+        "sequence": {
+          "en": "Skin → subcutaneous tissue → trapezius fascia → trapezius → supraspinatus",
+          "zh": "皮肤 → 皮下组织 → 斜方肌筋膜 → 斜方肌 → 冈上肌"
+        },
+        "agreement": "same-order",
+        "muscles": [
+          {
+            "match": "trapezius-muscles-",
+            "english": "Trapezius",
+            "chinese": "斜方肌",
+            "anatomyIds": [
+              "trapezius-muscles-ascending-part-of-trapezius-muscle-right",
+              "trapezius-muscles-descending-part-of-trapezius-muscle-right",
+              "trapezius-muscles-transverse-part-of-trapezius-muscle-right"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "trapezius-muscles-ascending-part-of-trapezius-muscle-right"
+            ],
+            "entryCm": 0,
+            "exitCm": 0.87
+          },
+          {
+            "match": "rotator-cuff-muscles-supraspinatus-muscle",
+            "english": "Supraspinatus",
+            "chinese": "冈上肌",
+            "anatomyIds": [
+              "rotator-cuff-muscles-supraspinatus-muscle-right"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "rotator-cuff-muscles-supraspinatus-muscle-right"
+            ],
+            "entryCm": 0.86,
+            "exitCm": 2.66
+          }
+        ],
+        "modelOnlyMuscles": [],
+        "notes": [],
+        "sources": [
+          {
+            "title": "秉风穴 · 穴位解剖",
+            "publisher": "医学百科 (yixue.com), revision 43050",
+            "url": "https://www.yixue.com/%E7%A7%89%E9%A3%8E%E7%A9%B4",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "Layers under the point: skin, subcutaneous tissue, trapezius fascia, trapezius, supraspinatus.",
+              "zh": "穴下为皮肤、皮下组织、斜方肌筋膜、斜方肌、冈上肌。"
+            }
+          },
+          {
+            "title": "Supraspinatus muscle",
+            "publisher": "Kenhub (Niamh Gorman; reviewed 2022-12-05)",
+            "url": "https://www.kenhub.com/en/library/anatomy/supraspinatus-muscle",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "The supraspinatus lies deep to the trapezius, superior to the spine of the scapula.",
+              "zh": "冈上肌位于斜方肌深面、肩胛冈上方。"
+            }
+          },
+          {
+            "title": "Shoulder Pain: The Supraspinatous Muscle, Part 2",
+            "publisher": "Acupuncture Today (Whitfield Reaves, Chad Bong; May 2010)",
+            "url": "https://acupuncturetoday.com/article/32206-shoulder-pain-the-supraspinatous-muscle-part-2",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "At SI 12 the path runs through the superficial layer of the trapezius to the supraspinatus, with the supraspinous fossa as the bony floor.",
+              "zh": "秉风处经斜方肌浅层到达冈上肌，冈上窝骨面为底。"
+            }
+          },
+          {
+            "title": "Trapezius muscle",
+            "publisher": "Kenhub (Gordana Sendić; reviewed 2023-10-30)",
+            "url": "https://www.kenhub.com/en/library/anatomy/trapezius-muscle",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "Transverse (middle) fibres insert on the medial margin of the acromion and the superior crest of the scapular spine; ascending (lower) fibres insert by an aponeurosis on a tubercle at the medial end of the spine.",
+              "zh": "横部（中部）纤维止于肩峰内侧缘和肩胛冈上嵴；升部（下部）纤维以腱膜止于肩胛冈内侧端的结节。"
+            }
+          }
+        ]
+      },
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",
@@ -1157,6 +1723,10 @@
         {
           "en": "This probe is a geometric study axis through the model reference. It is not a needling path, needling direction or needling depth.",
           "zh": "此探针是穿过模型参照点的几何学习轴线，不是进针路径、进针方向或进针深度。"
+        },
+        {
+          "en": "Source meshes interpenetrate here (Supraspinatus, Serratus anterior); overlapping ranges are shown as modeled, not as real tissue sharing space.",
+          "zh": "此处原始网格存在互相穿插（冈上肌、前锯肌）；重叠范围按模型显示，不代表真实组织共占同一空间。"
         }
       ]
     },
@@ -1175,8 +1745,8 @@
           "zh": "后方"
         },
         "rationale": {
-          "en": "Bingfeng lies in the supraspinous fossa above the midpoint of the scapular spine; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the supraspinatus).",
-          "zh": "秉风位于肩胛冈中点上方的冈上窝；探针自后方进入，并按模型外表面（冈上肌）法线调整为垂直于该处外表面。"
+          "en": "Bingfeng lies in the supraspinous fossa above the midpoint of the scapular spine; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface, which is now the trapezius covering the supraspinatus. The source model splits the trapezius into three meshes and the split passes this spot, so the surface normal is taken from all trapezius meshes of that side rather than from one part.",
+          "zh": "秉风位于肩胛冈中点上方的冈上窝；探针自后方进入，并按模型外表面法线调整为垂直于该处外表面；现在该外表面是覆盖冈上肌的斜方肌。原始模型把斜方肌分成三个网格，分界线正好经过此处，因此表面法线取同侧全部斜方肌网格，而不是其中一部分。"
         },
         "method": "outer-surface-normal",
         "nominalOutward": [
@@ -1185,24 +1755,30 @@
           -1
         ],
         "nominalSurface": {
-          "anatomyId": "rotator-cuff-muscles-supraspinatus-muscle-left",
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
           "point": [
             0.1118322,
             1.393608,
-            -0.0806165
+            -0.092223
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 131
+          "triangles": 313,
+          "patchScope": "muscle",
+          "patchStructures": [
+            "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
+            "trapezius-muscles-descending-part-of-trapezius-muscle-left",
+            "trapezius-muscles-transverse-part-of-trapezius-muscle-left"
+          ]
         },
         "directionInward": [
-          -0.367136,
-          -0.262843,
-          0.892258
+          -0.444606,
+          -0.2456,
+          0.861398
         ],
         "origin": [
-          0.1152458,
-          1.396052,
-          -0.0786865
+          0.119738,
+          1.3979752,
+          -0.0857073
         ],
         "originDescription": {
           "en": "First modeled surface along the axis (depth 0)",
@@ -1212,11 +1788,11 @@
           "en": "From posterior",
           "zh": "自后方"
         },
-        "angleFromNominalDeg": 26.8,
-        "angleToEntrySurfaceNormalDeg": 8.6,
+        "angleFromNominalDeg": 30.5,
+        "angleToEntrySurfaceNormalDeg": 6.4,
         "referenceOffsetMm": 0,
         "probeStartCm": -1,
-        "probeEndCm": 5.15,
+        "probeEndCm": 5.59,
         "layerStopReason": "thoracic-wall",
         "sensitivity": {
           "patchRadiiCm": [
@@ -1226,13 +1802,14 @@
             3
           ],
           "referenceDepthCm": {
-            "min": 0.93,
-            "max": 0.93
+            "min": 1.72,
+            "max": 1.91
           },
           "layerSequences": [
-            "Supraspinatus → Scapula → Subscapularis → Third rib"
+            "Trapezius → Supraspinatus → Scapula → Serratus anterior → Third rib",
+            "Trapezius → Supraspinatus → Scapula → Subscapularis → Serratus anterior → Third rib"
           ],
-          "sameLayerSequence": true
+          "sameLayerSequence": false
         },
         "firstBoneSurface": {
           "anatomyId": "appendicular-skeleton-scapula-left",
@@ -1240,7 +1817,7 @@
         },
         "irregularStructures": []
       },
-      "referenceDepthCm": 0.93,
+      "referenceDepthCm": 1.78,
       "referenceLayer": {
         "anatomyId": "rotator-cuff-muscles-supraspinatus-muscle-left",
         "english": "Supraspinatus",
@@ -1248,15 +1825,32 @@
       },
       "layers": [
         {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
+          "english": "Trapezius",
+          "chinese": "斜方肌",
+          "kind": "muscle",
+          "entryCm": 0,
+          "exitCm": 0.87,
+          "thicknessCm": 0.87,
+          "gapBeforeCm": 0,
+          "overlapsPreviousCm": 0,
+          "containsReference": false,
+          "normalsAgree": true,
+          "note": {
+            "en": "The source model splits the trapezius into three meshes; here the probe enters the lower trapezius mesh 0.3 cm from the middle trapezius mesh. The model's part boundaries are approximate, so this layer is named as the whole trapezius. Standard descriptions attach the middle fibres to the acromion and the superior crest of the scapular spine and the lower fibres to the medial end of the spine (Kenhub).",
+            "zh": "原始模型把斜方肌分成三个网格；探针在距中斜方肌网格 0.3 cm 处进入下斜方肌网格。模型中各部分的分界只是近似，因此这一层按整块斜方肌命名。标准描述中，中部纤维止于肩峰和肩胛冈上嵴，下部纤维止于肩胛冈内侧端（Kenhub）。"
+          }
+        },
+        {
           "anatomyId": "rotator-cuff-muscles-supraspinatus-muscle-left",
           "english": "Supraspinatus",
           "chinese": "冈上肌",
           "kind": "muscle",
-          "entryCm": 0,
-          "exitCm": 1.82,
-          "thicknessCm": 1.82,
+          "entryCm": 0.86,
+          "exitCm": 2.66,
+          "thicknessCm": 1.8,
           "gapBeforeCm": 0,
-          "overlapsPreviousCm": 0,
+          "overlapsPreviousCm": 0.01,
           "containsReference": true,
           "normalsAgree": true
         },
@@ -1265,10 +1859,10 @@
           "english": "Scapula",
           "chinese": "肩胛骨",
           "kind": "bone",
-          "entryCm": 2.43,
-          "exitCm": 2.71,
-          "thicknessCm": 0.28,
-          "gapBeforeCm": 0.61,
+          "entryCm": 3.25,
+          "exitCm": 3.51,
+          "thicknessCm": 0.27,
+          "gapBeforeCm": 0.58,
           "overlapsPreviousCm": 0,
           "containsReference": false,
           "normalsAgree": true
@@ -1278,11 +1872,24 @@
           "english": "Subscapularis",
           "chinese": "肩胛下肌",
           "kind": "muscle",
-          "entryCm": 2.94,
-          "exitCm": 3.55,
-          "thicknessCm": 0.61,
-          "gapBeforeCm": 0.23,
+          "entryCm": 3.73,
+          "exitCm": 4.21,
+          "thicknessCm": 0.48,
+          "gapBeforeCm": 0.21,
           "overlapsPreviousCm": 0,
+          "containsReference": false,
+          "normalsAgree": true
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-left",
+          "english": "Serratus anterior",
+          "chinese": "前锯肌",
+          "kind": "muscle",
+          "entryCm": 3.86,
+          "exitCm": 4.57,
+          "thicknessCm": 0.72,
+          "gapBeforeCm": 0,
+          "overlapsPreviousCm": 0.35,
           "containsReference": false,
           "normalsAgree": true
         },
@@ -1291,10 +1898,10 @@
           "english": "Third rib",
           "chinese": "第3肋",
           "kind": "bone",
-          "entryCm": 3.94,
-          "exitCm": 4.85,
-          "thicknessCm": 0.91,
-          "gapBeforeCm": 0.39,
+          "entryCm": 4.64,
+          "exitCm": 5.29,
+          "thicknessCm": 0.66,
+          "gapBeforeCm": 0.06,
           "overlapsPreviousCm": 0,
           "containsReference": false,
           "normalsAgree": true,
@@ -1306,6 +1913,35 @@
       ],
       "alsoInsideReference": [],
       "nearby": [
+        {
+          "anatomyId": "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
+          "english": "Lower trapezius",
+          "chinese": "下斜方肌",
+          "kind": "muscle",
+          "distanceCm": 0.87,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "posterior"
+            ],
+            "en": "Posterior",
+            "zh": "后方",
+            "probeRelation": "superficial",
+            "probeRelationEn": "more superficial along the probe",
+            "probeRelationZh": "沿探针更浅",
+            "components": {
+              "superior": 0.358,
+              "lateral": 0.263,
+              "anterior": -0.896,
+              "deep": -0.977
+            }
+          },
+          "closestPoint": [
+            0.1141227,
+            1.3967259,
+            -0.0781917
+          ]
+        },
         {
           "anatomyId": "appendicular-skeleton-scapula-left",
           "english": "Scapula",
@@ -1327,7 +1963,7 @@
               "superior": -0.665,
               "lateral": 0.545,
               "anterior": -0.51,
-              "deep": -0.481
+              "deep": -0.518
             }
           },
           "closestPoint": [
@@ -1357,13 +1993,43 @@
               "superior": -0.725,
               "lateral": 0.355,
               "anterior": -0.591,
-              "deep": -0.467
+              "deep": -0.489
             }
           },
           "closestPoint": [
             0.1165368,
             1.3840158,
             -0.0782096
+          ]
+        },
+        {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-left",
+          "english": "Middle trapezius",
+          "chinese": "中斜方肌",
+          "kind": "muscle",
+          "distanceCm": 1.35,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "posterior",
+              "superior"
+            ],
+            "en": "Posterior, superior",
+            "zh": "后方、上方",
+            "probeRelation": "superficial",
+            "probeRelationEn": "more superficial along the probe",
+            "probeRelationZh": "沿探针更浅",
+            "components": {
+              "superior": 0.681,
+              "lateral": 0.175,
+              "anterior": -0.711,
+              "deep": -0.858
+            }
+          },
+          "closestPoint": [
+            0.1142009,
+            1.4028178,
+            -0.0800099
           ]
         },
         {
@@ -1387,7 +2053,7 @@
               "superior": -0.649,
               "lateral": -0.559,
               "anterior": 0.516,
-              "deep": 0.836
+              "deep": 0.852
             }
           },
           "closestPoint": [
@@ -1417,7 +2083,7 @@
               "superior": -0.113,
               "lateral": -0.657,
               "anterior": 0.746,
-              "deep": 0.936
+              "deep": 0.962
             }
           },
           "closestPoint": [
@@ -1446,13 +2112,43 @@
               "superior": -0.443,
               "lateral": 0.32,
               "anterior": -0.838,
-              "deep": -0.749
+              "deep": -0.755
             }
           },
           "closestPoint": [
             0.1175143,
             1.385745,
             -0.0852693
+          ]
+        },
+        {
+          "anatomyId": "serratus-anterior-muscles-serratus-anterior-muscle-left",
+          "english": "Serratus anterior",
+          "chinese": "前锯肌",
+          "kind": "muscle",
+          "distanceCm": 1.87,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "medial",
+              "anterior"
+            ],
+            "en": "Medial, anterior",
+            "zh": "内侧、前方",
+            "probeRelation": "deep",
+            "probeRelationEn": "deeper along the probe",
+            "probeRelationZh": "沿探针更深",
+            "components": {
+              "superior": -0.394,
+              "lateral": -0.674,
+              "anterior": 0.625,
+              "deep": 0.935
+            }
+          },
+          "closestPoint": [
+            0.0992125,
+            1.386228,
+            -0.0586778
           ]
         },
         {
@@ -1476,7 +2172,7 @@
               "superior": -0.098,
               "lateral": -0.675,
               "anterior": 0.731,
-              "deep": 0.926
+              "deep": 0.954
             }
           },
           "closestPoint": [
@@ -1506,7 +2202,7 @@
               "superior": -0.677,
               "lateral": -0.656,
               "anterior": 0.335,
-              "deep": 0.717
+              "deep": 0.746
             }
           },
           "closestPoint": [
@@ -1514,17 +2210,39 @@
             1.3748451,
             -0.0611122
           ]
+        },
+        {
+          "anatomyId": "levator-scapulae-muscles-levator-scapulae-left",
+          "english": "Levator scapulae",
+          "chinese": "肩胛提肌",
+          "kind": "muscle",
+          "distanceCm": 2.96,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "medial",
+              "superior"
+            ],
+            "en": "Medial, superior",
+            "zh": "内侧、上方",
+            "probeRelation": "level",
+            "probeRelationEn": "beside the probe",
+            "probeRelationZh": "探针侧旁",
+            "components": {
+              "superior": 0.517,
+              "lateral": -0.85,
+              "anterior": -0.103,
+              "deep": 0.162
+            }
+          },
+          "closestPoint": [
+            0.0866434,
+            1.4089294,
+            -0.0734452
+          ]
         }
       ],
       "notModeled": [
-        {
-          "english": "Trapezius",
-          "chinese": "斜方肌",
-          "note": {
-            "en": "Covers the supraspinatus superficially; absent from this atlas, so the supraspinatus is the first modeled layer here.",
-            "zh": "覆盖于冈上肌浅面；本模型未包含，因此此处第一层建模结构是冈上肌。"
-          }
-        },
         {
           "english": "Suprascapular nerve and vessels",
           "chinese": "肩胛上神经与血管",
@@ -1534,14 +2252,97 @@
           }
         }
       ],
+      "sourceComparison": {
+        "sequence": {
+          "en": "Skin → subcutaneous tissue → trapezius fascia → trapezius → supraspinatus",
+          "zh": "皮肤 → 皮下组织 → 斜方肌筋膜 → 斜方肌 → 冈上肌"
+        },
+        "agreement": "same-order",
+        "muscles": [
+          {
+            "match": "trapezius-muscles-",
+            "english": "Trapezius",
+            "chinese": "斜方肌",
+            "anatomyIds": [
+              "trapezius-muscles-ascending-part-of-trapezius-muscle-left",
+              "trapezius-muscles-descending-part-of-trapezius-muscle-left",
+              "trapezius-muscles-transverse-part-of-trapezius-muscle-left"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "trapezius-muscles-ascending-part-of-trapezius-muscle-left"
+            ],
+            "entryCm": 0,
+            "exitCm": 0.87
+          },
+          {
+            "match": "rotator-cuff-muscles-supraspinatus-muscle",
+            "english": "Supraspinatus",
+            "chinese": "冈上肌",
+            "anatomyIds": [
+              "rotator-cuff-muscles-supraspinatus-muscle-left"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "rotator-cuff-muscles-supraspinatus-muscle-left"
+            ],
+            "entryCm": 0.86,
+            "exitCm": 2.66
+          }
+        ],
+        "modelOnlyMuscles": [],
+        "notes": [],
+        "sources": [
+          {
+            "title": "秉风穴 · 穴位解剖",
+            "publisher": "医学百科 (yixue.com), revision 43050",
+            "url": "https://www.yixue.com/%E7%A7%89%E9%A3%8E%E7%A9%B4",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "Layers under the point: skin, subcutaneous tissue, trapezius fascia, trapezius, supraspinatus.",
+              "zh": "穴下为皮肤、皮下组织、斜方肌筋膜、斜方肌、冈上肌。"
+            }
+          },
+          {
+            "title": "Supraspinatus muscle",
+            "publisher": "Kenhub (Niamh Gorman; reviewed 2022-12-05)",
+            "url": "https://www.kenhub.com/en/library/anatomy/supraspinatus-muscle",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "The supraspinatus lies deep to the trapezius, superior to the spine of the scapula.",
+              "zh": "冈上肌位于斜方肌深面、肩胛冈上方。"
+            }
+          },
+          {
+            "title": "Shoulder Pain: The Supraspinatous Muscle, Part 2",
+            "publisher": "Acupuncture Today (Whitfield Reaves, Chad Bong; May 2010)",
+            "url": "https://acupuncturetoday.com/article/32206-shoulder-pain-the-supraspinatous-muscle-part-2",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "At SI 12 the path runs through the superficial layer of the trapezius to the supraspinatus, with the supraspinous fossa as the bony floor.",
+              "zh": "秉风处经斜方肌浅层到达冈上肌，冈上窝骨面为底。"
+            }
+          },
+          {
+            "title": "Trapezius muscle",
+            "publisher": "Kenhub (Gordana Sendić; reviewed 2023-10-30)",
+            "url": "https://www.kenhub.com/en/library/anatomy/trapezius-muscle",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "Transverse (middle) fibres insert on the medial margin of the acromion and the superior crest of the scapular spine; ascending (lower) fibres insert by an aponeurosis on a tubercle at the medial end of the spine.",
+              "zh": "横部（中部）纤维止于肩峰内侧缘和肩胛冈上嵴；升部（下部）纤维以腱膜止于肩胛冈内侧端的结节。"
+            }
+          }
+        ]
+      },
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",
@@ -1550,6 +2351,10 @@
         {
           "en": "This probe is a geometric study axis through the model reference. It is not a needling path, needling direction or needling depth.",
           "zh": "此探针是穿过模型参照点的几何学习轴线，不是进针路径、进针方向或进针深度。"
+        },
+        {
+          "en": "Source meshes interpenetrate here (Supraspinatus, Serratus anterior); overlapping ranges are shown as modeled, not as real tissue sharing space.",
+          "zh": "此处原始网格存在互相穿插（冈上肌、前锯肌）；重叠范围按模型显示，不代表真实组织共占同一空间。"
         }
       ]
     },
@@ -1585,7 +2390,11 @@
             -0.1010519
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 116
+          "triangles": 116,
+          "patchScope": "part",
+          "patchStructures": [
+            "deltoid-muscles-scapular-spinal-part-of-deltoid-muscle-right"
+          ]
         },
         "directionInward": [
           -0.046045,
@@ -1609,8 +2418,8 @@
         "angleToEntrySurfaceNormalDeg": 13.1,
         "referenceOffsetMm": 0,
         "probeStartCm": -1,
-        "probeEndCm": 5.14,
-        "layerStopReason": "no-further-structure",
+        "probeEndCm": 6.16,
+        "layerStopReason": "unmodeled-gap",
         "sensitivity": {
           "patchRadiiCm": [
             1.5,
@@ -1623,7 +2432,7 @@
             "max": 3.92
           },
           "layerSequences": [
-            "Deltoid · spinal part → Teres minor"
+            "Deltoid · spinal part → Teres minor → Triceps brachii · long head"
           ],
           "sameLayerSequence": true
         },
@@ -1661,10 +2470,53 @@
           "overlapsPreviousCm": 0,
           "containsReference": true,
           "normalsAgree": true
+        },
+        {
+          "anatomyId": "triceps-brachii-muscles-long-head-of-triceps-brachii-right",
+          "english": "Triceps brachii · long head",
+          "chinese": "肱三头肌 · 长头",
+          "kind": "muscle",
+          "entryCm": 4.94,
+          "exitCm": 5.86,
+          "thicknessCm": 0.92,
+          "gapBeforeCm": 0.1,
+          "overlapsPreviousCm": 0,
+          "containsReference": false,
+          "normalsAgree": true
         }
       ],
       "alsoInsideReference": [],
       "nearby": [
+        {
+          "anatomyId": "triceps-brachii-muscles-long-head-of-triceps-brachii-right",
+          "english": "Triceps brachii · long head",
+          "chinese": "肱三头肌 · 长头",
+          "kind": "muscle",
+          "distanceCm": 0.59,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "inferior",
+              "anterior"
+            ],
+            "en": "Inferior, anterior",
+            "zh": "下方、前方",
+            "probeRelation": "deep",
+            "probeRelationEn": "deeper along the probe",
+            "probeRelationZh": "沿探针更深",
+            "components": {
+              "superior": -0.675,
+              "lateral": -0.316,
+              "anterior": 0.667,
+              "deep": 0.523
+            }
+          },
+          "closestPoint": [
+            -0.1515073,
+            1.3460008,
+            -0.0560463
+          ]
+        },
         {
           "anatomyId": "appendicular-skeleton-scapula-right",
           "english": "Scapula",
@@ -1816,38 +2668,176 @@
       ],
       "notModeled": [
         {
-          "english": "Teres major",
-          "chinese": "大圆肌",
-          "note": {
-            "en": "Lies inferior to the teres minor in this region.",
-            "zh": "在此区域位于小圆肌下方。"
-          }
-        },
-        {
-          "english": "Triceps brachii, long head",
-          "chinese": "肱三头肌长头",
-          "note": {
-            "en": "Passes between the teres minor and teres major.",
-            "zh": "穿行于小圆肌与大圆肌之间。"
-          }
-        },
-        {
           "english": "Axillary nerve and posterior circumflex humeral vessels",
           "chinese": "腋神经与旋肱后血管",
           "note": {
             "en": "Pass through the quadrangular space (teres minor, teres major, long head of triceps, humerus).",
             "zh": "穿过四边孔（小圆肌、大圆肌、肱三头肌长头、肱骨围成）。"
           }
+        },
+        {
+          "english": "Axillary fat, vessels and nerves",
+          "chinese": "腋窝脂肪、血管与神经",
+          "note": {
+            "en": "The source layer description says a deep path here can reach the axilla; the space deep to the modeled muscles is empty in this model.",
+            "zh": "资料的层次描述称此处深刺可达腋腔；模型中肌肉深面的这一空间没有建模结构。"
+          }
         }
       ],
+      "sourceComparison": {
+        "sequence": {
+          "en": "Skin → subcutaneous tissue → deltoid fascia → deltoid (posterior part) → long head of triceps brachii → teres major → latissimus dorsi (tendon)",
+          "zh": "皮肤 → 皮下组织 → 三角肌筋膜 → 三角肌（后部） → 肱三头肌长头 → 大圆肌 → 背阔肌（腱）"
+        },
+        "agreement": "differs",
+        "muscles": [
+          {
+            "match": "deltoid-muscles-",
+            "english": "Deltoid",
+            "chinese": "三角肌",
+            "anatomyIds": [
+              "deltoid-muscles-acromial-part-of-deltoid-muscle-right",
+              "deltoid-muscles-clavicular-part-of-deltoid-muscle-right",
+              "deltoid-muscles-scapular-spinal-part-of-deltoid-muscle-right"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "deltoid-muscles-scapular-spinal-part-of-deltoid-muscle-right"
+            ],
+            "entryCm": 0,
+            "exitCm": 1.39
+          },
+          {
+            "match": "triceps-brachii-muscles-long-head-of-triceps-brachii",
+            "english": "Triceps brachii · long head",
+            "chinese": "肱三头肌长头",
+            "anatomyIds": [
+              "triceps-brachii-muscles-long-head-of-triceps-brachii-right"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "triceps-brachii-muscles-long-head-of-triceps-brachii-right"
+            ],
+            "entryCm": 4.94,
+            "exitCm": 5.86
+          },
+          {
+            "match": "teres-major-muscles-teres-major-muscle",
+            "english": "Teres major",
+            "chinese": "大圆肌",
+            "anatomyIds": [
+              "teres-major-muscles-teres-major-muscle-right"
+            ],
+            "onProbe": false,
+            "closestPartId": "teres-major-muscles-teres-major-muscle-right",
+            "closestPartEnglish": "Teres major",
+            "distanceToProbeCm": 2.33,
+            "atProbeDepthCm": 7.15,
+            "direction": {
+              "terms": [
+                "inferior",
+                "lateral"
+              ],
+              "en": "Inferior, lateral",
+              "zh": "下方、外侧",
+              "probeRelation": "level",
+              "probeRelationEn": "beside the probe",
+              "probeRelationZh": "探针侧旁",
+              "components": {
+                "superior": -0.799,
+                "lateral": 0.59,
+                "anterior": 0.115,
+                "deep": 0
+              }
+            }
+          },
+          {
+            "match": "latissimus-dorsi-muscles-latissimus-dorsi-muscle",
+            "english": "Latissimus dorsi",
+            "chinese": "背阔肌",
+            "anatomyIds": [
+              "latissimus-dorsi-muscles-latissimus-dorsi-muscle-right"
+            ],
+            "onProbe": false,
+            "closestPartId": "latissimus-dorsi-muscles-latissimus-dorsi-muscle-right",
+            "closestPartEnglish": "Latissimus dorsi",
+            "distanceToProbeCm": 2.15,
+            "atProbeDepthCm": 6.85,
+            "direction": {
+              "terms": [
+                "inferior",
+                "lateral"
+              ],
+              "en": "Inferior, lateral",
+              "zh": "下方、外侧",
+              "probeRelation": "level",
+              "probeRelationEn": "beside the probe",
+              "probeRelationZh": "探针侧旁",
+              "components": {
+                "superior": -0.742,
+                "lateral": 0.665,
+                "anterior": 0.09,
+                "deep": -0.011
+              }
+            }
+          }
+        ],
+        "modelOnlyMuscles": [
+          {
+            "anatomyId": "rotator-cuff-muscles-teres-minor-muscle-right",
+            "english": "Teres minor",
+            "chinese": "小圆肌",
+            "entryCm": 1.54,
+            "exitCm": 4.84
+          }
+        ],
+        "notes": [
+          {
+            "en": "The model probe passes through the teres minor (the study reference) and then the long head of triceps; the teres major and latissimus dorsi lie inferior to it. This order matches the relations in the anatomy sources (teres minor deep to the deltoid and posterior to the long head of triceps; teres major anterior to the long head and inferior to the teres minor), but the source layer description for Jianzhen runs lower, through the teres major and latissimus dorsi.",
+            "zh": "模型探针穿过小圆肌（学习参照所在）后到达肱三头肌长头；大圆肌和背阔肌位于其下方。此顺序符合解剖资料中的关系（小圆肌在三角肌深面、肱三头肌长头后方；大圆肌在长头前方、小圆肌下方），但资料中肩贞的层次路径更低，经过大圆肌和背阔肌。"
+          }
+        ],
+        "sources": [
+          {
+            "title": "肩贞穴 · 穴位解剖",
+            "publisher": "医学百科 (yixue.com), revision 43051",
+            "url": "https://www.yixue.com/%E8%82%A9%E8%B4%9E%E7%A9%B4",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "Layers under the point: skin, subcutaneous tissue, deltoid fascia, deltoid, triceps brachii, teres major, latissimus dorsi; the path enters the posterior deltoid, then the long head of triceps, the teres major and the latissimus dorsi (tendon), and may reach the axilla.",
+              "zh": "穴下为皮肤、皮下组织、三角肌筋膜、三角肌、肱三头肌、大圆肌、背阔肌；针经三角肌后部，依次入肱三头肌长头、大圆肌和背阔肌（腱），可深达腋腔。"
+            }
+          },
+          {
+            "title": "Triceps brachii",
+            "publisher": "Radiopaedia",
+            "url": "https://radiopaedia.org/articles/triceps-brachii?lang=gb",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "The teres minor lies posterior to the long head of triceps near its origin; the teres major lies anterior to the long head.",
+              "zh": "小圆肌在肱三头肌长头起点附近位于其后方；大圆肌位于长头前方。"
+            }
+          },
+          {
+            "title": "Anatomy, Shoulder and Upper Limb, Teres Minor Muscle",
+            "publisher": "StatPearls (Pallavi Juneja, John B. Hubbard; updated 2023-05-08)",
+            "url": "https://www.ncbi.nlm.nih.gov/books/NBK513324/",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "The teres minor is deep to the deltoid; the long head of triceps runs inferior to it; the quadrangular space is bounded by the teres minor, teres major, long head of triceps and surgical neck of the humerus.",
+              "zh": "小圆肌位于三角肌深面；肱三头肌长头在其下方；四边孔由小圆肌、大圆肌、肱三头肌长头和肱骨外科颈围成。"
+            }
+          }
+        ]
+      },
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",
@@ -1891,7 +2881,11 @@
             -0.1010519
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 116
+          "triangles": 116,
+          "patchScope": "part",
+          "patchStructures": [
+            "deltoid-muscles-scapular-spinal-part-of-deltoid-muscle-left"
+          ]
         },
         "directionInward": [
           0.046045,
@@ -1915,8 +2909,8 @@
         "angleToEntrySurfaceNormalDeg": 13.1,
         "referenceOffsetMm": 0,
         "probeStartCm": -1,
-        "probeEndCm": 5.14,
-        "layerStopReason": "no-further-structure",
+        "probeEndCm": 6.16,
+        "layerStopReason": "unmodeled-gap",
         "sensitivity": {
           "patchRadiiCm": [
             1.5,
@@ -1929,7 +2923,7 @@
             "max": 3.92
           },
           "layerSequences": [
-            "Deltoid · spinal part → Teres minor"
+            "Deltoid · spinal part → Teres minor → Triceps brachii · long head"
           ],
           "sameLayerSequence": true
         },
@@ -1967,10 +2961,53 @@
           "overlapsPreviousCm": 0,
           "containsReference": true,
           "normalsAgree": true
+        },
+        {
+          "anatomyId": "triceps-brachii-muscles-long-head-of-triceps-brachii-left",
+          "english": "Triceps brachii · long head",
+          "chinese": "肱三头肌 · 长头",
+          "kind": "muscle",
+          "entryCm": 4.94,
+          "exitCm": 5.86,
+          "thicknessCm": 0.92,
+          "gapBeforeCm": 0.1,
+          "overlapsPreviousCm": 0,
+          "containsReference": false,
+          "normalsAgree": true
         }
       ],
       "alsoInsideReference": [],
       "nearby": [
+        {
+          "anatomyId": "triceps-brachii-muscles-long-head-of-triceps-brachii-left",
+          "english": "Triceps brachii · long head",
+          "chinese": "肱三头肌 · 长头",
+          "kind": "muscle",
+          "distanceCm": 0.59,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "inferior",
+              "anterior"
+            ],
+            "en": "Inferior, anterior",
+            "zh": "下方、前方",
+            "probeRelation": "deep",
+            "probeRelationEn": "deeper along the probe",
+            "probeRelationZh": "沿探针更深",
+            "components": {
+              "superior": -0.675,
+              "lateral": -0.316,
+              "anterior": 0.667,
+              "deep": 0.523
+            }
+          },
+          "closestPoint": [
+            0.1515073,
+            1.3460007,
+            -0.0560462
+          ]
+        },
         {
           "anatomyId": "appendicular-skeleton-scapula-left",
           "english": "Scapula",
@@ -2122,38 +3159,176 @@
       ],
       "notModeled": [
         {
-          "english": "Teres major",
-          "chinese": "大圆肌",
-          "note": {
-            "en": "Lies inferior to the teres minor in this region.",
-            "zh": "在此区域位于小圆肌下方。"
-          }
-        },
-        {
-          "english": "Triceps brachii, long head",
-          "chinese": "肱三头肌长头",
-          "note": {
-            "en": "Passes between the teres minor and teres major.",
-            "zh": "穿行于小圆肌与大圆肌之间。"
-          }
-        },
-        {
           "english": "Axillary nerve and posterior circumflex humeral vessels",
           "chinese": "腋神经与旋肱后血管",
           "note": {
             "en": "Pass through the quadrangular space (teres minor, teres major, long head of triceps, humerus).",
             "zh": "穿过四边孔（小圆肌、大圆肌、肱三头肌长头、肱骨围成）。"
           }
+        },
+        {
+          "english": "Axillary fat, vessels and nerves",
+          "chinese": "腋窝脂肪、血管与神经",
+          "note": {
+            "en": "The source layer description says a deep path here can reach the axilla; the space deep to the modeled muscles is empty in this model.",
+            "zh": "资料的层次描述称此处深刺可达腋腔；模型中肌肉深面的这一空间没有建模结构。"
+          }
         }
       ],
+      "sourceComparison": {
+        "sequence": {
+          "en": "Skin → subcutaneous tissue → deltoid fascia → deltoid (posterior part) → long head of triceps brachii → teres major → latissimus dorsi (tendon)",
+          "zh": "皮肤 → 皮下组织 → 三角肌筋膜 → 三角肌（后部） → 肱三头肌长头 → 大圆肌 → 背阔肌（腱）"
+        },
+        "agreement": "differs",
+        "muscles": [
+          {
+            "match": "deltoid-muscles-",
+            "english": "Deltoid",
+            "chinese": "三角肌",
+            "anatomyIds": [
+              "deltoid-muscles-acromial-part-of-deltoid-muscle-left",
+              "deltoid-muscles-clavicular-part-of-deltoid-muscle-left",
+              "deltoid-muscles-scapular-spinal-part-of-deltoid-muscle-left"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "deltoid-muscles-scapular-spinal-part-of-deltoid-muscle-left"
+            ],
+            "entryCm": 0,
+            "exitCm": 1.39
+          },
+          {
+            "match": "triceps-brachii-muscles-long-head-of-triceps-brachii",
+            "english": "Triceps brachii · long head",
+            "chinese": "肱三头肌长头",
+            "anatomyIds": [
+              "triceps-brachii-muscles-long-head-of-triceps-brachii-left"
+            ],
+            "onProbe": true,
+            "layerIds": [
+              "triceps-brachii-muscles-long-head-of-triceps-brachii-left"
+            ],
+            "entryCm": 4.94,
+            "exitCm": 5.86
+          },
+          {
+            "match": "teres-major-muscles-teres-major-muscle",
+            "english": "Teres major",
+            "chinese": "大圆肌",
+            "anatomyIds": [
+              "teres-major-muscles-teres-major-muscle-left"
+            ],
+            "onProbe": false,
+            "closestPartId": "teres-major-muscles-teres-major-muscle-left",
+            "closestPartEnglish": "Teres major",
+            "distanceToProbeCm": 2.33,
+            "atProbeDepthCm": 7.15,
+            "direction": {
+              "terms": [
+                "inferior",
+                "lateral"
+              ],
+              "en": "Inferior, lateral",
+              "zh": "下方、外侧",
+              "probeRelation": "level",
+              "probeRelationEn": "beside the probe",
+              "probeRelationZh": "探针侧旁",
+              "components": {
+                "superior": -0.799,
+                "lateral": 0.59,
+                "anterior": 0.115,
+                "deep": 0
+              }
+            }
+          },
+          {
+            "match": "latissimus-dorsi-muscles-latissimus-dorsi-muscle",
+            "english": "Latissimus dorsi",
+            "chinese": "背阔肌",
+            "anatomyIds": [
+              "latissimus-dorsi-muscles-latissimus-dorsi-muscle-left"
+            ],
+            "onProbe": false,
+            "closestPartId": "latissimus-dorsi-muscles-latissimus-dorsi-muscle-left",
+            "closestPartEnglish": "Latissimus dorsi",
+            "distanceToProbeCm": 2.15,
+            "atProbeDepthCm": 6.85,
+            "direction": {
+              "terms": [
+                "inferior",
+                "lateral"
+              ],
+              "en": "Inferior, lateral",
+              "zh": "下方、外侧",
+              "probeRelation": "level",
+              "probeRelationEn": "beside the probe",
+              "probeRelationZh": "探针侧旁",
+              "components": {
+                "superior": -0.742,
+                "lateral": 0.665,
+                "anterior": 0.09,
+                "deep": -0.011
+              }
+            }
+          }
+        ],
+        "modelOnlyMuscles": [
+          {
+            "anatomyId": "rotator-cuff-muscles-teres-minor-muscle-left",
+            "english": "Teres minor",
+            "chinese": "小圆肌",
+            "entryCm": 1.54,
+            "exitCm": 4.84
+          }
+        ],
+        "notes": [
+          {
+            "en": "The model probe passes through the teres minor (the study reference) and then the long head of triceps; the teres major and latissimus dorsi lie inferior to it. This order matches the relations in the anatomy sources (teres minor deep to the deltoid and posterior to the long head of triceps; teres major anterior to the long head and inferior to the teres minor), but the source layer description for Jianzhen runs lower, through the teres major and latissimus dorsi.",
+            "zh": "模型探针穿过小圆肌（学习参照所在）后到达肱三头肌长头；大圆肌和背阔肌位于其下方。此顺序符合解剖资料中的关系（小圆肌在三角肌深面、肱三头肌长头后方；大圆肌在长头前方、小圆肌下方），但资料中肩贞的层次路径更低，经过大圆肌和背阔肌。"
+          }
+        ],
+        "sources": [
+          {
+            "title": "肩贞穴 · 穴位解剖",
+            "publisher": "医学百科 (yixue.com), revision 43051",
+            "url": "https://www.yixue.com/%E8%82%A9%E8%B4%9E%E7%A9%B4",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "Layers under the point: skin, subcutaneous tissue, deltoid fascia, deltoid, triceps brachii, teres major, latissimus dorsi; the path enters the posterior deltoid, then the long head of triceps, the teres major and the latissimus dorsi (tendon), and may reach the axilla.",
+              "zh": "穴下为皮肤、皮下组织、三角肌筋膜、三角肌、肱三头肌、大圆肌、背阔肌；针经三角肌后部，依次入肱三头肌长头、大圆肌和背阔肌（腱），可深达腋腔。"
+            }
+          },
+          {
+            "title": "Triceps brachii",
+            "publisher": "Radiopaedia",
+            "url": "https://radiopaedia.org/articles/triceps-brachii?lang=gb",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "The teres minor lies posterior to the long head of triceps near its origin; the teres major lies anterior to the long head.",
+              "zh": "小圆肌在肱三头肌长头起点附近位于其后方；大圆肌位于长头前方。"
+            }
+          },
+          {
+            "title": "Anatomy, Shoulder and Upper Limb, Teres Minor Muscle",
+            "publisher": "StatPearls (Pallavi Juneja, John B. Hubbard; updated 2023-05-08)",
+            "url": "https://www.ncbi.nlm.nih.gov/books/NBK513324/",
+            "accessed": "2026-10-09",
+            "supports": {
+              "en": "The teres minor is deep to the deltoid; the long head of triceps runs inferior to it; the quadrangular space is bounded by the teres minor, teres major, long head of triceps and surgical neck of the humerus.",
+              "zh": "小圆肌位于三角肌深面；肱三头肌长头在其下方；四边孔由小圆肌、大圆肌、肱三头肌长头和肱骨外科颈围成。"
+            }
+          }
+        ]
+      },
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",
@@ -2197,7 +3372,11 @@
             -0.02
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 216
+          "triangles": 216,
+          "patchScope": "part",
+          "patchStructures": [
+            "deltoid-muscles-acromial-part-of-deltoid-muscle-right"
+          ]
         },
         "directionInward": [
           0.478286,
@@ -2370,6 +3549,36 @@
           ]
         },
         {
+          "anatomyId": "biceps-brachii-muscles-long-head-of-biceps-brachii-right",
+          "english": "Biceps brachii · long head",
+          "chinese": "肱二头肌 · 长头",
+          "kind": "muscle",
+          "distanceCm": 1.23,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "anterior",
+              "medial"
+            ],
+            "en": "Anterior, medial",
+            "zh": "前方、内侧",
+            "probeRelation": "level",
+            "probeRelationEn": "beside the probe",
+            "probeRelationZh": "探针侧旁",
+            "components": {
+              "superior": -0.451,
+              "lateral": -0.593,
+              "anterior": 0.667,
+              "deep": 0.381
+            }
+          },
+          "closestPoint": [
+            -0.1784672,
+            1.3994553,
+            -0.0117956
+          ]
+        },
+        {
           "anatomyId": "rotator-cuff-muscles-infraspinatus-muscle-right",
           "english": "Infraspinatus",
           "chinese": "冈下肌",
@@ -2459,6 +3668,36 @@
           ]
         },
         {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-right",
+          "english": "Middle trapezius",
+          "chinese": "中斜方肌",
+          "kind": "muscle",
+          "distanceCm": 2.59,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "medial",
+              "posterior"
+            ],
+            "en": "Medial, posterior",
+            "zh": "内侧、后方",
+            "probeRelation": "level",
+            "probeRelationEn": "beside the probe",
+            "probeRelationZh": "探针侧旁",
+            "components": {
+              "superior": 0.465,
+              "lateral": -0.73,
+              "anterior": -0.502,
+              "deep": 0.177
+            }
+          },
+          "closestPoint": [
+            -0.1668565,
+            1.417029,
+            -0.0329917
+          ]
+        },
+        {
           "anatomyId": "rotator-cuff-muscles-subscapularis-muscle-right",
           "english": "Subscapularis",
           "chinese": "肩胛下肌",
@@ -2499,14 +3738,15 @@
           }
         }
       ],
+      "sourceComparison": null,
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",
@@ -2554,7 +3794,11 @@
             -0.02
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 216
+          "triangles": 216,
+          "patchScope": "part",
+          "patchStructures": [
+            "deltoid-muscles-acromial-part-of-deltoid-muscle-left"
+          ]
         },
         "directionInward": [
           -0.478286,
@@ -2727,6 +3971,36 @@
           ]
         },
         {
+          "anatomyId": "biceps-brachii-muscles-long-head-of-biceps-brachii-left",
+          "english": "Biceps brachii · long head",
+          "chinese": "肱二头肌 · 长头",
+          "kind": "muscle",
+          "distanceCm": 1.23,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "anterior",
+              "medial"
+            ],
+            "en": "Anterior, medial",
+            "zh": "前方、内侧",
+            "probeRelation": "level",
+            "probeRelationEn": "beside the probe",
+            "probeRelationZh": "探针侧旁",
+            "components": {
+              "superior": -0.451,
+              "lateral": -0.593,
+              "anterior": 0.667,
+              "deep": 0.381
+            }
+          },
+          "closestPoint": [
+            0.178467,
+            1.3994551,
+            -0.0117956
+          ]
+        },
+        {
           "anatomyId": "rotator-cuff-muscles-infraspinatus-muscle-left",
           "english": "Infraspinatus",
           "chinese": "冈下肌",
@@ -2816,6 +4090,36 @@
           ]
         },
         {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-left",
+          "english": "Middle trapezius",
+          "chinese": "中斜方肌",
+          "kind": "muscle",
+          "distanceCm": 2.59,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "medial",
+              "posterior"
+            ],
+            "en": "Medial, posterior",
+            "zh": "内侧、后方",
+            "probeRelation": "level",
+            "probeRelationEn": "beside the probe",
+            "probeRelationZh": "探针侧旁",
+            "components": {
+              "superior": 0.465,
+              "lateral": -0.73,
+              "anterior": -0.502,
+              "deep": 0.177
+            }
+          },
+          "closestPoint": [
+            0.1668565,
+            1.417029,
+            -0.0329917
+          ]
+        },
+        {
           "anatomyId": "rotator-cuff-muscles-subscapularis-muscle-left",
           "english": "Subscapularis",
           "chinese": "肩胛下肌",
@@ -2856,14 +4160,15 @@
           }
         }
       ],
+      "sourceComparison": null,
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",
@@ -2911,7 +4216,11 @@
             -0.06
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 172
+          "triangles": 172,
+          "patchScope": "part",
+          "patchStructures": [
+            "deltoid-muscles-acromial-part-of-deltoid-muscle-right"
+          ]
         },
         "directionInward": [
           0.518514,
@@ -3141,6 +4450,36 @@
           ]
         },
         {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-right",
+          "english": "Middle trapezius",
+          "chinese": "中斜方肌",
+          "kind": "muscle",
+          "distanceCm": 1.71,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "medial",
+              "superior"
+            ],
+            "en": "Medial, superior",
+            "zh": "内侧、上方",
+            "probeRelation": "level",
+            "probeRelationEn": "beside the probe",
+            "probeRelationZh": "探针侧旁",
+            "components": {
+              "superior": 0.51,
+              "lateral": -0.854,
+              "anterior": -0.105,
+              "deep": 0.034
+            }
+          },
+          "closestPoint": [
+            -0.1657942,
+            1.4086996,
+            -0.0617924
+          ]
+        },
+        {
           "anatomyId": "appendicular-skeleton-humerus-right",
           "english": "Humerus",
           "chinese": "肱骨",
@@ -3200,14 +4539,15 @@
         }
       ],
       "notModeled": [],
+      "sourceComparison": null,
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",
@@ -3251,7 +4591,11 @@
             -0.06
           ],
           "patchRadiusCm": 2.5,
-          "triangles": 172
+          "triangles": 172,
+          "patchScope": "part",
+          "patchStructures": [
+            "deltoid-muscles-acromial-part-of-deltoid-muscle-left"
+          ]
         },
         "directionInward": [
           -0.518514,
@@ -3481,6 +4825,36 @@
           ]
         },
         {
+          "anatomyId": "trapezius-muscles-transverse-part-of-trapezius-muscle-left",
+          "english": "Middle trapezius",
+          "chinese": "中斜方肌",
+          "kind": "muscle",
+          "distanceCm": 1.71,
+          "overlapsReference": false,
+          "direction": {
+            "terms": [
+              "medial",
+              "superior"
+            ],
+            "en": "Medial, superior",
+            "zh": "内侧、上方",
+            "probeRelation": "level",
+            "probeRelationEn": "beside the probe",
+            "probeRelationZh": "探针侧旁",
+            "components": {
+              "superior": 0.51,
+              "lateral": -0.854,
+              "anterior": -0.105,
+              "deep": 0.034
+            }
+          },
+          "closestPoint": [
+            0.1657942,
+            1.4086996,
+            -0.0617924
+          ]
+        },
+        {
           "anatomyId": "appendicular-skeleton-humerus-left",
           "english": "Humerus",
           "chinese": "肱骨",
@@ -3540,14 +4914,15 @@
         }
       ],
       "notModeled": [],
+      "sourceComparison": null,
       "limitations": [
         {
           "en": "Depths start at the first modeled surface (outer muscle or bone), not at the skin. Skin and subcutaneous fat are not in the model, so a depth from the skin would be larger and varies between people.",
           "zh": "深度从第一个建模表面（肌肉或骨的外表面）起算，而不是从皮肤起算。模型不含皮肤和皮下脂肪，从皮肤量起的深度会更大，并且因人而异。"
         },
         {
-          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.",
-          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。"
+          "en": "Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.",
+          "zh": "模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。"
         },
         {
           "en": "One adult atlas in a fixed pose (arm adducted). Standard locations for some of these points use abduction or other positions, which change the relations shown here.",

@@ -57,11 +57,12 @@
 | 新主题内容、资料及模型映射 | 对应 `library/<id>/`；创建方式与校验见 `library/README.md` |
 | 主题生成与校验规则 | `site/build/` 中共享脚本 |
 | 共享主题内容规范、页面渲染和主题库样式 | `site/build/platform/` |
-| 肩袖六章阅读正文（HTML 与 Markdown 由它生成） | `library/shoulder/content.json`；读音在 `library/shoulder/pronunciation.json` |
+| 肩袖五章阅读正文（HTML 与 Markdown 由它生成） | `library/shoulder/content.json`；读音在 `library/shoulder/pronunciation.json` |
 | 阅读页版式与目录（各章共用） | `site/build/platform/reading.py`、`site/build/platform/reading.css` |
 | 肩袖可编辑解剖配图 | `library/shoulder/figures/` 中的 SVG |
 | 肩袖结构清单与 3D 跳转 | `library/shoulder/topic.json` 的 `structures`；正文另需的 3D 名称写在 `content.json` 的 `modelLinks` |
 | 3D 页面、状态与交互（肩部章节，髋关节暂借用） | `library/shoulder/3d/src/` |
+| 章节 3D 附加模型（自带模型缺的肌肉） | `library/<id>/3d/atlas-addon.json`；共用脚本 `site/build/atlas/`（见其 README） |
 | 模型、音频、许可等公开资源 | `library/shoulder/3d/public/` |
 | Claude 独立阅读版 | `library/shoulder/3d/public/reading-claude.html` |
 | 每日学习包（内容、配图、流水线、运行记录） | `daily/`：每天的 `days/<date>/content.json` 与 `figures.py`；共用引擎在 `daily/engine/`；说明见 `daily/README.md`。`site/public/daily/` 是生成输出 |

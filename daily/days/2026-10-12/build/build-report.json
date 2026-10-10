@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-12",
+  "out": "2026-10-12-第1周-试用-肩带四穴与肩袖四肌",
+  "chapters": 2,
+  "figure_occurrences": 4,
+  "figures": [
+    "01",
+    "02",
+    "03",
+    "04"
+  ],
+  "model_links": [
+    "acromion",
+    "clavicle",
+    "deltoid",
+    "greater-tubercle",
+    "humeral-head",
+    "humerus",
+    "lesser-tubercle",
+    "scapula"
+  ],
+  "html_bytes": 138077
+}

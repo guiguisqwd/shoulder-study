@@ -8,7 +8,11 @@ DAILY = ENGINE.parent                     # <repo>/daily
 REPO = DAILY.parent                       # <repo>
 DAYS = DAILY / "days"
 RUNS = DAILY / "runs"
-PLAN = DAILY / "plan" / "schedule.json"
+PLAN = DAILY / "plan" / "schedule.json"   # the 60-day plan (days before the weekly plan starts)
+WEEKS = DAILY / "plan" / "weeks.json"     # the weekly plan (DL-12): one library chapter a week + six supplement days
+PAPERS = DAILY / "papers"                 # paper records for N-5 (DL-07)
+LIBRARY = REPO / "library"
+STANDARDS_DAILY = REPO / "standards" / "daily" / "README.md"
 TEMPLATES = ENGINE / "templates"
 DATA = ENGINE / "data"
 QA_JS = ENGINE / "qa" / "qa.js"
@@ -41,9 +45,11 @@ def load_content(date: str) -> dict:
 
 
 def out_name(content: dict) -> str:
-    """Folder / file stem, e.g. 2026-10-07-第1天-肺经与胸前肌 (review days: 2026-10-11-第1周复习)."""
+    """Folder / file stem, e.g. 2026-10-07-第1天-肺经与胸前肌, weekly plan: 2026-10-12-第1周-肩袖穴位与肩袖肌."""
     if content.get("kind") == "learning":
         return f"{content['date']}-第{content['day']}天-{content['slug_zh']}"
+    if content.get("schema") == "dpt-daily-pack/2":
+        return f"{content['date']}-第{content['week']}周-{content['slug_zh']}"
     return f"{content['date']}-{content['slug_zh']}"
 
 

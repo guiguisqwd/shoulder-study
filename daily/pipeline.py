@@ -20,11 +20,11 @@ Exit codes: 0 done · 10 author content · 11 visual review · 12 write to Mac �
 14 review center · 20 validation failed · 21 figures failed · 22 build failed · 23 QA failed ·
 24 git commit/push blocked · 30 pack missing (morning) · 2 usage error.
 """
-import argparse, datetime as dt, hashlib, json, os, shutil, subprocess, sys, traceback
+import argparse, datetime as dt, hashlib, json, os, shutil, subprocess, sys, tempfile, traceback
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from engine import paths, plan, schema, build as builder, site, archive, cards  # noqa: E402
+from engine import paths, plan, schema, build as builder, site, archive, cards, codes  # noqa: E402
 from engine.paths import DAYS, RUNS, REPO, DAILY  # noqa: E402
 
 STAGING = Path(os.environ.get("DPT_STAGING") or ("/mnt/user-data/outputs/dpt-daily" if Path("/mnt/user-data/outputs").is_dir()
@@ -142,8 +142,39 @@ def need(code, title, lines):
 
 
 # ------------------------------------------------------------------ authoring brief
+def write_weekly_brief(date, info):
+    """Brief for a Monday–Saturday pack of the weekly plan (standards/daily/README.md)."""
+    d = DAYS / date
+    d.mkdir(parents=True, exist_ok=True)
+    names = codes.table()
+    prev = sorted(p.parent.name for p in DAYS.glob("*/content.json")
+                  if p.parent.name < date and json.loads(p.read_text(encoding="utf-8")).get("kind") == "supplement")
+    lines = [f"# Authoring brief · {date} {plan.weekday_zh(date)}", "",
+             f"Week {info['week']} · chapter `{info['chapter']}` ({info['chapterName']}) · rules: `standards/daily/README.md`", "",
+             "## Today's chapters (one per plan entry, same order; content/items/forms copied exactly from plan/weeks.json)", ""]
+    for k, e in enumerate(info["entries"], 1):
+        forms = "; ".join(f"{f} {names.get(f, '?')} → block `{'/'.join(sorted(codes.FORM_BLOCKS.get(f, {'?'})))}`" for f in e["forms"])
+        lines += [f"{k}. **{e['type']} {names.get(e['type'], '')}** ({'新' if e['group'] == 'new' else '旧的夯实'})",
+                  f"   - items: {json.dumps(e['items'], ensure_ascii=False)}", f"   - forms: {forms}"]
+    lines += ["", "## What to write", "",
+              f"1. `daily/days/{date}/content.json` — schema `dpt-daily-pack/2`, kind `supplement`, `week` {info['week']}, `chapter` `{info['chapter']}`, "
+              f"`chapter_name` `{info['chapterName']}`. Each chapter carries `content`, `items`, `forms` as above plus the usual title/toc/goals/terms/blocks/bridge. "
+              "Field and block definitions: `daily/CONTENT_SCHEMA.md` (v2 section)" + (f"; the last weekly pack is `daily/days/{prev[-1]}/content.json`." if prev else "."),
+              f"2. `daily/days/{date}/figures.py` — `build(out_dir)` drawing every figure in `content.figures` with `engine.figlib` (an empty build is fine when no figure is needed).",
+              "3. Consolidation (O-x): take the facts from the chapter `library/" + info["chapter"] + "/content.json` (DL-01), do not rewrite them differently.",
+              "   New content: N-1 acupoints in `content.acupoints` with `meridian` (AN-20 to AN-24); N-5 papers come from `daily/papers/<id>.json` (block `paper`);",
+              "   N-2/N-3/N-4/N-6/N-7 need sources you actually opened (G-02); N-4 cases are teaching cases.",
+              "4. Rules: English first then Chinese; pronunciation for every English key term (content.pronunciation or engine/data/pronunciation.json); "
+              "no public-health framing; archive tags (tags.vertical with fixed top levels, tags.horizontal).",
+              "5. Then run `python3 daily/pipeline.py evening --date " + date + "` again."]
+    (d / "AUTHORING_BRIEF.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return d / "AUTHORING_BRIEF.md"
+
+
 def write_brief(date):
     info = plan.day_info(date)
+    if info["kind"] == "supplement":
+        return write_weekly_brief(date, info)
     d = DAYS / date
     d.mkdir(parents=True, exist_ok=True)
     prev = sorted(p.parent.name for p in DAYS.glob("*/content.json") if p.parent.name < date)
@@ -178,6 +209,14 @@ def s_plan(run, date):
     run["kind"] = info["kind"]
     if info["kind"] == "learning":
         run["day"] = info["day"]
+    if "week" in info:
+        run["week"], run["chapter"] = info["week"], info["chapter"]
+        if info["kind"] == "unplanned":
+            set_step(run, "evening", "plan", "failed", error=info["reason"])
+            return need(2, "the weekly plan has nothing for this date", [info["reason"], "Fill daily/plan/weeks.json (DL-12) and run again."])
+        set_step(run, "evening", "plan", "done", evidence={"kind": info["kind"], "week": info["week"], "chapter": info["chapter"],
+                                                            "entries": [[e["type"], e["items"], e["forms"]] for e in info.get("entries", [])]})
+        return 0
     set_step(run, "evening", "plan", "done", evidence={"kind": info["kind"], "day": info.get("day"),
                                                         "acupoints": [a["name"] for a in info.get("acupoints", [])],
                                                         "muscles": [m["zh"] for m in info.get("muscles", [])]})
@@ -190,6 +229,9 @@ def s_author(run, date):
     if info["kind"] in ("weekly_review", "final_review") and not c.exists():
         from engine import review_pack
         review_pack.write(date, info)
+    if info["kind"] == "chapter_day" and not c.exists():
+        from engine import week_pack
+        week_pack.write_chapter_day(date, info)
     if info["kind"] == "none":
         set_step(run, "evening", "author", "done", evidence="no study item planned for this date")
         return 0
@@ -236,7 +278,7 @@ def s_validate(run, date):
     if errs:
         set_step(run, "evening", "validate", "failed", error=errs)
         return need(20, "content.json has problems", errs)
-    set_step(run, "evening", "validate", "done", evidence="schema dpt-daily-pack/1: 0 problems")
+    set_step(run, "evening", "validate", "done", evidence=f"schema {paths.load_content(date)['schema']}: 0 problems")
     return 0
 
 
@@ -461,10 +503,12 @@ def run_phase(phase, date):
         say(f"content or engine changed since the last run ({ph['fingerprint']} → {fp}); later steps will run again")
     ph["fingerprint"] = fp
     save_run(run)
+    ran = False
     for name, kind, code in PHASES[phase]:
         rec = step_rec(run, phase, name)
         if rec.get("status") == "done":
             continue
+        ran = True
         say(f"→ {phase}/{name}")
         try:
             rc = FUN[name](run, date)
@@ -476,12 +520,37 @@ def run_phase(phase, date):
             return rc
         if phase == "evening" and name == "author":
             fp = fingerprint(date); ph["fingerprint"] = fp; save_run(run)
+    if not ran and ph.get("finished"):  # everything was already done: leave the committed run record as it is
+        return verify(date, phase, save=False)
     ph["finished"] = now()
     save_run(run)
     return verify(date, phase)
 
 
-def verify(date, phase):
+def push_run_record(date):
+    """s_publish commits the pack before its own step, the phase's finish and the verify result are written to
+    the run record. Commit and push that record too, so the pushed record passes `verify` and the clone stays clean."""
+    files = [run_path(date).relative_to(REPO).as_posix(), (RUNS / "log.jsonl").relative_to(REPO).as_posix()]
+    dirty = bool(git("status", "--porcelain", "--", *files).stdout.strip())
+    ahead = git("rev-list", "--count", "origin/main..HEAD", check=False).stdout.strip() not in ("", "0")
+    if not dirty and not ahead:
+        return 0
+    if dirty:
+        git("add", "--", *files)
+        git("-c", "user.name=Claude", "-c", "user.email=noreply@anthropic.com", "commit", "-m",
+            f"Daily pack {date}: record the publish step in the run log\n\nCo-Authored-By: Claude <noreply@anthropic.com>")
+    try:  # also retries a run-record commit an earlier run could not push
+        git("fetch", "origin", "main")
+        git("rebase", "origin/main")
+        git("push", "origin", "HEAD:main")
+    except Exception as e:  # the pack itself is already pushed; this commit goes out with the next publish
+        git("rebase", "--abort", check=False)
+        say(f"note: the run-record commit for {date} is kept locally (push failed: {str(e)[-300:]}). "
+            "The pack itself is pushed; the next publish pushes this commit too. Mention it in the report.")
+    return 0
+
+
+def verify(date, phase, save=True):
     run = load_run(date)
     steps = run["phases"].get(phase, {}).get("steps", {})
     missing = []
@@ -496,8 +565,10 @@ def verify(date, phase):
     say(f"\nVERIFY {phase} {date}: " + ("ALL STEPS DONE" if not missing else f"{len(missing)} step(s) not done"))
     for m in missing:
         say("  ✗ " + str(m)[:600])
-    run["phases"].setdefault(phase, {})["verified"] = {"at": now(), "ok": not missing, "missing": missing}
-    save_run(run)
+    old = run["phases"].get(phase, {}).get("verified") or {}
+    if save and (old.get("ok") != (not missing) or old.get("missing") != missing):  # rewrite only when the result changes
+        run["phases"].setdefault(phase, {})["verified"] = {"at": now(), "ok": not missing, "missing": missing}
+        save_run(run)
     return 0 if not missing else 1
 
 
@@ -554,7 +625,10 @@ def main():
     a = ap.parse_args()
     if a.cmd == "evening":
         date = a.date or plan.tomorrow(tz=TZ)
-        sys.exit(run_phase("evening", date))
+        rc = run_phase("evening", date)
+        if rc == 0 and step_rec(load_run(date), "evening", "publish").get("status") == "done":
+            push_run_record(date)
+        sys.exit(rc)
     if a.cmd == "morning":
         date = a.date or plan.today(TZ).isoformat()
         sys.exit(run_phase("morning", date))

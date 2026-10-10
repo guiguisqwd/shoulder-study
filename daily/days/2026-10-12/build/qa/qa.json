@@ -1,0 +1,27 @@
+{
+  "file": "/home/claude/dpt-study/daily/days/2026-10-12/build/2026-10-12-第1周-试用-肩带四穴与肩袖四肌.html",
+  "errors": [],
+  "overlaps": [],
+  "outside": [],
+  "chapters": [
+    "new-acupoints",
+    "consolidate-cuff"
+  ],
+  "figures": 4,
+  "say_buttons": 21,
+  "terms_without_pron": [],
+  "mobile_scroll_width": 390,
+  "screenshots": [
+    "/home/claude/dpt-study/daily/days/2026-10-12/build/qa/top.png",
+    "/home/claude/dpt-study/daily/days/2026-10-12/build/qa/chapter-new-acupoints.png",
+    "/home/claude/dpt-study/daily/days/2026-10-12/build/qa/chapter-consolidate-cuff.png",
+    "/home/claude/dpt-study/daily/days/2026-10-12/build/qa/mobile-top.png"
+  ],
+  "figure_shots": [
+    "/home/claude/dpt-study/daily/days/2026-10-12/build/qa/figure-01.png",
+    "/home/claude/dpt-study/daily/days/2026-10-12/build/qa/figure-02.png",
+    "/home/claude/dpt-study/daily/days/2026-10-12/build/qa/figure-03.png",
+    "/home/claude/dpt-study/daily/days/2026-10-12/build/qa/figure-04.png"
+  ],
+  "flashcards": 10
+}

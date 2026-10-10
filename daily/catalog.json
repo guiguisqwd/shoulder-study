@@ -2,8 +2,80 @@
  "schema": "dpt-daily-catalog/1",
  "entries": [
   {
+   "date": "2026-10-12",
+   "day": null,
+   "week": 1,
+   "chapter": "shoulder",
+   "kind": "supplement",
+   "out": "2026-10-12-第1周-试用-肩带四穴与肩袖四肌",
+   "title": {
+    "zh": "试用版：肩带四穴与肩袖四肌",
+    "en": "Trial: SI14, SI15, TE15, LI14 · the rotator cuff"
+   },
+   "acupoints": [
+    [
+     "肩外俞",
+     "Jiānwàishū",
+     "SI14"
+    ],
+    [
+     "肩中俞",
+     "Jiānzhōngshū",
+     "SI15"
+    ],
+    [
+     "天髎",
+     "Tiānliáo",
+     "TE15"
+    ],
+    [
+     "臂臑",
+     "Bìnào",
+     "LI14"
+    ]
+   ],
+   "muscles": [
+    [
+     "Supraspinatus",
+     "冈上肌"
+    ],
+    [
+     "Infraspinatus",
+     "冈下肌"
+    ],
+    [
+     "Teres minor",
+     "小圆肌"
+    ],
+    [
+     "Subscapularis",
+     "肩胛下肌"
+    ]
+   ],
+   "tags": {
+    "vertical": [
+     "解剖学/上肢/肩带/肩袖",
+     "解剖学/背部/肩胛提肌与菱形肌",
+     "中医针灸对照/经络/手太阳小肠经",
+     "中医针灸对照/经络/手少阳三焦经",
+     "中医针灸对照/经络/手阳明大肠经"
+    ],
+    "horizontal": [
+     "中西医对照/穴位-触发点",
+     "体表定位/骨度分寸",
+     "针刺安全/危险结构",
+     "记忆法"
+    ]
+   },
+   "figures": 4,
+   "path": "daily/2026-10-12/index.html",
+   "md": "daily/2026-10-12/2026-10-12-第1周-试用-肩带四穴与肩袖四肌.md"
+  },
+  {
    "date": "2026-10-08",
    "day": 2,
+   "week": null,
+   "chapter": null,
    "kind": "learning",
    "out": "2026-10-08-第2天-肺经收尾与肩胛肌",
    "title": {
@@ -79,6 +151,8 @@
   {
    "date": "2026-10-07",
    "day": 1,
+   "week": null,
+   "chapter": null,
    "kind": "learning",
    "out": "2026-10-07-第1天-肺经与胸前肌",
    "title": {

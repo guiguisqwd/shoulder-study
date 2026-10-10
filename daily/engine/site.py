@@ -13,7 +13,7 @@ def entry(date):
     c = load_content(date)
     B = build_dir(date)
     qa = json.loads((B / "qa" / "qa.json").read_text(encoding="utf-8")) if (B / "qa" / "qa.json").exists() else {}
-    return {"date": date, "day": c.get("day"), "kind": c.get("kind"), "out": out_name(c), "title": c["title"],
+    return {"date": date, "day": c.get("day"), "week": c.get("week"), "chapter": c.get("chapter"), "kind": c.get("kind"), "out": out_name(c), "title": c["title"],
             "acupoints": [[a["name"], a.get("pinyin", ""), a.get("code", "")] for a in c.get("acupoints", [])],
             "muscles": [[m["en"], m["zh"]] for m in c.get("muscles", [])],
             "tags": c.get("tags", {}), "figures": qa.get("figures"), "path": f"daily/{date}/index.html", "md": f"daily/{date}/{out_name(c)}.md"}
@@ -44,13 +44,14 @@ def rebuild_index():
     CATALOG.write_text(json.dumps({"schema": "dpt-daily-catalog/1", "entries": entries}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     S = plan.schedule()
     total_acu, total_mus = S["counts"]["acupoints"], S["counts"]["muscles_new"] + S["counts"]["muscles_learned"]
-    learned_acu = sum(len(e["acupoints"]) for e in entries if e["kind"] == "learning")
-    learned_mus = sum(len(e["muscles"]) for e in entries if e["kind"] == "learning") + S["counts"]["muscles_learned"]
+    learned_acu = sum(len(e["acupoints"]) for e in entries if e["kind"] in ("learning", "supplement"))
+    learned_mus = sum(len(e["muscles"]) for e in entries if e["kind"] in ("learning", "supplement")) + S["counts"]["muscles_learned"]
     cards = []
     for e in entries:
         chips_a = "".join(f'<span class="chip acu">{E(n)}<small>{E(p)}</small></span>' for n, p, _ in e["acupoints"])
         chips_m = "".join(f'<span class="chip mus">{E(en)}<small>{E(zh)}</small></span>' for en, zh in e["muscles"])
-        label = f"Day {e['day']} · 第 {e['day']} 天" if e["kind"] == "learning" else "Review · 复习"
+        label = {"learning": f"Day {e['day']} · 第 {e['day']} 天", "supplement": f"Week {e.get('week')} · 第 {e.get('week')} 周",
+                 "chapter_day": f"Week {e.get('week')} chapter · 第 {e.get('week')} 周章节日"}.get(e["kind"], "Review · 复习")
         cards.append(f'''<article class="day" data-search="{E((e['title']['zh'] + ' ' + e['title']['en'] + ' ' + ' '.join(a[0] for a in e['acupoints']) + ' ' + ' '.join(m[0] + ' ' + m[1] for m in e['muscles'])).lower())}">
 <div class="meta"><span>{E(e['date'])} {plan.weekday_zh(e['date'])}</span><span>{label}</span></div>
 <h2><a href="./{E(e['date'])}/index.html">{E(e['title']['zh'])}<small>{E(e['title']['en'])}</small></a></h2>

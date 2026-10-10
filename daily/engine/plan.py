@@ -1,15 +1,56 @@
 # -*- coding: utf-8 -*-
-"""Which day is it in the study plan? (learning day / weekly review / final review / nothing)."""
+"""Which day is it in the study plan?
+
+From the first Sunday of plan/weeks.json (DL-10 to DL-15): `chapter_day` (Sunday: study the week's library
+chapter), `supplement` (Monday–Saturday: the planned content items and forms) or `unplanned` (the week has
+no day entries yet). Before that, plan/schedule.json: learning day / weekly review / final review / nothing.
+"""
 import datetime as dt
 import json
-from .paths import PLAN
+from .paths import PLAN, WEEKS
 
 
 def schedule():
     return json.loads(PLAN.read_text(encoding="utf-8"))
 
 
+def weeks():
+    return json.loads(WEEKS.read_text(encoding="utf-8"))
+
+
+def weekly_start() -> str:
+    return weeks()["weeks"][0]["sunday"]
+
+
+def week_of(date: str):
+    """The weeks.json entry whose Sunday-to-Saturday span holds this date, or None."""
+    d = dt.date.fromisoformat(date)
+    for w in weeks()["weeks"]:
+        start = dt.date.fromisoformat(w["sunday"])
+        if start <= d < start + dt.timedelta(days=7):
+            return w
+    return None
+
+
+def weekly_info(date: str) -> dict:
+    w = week_of(date)
+    if w is None:
+        return {"kind": "none", "date": date}
+    base = {"date": date, "week": w["week"], "chapter": w.get("chapter"), "chapterName": w.get("chapterName")}
+    if not w.get("chapter"):
+        return {"kind": "unplanned", **base, "reason": f"week {w['week']} ({w['chapterName']}) has no chapter or day entries yet"}
+    if date == w["sunday"]:
+        return {"kind": "chapter_day", **base, "chapterStatus": w.get("chapterStatus"), "days": w.get("days")}
+    days = w.get("days")
+    if not isinstance(days, dict) or date not in days:
+        return {"kind": "unplanned", **base, "reason": f"weeks.json week {w['week']} lists no items for {date}; fill them after the chapter's ST-1 list"}
+    entries = [{"group": group, **e} for group in ("new", "consolidate") for e in days[date].get(group, [])]
+    return {"kind": "supplement", **base, "entries": entries}
+
+
 def day_info(date: str) -> dict:
+    if date >= weekly_start():
+        return weekly_info(date)
     S = schedule()
     for d in S["learning_days"]:
         if d["date"] == date:

@@ -53,3 +53,36 @@
 {"date": "2026-10-08", "at": "2026-10-07T05:49:25-07:00", "phase": "evening", "step": "review_center", "status": "waiting"}
 {"date": "2026-10-08", "at": "2026-10-08T00:25:01-07:00", "phase": "evening", "step": "review_center", "status": "done"}
 {"date": "2026-10-08", "at": "2026-10-08T00:25:02-07:00", "phase": "evening", "step": "publish", "status": "blocked", "error": "git push origin HEAD:main failed (128):\n\nremote: access denied by the git proxy: guiguisqwd/shoulder-study is not in this session's authorized repository set, so the proxy will not inject a credential for it. To fix, add the repository to the session's sources.\nfatal: unable to access 'https://githu"}
+{"date": "2026-10-09", "at": "2026-10-09T14:18:43+00:00", "phase": "evening", "step": "plan", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:18:43+00:00", "phase": "evening", "step": "author", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:18:43+00:00", "phase": "evening", "step": "figures", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:18:43+00:00", "phase": "evening", "step": "validate", "status": "failed", "error": "['2026-10-09 is learning in plan/weeks.json, content says supplement']"}
+{"date": "2026-10-09", "at": "2026-10-09T14:18:50+00:00", "phase": "evening", "step": "plan", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:18:50+00:00", "phase": "evening", "step": "validate", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:18:50+00:00", "phase": "evening", "step": "build", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:18:57+00:00", "phase": "evening", "step": "qa", "status": "failed", "error": "[\"SVG text overlaps: ['04: Posterior view | 后面观', '04: Anterior view | 前面观']\"]"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:09+00:00", "phase": "evening", "step": "figures", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:09+00:00", "phase": "evening", "step": "validate", "status": "failed", "error": "['2026-10-09 is learning in plan/weeks.json, content says supplement']"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:16+00:00", "phase": "evening", "step": "validate", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:16+00:00", "phase": "evening", "step": "build", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:21+00:00", "phase": "evening", "step": "qa", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:21+00:00", "phase": "evening", "step": "visual_review", "status": "waiting", "error": "['no visual-review.json newer than qa.json']"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:48+00:00", "phase": "evening", "step": "visual_review", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:48+00:00", "phase": "evening", "step": "site", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:48+00:00", "phase": "evening", "step": "cards", "status": "done"}
+{"date": "2026-10-09", "at": "2026-10-09T14:19:51+00:00", "phase": "evening", "step": "publish", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:07+00:00", "phase": "evening", "step": "plan", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:07+00:00", "phase": "evening", "step": "author", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:07+00:00", "phase": "evening", "step": "figures", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:07+00:00", "phase": "evening", "step": "validate", "status": "failed", "error": "['2026-10-09 is learning in plan/weeks.json, content says supplement', \"figure files missing in build/资源: ['01', '02', '03', '04'] (run the figures step)\"]"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:23+00:00", "phase": "evening", "step": "plan", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:23+00:00", "phase": "evening", "step": "author", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:23+00:00", "phase": "evening", "step": "figures", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:23+00:00", "phase": "evening", "step": "validate", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:23+00:00", "phase": "evening", "step": "build", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:28+00:00", "phase": "evening", "step": "qa", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:28+00:00", "phase": "evening", "step": "visual_review", "status": "waiting", "error": "['no visual-review.json newer than qa.json']"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:39+00:00", "phase": "evening", "step": "visual_review", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:39+00:00", "phase": "evening", "step": "site", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:39+00:00", "phase": "evening", "step": "cards", "status": "done"}
+{"date": "2026-10-12", "at": "2026-10-09T14:21:44+00:00", "phase": "evening", "step": "publish", "status": "done"}

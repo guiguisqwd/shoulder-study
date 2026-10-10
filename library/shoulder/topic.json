@@ -6,8 +6,8 @@
     "zh": "肩袖"
   },
   "summary": {
-    "en": "Six-part bilingual reading, annotated anatomy diagrams, three-dimensional models and reviewed offline materials.",
-    "zh": "六部分双语阅读、解剖标注图、三维模型与已核验的离线资料。"
+    "en": "Five-part bilingual reading, annotated anatomy diagrams, three-dimensional models and reviewed offline materials.",
+    "zh": "五部分双语阅读、解剖标注图、三维模型与已核验的离线资料。"
   },
   "region": {
     "en": "Shoulder",
@@ -198,7 +198,7 @@
         "clinical",
         "review"
       ],
-      "modelTermId": null
+      "modelTermId": "teres-major"
     },
     {
       "id": "trapezius",
@@ -208,11 +208,12 @@
         "zh": "斜方肌"
       },
       "chapters": [
+        "anatomy",
         "movement",
         "clinical",
         "review"
       ],
-      "modelTermId": null
+      "modelTermId": "trapezius"
     },
     {
       "id": "upper-trapezius",
@@ -222,10 +223,23 @@
         "zh": "上斜方肌"
       },
       "chapters": [
+        "anatomy",
         "movement",
         "clinical"
       ],
-      "modelTermId": null
+      "modelTermId": "upper-trapezius"
+    },
+    {
+      "id": "middle-trapezius",
+      "kind": "muscle",
+      "name": {
+        "en": "Middle trapezius",
+        "zh": "中斜方肌"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": "middle-trapezius"
     },
     {
       "id": "lower-trapezius",
@@ -235,10 +249,11 @@
         "zh": "下斜方肌"
       },
       "chapters": [
+        "anatomy",
         "movement",
         "clinical"
       ],
-      "modelTermId": null
+      "modelTermId": "lower-trapezius"
     },
     {
       "id": "serratus-anterior",
@@ -248,11 +263,28 @@
         "zh": "前锯肌"
       },
       "chapters": [
+        "anatomy",
         "movement",
         "clinical",
         "review"
       ],
-      "modelTermId": null
+      "modelTermId": "serratus-anterior"
+    },
+    {
+      "id": "triceps-long-head",
+      "kind": "muscle",
+      "name": {
+        "en": "Long head of triceps",
+        "zh": "肱三头肌长头"
+      },
+      "aliases": [
+        "Long head of the triceps brachii",
+        "Long head of triceps brachii"
+      ],
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": "triceps-long-head"
     },
     {
       "id": "suprascapular-nerve",
@@ -763,21 +795,6 @@
       ],
       "chapters": [
         "clinical"
-      ],
-      "modelTermId": null
-    },
-    {
-      "id": "hando-2026-dry-needling",
-      "kind": "paper",
-      "name": {
-        "en": "Dry Needling Plus Manual Therapy and Exercise for Subacromial Pain Syndrome: A Sham-Controlled Randomized Clinical Trial",
-        "zh": "干针联合手法治疗与运动治疗肩峰下疼痛综合征：一项假干针对照随机临床试验"
-      },
-      "aliases": [
-        "10.2519/jospt.2025.13460"
-      ],
-      "chapters": [
-        "papers"
       ],
       "modelTermId": null
     }

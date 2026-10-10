@@ -25,7 +25,7 @@ SECTIONS = [
 ]
 # CH-01 (2026-10-09): paper reading left the chapter and became daily content (N-5). Chapters made
 # before that still carry a trailing 'papers' section until their own threads move it out.
-LEGACY_PAPER_SECTION = {'shoulder'}
+LEGACY_PAPER_SECTION = set()
 STRUCTURE_KINDS = ['muscle', 'nerve', 'bone', 'landmark', 'joint', 'acupoint', 'paper']
 QA_CHECKS = ['medicalSources', 'bilingual', 'originInsertionLabels', 'modelLinks',
              'layoutDesktop', 'layoutMobile', 'fullAnswers']

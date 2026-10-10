@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { VanatomeViewer } from './vendor/VanatomeViewer';
 import type { VanatomeAnnotation, VanatomeCameraRequest, VanatomeAtlas, VanatomeDisplayMode, VanatomeSurfacePickEvent, VanatomeVector3 } from './vendor/types';
-import { anatomyLabel, anatomyNames, anatomyEnglish, relatedEnglish, loadAtlases, modelPosition, modelScale, modelVersion, points, storageKey, validatePlacements } from './data';
-import type { Placement, Placements, PointKind } from './data';
+import { anatomyLabel, anatomyNames, anatomyEnglish, relatedEnglish, loadAtlases, modelPosition, modelScale, modelVersion, points, storageKey, validatePlacements, muscleGroups, initialMuscleGroups, muscleGroupOf, modelGroupOf } from './data';
+import type { MuscleGroupId, Placement, Placements, PointKind } from './data';
 import { modelReferences, referenceVersion } from './references';
 import { VocabularyCard } from './VocabularyCard';
 import { vocabularyById, termForAnatomy, pointRelatedTerms } from './vocabulary';
 import { boneFocus, landmarkById, landmarksForBone, type BoneName } from './landmarks';
 import { depthProbe, loadAcupointDepth, type DepthData } from './depth';
 import { DepthSection } from './DepthPanel';
+import { fitDockedLabels, useElementHeight } from './labelDock';
 
 type Side = 'right' | 'left';
 type View = 'back' | 'front' | 'side' | 'body';
@@ -16,7 +17,32 @@ type CameraIntent = VanatomeCameraRequest extends infer R ? R extends VanatomeCa
 const initialCameraPosition: VanatomeVector3 = [-0.98, 3.65, -3.6];
 const initialCameraTarget: VanatomeVector3 = [-0.98, 3.37, -0.34];
 const kindNames: Record<PointKind, string> = { unconfirmed: '待核对的空间点', 'surface-reference': '体表定位参考', 'deep-reference': '深部解剖关联点' };
-const anatomyDockOrder = Object.keys(anatomyNames).filter(id => !id.startsWith('deltoid'));
+// Rotator cuff and the three bones keep their original fixed label slots (deltoid takes slot 7 when selected).
+const legacyDockOrder = Object.keys(anatomyNames).filter(id => muscleGroupOf(id) === 'cuff' || id.startsWith('appendicular-skeleton-'));
+// The 14 shoulder add-on muscles, by layer-bar group (EXPLORE strip and label priority).
+const addonMuscleTerms = ['trapezius', 'latissimus-dorsi', 'levator-scapulae', 'rhomboid-major', 'rhomboid-minor', 'pectoralis-major', 'pectoralis-minor', 'subclavius', 'serratus-anterior', 'teres-major', 'biceps-brachii', 'triceps-brachii', 'coracobrachialis', 'brachialis'].filter(id => vocabularyById[id]);
+// Multi-part add-on muscles carry one label (their own word) unless one of their parts is selected.
+const labelledAsWhole = ['trapezius-muscles', 'pectoralis-major-muscles', 'biceps-brachii-muscles', 'triceps-brachii-muscles'];
+const anteriorMuscles = ['pectoralis-major-muscles', 'pectoralis-minor-muscles', 'subclavius-muscles', 'biceps-brachii-muscles', 'coracobrachialis-muscles', 'brachialis-muscles'];
+const lateralMuscles = ['serratus-anterior-muscles'];
+const addonOrder = muscleGroups.filter(group => !group.initial).flatMap(group => group.groupIds);
+const baseId = (id: string) => id.replace(/-(right|left)$/, '');
+const toAnnotationSpace = (position: readonly number[]) => position.map((v, axis) => (v - modelPosition[axis]) / modelScale) as unknown as VanatomeVector3;
+
+type LabelCandidate = { annotation: VanatomeAnnotation; base: string; priority: number; y: number; addon: boolean };
+/** Anatomy-mode labels: legacy slots for the cuff + bones; otherwise a gap-free column, top to bottom by height,
+ * keeping the highest-priority labels that fit the scene without overlapping. */
+function layoutAnatomyLabels(candidates: LabelCandidate[], sceneHeight: number): { items: VanatomeAnnotation[]; total: number } {
+  if (!candidates.some(item => item.addon)) {
+    const slot = (item: LabelCandidate) => item.base.startsWith('deltoid') ? 7 : legacyDockOrder.indexOf(item.base);
+    if (legacyDockOrder.every(id => candidates.some(item => item.base === id))) {
+      return { items: candidates.map(item => ({ ...item.annotation, labelDockIndex: slot(item), labelDockCount: 8 })), total: candidates.length };
+    }
+    const order = [...candidates].sort((a, b) => slot(a) - slot(b));
+    return { items: candidates.map(item => ({ ...item.annotation, labelDockIndex: order.indexOf(item), labelDockCount: candidates.length })), total: candidates.length };
+  }
+  return { items: fitDockedLabels(candidates, sceneHeight), total: candidates.length };
+}
 const whoUrl = 'https://iris.who.int/bitstream/handle/10665/353407/9789290613831-eng.pdf';
 
 export default function App() {
@@ -31,8 +57,12 @@ export default function App() {
   const [displayMode, setDisplayMode] = useState<VanatomeDisplayMode>('xray');
   const [bones, setBones] = useState(true);
   const [muscles, setMuscles] = useState(true);
-  const [deltoid, setDeltoid] = useState(true);
-  const [allLabels, setAllLabels] = useState(true);
+  const [groups, setGroups] = useState<Record<MuscleGroupId, boolean>>(initialMuscleGroups);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const sceneHeight = useElementHeight(sceneRef);
+  // Only the selected structure, landmark or point is labelled until All labels is ticked (gui, 2026-10-09);
+  // a bone view with no landmark chosen yet labels all of that bone's landmarks.
+  const [allLabels, setAllLabels] = useState(false);
   const [showGuides, setShowGuides] = useState(false);
   const [showProbe, setShowProbe] = useState(true);
   const [depthData, setDepthData] = useState<DepthData | null>(null);
@@ -66,7 +96,7 @@ export default function App() {
   const activeLandmark = landmarkId ? landmarkById[landmarkId] : undefined;
   const currentBoneLandmarks = landmarksForBone(detailBone);
 
-  useEffect(() => { loadAtlases().then(setAtlases).catch(e => setError(String(e))); }, []);
+  useEffect(() => { loadAtlases(['shoulder']).then(setAtlases).catch(e => setError(e instanceof Error ? e.message : String(e))); }, []);
   useEffect(() => { loadAcupointDepth().then(setDepthData).catch(e => setDepthError(e instanceof Error ? e.message : String(e))); }, []);
   useEffect(() => {
     try {
@@ -95,20 +125,73 @@ export default function App() {
     else if (linkedId && points.some(p => p.id === linkedId)) choosePoint(linkedId, true);
   }, [ready, storageReady]);
 
+  const depthEntry = depthData?.points[key];
+  // With the depth probe on, every muscle the probe passes through stays visible, even when its group is off.
+  const probeMuscleIds = useMemo(() => new Set(labelMode === 'acupoints' && showProbe && depthEntry
+    ? depthEntry.layers.filter(layer => layer.kind === 'muscle').map(layer => layer.anatomyId) : []), [labelMode, showProbe, depthEntry]);
   const hiddenIds = useMemo(() => structures.filter(s => {
     if (!s.objectCount) return false;
     if (s.layer === 'skeletal') return !bones || (boneDetail && isolateBone ? s.id !== `appendicular-skeleton-${detailBone}-${side}` : view !== 'body' && !['scapula', 'clavicle', 'humerus'].some(n => s.id === `appendicular-skeleton-${n}-${side}`));
-    if (s.layer === 'muscular') return !muscles || !s.id.endsWith(`-${side}`) || !(s.id.startsWith('rotator-cuff-muscles-') || (deltoid && s.id.startsWith('deltoid-muscles-')));
+    if (s.layer === 'muscular') {
+      if (!muscles || !s.id.endsWith(`-${side}`)) return true;
+      if (probeMuscleIds.has(s.id)) return false;
+      const group = muscleGroupOf(s.id);
+      return !group || !groups[group];
+    }
     return true;
-  }).map(s => s.id), [structures, side, bones, muscles, deltoid, view, boneDetail, isolateBone, detailBone]);
+  }).map(s => s.id), [structures, side, bones, muscles, groups, probeMuscleIds, view, boneDetail, isolateBone, detailBone]);
+  const anatomyLabels = useMemo(() => {
+    if (labelMode !== 'anatomy') return { items: [], total: 0 };
+    const hidden = new Set(hiddenIds);
+    // What was chosen: the selected structure or, with none selected (e.g. a ?point= link), the current word's structure.
+    const termAnatomy = vocabularyById[termId]?.anatomy;
+    const chosenId = selectedId ?? (termAnatomy ? (termAnatomy.endsWith('-muscles') ? termAnatomy : `${termAnatomy}-${side}`) : null);
+    // Deltoid parts are labelled only when selected, or when they are the chosen word's structure while All labels is off.
+    const deltoidLabelled = (id: string) => id === selectedId || selectedId === 'deltoid-muscles' || (!allLabels && (id === chosenId || chosenId === 'deltoid-muscles'));
+    const visible = structures.filter(s => !hidden.has(s.id) && s.id.endsWith(`-${side}`) && anatomyEnglish[baseId(s.id)] && (!s.id.startsWith('deltoid') || deltoidLabelled(s.id)));
+    const selectedWhole = selectedId && visible.some(s => s.id === selectedId) ? labelledAsWhole.find(group => selectedId.startsWith(group + '-')) : undefined;
+    const candidates: LabelCandidate[] = [];
+    const rank = (base: string, selected: boolean) => {
+      const group = modelGroupOf(base) || '';
+      if (selected) return 0;
+      if (muscleGroupOf(base) === 'cuff') return 100 + legacyDockOrder.indexOf(base);
+      return addonOrder.includes(group) ? 200 + addonOrder.indexOf(group) : 300 + legacyDockOrder.indexOf(base);
+    };
+    for (const s of visible) {
+      const base = baseId(s.id);
+      const whole = labelledAsWhole.find(group => base.startsWith(group + '-'));
+      const addon = Boolean(modelGroupOf(base) && addonOrder.includes(modelGroupOf(base)!));
+      if (whole && whole !== selectedWhole) {
+        // One label for the whole muscle, at the middle of its visible parts on this side.
+        if (candidates.some(item => item.base === whole)) continue;
+        const parts = visible.filter(part => part.id.startsWith(whole + '-'));
+        const centre = [0, 1, 2].map(axis => parts.reduce((sum, part) => sum + part.position[axis], 0) / parts.length);
+        const term = termForAnatomy(whole);
+        const name = `${side === 'right' ? 'Right · ' : 'Left · '}${term?.english || anatomyEnglish[base]}${showChinese ? `\n${term?.chinese || anatomyNames[base]}` : ''}`;
+        candidates.push({ annotation: { id: `structure:${whole}`, label: name, position: toAnnotationSpace(centre), color: '#a6cbb9', showLabel: allLabels }, base: whole, priority: rank(whole, selectedId === whole), y: centre[1], addon });
+        continue;
+      }
+      if (whole && s.id !== selectedId) continue;
+      candidates.push({ annotation: { id: `structure:${s.id}`, label: anatomyLabel(s.id, showChinese).replace('Deltoid · ', ''), position: toAnnotationSpace(s.position), color: s.layer === 'skeletal' ? '#dfd2ad' : '#a6cbb9', showLabel: allLabels }, base, priority: rank(base, s.id === selectedId), y: s.position[1], addon });
+    }
+    if (!allLabels) {
+      // Only what was chosen (chosenId above), or every part of a chosen muscle group.
+      const group = chosenId?.endsWith('-muscles') ? chosenId + '-' : null;
+      const chosen = candidates.filter(item => item.annotation.id === `structure:${chosenId}` || (group && (item.base === chosenId || item.base.startsWith(group))))
+        .map(item => ({ ...item, annotation: { ...item.annotation, showLabel: true } }));
+      return { items: fitDockedLabels(chosen, sceneHeight), total: chosen.length };
+    }
+    return layoutAnatomyLabels(candidates, sceneHeight);
+  }, [labelMode, hiddenIds, structures, side, selectedId, showChinese, allLabels, sceneHeight, termId]);
   const annotations = useMemo(() => {
     if (labelMode === 'landmarks') {
       const items = landmarksForBone(detailBone);
-      return bones ? items.map((item, i): VanatomeAnnotation => ({ id: `landmark:${item.id}`, label: `${item.english}${showChinese ? `\n${item.chinese}` : ''}`, position: item.positions[side], color: item.id === landmarkId ? '#f1c16f' : '#b6cfbd', showLabel: allLabels, labelDockIndex: i, labelDockCount: items.length })) : [];
+      // A bone link (?term=humerus, Bone landmarks) is about its landmarks, so all of them are labelled until one is chosen.
+      const labelAll = allLabels || !landmarkId;
+      return bones ? items.map((item, i): VanatomeAnnotation => ({ id: `landmark:${item.id}`, label: `${item.english}${showChinese ? `\n${item.chinese}` : ''}`, position: item.positions[side], color: item.id === landmarkId ? '#f1c16f' : '#b6cfbd', showLabel: labelAll, labelDockIndex: labelAll ? i : 0, labelDockCount: labelAll ? items.length : 1 })) : [];
     }
     if (labelMode === 'anatomy') {
-      const visible = structures.filter(s => !hiddenIds.includes(s.id) && s.id.endsWith(`-${side}`) && anatomyEnglish[s.id.replace(/-(right|left)$/, '')] && (!s.id.startsWith('deltoid') || s.id === selectedId));
-      const items = visible.map((s): VanatomeAnnotation => ({ id: `structure:${s.id}`, label: anatomyLabel(s.id, showChinese).replace('Deltoid · ', ''), position: s.position.map((v, axis) => (v - modelPosition[axis]) / modelScale) as unknown as VanatomeVector3, color: s.layer === 'skeletal' ? '#dfd2ad' : '#a6cbb9', showLabel: allLabels, labelDockIndex: allLabels ? (s.id.startsWith('deltoid') ? 7 : anatomyDockOrder.indexOf(s.id.replace(/-(right|left)$/, ''))) : undefined, labelDockCount: 8 }));
+      const items = [...anatomyLabels.items];
       if (termId === 'posterior-shoulder') items.push({ id: 'region:posterior-shoulder', label: `Posterior shoulder · region${showChinese ? '\n肩后区 · 区域参照' : ''}`, position: modelReferences[`SI9-${side}`].position, color: '#e6b96b', showLabel: true });
       return items;
     }
@@ -124,9 +207,8 @@ export default function App() {
       items.push({ id: `structure:${structure.id}`, label: anatomyLabel(structure.id, showChinese), position: structure.position.map((v, i) => (v - modelPosition[i]) / modelScale) as unknown as VanatomeVector3, color: '#d2e0d3' });
     }
     return items;
-  }, [effectivePlacements, placements, side, key, allLabels, showGuides, selectedId, structures, labelMode, showChinese, hiddenIds, detailBone, landmarkId, bones, termId]);
+  }, [effectivePlacements, placements, side, key, allLabels, showGuides, selectedId, structures, labelMode, showChinese, anatomyLabels, detailBone, landmarkId, bones, termId]);
   const detailTarget = activeLandmark?.positions[side] || boneFocus(detailBone, side);
-  const depthEntry = depthData?.points[key];
   // The depth probe follows the built-in reference of the selected point (Acupoints mode only).
   const probes = useMemo(() => labelMode === 'acupoints' && showProbe && depthEntry ? [depthProbe(depthEntry, point.color, showChinese, customized)] : [], [labelMode, showProbe, depthEntry, point.color, showChinese, customized]);
 
@@ -180,8 +262,7 @@ export default function App() {
     setPointId(id); setEditing(false);
     setTermId(initial ? (termForAnatomy(p.anatomy)?.id || 'infraspinatus') : id.toLowerCase());
     if (!initial) setLabelMode('acupoints');
-    setMuscles(true); setBones(true);
-    if (p.anatomy.startsWith('deltoid-')) setDeltoid(true);
+    setMuscles(true); setBones(true); showMuscleGroup(p.anatomy);
     if (!keepView) { setView(nextView); setFreeRotation(false); }
     const saved = effectivePlacements[`${id}-${side}`];
     const direction = keepView ? undefined : directionFor(nextView);
@@ -205,7 +286,7 @@ export default function App() {
       requestCamera({ kind: 'structure', structureId: id });
       return;
     }
-    setSide(selectedSide); setSelectedId(id); setLabelMode('anatomy');
+    setSide(selectedSide); setSelectedId(id); setLabelMode('anatomy'); showMuscleGroup(id);
     if (view === 'body') setView('back');
     const term = termForAnatomy(id);
     if (term) setTermId(term.id);
@@ -218,20 +299,35 @@ export default function App() {
     if (landmarkById[id]) { chooseLandmark(id); return; }
     if (id === 'humerus' || id === 'scapula') { chooseBone(id); return; }
     const preserveView = freeRotation && view !== 'body';
-    const nextView = ['subscapularis', 'clavicle', 'clavicular-part'].includes(id) ? 'front' : 'back';
+    const muscle = term.anatomy ? modelGroupOf(term.anatomy) : undefined;
+    const nextView: View = ['subscapularis', 'clavicle', 'clavicular-part'].includes(id) || (muscle && anteriorMuscles.includes(muscle)) ? 'front'
+      : muscle && lateralMuscles.includes(muscle) ? 'side' : 'back';
     setTermId(id); setLabelMode('anatomy'); setEditing(false); setBones(true); setMuscles(true);
     if (!preserveView) { setView(nextView); setFreeRotation(false); }
     if (term.anatomy) {
-      if (term.anatomy.startsWith('deltoid')) setDeltoid(true);
-      const anatomyId = ['rotator-cuff-muscles', 'deltoid-muscles'].includes(term.anatomy) ? term.anatomy : `${term.anatomy}-${side}`;
+      showMuscleGroup(term.anatomy);
+      // A whole-muscle word (rotator cuff, trapezius…) selects its model group; only this side is visible, so only this side is framed.
+      const anatomyId = term.anatomy.endsWith('-muscles') ? term.anatomy : `${term.anatomy}-${side}`;
       setSelectedId(anatomyId);
       requestCamera({ kind: 'structure', structureId: anatomyId, direction: preserveView ? undefined : directionFor(nextView) });
     }
   }
+  function showMuscleGroup(anatomyId: string) {
+    const group = muscleGroupOf(anatomyId);
+    if (group) setGroups(current => current[group] ? current : { ...current, [group]: true });
+  }
+  function toggleMuscleGroup(group: MuscleGroupId, on: boolean) {
+    setGroups(current => ({ ...current, [group]: on }));
+    if (on) setMuscles(true);
+    else if (selectedId && muscleGroupOf(selectedId) === group) setSelectedId(null);
+  }
+  function muscleGroupBox(group: (typeof muscleGroups)[number]) {
+    return <label key={group.id} className={muscles ? undefined : 'muscles-hidden'}><input type="checkbox" checked={groups[group.id]} onChange={e => toggleMuscleGroup(group.id, e.target.checked)} />{group.en} · {group.zh}</label>;
+  }
   function chooseBone(bone: BoneName, nextSide = side) {
     const sameBone = boneDetail && detailBone === bone && nextSide === side && !wholeBone;
     setSide(nextSide); setDetailBone(bone); setLandmarkId(null); setLabelMode('landmarks'); setWholeBone(false);
-    setTermId(bone); setBones(true); setMuscles(false); setAllLabels(true); setEditing(false);
+    setTermId(bone); setBones(true); setMuscles(false); setEditing(false);
     const nextView = bone === 'humerus' ? 'front' : 'back';
     if (!sameBone) { setView(nextView); setFreeRotation(false); }
     setSelectedId(`appendicular-skeleton-${bone}-${nextSide}`);
@@ -243,7 +339,7 @@ export default function App() {
     const bone = item.anatomy.endsWith('humerus') ? 'humerus' : 'scapula';
     const sameBone = boneDetail && detailBone === bone;
     setDetailBone(bone); setLandmarkId(id); setLabelMode('landmarks'); setWholeBone(false);
-    setTermId(vocabularyById[id] ? id : bone); setBones(true); setMuscles(false); setAllLabels(true); setEditing(false);
+    setTermId(vocabularyById[id] ? id : bone); setBones(true); setMuscles(false); setEditing(false);
     if (!sameBone) { setView(item.view); setFreeRotation(false); }
     setSelectedId(`${item.anatomy}-${side}`);
     requestCamera({ kind: 'point', target: item.positions[side], direction: sameBone ? undefined : directionFor(item.view), distance: boneDistance(bone, id), preserveDistance: sameBone && !wholeBone });
@@ -312,18 +408,19 @@ export default function App() {
     <header className="masthead"><div><span className="eyebrow">SHOULDER · SPATIAL STUDY</span><h1>Shoulder anatomy<span>肩部三维 · 英语学习</span></h1></div><a className="reading-link" href="./reading.html" target="_blank" rel="noreferrer">Reading notes · 阅读笔记 ↗</a></header>
     <main className="workspace">
       <section className="viewer-panel" aria-label="三维人体工作区">
-        <div className="toolbar"><div className="segments">{(['right', 'left'] as const).map(s => <button key={s} aria-pressed={side === s} onClick={() => changeSide(s)}>{s === 'right' ? 'Right · 右肩' : 'Left · 左肩'}</button>)}</div><div className="segments">{([['back', 'Posterior'], ['front', 'Anterior'], ['side', 'Lateral'], ['body', 'Skeleton']] as const).map(([v, label]) => <button key={v} aria-pressed={view === v && !freeRotation} onClick={() => moveView(v)}>{label}</button>)}</div></div>
+        <div className="toolbar has-end"><div className="segments side-switch">{(['right', 'left'] as const).map(s => <button key={s} aria-pressed={side === s} onClick={() => changeSide(s)}>{s === 'right' ? 'Right · 右肩' : 'Left · 左肩'}</button>)}</div><div className="toolbar-end"><div className="segments">{([['back', 'Posterior'], ['front', 'Anterior'], ['side', 'Lateral'], ['body', 'Skeleton']] as const).map(([v, label]) => <button key={v} aria-pressed={view === v && !freeRotation} onClick={() => moveView(v)}>{label}</button>)}</div><div className="segments muscle-switch"><button className={muscles ? undefined : 'active'} onClick={() => setMuscles(shown => !shown)}>{muscles ? 'Hide muscles · 隐藏肌肉' : 'Show muscles · 显示肌肉'}</button></div></div></div>
         <div className="bone-view-slot"><div className="bone-view-controls" style={{visibility: boneDetail ? 'visible' : 'hidden'}} aria-hidden={!boneDetail}><div className="segments"><button aria-pressed={detailBone === 'humerus'} onClick={() => chooseBone('humerus')}>Humerus</button><button aria-pressed={detailBone === 'scapula'} onClick={() => chooseBone('scapula')}>Scapula</button></div><label><input type="checkbox" checked={isolateBone} onChange={e => setIsolateBone(e.target.checked)} />Isolate bone · 单骨</label><button aria-pressed={wholeBone} onClick={toggleWholeBone}>{wholeBone ? 'Close-up · 局部' : 'Whole bone · 全骨'}</button></div></div>
-        <div className={`scene ${editing ? 'editing' : ''}`}>
+        <div ref={sceneRef} className={`scene ${editing ? 'editing' : ''}`}>
           {atlases.length > 0 && !error && <VanatomeViewer atlases={atlases} modelScale={modelScale} modelPosition={modelPosition} initialCameraPosition={initialCameraPosition} initialCameraTarget={initialCameraTarget} cameraRequest={cameraRequest} enablePan minDistance={0.7} maxDistance={28} focusDistance={2.5} hiddenIds={hiddenIds} selectedId={selectedId} displayMode={displayMode} annotations={annotations} probes={probes} selectedAnnotationId={boneDetail ? landmarkId ? `landmark:${landmarkId}` : null : termId === 'posterior-shoulder' ? 'region:posterior-shoulder' : selectedId ? `structure:${selectedId}` : key} annotationEditing={editing} onSurfacePick={pick} onAnnotationSelect={id => { if (id.startsWith('landmark:')) chooseLandmark(id.slice(9)); else if (id.startsWith('region:')) chooseTerm(id.slice(7)); else if (id.startsWith('structure:')) selectStructure(id.slice(10)); else choosePoint(id.replace(/-(right|left)$/, '')); }} onSelect={selectStructure} onReady={() => setReady(true)} onError={e => setError(e.message)} onEscape={() => setEditing(false)} onInteractionStart={() => setFreeRotation(true)} appearance={{ xrayOpacity: 0.32, ghostOpacity: 0.13, pulseSelection: false, skeletonId: 'skeletal-system', bodyShellId: null }} loadingFallback={<div className="loading">正在载入真实解剖模型…</div>} ariaLabel="可旋转的肩部三维解剖模型" />}
           {error && <div className="loading error">模型未能载入：{error}<button onClick={() => location.reload()}>重新载入</button></div>}
           <div className="scene-caption"><span className="live-dot" />{editing ? `Select a starting point · ${point.english}` : boneDetail ? `${activeLandmark?.english || (detailBone === 'humerus' ? 'Humerus · proximal end' : 'Scapula')} · Bone landmarks` : labelMode === 'anatomy' ? `Anatomy · ${vocabularyById[termId].english}` : `${point.english} ${point.id} · ${customized ? 'Custom' : 'Study reference'}`}</div>
           <div className="scene-help">Drag to rotate · Scroll to zoom</div>
-          <div className="orientation">{side === 'right' ? 'R' : 'L'}<small>{freeRotation ? 'Free view' : view === 'back' ? 'Posterior view' : view === 'front' ? 'Anterior view' : view === 'side' ? 'Lateral view' : 'Skeleton'}</small></div>
+          <div className={`orientation${anatomyLabels.items.filter(item => item.labelDockIndex !== undefined).length > 8 ? ' beside-dock' : ''}`}>{side === 'right' ? 'R' : 'L'}<small>{freeRotation ? 'Free view' : view === 'back' ? 'Posterior view' : view === 'front' ? 'Anterior view' : view === 'side' ? 'Lateral view' : 'Skeleton'}</small></div>
         </div>
-        <div className="layerbar"><div className="segments">{([['normal', 'Solid'], ['xray', 'X-ray'], ['ghost', 'Ghost']] as const).map(([mode, label]) => <button key={mode} aria-pressed={displayMode === mode} onClick={() => setDisplayMode(mode)}>{label}</button>)}</div><label><input type="checkbox" checked={bones} onChange={e => setBones(e.target.checked)} />Bones</label><label><input type="checkbox" checked={muscles} onChange={e => setMuscles(e.target.checked)} />Rotator cuff</label><label><input type="checkbox" checked={deltoid} onChange={e => {setDeltoid(e.target.checked); if(e.target.checked) setMuscles(true);}} />Deltoid</label></div>
+        {labelMode === 'anatomy' && allLabels && anatomyLabels.items.length < anatomyLabels.total && <p className="label-note" role="status">{anatomyLabels.items.length} of {anatomyLabels.total} labels fit the view; select a muscle or turn off a group to see the rest. · 视图中可显示 {anatomyLabels.items.length}/{anatomyLabels.total} 个标注；点选肌肉或关闭部分肌群可查看其余名称。</p>}
+        <div className="layerbar"><div className="segments">{([['normal', 'Solid'], ['xray', 'X-ray'], ['ghost', 'Ghost']] as const).map(([mode, label]) => <button key={mode} aria-pressed={displayMode === mode} onClick={() => setDisplayMode(mode)}>{label}</button>)}</div><label><input type="checkbox" checked={bones} onChange={e => setBones(e.target.checked)} />Bones · 骨骼</label>{muscleGroups.filter(group => group.initial).map(muscleGroupBox)}<div className="layer-more" role="group" aria-label="More muscles · 更多肌肉"><span className="layer-more-title">More muscles · 更多肌肉</span>{muscleGroups.filter(group => !group.initial).map(muscleGroupBox)}</div></div>
         <div className="annotation-options"><div className="segments"><button aria-pressed={labelMode === 'anatomy'} onClick={() => switchLabels('anatomy')}>Anatomy · 解剖</button><button aria-pressed={boneDetail} onClick={() => switchLabels('landmarks')}>Bone landmarks · 骨标</button><button aria-pressed={labelMode === 'acupoints'} onClick={() => switchLabels('acupoints')}>Acupoints · 穴位</button></div><label><input type="checkbox" checked={allLabels} onChange={e => setAllLabels(e.target.checked)} />All labels</label><label><input type="checkbox" checked={showGuides} onChange={e => { setShowGuides(e.target.checked); if (e.target.checked && labelMode !== 'acupoints') choosePoint(pointId); }} />Point guides</label><label><input type="checkbox" checked={showProbe} onChange={e => { setShowProbe(e.target.checked); if (e.target.checked && labelMode !== 'acupoints') choosePoint(pointId); }} />Depth probe · 深浅探针</label></div>
-        <div className="anatomy-strip"><span>EXPLORE</span>{Object.keys(anatomyNames).filter(id => !id.startsWith('deltoid')).map(id => <button key={id} aria-pressed={selectedId === `${id}-${side}`} onClick={() => { const term = termForAnatomy(id); if (term) chooseTerm(term.id); }}><span>{anatomyEnglish[id]}</span>{showChinese && <small>{anatomyNames[id]}</small>}</button>)}</div>
+        <div className="anatomy-strip"><span>EXPLORE</span>{legacyDockOrder.map(id => <button key={id} aria-pressed={selectedId === `${id}-${side}`} onClick={() => { const term = termForAnatomy(id); if (term) chooseTerm(term.id); }}><span>{anatomyEnglish[id]}</span>{showChinese && <small>{anatomyNames[id]}</small>}</button>)}{addonMuscleTerms.map(id => { const term = vocabularyById[id]; const anatomy = term.anatomy || ''; const pressed = Boolean(selectedId) && (anatomy.endsWith('-muscles') ? selectedId === anatomy || (selectedId!.startsWith(anatomy + '-') && selectedId!.endsWith(`-${side}`)) : selectedId === `${anatomy}-${side}`); return <button key={id} className="addon-term" aria-pressed={pressed} onClick={() => chooseTerm(id)}><span>{term.english}</span>{showChinese && <small>{term.chinese}</small>}</button>; })}</div>
         <div className="reference-note"><strong>Learn the structure, then its name · 看结构，记英语</strong><p>点击 Humerus / Scapula 会展开骨性结构；点选骨标可看具体位置，Whole bone 切回整骨。骨面标记用于辨认结构所在区域。Acupoints 中的体内学习参照不表示统一的穴位中心。</p></div>
       </section>
 

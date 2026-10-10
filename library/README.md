@@ -124,6 +124,8 @@ python3 site/build/new-topic.py --id knee --en 'Knee joint' --zh 膝关节
 
 一般加入一个关节不需要复制 React 页面或重写渲染器。若现有模型或共享能力确实不够，补充一次通用支持并检查肩袖兼容性；内容骨架不会自动生成可信的解剖图或模型。
 
+自带模型缺本章要讲的肌肉时，不另找模型：经用户同意（AN-43）后，在 `library/<id>/3d/atlas-addon.json` 列出要导出的 Z-Anatomy 网格和位置检查，用共用脚本导出本章的附加模型（AN-44、QC-09；做法见 [site/build/atlas/README.md](../site/build/atlas/README.md)）。主题构建发现这个文件后，本章的 3D 页面会一起载入附加模型；附加模型里的 ID 只能由本章使用。
+
 ## 4. 校验、构建与人工核验
 
 在仓库根目录运行：

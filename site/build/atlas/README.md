@@ -39,8 +39,8 @@ python3 site/build/atlas/check-addon.py <章>
 
 ## 导出之后
 
-附加模型只是文件。要在 3D 页面里出现，还要：在 3D 程序里载入它（肩部见 `src/model.ts` 的 `loadAtlases`），给新结构配名称、词条和读音，并在正文里把 3D 链接接上（AN-40、AN-41）。新增肌肉或模型文件要先问用户（AN-43）。
+附加模型只是文件。要在 3D 页面里出现，还要：在 3D 程序里载入它（肩部见 `src/model.ts` 的 `loadAtlases`），给新结构配名称、词条和读音，并在正文里把 3D 链接接上（AN-40、AN-41）。新增肌肉或模型文件要先问用户（AN-43）。附加模型本身的规则是 AN-44，发布前的检查是 QC-09（`check-addon.py` 无报错退出），见 `standards/library/rules.md` 和 `standards/library/checklist.md`。
 
 ## 许可
 
-Z-Anatomy 模型为 CC BY-SA 4.0（源自 BodyParts3D），导出的附加模型同样按 CC BY-SA 4.0 发布并署名；`export_batch.py` 为 MIT（Vanatome）。
+Z-Anatomy 模型为 CC BY-SA 4.0（源自 BodyParts3D），导出的附加模型同样按 CC BY-SA 4.0 发布并署名；`export_batch.py` 为 MIT（Copyright (c) 2026 Vanatome contributors），许可全文和来源地址见同目录的 [`LICENSE-export_batch.txt`](./LICENSE-export_batch.txt)（与 `library/shoulder/3d/public/licenses/LICENSE` 相同）。

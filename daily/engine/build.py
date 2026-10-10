@@ -4,7 +4,7 @@ import html, json, re, xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
 from .paths import TEMPLATES, DATA, APP_SRC, LOCAL_3D, build_dir, out_name
-from .render import render_sections
+from .render import render_sections, chapter_url
 from . import plan
 
 BASE = LOCAL_3D
@@ -47,11 +47,19 @@ class _Linker(HTMLParser):
     def handle_comment(self, data): self.parts.append("<!--" + data + "-->")
 
 
+def weekly(c):
+    return c.get("schema") == "dpt-daily-pack/2"
+
+
 def header_html(c):
     date, day = c["date"], c.get("day")
     left = f"DPT 基础 · {date} {plan.weekday_zh(date)}"
     right = (f"第 {day} 天 / 60 · " if c.get("kind") == "learning" else "") + f"距 12 月 23 日还有 {plan.days_left(date)} 天"
-    sp = c.get("study_plan") or [["先看图（10 分钟）", "01 肌肉、04 穴位的图，对着自己身体找"], ["再读文字（20 分钟）", "01–04 章，每章末尾先自测"],
+    if weekly(c):  # DL-04: every pack names and links the week's library chapter
+        right = (f'第 {c["week"]} 周 · 本周章节 <a href="{chapter_url(c["chapter"])}" target="_blank" rel="noreferrer">{html.escape(c.get("chapter_name", c["chapter"]))}</a>'
+                 f' · 距 12 月 23 日还有 {plan.days_left(date)} 天')
+    default_plan = ([[ch["toc"][1], ch["title"][1]] for ch in c["chapters"]] if weekly(c) else None)
+    sp = c.get("study_plan") or default_plan or [["先看图（10 分钟）", "01 肌肉、04 穴位的图，对着自己身体找"], ["再读文字（20 分钟）", "01–04 章，每章末尾先自测"],
                                  ["复习（15 分钟）", "05 章记忆卡 + 复习中心里的旧卡"], ["英文（5 分钟）", "06 章读两遍，用新词造一句"]]
     plan_html = "".join(f"<div><b>{b}</b><span>{s}</span></div>" for b, s in sp)
     return (f'<header class="page-header"><div class="eyebrow"><span>{left}</span><span>{right}</span></div>'
@@ -69,7 +77,11 @@ def build(date):
     B = build_dir(date)
     assets_dir = B / "资源"
     figs = {p.name[:2]: p.name for p in sorted(assets_dir.glob("*.svg"))}
-    secs = render_sections(c, figs, B / "sections")
+    due = None
+    if any(b.get("t") == "due_cards" for ch in c["chapters"] for b in ch.get("blocks", [])):
+        from . import cards
+        due = cards.due(date)
+    secs = render_sections(c, figs, B / "sections", due)
     terms = _terms()
     pattern = re.compile(r"(?<![A-Za-z])(?:" + "|".join(re.escape(k) for k in sorted(terms, key=len, reverse=True)) + r")(?![A-Za-z])", re.I)
 
@@ -112,13 +124,16 @@ def build(date):
     shell = (TEMPLATES / "reading-shell.html").read_text(encoding="utf-8")
     css = (TEMPLATES / "reading.css").read_text(encoding="utf-8")
     first = c["chapters"][0]
-    rep = {"{{PAGE_TITLE}}": c.get("page_title") or (f"第 {c['day']} 天｜{c['title']['zh']}" if c.get("kind") == "learning" else c["title"]["zh"]),
+    brand = c.get("brand") or (f"第 {c['week']} 周 · {plan.weekday_zh(date)}" if weekly(c) else f"第 {c.get('day')} 天")
+    rep = {"{{PAGE_TITLE}}": c.get("page_title") or (f"第 {c['day']} 天｜{c['title']['zh']}" if c.get("kind") == "learning"
+                                                     else f"第 {c['week']} 周 {plan.weekday_zh(date)}｜{c['title']['zh']}" if weekly(c) else c["title"]["zh"]),
            "{{DESCRIPTION}}": html.escape(c.get("description", ""), quote=True),
            "{{SKIP}}": f'<a class="skip" href="#{first["id"]}">跳到{first.get("skip_label", first["toc"][1])}</a>',
-           "{{BRAND}}": f'<div class="brand">{c.get("brand") or ("第 " + str(c.get("day")) + " 天")}<small>{c.get("brand_sub") or c["title"]["zh"]}</small></div>',
+           "{{BRAND}}": f'<div class="brand">{brand}<small>{c.get("brand_sub") or c["title"]["zh"]}</small></div>',
            "{{TOC}}": toc_html(c), "{{NCH}}": str(len(c["chapters"])), "{{HEADER}}": header_html(c),
            "{{FOOTER}}": c.get("footer") or f"DPT 基础 · {c['date']} · 定位依据 GB/T 12346；层次为学习用的简化描述，不代表进针方向或深度。",
-           "{{KEY}}": f"dpt-day-{c['date']}:"}
+           "{{KEY}}": f"dpt-day-{c['date']}:",
+           "{{SIDEBAR_NOTE}}": "学法：周日学一章，周一到周六补全这一章（新内容 + 旧的夯实）。" if weekly(c) else "进度目标：12 月 23 日前背完十四经穴 362 个和常用肌肉 157 块。"}
     page = shell
     for k, v in rep.items():
         page = page.replace(k, v)

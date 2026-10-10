@@ -6,16 +6,16 @@
       "zh": "DPT 学习笔记 · 阅读优化版"
     },
     "subtitle": {
-      "en": "From anatomy to paper reading",
-      "zh": "从解剖到文章阅读"
+      "en": "From anatomy to clinical application",
+      "zh": "从解剖到临床应用"
     },
     "lead": {
-      "en": "Location → innervation → movement → application → review → research",
-      "zh": "位置 → 支配 → 动作 → 应用 → 复习 → 研究"
+      "en": "Location → innervation → movement → application → review",
+      "zh": "位置 → 支配 → 动作 → 应用 → 复习"
     },
     "sidebarNote": {
-      "en": "Rotator cuff anatomy, innervation and movement; clinical tests, surface anatomy and research.",
-      "zh": "肩袖解剖、神经支配与运动功能；临床检查、体表解剖与研究文献。"
+      "en": "Rotator cuff anatomy, innervation and movement; clinical tests and surface anatomy.",
+      "zh": "肩袖解剖、神经支配与运动功能；临床检查与体表解剖。"
     },
     "footer": {
       "en": "Adapted from the original 2026-10-06 rotator cuff notes. The original figures are kept; chapters and reading levels were reorganized.",
@@ -64,6 +64,22 @@
             "infraspinatus",
             "teres-minor",
             "subscapularis"
+          ],
+          "layout": "cards"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": {
+            "en": "Two neighboring muscles that are not part of the rotator cuff",
+            "zh": "两块不属于肩袖的相邻肌肉"
+          }
+        },
+        {
+          "type": "muscles",
+          "ids": [
+            "teres-major",
+            "trapezius"
           ],
           "layout": "cards"
         },
@@ -966,425 +982,6 @@
         }
       ],
       "diagramIds": []
-    },
-    {
-      "id": "papers",
-      "anchor": "reading",
-      "navTitle": {
-        "en": "Paper reading",
-        "zh": "文章阅读"
-      },
-      "title": {
-        "en": "Paper reading: the additional effects of dry needling",
-        "zh": "文章阅读：加用干针的额外获益"
-      },
-      "overview": {
-        "en": "A critical reading of a randomized trial that added dry needling to physical therapy for subacromial pain syndrome.",
-        "zh": "批判性阅读一项随机试验：在物理治疗基础上加用干针治疗肩峰下疼痛综合征。"
-      },
-      "blocks": [
-        {
-          "type": "paper",
-          "id": "hando-2026-dry-needling",
-          "open": false
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "This appraisal uses the results abstract and the public study protocol. The full results article has not been obtained. A protocol records planned methods and cannot establish how the trial was actually conducted.",
-            "zh": "本节评价依据结果摘要与公开研究方案，尚未取得结果论文全文。研究方案记录的是计划采用的方法，不能据此确认试验实际怎样执行。"
-          }
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "text": {
-            "en": "6.1 Research question and comparison groups",
-            "zh": "6.1 研究问题与比较对象"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "In 121 participants with subacromial pain syndrome (SAPS), the trial compared physical therapy alone with physical therapy plus sham dry needling or dry needling. The primary outcome was the Shoulder Pain and Disability Index (SPADI) at 1 year.",
-            "zh": "试验纳入 121 名肩峰下疼痛综合征（SAPS）患者，比较单纯物理治疗、物理治疗加假干针，以及物理治疗加干针。主要结局是 1 年时的肩痛与功能障碍指数（SPADI）。"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "hando-2026-pubmed"
-          ]
-        },
-        {
-          "type": "table",
-          "columns": [
-            {
-              "en": "Group",
-              "zh": "组别"
-            },
-            {
-              "en": "Intervention",
-              "zh": "干预"
-            }
-          ],
-          "rows": [
-            [
-              "PT",
-              {
-                "en": "Manual therapy and exercise",
-                "zh": "手法治疗与运动治疗"
-              }
-            ],
-            [
-              "PT + SDN",
-              {
-                "en": "Physical therapy plus sham dry needling",
-                "zh": "物理治疗加假干针"
-              }
-            ],
-            [
-              "PT + DN",
-              {
-                "en": "Physical therapy plus dry needling",
-                "zh": "物理治疗加干针"
-              }
-            ]
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "The PT comparison estimates the added effect of including dry needling in the treatment program. The sham comparison also accounts for aspects of receiving a needling procedure. These comparisons address different questions.",
-            "zh": "与 PT 组的比较估计在治疗方案中加入干针的额外效果；与假干针组的比较还考虑了接受针刺程序所涉及的部分因素。这两项比较回答的问题不同。"
-          }
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "text": {
-            "en": "6.2 Primary outcome: SPADI at 1 year",
-            "zh": "6.2 主要结局：1 年时的 SPADI"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "Lower SPADI scores indicate less pain and disability. A negative between-group difference favors PT + DN.",
-            "zh": "SPADI 分数越低，表示疼痛与功能障碍越轻。组间差值为负数时，方向上有利于 PT + DN 组。"
-          }
-        },
-        {
-          "type": "table",
-          "columns": [
-            {
-              "en": "Comparison: PT + DN minus control",
-              "zh": "比较：加用干针组减去对照组"
-            },
-            {
-              "en": "SPADI difference",
-              "zh": "SPADI 分差"
-            },
-            {
-              "en": "95% confidence interval (CI)",
-              "zh": "95% 置信区间"
-            }
-          ],
-          "rows": [
-            [
-              "PT + DN vs PT",
-              "−7.51",
-              "−16.57 to 1.54"
-            ],
-            [
-              "PT + DN vs PT + SDN",
-              "−9.85",
-              "−18.98 to 0.73"
-            ]
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "Both confidence intervals include zero. The primary comparisons did not reach statistical significance; this does not establish equivalence or prove that dry needling has no effect. Estimates and intervals are reproduced as reported in the abstract.",
-            "zh": "两项置信区间都包含 0，主要比较未达到统计学显著性；这并不等于证明各组等效，也不等于证明干针没有作用。分差与区间按摘要所载记录，未自行修正。"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "hando-2026-pubmed-reported-spadi-estimates-and-intervals"
-          ]
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "text": {
-            "en": "6.3 Secondary outcomes: symptom acceptability and health care use",
-            "zh": "6.3 次要结局：症状可接受状态与后续就医"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "The Patient Acceptable Symptom State (PASS) records whether participants consider their current symptoms acceptable. The differences below are absolute percentage-point differences in affirmative responses, not relative percentage improvements.",
-            "zh": "患者可接受症状状态（PASS）记录患者是否认为目前的症状可以接受。下表是回答“可以接受”的比例之绝对差值，单位为百分点，并非相对改善百分比。"
-          }
-        },
-        {
-          "type": "table",
-          "columns": [
-            {
-              "en": "PASS comparison",
-              "zh": "PASS 比较"
-            },
-            {
-              "en": "Absolute difference",
-              "zh": "绝对差值"
-            },
-            {
-              "en": "95% CI",
-              "zh": "95% 置信区间"
-            }
-          ],
-          "rows": [
-            [
-              {
-                "en": "6 months: PT + DN vs PT",
-                "zh": "6 个月：PT + DN 对比 PT"
-              },
-              {
-                "en": "+34 percentage points",
-                "zh": "+34 个百分点"
-              },
-              {
-                "en": "+14 to +55 percentage points",
-                "zh": "+14 至 +55 个百分点"
-              }
-            ],
-            [
-              {
-                "en": "6 months: PT + DN vs PT + SDN",
-                "zh": "6 个月：PT + DN 对比 PT + SDN"
-              },
-              {
-                "en": "+24 percentage points",
-                "zh": "+24 个百分点"
-              },
-              {
-                "en": "+4 to +45 percentage points",
-                "zh": "+4 至 +45 个百分点"
-              }
-            ],
-            [
-              {
-                "en": "1 year: PT + DN vs PT + SDN",
-                "zh": "1 年：PT + DN 对比 PT + SDN"
-              },
-              {
-                "en": "+28 percentage points",
-                "zh": "+28 个百分点"
-              },
-              {
-                "en": "+7 to +49 percentage points",
-                "zh": "+7 至 +49 个百分点"
-              }
-            ]
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "For additional shoulder-related care within 1 year, the reported odds ratio (OR) was 0.35 (95% CI, 0.13–0.95). The abstract does not identify the reference group. An odds ratio cannot be directly restated as a risk reduction; this value should not be described as a 65% reduction in risk.",
-            "zh": "对于入组后 1 年内再次因肩部问题就医，摘要报告的优势比（OR）为 0.35（95% 置信区间 0.13–0.95）。摘要未说明参照组。优势比不能直接改写为风险降低的比例，因此不能把这个数值描述为“风险降低 65%”。"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "hando-2026-pubmed-pass-and-health-care-use-results"
-          ]
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "text": {
-            "en": "6.4 Methods appraisal and unresolved questions",
-            "zh": "6.4 方法评价与尚未核实的信息"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "Randomization, a sham comparator, and a public protocol support a more transparent comparison. The appraisal below separates planned methods from verified conduct. It is not a complete risk-of-bias assessment.",
-            "zh": "随机分组、假干针对照以及公开研究方案，使比较过程更便于追溯。以下评价区分计划采用的方法与已经核实的执行情况，并不构成完整的偏倚风险评价。"
-          }
-        },
-        {
-          "type": "heading",
-          "level": 4,
-          "text": {
-            "en": "Randomization and allocation concealment",
-            "zh": "随机化与分配隐藏"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "Randomization determines group assignment; allocation concealment prevents advance knowledge of the next assignment during enrollment. The protocol planned sequentially numbered, opaque, sealed envelopes. Whether this procedure was implemented adequately remains unverified.",
-            "zh": "随机化用于确定分组；分配隐藏用于防止在入组过程中提前知道下一次分配结果。研究方案计划采用顺序编号、不透明且密封的信封。该程序是否得到充分落实，仍未核实。"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "hando-2019-protocol-protocol-p-358-randomization"
-          ]
-        },
-        {
-          "type": "heading",
-          "level": 4,
-          "text": {
-            "en": "Blinding and outcome measurement",
-            "zh": "盲法与结局测量"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "The protocol planned to blind participants receiving real or sham needling to that distinction. Participants in the no-needling group would know their assignment, and treating clinicians could not be blinded to the treatment delivered. Actual masking success and unmasking require the results report.",
-            "zh": "研究方案计划使接受真干针或假干针的患者不知道自己接受的是哪一种。未接受针刺的患者会知道自己的分组，实施治疗的临床人员也无法对所提供的治疗设盲。盲法实际是否成功以及是否发生揭盲，需要结果论文才能核实。"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "hando-2019-protocol-protocol-p-358-blinding"
-          ]
-        },
-        {
-          "type": "heading",
-          "level": 4,
-          "text": {
-            "en": "Prespecified outcomes and selective reporting",
-            "zh": "预设结局与选择性报告"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "The protocol abstract lists SPADI and PROMIS-57, whereas its statistical section specifies 1-year SPADI as the primary endpoint. This wording difference alone does not establish outcome switching. The dated protocol, registration history, and final report must be compared.",
-            "zh": "研究方案摘要列出 SPADI 和 PROMIS-57，但其统计部分将 1 年时的 SPADI 明确定为主要终点。仅凭这处措辞差异，不能认定发生了结局更换。仍需对照注明日期的研究方案、注册历史和最终报告。"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "hando-2019-protocol-protocol-pp-355-and-361"
-          ]
-        },
-        {
-          "type": "heading",
-          "level": 4,
-          "text": {
-            "en": "Sample size, attrition, and missing data",
-            "zh": "样本量、失访与缺失数据"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "The planned sample was 130; the results abstract reports 121 participants. This difference is not a count of participants lost to follow-up. Group-specific missingness, reasons for dropout, and the analysis of incomplete outcomes remain unverified.",
-            "zh": "计划样本量为 130 人，结果摘要报告 121 名参与者。这一差额并不是失访人数。各组缺失数据的分布、退出原因，以及不完整结局的分析方式，仍未核实。"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "The protocol planned analysis in the originally assigned groups. An intention-to-treat principle does not, by itself, solve missing-data bias. Evaluating the estimates requires the actual analysis population, missing-data assumptions, and sensitivity analyses.",
-            "zh": "研究方案计划按照最初随机分配的组别进行分析。意向治疗原则本身并不能解决缺失数据带来的偏倚。评价效应估计，还需要了解实际分析人群、缺失数据假设与敏感性分析。"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "hando-2019-protocol-protocol-p-361-sample-size-and-statistical-approach"
-          ]
-        },
-        {
-          "type": "heading",
-          "level": 4,
-          "text": {
-            "en": "Multiplicity, harms, and health care ascertainment",
-            "zh": "多重比较、不良事件与就医信息来源"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "Multiplicity adjustment and adverse-event reporting have not been verified. Favorable secondary results therefore need separate appraisal rather than replacing the primary result. The protocol planned database and record-based health care data, whereas the results abstract describes self-report; this difference and the OR reference group remain unresolved.",
-            "zh": "多重比较校正与不良事件报告尚未核实。因此，有利的次要结果需要单独评价，不能用来替代主要结果。研究方案计划通过数据库及病历收集就医数据，结果摘要则描述为患者自报；这一差异以及 OR 的参照组仍待厘清。"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "hando-2019-protocol-protocol-p-361-health-care-utilization"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "The paper identifies trial registration NCT03442894. The current registry contents and amendment history have not been verified in this appraisal. Missing verification is not evidence that a method was omitted.",
-            "zh": "论文注明的试验登记号为 NCT03442894。本次评价尚未核验注册页面的当前内容与修改历史。未能核实某项方法，不等于有证据表明研究未实施该方法。"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "nct03442894"
-          ]
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "text": {
-            "en": "6.5 Interpretation and applicability",
-            "zh": "6.5 结论与适用范围"
-          }
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "The trial did not establish an additional benefit on 1-year SPADI. Favorable secondary findings warrant cautious, outcome-specific interpretation. The results cannot be generalized to every dry-needling protocol, all shoulder pain, or acupuncture as a whole.",
-            "zh": "这项试验未能在 1 年 SPADI 上确立额外获益。有利的次要发现应按具体结局谨慎解释。结果不能推广到所有干针方案、全部肩痛患者，或针灸整体。"
-          }
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "text": {
-            "en": "References",
-            "zh": "文献"
-          }
-        },
-        {
-          "type": "sources",
-          "ids": [
-            "hando-2026-doi",
-            "hando-2026-pubmed",
-            "hando-2019-protocol"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": {
-            "en": "The protocol was published in the Brazilian Journal of Physical Therapy, volume 23, pages 355–363. Its DOI is 10.1016/j.bjpt.2018.10.010.",
-            "zh": "研究方案发表于 Brazilian Journal of Physical Therapy，第 23 卷，第 355–363 页；DOI 为 10.1016/j.bjpt.2018.10.010。"
-          }
-        }
-      ],
-      "diagramIds": []
     }
   ],
   "muscles": [
@@ -1544,6 +1141,90 @@
       "letter": "S"
     },
     {
+      "id": "teres-major",
+      "name": {
+        "en": "Teres major",
+        "zh": "大圆肌"
+      },
+      "origin": {
+        "en": "Posterior surface of the inferior angle of the scapula",
+        "zh": "肩胛骨下角后面"
+      },
+      "insertion": {
+        "en": "Medial lip of the intertubercular groove (crest of the lesser tubercle) of the humerus",
+        "zh": "肱骨结节间沟内侧唇（小结节嵴）"
+      },
+      "course": {
+        "en": "The teres major originates from the posterior surface of the inferior angle of the scapula, passes superolaterally below the teres minor and anterior to the long head of the triceps brachii, and inserts onto the medial lip of the intertubercular groove of the humerus.",
+        "zh": "大圆肌起自肩胛骨下角后面，在小圆肌下方、肱三头肌长头前方向上外侧走行，止于肱骨结节间沟内侧唇。"
+      },
+      "actions": {
+        "en": "It adducts and medially rotates the arm at the glenohumeral joint and helps extend the arm from a flexed position. Teres major is not part of the rotator cuff; it forms the inferior border of the quadrangular space.",
+        "zh": "它在盂肱关节使上臂内收和内旋，并协助上臂从屈曲位伸展。大圆肌不属于肩袖；它构成四边孔的下界。"
+      },
+      "innervation": {
+        "en": "Lower subscapular nerve, from the posterior cord of the brachial plexus (usually C5–C6; some sources include C7)",
+        "zh": "下肩胛下神经，发自臂丛后束（通常为 C5–C6，部分资料含 C7）"
+      },
+      "modelTermId": "teres-major",
+      "modelUnavailableReason": null,
+      "diagramIds": [
+        "fig-18"
+      ],
+      "sources": [
+        "muscles-elsevier-teres-major",
+        "muscles-kenhub-teres-major",
+        "muscles-teachmeanatomy-intrinsic-shoulder",
+        "muscles-statpearls-subscapularis",
+        "landmarks-teachme-quadrangular-space"
+      ],
+      "color": "#826459"
+    },
+    {
+      "id": "trapezius",
+      "name": {
+        "en": "Trapezius",
+        "zh": "斜方肌"
+      },
+      "origin": {
+        "en": "External occipital protuberance and medial third of the superior nuchal line of the occipital bone, the nuchal ligament, and the spinous processes of the C7–T12 vertebrae",
+        "zh": "枕骨的枕外隆凸和上项线内侧三分之一、项韧带，以及 C7–T12 椎骨棘突"
+      },
+      "insertion": {
+        "en": "Posterior border of the lateral third of the clavicle, the medial margin of the acromion, and the superior lip of the spine of the scapula as far as the tubercle at its medial end",
+        "zh": "锁骨外侧三分之一后缘、肩峰内侧缘，以及肩胛冈上唇直至其内侧端的结节"
+      },
+      "course": {
+        "en": "The trapezius originates from the occipital bone, the nuchal ligament and the spinous processes of the C7–T12 vertebrae, passes laterally as its fibers converge on the shoulder, and inserts onto the lateral third of the clavicle, the acromion and the spine of the scapula. The upper trapezius (descending part) runs inferolaterally to the clavicle, the middle trapezius (transverse part) runs horizontally to the acromion and the lateral part of the scapular spine, and the lower trapezius (ascending part) runs superolaterally to the medial end of the scapular spine. The vertebral levels at which the parts divide differ between sources.",
+        "zh": "斜方肌起自枕骨、项韧带和 C7–T12 椎骨棘突，肌纤维向肩部汇聚并向外侧走行，止于锁骨外侧三分之一、肩峰和肩胛冈。上斜方肌（降部）向下外侧走向锁骨，中斜方肌（横部）水平走向肩峰和肩胛冈外侧部，下斜方肌（升部）向上外侧走向肩胛冈内侧端。各部分界的椎骨节段在不同资料中略有出入。"
+      },
+      "actions": {
+        "en": "The upper part elevates the scapula, the middle part retracts it, and the lower part depresses its medial part. The upper and lower parts work with serratus anterior to rotate the scapula upward during arm elevation. With the scapula fixed, the upper part extends and laterally flexes the neck.",
+        "zh": "上部上提肩胛骨，中部使肩胛骨后缩，下部使肩胛骨内侧部下降。上部和下部与前锯肌协作，在手臂上举时使肩胛骨上旋。肩胛骨固定时，上部可使颈部后伸并侧屈。"
+      },
+      "innervation": {
+        "en": "Spinal accessory nerve (cranial nerve XI) for motor supply; anterior rami of the C3 and C4 spinal nerves through the cervical plexus, usually described as proprioceptive (sensory), although a cadaveric study found motor axons in these branches",
+        "zh": "副神经（第十一对脑神经）提供运动支配；C3、C4 脊神经前支经颈丛加入，通常被描述为本体感觉（感觉）纤维，但一项尸体研究在这些分支中发现了运动轴突"
+      },
+      "modelTermId": "trapezius",
+      "modelUnavailableReason": null,
+      "diagramIds": [
+        "fig-19"
+      ],
+      "sources": [
+        "muscles-kenhub-trapezius",
+        "muscles-statpearls-trapezius",
+        "diagrams-elsevier-trapezius-descending",
+        "muscles-elsevier-trapezius-transverse",
+        "diagrams-elsevier-trapezius-ascending",
+        "muscles-teachmeanatomy-superficial-back",
+        "muscles-loyola-trapezius",
+        "muscles-tubbs-2011-trapezius-cervical",
+        "statpearls-serratus-anterior"
+      ],
+      "color": "#2b6c7c"
+    },
+    {
       "id": "deltoid",
       "name": {
         "en": "Deltoid",
@@ -1606,11 +1287,8 @@
         "en": "Accessory nerve (cranial nerve XI); anterior rami of C3–C4, usually described as proprioceptive (sensory)",
         "zh": "副神经（第十一对脑神经）；C3–C4 脊神经前支，通常被描述为本体感觉（感觉）纤维"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "3D mesh not included in the current atlas. Its origin and insertion are shown in this section’s diagrams.",
-        "zh": "当前模型包未包含这块肌肉，起止点见本节图示。"
-      },
+      "modelTermId": "upper-trapezius",
+      "modelUnavailableReason": null,
       "diagramIds": [
         "fig-11"
       ],
@@ -1648,11 +1326,8 @@
         "en": "Accessory nerve (cranial nerve XI); anterior rami of C3–C4, usually described as proprioceptive (sensory)",
         "zh": "副神经（第十一对脑神经）；C3–C4 脊神经前支，通常被描述为本体感觉（感觉）纤维"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "3D mesh not included in the current atlas. Its origin and insertion are shown in this section’s diagrams.",
-        "zh": "当前模型包未包含这块肌肉，起止点见本节图示。"
-      },
+      "modelTermId": "lower-trapezius",
+      "modelUnavailableReason": null,
       "diagramIds": [
         "fig-11"
       ],
@@ -1691,11 +1366,8 @@
         "en": "Long thoracic nerve (C5–C7)",
         "zh": "胸长神经（C5–C7）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "3D mesh not included in the current atlas. Its origin and insertion are shown in this section’s diagrams.",
-        "zh": "当前模型包未包含这块肌肉，起止点见本节图示。"
-      },
+      "modelTermId": "serratus-anterior",
+      "modelUnavailableReason": null,
       "diagramIds": [
         "fig-11"
       ],
@@ -1964,8 +1636,8 @@
       "modelTermId": null,
       "viewerLandmarkId": null,
       "modelUnavailableReason": {
-        "en": "The 3D model has no separate marker for this space; select the teres minor or the humerus to see its superior and lateral borders.",
-        "zh": "三维模型没有单独标记四边孔；可选择小圆肌或肱骨，查看它的上界和外界。"
+        "en": "The 3D model has no separate marker for this space; select teres minor, teres major, the long head of triceps or the humerus to see its four borders.",
+        "zh": "三维模型没有单独标记四边孔；可分别选择小圆肌、大圆肌、肱三头肌长头或肱骨，查看它的四条边界。"
       },
       "diagramIds": [
         "fig-07",
@@ -3407,6 +3079,143 @@
         "axillary-branch-pattern",
         "axillary-deltoid-mapping"
       ]
+    },
+    {
+      "id": "fig-18",
+      "file": "figures/18-大圆肌位置示意.svg",
+      "alt": {
+        "en": "Teres major: origin and insertion.",
+        "zh": "大圆肌起点与止点。"
+      },
+      "caption": {
+        "en": "Posterior view. The teres major originates from the posterior surface of the inferior angle of the scapula (O) and inserts onto the medial lip of the intertubercular groove of the humerus (I). The insertion lies on the anterior surface of the humerus, so it is outlined with dashes behind the shaft. Attachment areas are schematic, and the dashed arrow maps origin to insertion rather than showing a force vector.",
+        "zh": "后面观。大圆肌起自肩胛骨下角后面（O），止于肱骨结节间沟内侧唇（I）。止点位于肱骨前面，因此在骨干后方用虚线勾出。附着区域为示意，虚线箭头表示起点到止点的附着关系，并非力矢量。"
+      },
+      "labels": [
+        {
+          "kind": "origin",
+          "muscleId": "teres-major",
+          "text": {
+            "en": "Origin",
+            "zh": "起点"
+          }
+        },
+        {
+          "kind": "insertion",
+          "muscleId": "teres-major",
+          "text": {
+            "en": "Insertion",
+            "zh": "止点"
+          }
+        },
+        {
+          "kind": "structure",
+          "text": {
+            "en": "Posterior surface of the inferior angle of scapula",
+            "zh": "肩胛骨下角后面"
+          }
+        },
+        {
+          "kind": "structure",
+          "text": {
+            "en": "Medial lip of the intertubercular groove of humerus",
+            "zh": "肱骨结节间沟内侧唇"
+          }
+        }
+      ],
+      "sources": [
+        "muscles-elsevier-teres-major",
+        "muscles-kenhub-teres-major",
+        "muscles-teachmeanatomy-intrinsic-shoulder"
+      ]
+    },
+    {
+      "id": "fig-19",
+      "file": "figures/19-斜方肌位置示意.svg",
+      "alt": {
+        "en": "Trapezius: origin and insertion, with its upper, middle and lower parts.",
+        "zh": "斜方肌起点与止点，以及上、中、下三部分。"
+      },
+      "caption": {
+        "en": "Posterior view of the right trapezius. It originates from the occipital bone, the nuchal ligament and the spinous processes of C7–T12 (O) and inserts onto the lateral third of the clavicle, the acromion and the spine of the scapula (I). The upper (descending), middle (transverse) and lower (ascending) parts converge on these insertions; the vertebral levels at which the parts divide differ between sources. C7, T4 and T12 mark vertebrae. Attachment areas are schematic, and the dashed arrows map origin to insertion rather than showing force vectors.",
+        "zh": "右侧斜方肌后面观。斜方肌起自枕骨、项韧带和 C7–T12 棘突（O），止于锁骨外侧三分之一、肩峰和肩胛冈（I）。上部（降部）、中部（横部）和下部（升部）分别汇向这些止点；各部分界的椎骨节段在不同资料中略有出入。C7、T4、T12 指椎骨。附着区域为示意，虚线箭头表示起点到止点的附着关系，并非力矢量。"
+      },
+      "labels": [
+        {
+          "kind": "origin",
+          "muscleId": "trapezius",
+          "text": {
+            "en": "Origin",
+            "zh": "起点"
+          }
+        },
+        {
+          "kind": "insertion",
+          "muscleId": "trapezius",
+          "text": {
+            "en": "Insertion",
+            "zh": "止点"
+          }
+        },
+        {
+          "kind": "structure",
+          "text": {
+            "en": "Upper trapezius (descending part)",
+            "zh": "上斜方肌（降部）"
+          }
+        },
+        {
+          "kind": "structure",
+          "text": {
+            "en": "Middle trapezius (transverse part)",
+            "zh": "中斜方肌（横部）"
+          }
+        },
+        {
+          "kind": "structure",
+          "text": {
+            "en": "Lower trapezius (ascending part)",
+            "zh": "下斜方肌（升部）"
+          }
+        },
+        {
+          "kind": "structure",
+          "text": {
+            "en": "Occipital bone",
+            "zh": "枕骨"
+          }
+        },
+        {
+          "kind": "structure",
+          "text": {
+            "en": "Clavicle",
+            "zh": "锁骨"
+          }
+        },
+        {
+          "kind": "structure",
+          "text": {
+            "en": "Acromion",
+            "zh": "肩峰"
+          }
+        },
+        {
+          "kind": "structure",
+          "text": {
+            "en": "Spine of scapula",
+            "zh": "肩胛冈"
+          }
+        }
+      ],
+      "sources": [
+        "muscles-kenhub-trapezius",
+        "muscles-statpearls-trapezius",
+        "diagrams-elsevier-trapezius-descending",
+        "muscles-elsevier-trapezius-transverse",
+        "diagrams-elsevier-trapezius-ascending",
+        "muscles-loyola-trapezius",
+        "muscles-teachmeanatomy-superficial-back"
+      ]
     }
   ],
   "review": [
@@ -3470,174 +3279,6 @@
       "sources": [
         "statpearls-serratus-anterior",
         "muscles-statpearls-trapezius"
-      ]
-    }
-  ],
-  "papers": [
-    {
-      "id": "hando-2026-dry-needling",
-      "citation": "Hando BR et al. Dry Needling Plus Manual Therapy and Exercise for Subacromial Pain Syndrome: A Sham-Controlled Randomized Clinical Trial. JOSPT 2026;56(1):50–63.",
-      "doi": "10.2519/jospt.2025.13460",
-      "title": {
-        "en": "Dry Needling Plus Manual Therapy and Exercise for Subacromial Pain Syndrome: A Sham-Controlled Randomized Clinical Trial",
-        "zh": "干针联合手法治疗与运动治疗肩峰下疼痛综合征：一项假干针对照随机临床试验"
-      },
-      "byline": "Hando BR et al. · JOSPT 2026;56(1):50–63",
-      "question": {
-        "en": "What additional effect does dry needling have when it is added to manual therapy and exercise for subacromial pain syndrome (SAPS)? The trial compared physical therapy (PT) alone, PT plus sham dry needling (PT + SDN), and PT plus dry needling (PT + DN). The PT comparison estimates the added effect of including dry needling in the treatment program, whereas the sham comparison also accounts for aspects of receiving a needling procedure, so the two comparisons address different questions.",
-        "zh": "在手法治疗与运动治疗的基础上加用干针，对肩峰下疼痛综合征（SAPS）有什么额外效果？试验比较了单纯物理治疗（PT）、物理治疗加假干针（PT + SDN），以及物理治疗加干针（PT + DN）。与 PT 组的比较估计在治疗方案中加入干针的额外效果；与假干针组的比较还考虑了接受针刺程序所涉及的部分因素，因此这两项比较回答的问题不同。"
-      },
-      "design": {
-        "en": "A sham-controlled randomized clinical trial with three groups: PT (manual therapy and exercise), PT + SDN, and PT + DN. This appraisal is based on the results abstract and the public study protocol; the full results article has not been obtained. A protocol records planned methods and cannot establish how the trial was actually conducted. The paper identifies trial registration NCT03442894, but the current registry contents and amendment history have not been verified.",
-        "zh": "这是一项假干针对照随机临床试验，分为三组：PT（手法治疗与运动治疗）、PT + SDN 和 PT + DN。本评价依据结果摘要与公开研究方案，尚未取得结果论文全文。研究方案记录的是计划采用的方法，不能据此确认试验实际怎样执行。论文注明的试验登记号为 NCT03442894，但注册页面的当前内容与修改历史尚未核验。"
-      },
-      "population": {
-        "en": "The results abstract reports 121 participants with subacromial pain syndrome (SAPS). The planned sample in the protocol was 130; this difference is not a count of participants lost to follow-up. Group-specific missingness and reasons for dropout remain unverified.",
-        "zh": "结果摘要报告 121 名肩峰下疼痛综合征（SAPS）患者。研究方案计划的样本量为 130 人；这一差额并不是失访人数。各组缺失数据的分布与退出原因仍未核实。"
-      },
-      "methods": {
-        "en": "All three groups received physical therapy consisting of manual therapy and exercise; two groups additionally received sham dry needling or dry needling. The primary outcome was the Shoulder Pain and Disability Index (SPADI) at 1 year; secondary outcomes included the Patient Acceptable Symptom State (PASS) and additional shoulder-related care within 1 year. The protocol planned sequentially numbered, opaque, sealed envelopes for allocation concealment, blinding of participants receiving real or sham needling to that distinction, and analysis in the originally assigned groups. Whether these planned procedures were implemented as planned remains unverified.",
-        "zh": "三组都接受由手法治疗与运动治疗组成的物理治疗，其中两组另外加用假干针或干针。主要结局是 1 年时的肩痛与功能障碍指数（SPADI）；次要结局包括患者可接受症状状态（PASS），以及入组后 1 年内再次因肩部问题就医。研究方案计划采用顺序编号、不透明且密封的信封进行分配隐藏，使接受真干针或假干针的患者不知道自己接受的是哪一种，并按照最初随机分配的组别进行分析。这些计划程序是否按计划落实，仍未核实。"
-      },
-      "results": {
-        "en": "As reported in the abstract, the 1-year SPADI difference was −7.51 (95% CI −16.57 to 1.54) for PT + DN vs PT and −9.85 (95% CI −18.98 to 0.73) for PT + DN vs PT + SDN; both intervals include zero, so the primary comparisons did not reach statistical significance. At 6 months, absolute PASS differences were +34 percentage points (95% CI +14 to +55 percentage points) for PT + DN vs PT and +24 percentage points (95% CI +4 to +45 percentage points) for PT + DN vs PT + SDN; at 1 year, +28 percentage points (95% CI +7 to +49 percentage points) for PT + DN vs PT + SDN. For additional shoulder-related care within 1 year, the reported odds ratio (OR) was 0.35 (95% CI, 0.13–0.95); the abstract does not identify the reference group. An odds ratio cannot be directly restated as a risk reduction, so this value should not be described as a 65% reduction in risk.",
-        "zh": "按摘要所载，1 年 SPADI 组间差值为：PT + DN 对比 PT −7.51（95% 置信区间 −16.57 到 1.54），PT + DN 对比 PT + SDN −9.85（95% 置信区间 −18.98 到 0.73）；两项置信区间都包含 0，因此主要比较未达到统计学显著性。6 个月时，PASS 的绝对差值为：PT + DN 对比 PT +34 个百分点（95% 置信区间 +14 至 +55 个百分点），PT + DN 对比 PT + SDN +24 个百分点（95% 置信区间 +4 至 +45 个百分点）；1 年时，PT + DN 对比 PT + SDN 为 +28 个百分点（95% 置信区间 +7 至 +49 个百分点）。对于入组后 1 年内再次因肩部问题就医，摘要报告的优势比（OR）为 0.35（95% 置信区间 0.13–0.95）；摘要未说明参照组。优势比不能直接改写为风险降低的比例，因此不能把这个数值描述为“风险降低 65%”。"
-      },
-      "limitations": {
-        "en": "This appraisal rests on the results abstract and the protocol only: the full results article was not obtained, the registry was not checked, and the appraisal is not a complete risk-of-bias assessment. Adequate allocation concealment, masking success, the handling of missing data, multiplicity adjustment, and adverse-event reporting all remain unverified, and missing verification is not evidence that a method was omitted. The protocol abstract lists SPADI and PROMIS-57, whereas its statistical section specifies 1-year SPADI as the primary endpoint; this wording difference alone does not establish outcome switching. The protocol planned database and record-based health care data, whereas the results abstract describes self-report; this difference and the OR reference group remain unresolved.",
-        "zh": "本评价只依据结果摘要与研究方案：尚未取得结果论文全文，也未核验注册页面，因此并不构成完整的偏倚风险评价。分配隐藏是否充分落实、盲法是否成功、缺失数据如何处理、是否进行多重比较校正以及不良事件报告情况都仍未核实，而未能核实某项方法，不等于有证据表明研究未实施该方法。研究方案摘要列出 SPADI 和 PROMIS-57，但其统计部分将 1 年时的 SPADI 明确定为主要终点；仅凭这处措辞差异，不能认定发生了结局更换。研究方案计划通过数据库及病历收集就医数据，结果摘要则描述为患者自报；这一差异以及 OR 的参照组仍待厘清。"
-      },
-      "applicability": {
-        "en": "In this appraisal's interpretation, the trial did not establish an additional benefit of dry needling on 1-year SPADI; this does not establish equivalence or prove that dry needling has no effect. Favorable secondary findings warrant cautious, outcome-specific interpretation and cannot replace the primary result. The results cannot be generalized to every dry-needling protocol, all shoulder pain, or acupuncture as a whole.",
-        "zh": "按本评价的解读，这项试验未能在 1 年 SPADI 上确立加用干针的额外获益；这并不等于证明各组等效，也不等于证明干针没有作用。有利的次要发现应按具体结局谨慎解释，不能用来替代主要结果。结果不能推广到所有干针方案、全部肩痛患者，或针灸整体。"
-      },
-      "terms": [
-        {
-          "term": {
-            "en": "Randomization and allocation concealment",
-            "zh": "随机化与分配隐藏"
-          },
-          "explanation": {
-            "en": "Randomization determines group assignment; allocation concealment prevents advance knowledge of the next assignment during enrollment. The protocol planned sequentially numbered, opaque, sealed envelopes, and whether this procedure was implemented adequately remains unverified.",
-            "zh": "随机化用于确定分组；分配隐藏用于防止在入组过程中提前知道下一次分配结果。研究方案计划采用顺序编号、不透明且密封的信封，该程序是否得到充分落实，仍未核实。"
-          }
-        },
-        {
-          "term": {
-            "en": "Sham comparator",
-            "zh": "假干针对照"
-          },
-          "explanation": {
-            "en": "The comparison with PT alone estimates the added effect of including dry needling in the treatment program. The comparison with sham dry needling also accounts for aspects of receiving a needling procedure, so the two comparisons address different questions.",
-            "zh": "与单纯 PT 组的比较估计在治疗方案中加入干针的额外效果；与假干针组的比较还考虑了接受针刺程序所涉及的部分因素，因此这两项比较回答的问题不同。"
-          }
-        },
-        {
-          "term": {
-            "en": "Blinding",
-            "zh": "盲法"
-          },
-          "explanation": {
-            "en": "The protocol planned to blind participants receiving real or sham needling to that distinction. Participants in the no-needling group would know their assignment, and treating clinicians could not be blinded to the treatment delivered. Actual masking success and unmasking require the results report.",
-            "zh": "研究方案计划使接受真干针或假干针的患者不知道自己接受的是哪一种。未接受针刺的患者会知道自己的分组，实施治疗的临床人员也无法对所提供的治疗设盲。盲法实际是否成功以及是否发生揭盲，需要结果论文才能核实。"
-          }
-        },
-        {
-          "term": {
-            "en": "Shoulder Pain and Disability Index (SPADI)",
-            "zh": "肩痛与功能障碍指数（SPADI）"
-          },
-          "explanation": {
-            "en": "Lower SPADI scores indicate less pain and disability. In this trial, a negative between-group difference favors PT + DN.",
-            "zh": "SPADI 分数越低，表示疼痛与功能障碍越轻。在本试验中，组间差值为负数时，方向上有利于 PT + DN 组。"
-          }
-        },
-        {
-          "term": {
-            "en": "Patient Acceptable Symptom State (PASS)",
-            "zh": "患者可接受症状状态（PASS）"
-          },
-          "explanation": {
-            "en": "PASS records whether participants consider their current symptoms acceptable. The reported differences are absolute percentage-point differences in affirmative responses, not relative percentage improvements.",
-            "zh": "PASS 记录患者是否认为目前的症状可以接受。报告的差值是回答“可以接受”的比例之绝对差值，单位为百分点，并非相对改善百分比。"
-          }
-        },
-        {
-          "term": {
-            "en": "95% confidence interval (CI)",
-            "zh": "95% 置信区间"
-          },
-          "explanation": {
-            "en": "Both 1-year SPADI confidence intervals include zero, so the primary comparisons did not reach statistical significance. This does not establish equivalence or prove that dry needling has no effect.",
-            "zh": "两项 1 年 SPADI 置信区间都包含 0，因此主要比较未达到统计学显著性。这并不等于证明各组等效，也不等于证明干针没有作用。"
-          }
-        },
-        {
-          "term": {
-            "en": "Odds ratio (OR)",
-            "zh": "优势比（OR）"
-          },
-          "explanation": {
-            "en": "An odds ratio cannot be directly restated as a risk reduction, so the reported OR of 0.35 should not be described as a 65% reduction in risk. The abstract does not identify the reference group.",
-            "zh": "优势比不能直接改写为风险降低的比例，因此不能把报告的 OR 0.35 描述为“风险降低 65%”。摘要未说明参照组。"
-          }
-        },
-        {
-          "term": {
-            "en": "Multiplicity adjustment",
-            "zh": "多重比较校正"
-          },
-          "explanation": {
-            "en": "Multiplicity adjustment and adverse-event reporting have not been verified. Favorable secondary results therefore need separate appraisal rather than replacing the primary result.",
-            "zh": "多重比较校正与不良事件报告尚未核实。因此，有利的次要结果需要单独评价，不能用来替代主要结果。"
-          }
-        },
-        {
-          "term": {
-            "en": "Intention-to-treat principle",
-            "zh": "意向治疗原则"
-          },
-          "explanation": {
-            "en": "The protocol planned analysis in the originally assigned groups. An intention-to-treat principle does not, by itself, solve missing-data bias; evaluating the estimates requires the actual analysis population, missing-data assumptions, and sensitivity analyses.",
-            "zh": "研究方案计划按照最初随机分配的组别进行分析。意向治疗原则本身并不能解决缺失数据带来的偏倚；评价效应估计，还需要了解实际分析人群、缺失数据假设与敏感性分析。"
-          }
-        },
-        {
-          "term": {
-            "en": "Sample size and attrition",
-            "zh": "样本量与失访"
-          },
-          "explanation": {
-            "en": "The planned sample was 130, and the results abstract reports 121 participants. This difference is not a count of participants lost to follow-up.",
-            "zh": "计划样本量为 130 人，结果摘要报告 121 名参与者。这一差额并不是失访人数。"
-          }
-        },
-        {
-          "term": {
-            "en": "Prespecified outcomes and selective reporting",
-            "zh": "预设结局与选择性报告"
-          },
-          "explanation": {
-            "en": "A wording difference between parts of a protocol does not, by itself, establish outcome switching. The dated protocol, registration history, and final report must be compared.",
-            "zh": "研究方案不同部分之间的措辞差异，本身不能认定发生了结局更换。仍需对照注明日期的研究方案、注册历史和最终报告。"
-          }
-        },
-        {
-          "term": {
-            "en": "Study protocol",
-            "zh": "研究方案"
-          },
-          "explanation": {
-            "en": "A protocol records planned methods and cannot establish how the trial was actually conducted. Missing verification is not evidence that a method was omitted.",
-            "zh": "研究方案记录的是计划采用的方法，不能据此确认试验实际怎样执行。未能核实某项方法，不等于有证据表明研究未实施该方法。"
-          }
-        }
-      ],
-      "sources": [
-        "hando-2026-pubmed",
-        "hando-2019-protocol",
-        "hando-2026-doi",
-        "nct03442894"
       ]
     }
   ],
@@ -3764,61 +3405,6 @@
       "id": "clinical-walch-1998-hornblower",
       "title": "Walch G, Boulahia A, Calderone S, Robinson AHN. The 'dropping' and 'hornblower's' signs in evaluation of rotator-cuff tears. J Bone Joint Surg Br. 1998;80-B(4):624–628",
       "url": "https://boneandjoint.org.uk/Article/10.1302/0301-620X.80B4.0800624"
-    },
-    {
-      "id": "hando-2026-pubmed",
-      "title": "PubMed: Results abstract · 结果摘要",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41476428/"
-    },
-    {
-      "id": "hando-2026-pubmed-reported-spadi-estimates-and-intervals",
-      "title": "Reported SPADI estimates and intervals · 摘要报告的 SPADI 估计值与区间",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41476428/"
-    },
-    {
-      "id": "hando-2026-pubmed-pass-and-health-care-use-results",
-      "title": "PASS and health care use results · PASS 与后续就医结果",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41476428/"
-    },
-    {
-      "id": "hando-2019-protocol-protocol-p-358-randomization",
-      "title": "Protocol, p. 358: Randomization · 研究方案，第 358 页：随机化",
-      "url": "https://www.rbf-bjpt.org.br/en-download-pdf-S1413355518307871"
-    },
-    {
-      "id": "hando-2019-protocol-protocol-p-358-blinding",
-      "title": "Protocol, p. 358: Blinding · 研究方案，第 358 页：盲法",
-      "url": "https://www.rbf-bjpt.org.br/en-download-pdf-S1413355518307871"
-    },
-    {
-      "id": "hando-2019-protocol-protocol-pp-355-and-361",
-      "title": "Protocol, pp. 355 and 361 · 研究方案，第 355、361 页",
-      "url": "https://www.rbf-bjpt.org.br/en-download-pdf-S1413355518307871"
-    },
-    {
-      "id": "hando-2019-protocol-protocol-p-361-sample-size-and-statistical-approach",
-      "title": "Protocol, p. 361: Sample size and statistical approach · 研究方案，第 361 页：样本量与统计方法",
-      "url": "https://www.rbf-bjpt.org.br/en-download-pdf-S1413355518307871"
-    },
-    {
-      "id": "hando-2019-protocol-protocol-p-361-health-care-utilization",
-      "title": "Protocol, p. 361: Health care utilization · 研究方案，第 361 页：医疗服务利用",
-      "url": "https://www.rbf-bjpt.org.br/en-download-pdf-S1413355518307871"
-    },
-    {
-      "id": "nct03442894",
-      "title": "Trial registry · 试验注册页面",
-      "url": "https://clinicaltrials.gov/study/NCT03442894"
-    },
-    {
-      "id": "hando-2026-doi",
-      "title": "Hando et al. 2026: Results article · 结果论文",
-      "url": "https://doi.org/10.2519/jospt.2025.13460"
-    },
-    {
-      "id": "hando-2019-protocol",
-      "title": "Hando et al. 2019: Public protocol · 公开研究方案",
-      "url": "https://www.rbf-bjpt.org.br/en-download-pdf-S1413355518307871"
     },
     {
       "id": "elsevier-supraspinatus",
@@ -3969,6 +3555,26 @@
       "id": "diagrams-physiopedia-painful-arc",
       "title": "Physiopedia: Painful Arc",
       "url": "https://www.physio-pedia.com/Painful_Arc"
+    },
+    {
+      "id": "muscles-elsevier-teres-major",
+      "title": "Elsevier anatomy resource (Complete Anatomy): Teres major muscle",
+      "url": "https://www.elsevier.com/resources/anatomy/muscular-system/muscles-of-upper-limb/teres-major-muscle/17190"
+    },
+    {
+      "id": "muscles-kenhub-teres-major",
+      "title": "Kenhub: Teres major muscle: Anatomy, function, clinical aspects",
+      "url": "https://www.kenhub.com/en/library/anatomy/teres-major-muscle"
+    },
+    {
+      "id": "muscles-teachmeanatomy-intrinsic-shoulder",
+      "title": "TeachMeAnatomy: The Intrinsic Muscles of the Shoulder",
+      "url": "https://teachmeanatomy.info/upper-limb/muscles/shoulder/intrinsic/"
+    },
+    {
+      "id": "muscles-elsevier-trapezius-transverse",
+      "title": "Elsevier anatomy resource (Complete Anatomy): Transverse part of trapezius muscle",
+      "url": "https://www.elsevier.com/resources/anatomy/muscular-system/muscles-of-back/transverse-part-of-trapezius-muscle/19991"
     }
   ],
   "qa": {
@@ -3981,8 +3587,7 @@
       "modelLinks": true,
       "layoutDesktop": true,
       "layoutMobile": true,
-      "fullAnswers": true,
-      "paperAppraisal": true
+      "fullAnswers": true
     }
   }
 }

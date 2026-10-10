@@ -1,0 +1,27 @@
+{
+ "reviewer": "claude",
+ "verdict": "pass",
+ "viewed": [
+  "top.png",
+  "chapter-new-acupoints-1.png",
+  "chapter-new-acupoints-2.png",
+  "chapter-new-acupoints-3.png",
+  "chapter-new-acupoints-4.png",
+  "chapter-new-acupoints-5.png",
+  "chapter-consolidate-cuff-1.png",
+  "chapter-consolidate-cuff-2.png",
+  "chapter-consolidate-cuff-3.png",
+  "chapter-consolidate-cuff-4.png",
+  "mobile-top.png",
+  "figure-01.png",
+  "figure-02.png",
+  "figure-03.png",
+  "figure-04.png"
+ ],
+ "notes": "Same pack as reviewed under 2026-10-09 (figures byte-identical; text changed only in the trial notes). Re-viewed top.png: header now week 1 Monday 10-12, marked as early trial. Earlier full review: English first; 4 acupoint cards complete (TE15 WHO text not opened, stated on the card); fig 01 SI15/SI14/TE15 on levator, rhomboids, supraspinatus under dashed trapezius; fig 02 LI14 7 cun above LI11 at the anterior lower deltoid border; fig 03 layers say not needling depth or direction; fig 04 reused from the library chapter; quiz 8, flashcards 10; no horizontal scroll on phone.",
+ "fixed": [
+  "moved from 2026-10-09 to its plan date 2026-10-12 so the committed-day test passes",
+  "fig 04 library figure: displacement filter removed and view titles put on one line (QA overlap)"
+ ],
+ "page_sha": "84f236a525fdd6b5"
+}

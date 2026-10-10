@@ -10,8 +10,10 @@ acupoints read aloud in Chinese, self-checks, flashcards, and spaced-repetition 
 
 **Weekly plan (2026-10-09).** From 2026-10-11 the plan is `plan/weeks.json`: on Sunday gui studies one
 library chapter, Monday–Saturday packs supplement it with new content and consolidation (content types N-x / O-x,
-forms F-x in `standards/daily/README.md`). Paper records live in `papers/`. `pipeline.py` below still reads
-`plan/schedule.json` and the six-chapter form; it is to be switched to `weeks.json` before generation resumes.
+forms F-x in `standards/daily/README.md`). Paper records live in `papers/`. `pipeline.py` reads `weeks.json` from
+its first Sunday on: Sunday packs (`chapter_day`) are generated, Monday–Saturday packs (`supplement`, schema
+`dpt-daily-pack/2`, see `CONTENT_SCHEMA.md`) are authored from the brief; a date whose week has no day entries yet
+stops at the plan step (exit 2) until `weeks.json` is filled. Earlier dates keep `schedule.json` and the v1 form.
 
 This is block ② of the repository: daily learning is generated **from** the anatomy library in
 `library/` (block ①). The rules for how a pack draws on the library, and the short chapter form
@@ -63,7 +65,7 @@ daily/
   pipeline.py            orchestrator (steps, evidence, verify)
   CONTENT_SCHEMA.md      content.json fields and block types
   plan/weeks.json        the weekly plan from 2026-10-11 (one chapter a week + six supplement days)
-  plan/schedule.json     the old 60-day plan (used by pipeline.py until it reads weeks.json); plan/legacy/ = 10-06 shoulder preview cards
+  plan/schedule.json     the old 60-day plan (dates before 2026-10-11); plan/legacy/ = 10-06 shoulder preview cards
   papers/<id>.json       paper records for N-5 (paper reading moved out of the chapters)
   engine/
     figlib/              Fig kit (fig.py) + region base art: chest.py, arm.py, … (reuse; add new regions here)
@@ -72,12 +74,15 @@ daily/
     qa/qa.js             Playwright: JS errors, chapters, SVG text overlap/outside, phone width, pronunciation coverage, screenshots
     site.py              public/daily/<date>/ + public/daily/index.html + catalog.json (shipped by GitHub Pages)
     archive.py           Mac archive: pack, tagged Markdown (item-meta, vertical/horizontal), catalog.jsonl, topic indexes
+    week_pack.py         Sunday chapter-day pack generated from weeks.json
+    codes.py             N-/O-/F- names read from standards/daily/README.md; form → block map
     cards.py             review-center cards (intervals 1/3/7/14/30 days)
     data/                pronunciation.json (IPA, stress, dictionary URL), model-links.json (3D term IDs)
     templates/           reading shell + CSS (Day 1 design), review-center template
   days/<date>/           content.json, figures.py, build/ (pack, 资源/, sections/, qa/qa.json, qa/visual-review.json)
   runs/<date>.json       every step of every run: status, time, evidence, errors; runs/log.jsonl = append-only log
-  review-center/         generated review-center page
+  review-center/         generated review-center page; each answer is written to the artifact's shared db
+                         (answers/<page load>, progress/c<hex card id>); push-hub syncs answers into feedback/
   archive/seed-catalog.jsonl  catalog items that predate the pipeline (kept verbatim)
 ```
 

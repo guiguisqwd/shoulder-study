@@ -15,6 +15,17 @@ const groupChinese: Record<VocabularyTerm['group'], string> = {
   Muscles: '肌肉', Bones: '骨骼', Landmarks: '解剖标志', Acupoints: '穴位拼音',
 };
 const audioClips: Record<string, { file: string; voice: string; provider?: string }> = audioManifest.clips;
+// Previous / Next and the counter follow the word list as displayed (grouped).
+const orderedVocabulary = groups.flatMap(group => vocabulary.filter(item => item.group === group));
+const browserVoiceLabel = 'Browser voice · 浏览器朗读';
+const speechUnavailable = 'Browser voice is not available in this browser. Use the dictionary links under “Pronunciation notes & sources”. 此浏览器无法朗读，请使用下方“读音依据”中的词典链接。';
+function speechSynthesisOrNull(): SpeechSynthesis | null {
+  return typeof window !== 'undefined' && 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined' ? window.speechSynthesis : null;
+}
+function stopSpeech() {
+  const synth = speechSynthesisOrNull();
+  if (synth && (synth.speaking || synth.pending)) synth.cancel();
+}
 
 export function VocabularyCard({ term, showChinese, onToggleChinese, onChoose }: VocabularyCardProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -22,11 +33,12 @@ export function VocabularyCard({ term, showChinese, onToggleChinese, onChoose }:
   const [playing, setPlaying] = useState<'normal' | 'slow' | null>(null);
   const [error, setError] = useState('');
   const selectId = useId();
-  const index = vocabulary.findIndex(item => item.id === term.id);
+  const index = orderedVocabulary.findIndex(item => item.id === term.id);
   const isPinyin = term.group === 'Acupoints';
   const audioClip = audioClips[term.id];
   const voiceName = audioClip?.voice === 'marin' ? 'Marin' : audioClip?.voice;
-  const voiceLabel = audioClip?.provider === 'OpenAI' ? `OpenAI ${voiceName}` : voiceName;
+  // Words without a recorded clip (e.g. the shoulder add-on muscles) are read by the browser's own voice.
+  const voiceLabel = !audioClip ? browserVoiceLabel : audioClip.provider === 'OpenAI' ? `OpenAI ${voiceName}` : voiceName;
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -34,13 +46,38 @@ export function VocabularyCard({ term, showChinese, onToggleChinese, onChoose }:
     audio?.pause();
     setPlaying(null);
     setError('');
+    stopSpeech();
     return () => {
       requestRef.current += 1;
       audio?.pause();
+      stopSpeech();
     };
   }, [term.id]);
 
+  function speak(mode: 'normal' | 'slow') {
+    const request = ++requestRef.current;
+    const synth = speechSynthesisOrNull();
+    setError('');
+    if (!synth) { setPlaying(null); setError(speechUnavailable); return; }
+    if (synth.speaking || synth.pending) synth.cancel();
+    const utterance = new SpeechSynthesisUtterance(isPinyin ? term.chinese : term.english);
+    utterance.lang = isPinyin ? 'zh-CN' : 'en-US';
+    utterance.rate = mode === 'slow' ? 0.75 : 1;
+    const voices = synth.getVoices();
+    const voice = voices.find(item => item.lang === utterance.lang) || voices.find(item => item.lang.replace('_', '-').toLowerCase() === utterance.lang.toLowerCase());
+    if (voice) utterance.voice = voice;
+    utterance.onend = () => { if (request === requestRef.current) setPlaying(null); };
+    utterance.onerror = event => {
+      if (request !== requestRef.current) return;
+      setPlaying(null);
+      if (event.error !== 'interrupted' && event.error !== 'canceled') setError('Browser voice could not play. Try again. 浏览器朗读未能播放，请重试。');
+    };
+    setPlaying(mode);
+    synth.speak(utterance);
+  }
+
   async function play(mode: 'normal' | 'slow') {
+    if (!audioClip) { speak(mode); return; }
     const audio = audioRef.current;
     if (!audio) return;
     const request = ++requestRef.current;
@@ -61,7 +98,7 @@ export function VocabularyCard({ term, showChinese, onToggleChinese, onChoose }:
   }
 
   function move(offset: number) {
-    const next = vocabulary[(index + offset + vocabulary.length) % vocabulary.length];
+    const next = orderedVocabulary[(index + offset + orderedVocabulary.length) % orderedVocabulary.length];
     onChoose(next.id);
   }
 
@@ -97,7 +134,7 @@ export function VocabularyCard({ term, showChinese, onToggleChinese, onChoose }:
     <p className="vocab-voice">{isPinyin ? 'Mandarin' : 'American English'} · {voiceLabel}<span>合成发音</span></p>
     {error && <p className="vocab-audio-error" role="alert">{error}</p>}
     <div className="vocab-word-nav">
-      <label htmlFor={selectId}>Word list <span>{index + 1} / {vocabulary.length}</span></label>
+      <label htmlFor={selectId}>Word list <span>{index + 1} / {orderedVocabulary.length}</span></label>
       <select id={selectId} value={term.id} onChange={event => onChoose(event.target.value)}>
         {groups.map(group => <optgroup key={group} label={`${group}${showChinese ? ` · ${groupChinese[group]}` : ''}`}>
           {vocabulary.filter(item => item.group === group).map(item => <option value={item.id} key={item.id}>
@@ -117,6 +154,7 @@ export function VocabularyCard({ term, showChinese, onToggleChinese, onChoose }:
         : 'American pronunciation. CAPITALS are a stress aid, not IPA. Some IPA is converted from Merriam-Webster notation; phrase pronunciations may combine the individual words.'}</p>
       {term.pronunciationNote && <p>{term.pronunciationNote}</p>}
       <p>Audio is synthesized; dictionary links provide the pronunciation reference.</p>
+      {!audioClip && <p>No recorded clip yet: your browser’s built-in voice reads this {isPinyin ? 'name' : 'word'}, so the sound depends on your device. 暂无录制音频，由浏览器自带语音朗读，音色因设备而异。</p>}
       <ul>{term.sources.map((source, sourceIndex) => <li key={source}>
         <a href={source} target="_blank" rel="noreferrer">{source.includes('merriam-webster') ? 'Merriam-Webster' : source.includes('cambridge.org') ? 'Cambridge Dictionary' : 'Acupoint name reference'}{term.sources.length > 1 ? ` · ${sourceIndex + 1}` : ''} ↗</a>
       </li>)}</ul>
