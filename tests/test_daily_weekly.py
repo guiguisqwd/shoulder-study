@@ -45,7 +45,9 @@ class WeeklyPlan(unittest.TestCase):
         mon = plan.day_info("2026-10-12")
         self.assertEqual((mon["kind"], mon["week"], mon["chapter"]), ("supplement", 1, "shoulder"))
         self.assertEqual([e["type"] for e in mon["entries"]], ["N-1", "O-1"])
-        self.assertEqual(plan.day_info("2026-10-19")["kind"], "unplanned")  # hip week: items come after its ST-1 list
+        hip = plan.day_info("2026-10-19")
+        self.assertEqual((hip["kind"], hip["week"], hip["chapter"]), ("supplement", 2, "hip"))
+        self.assertEqual(plan.day_info("2026-10-26")["kind"], "unplanned")  # elbow week: items come after its ST-1 list
 
     def test_every_planned_code_and_form_is_in_the_standard(self):
         names = codes.table()

@@ -289,8 +289,178 @@
       "sunday": "2026-10-18",
       "chapter": "hip",
       "chapterName": "髋关节 Hip joint",
-      "chapterStatus": "draft",
-      "days": "按 weekTemplate 排；条目在本章 ST-1 结构清单定好后填写"
+      "chapterStatus": "published",
+      "days": {
+        "2026-10-19": {
+          "new": [
+            {
+              "type": "N-1",
+              "items": [
+                "SP12 冲门 · 足太阴脾经",
+                "ST30 气冲 · 足阳明胃经",
+                "LR12 急脉 · 足厥阴肝经",
+                "LR10 足五里 · 足厥阴肝经"
+              ],
+              "forms": [
+                "F-1"
+              ]
+            }
+          ],
+          "consolidate": [
+            {
+              "type": "O-1",
+              "items": [
+                "Gluteus maximus",
+                "Gluteus medius",
+                "Gluteus minimus",
+                "Tensor fasciae latae"
+              ],
+              "forms": [
+                "F-6",
+                "F-7"
+              ]
+            }
+          ]
+        },
+        "2026-10-20": {
+          "new": [
+            {
+              "type": "N-2",
+              "items": [
+                "Greater trochanteric pain syndrome 大转子疼痛综合征（髋外侧痛）：检测到治疗"
+              ],
+              "forms": [
+                "F-2",
+                "F-1"
+              ]
+            }
+          ],
+          "consolidate": [
+            {
+              "type": "O-2",
+              "items": [
+                "Anterior superior iliac spine",
+                "Posterior superior iliac spine",
+                "Iliac crest",
+                "Ischial tuberosity",
+                "Greater trochanter",
+                "Lesser trochanter",
+                "Femoral head",
+                "Femoral neck"
+              ],
+              "forms": [
+                "F-6",
+                "F-9"
+              ]
+            }
+          ]
+        },
+        "2026-10-21": {
+          "new": [
+            {
+              "type": "N-4",
+              "items": [
+                "Femoroacetabular impingement syndrome 髋撞击综合征案例"
+              ],
+              "forms": [
+                "F-3",
+                "F-4"
+              ]
+            }
+          ],
+          "consolidate": [
+            {
+              "type": "O-4",
+              "items": [
+                "Femoral nerve",
+                "Obturator nerve",
+                "Superior gluteal nerve",
+                "Sciatic nerve"
+              ],
+              "forms": [
+                "F-8",
+                "F-11"
+              ]
+            }
+          ]
+        },
+        "2026-10-22": {
+          "new": [
+            {
+              "type": "N-5",
+              "items": [
+                "mellor-2018-leap-gtps"
+              ],
+              "forms": [
+                "F-5"
+              ]
+            }
+          ],
+          "consolidate": [
+            {
+              "type": "O-3",
+              "items": [
+                "Hip joint 髋关节：关节囊、髂股韧带、耻股韧带、坐股韧带、髋臼唇"
+              ],
+              "forms": [
+                "F-6"
+              ]
+            }
+          ]
+        },
+        "2026-10-23": {
+          "new": [
+            {
+              "type": "N-7",
+              "items": [
+                "FABER test",
+                "FADIR test",
+                "Trendelenburg sign",
+                "Thomas test",
+                "Ober test",
+                "Log roll test"
+              ],
+              "forms": [
+                "F-1"
+              ]
+            }
+          ],
+          "consolidate": [
+            {
+              "type": "O-6",
+              "items": [
+                "Hip abductor moment in single-leg stance 单腿站立时的外展力矩"
+              ],
+              "forms": [
+                "F-12"
+              ]
+            }
+          ]
+        },
+        "2026-10-24": {
+          "new": [],
+          "consolidate": [
+            {
+              "type": "quiz",
+              "items": [
+                "本周新旧混合小测（含本章 9 个穴位：环跳、居髎、秩边、承扶、殷门、髀关、伏兔、风市、阴廉）"
+              ],
+              "forms": [
+                "F-6"
+              ]
+            },
+            {
+              "type": "review",
+              "items": [
+                "跨周间隔复习"
+              ],
+              "forms": [
+                "F-10"
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "week": 3,
