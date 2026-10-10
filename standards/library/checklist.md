@@ -15,6 +15,7 @@ ST-5 核验时逐条过。自动项由脚本检查；人工项要留截图或记
 | QC-07 | SVG 文字出界、重叠；手机宽度显示 | AN-16 | `daily/engine/qa/qa.js` |
 | QC-08 | ST-1 结构清单存在；每一项在它所列的章节正文里出现；3D ID 真实存在；正文里每条肌肉记录都在清单里 | ST-1、AN-40、AN-41 | `site/build/platform/topiclib.py`（草稿记为待办，`published` 时报错） |
 | QC-09 | 3D 附加模型检查通过（有 `library/<id>/3d/atlas-addon.json` 的章节）：`python3 site/build/atlas/check-addon.py` 无报错退出——与自带模型同一 `atlasVersion` 和 `buildId`、metadata 与 GLB 一致、ID 不与自带模型重复、左右侧位置正确且互为镜像、清单 `checks` 的位置检查全过 | AN-42、AN-44 | `site/build/atlas/check-addon.py`；CI 由 `tests/test_atlas_addon.py` 运行它，并核对导出脚本未改动、provenance 记录的 GLB 摘要与发布的文件一致；附加模型的 ID 只能由它所属的章节使用，由 `topiclib.py` 检查 |
+| QC-10 | 【试用】题库（有 `questions.json` 的章节）：格式正确；`id` 唯一；`covers` 都在结构清单里；`record` 指向的记录存在；`from` 是 CH-01 的一部分；评分要点条数对；覆盖达到 AN-62 | AN-60 至 AN-66 | `site/build/platform/questions.py`，由 `topiclib.py` 调用；格式错误直接报错，覆盖缺口记为待办（`published` 时报错）；CI 由 `tests/test_questions.py` 运行 |
 
 ## 人工检查
 
@@ -28,5 +29,6 @@ ST-5 核验时逐条过。自动项由脚本检查；人工项要留截图或记
 | QC-25 | 宽屏、分屏、窄屏下无遮挡和溢出 | AN-16 |
 | QC-26 | 制作记录列出所有未核验项 | G-03 |
 | QC-27 | PDF（ST-9）：每一页都渲染出来看过；内容和阅读页逐项对照无遗漏（章节、图、表、问答数与导出清单一致）；文字不出界；链接可点击；生成自当前构建 | G-03、G-08、AN-16 |
+| QC-28 | 【试用】题库（ST-10）：自己写的题逐题对照 `from` 那一部分正文，答案的事实都能找到；评分要点和答案一致；用户过目过一遍题目 | AN-61、AN-63 |
 
 新主题从 `draft` 改为 `published` 前，以上各项和 `library/README.md` §4 的 8 项签核都要完成，并记录审核人和日期。

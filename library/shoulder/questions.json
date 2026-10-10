@@ -1,0 +1,1047 @@
+{
+ "schema": "dpt-question-bank/1",
+ "chapter": "shoulder",
+ "questions": [
+  {
+   "id": "supraspinatus-oina",
+   "type": "recall",
+   "part": "anatomy",
+   "covers": [
+    "supraspinatus",
+    "supraspinous-fossa",
+    "greater-tubercle",
+    "humerus",
+    "scapula",
+    "suprascapular-nerve",
+    "humeral-head",
+    "glenoid"
+   ],
+   "record": "muscles/supraspinatus",
+   "ask": [
+    "origin",
+    "insertion",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "infraspinatus-oina",
+   "type": "recall",
+   "part": "anatomy",
+   "covers": [
+    "infraspinatus",
+    "infraspinous-fossa",
+    "greater-tubercle",
+    "suprascapular-nerve",
+    "glenohumeral-joint"
+   ],
+   "record": "muscles/infraspinatus",
+   "ask": [
+    "origin",
+    "insertion",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "teres-minor-oina",
+   "type": "recall",
+   "part": "anatomy",
+   "covers": [
+    "teres-minor",
+    "lateral-border-of-scapula",
+    "greater-tubercle",
+    "axillary-nerve"
+   ],
+   "record": "muscles/teres-minor",
+   "ask": [
+    "origin",
+    "insertion",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "subscapularis-oina",
+   "type": "recall",
+   "part": "anatomy",
+   "covers": [
+    "subscapularis",
+    "subscapular-fossa",
+    "lesser-tubercle",
+    "glenohumeral-joint"
+   ],
+   "record": "muscles/subscapularis",
+   "ask": [
+    "origin",
+    "insertion",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "teres-major-oina",
+   "type": "recall",
+   "part": "anatomy",
+   "covers": [
+    "teres-major",
+    "inferior-angle",
+    "triceps-long-head",
+    "quadrangular-space"
+   ],
+   "record": "muscles/teres-major",
+   "ask": [
+    "origin",
+    "insertion",
+    "course",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "trapezius-oina",
+   "type": "recall",
+   "part": "anatomy",
+   "covers": [
+    "trapezius",
+    "upper-trapezius",
+    "middle-trapezius",
+    "lower-trapezius",
+    "clavicle",
+    "acromion",
+    "scapular-spine"
+   ],
+   "record": "muscles/trapezius",
+   "ask": [
+    "origin",
+    "insertion",
+    "course",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "supraspinatus-tendon-path",
+   "type": "recall",
+   "part": "anatomy",
+   "covers": [
+    "supraspinatus",
+    "acromion",
+    "teres-minor",
+    "infraspinatus"
+   ],
+   "from": "anatomy",
+   "prompt": {
+    "en": "Which bony structure does the supraspinatus tendon pass beneath, and along which muscle does teres minor run?",
+    "zh": "冈上肌腱从哪块骨性结构下方经过？小圆肌沿哪块肌肉走行？"
+   },
+   "answer": {
+    "en": "The supraspinatus tendon passes beneath the acromion. Teres minor runs along the inferior border of the infraspinatus.",
+    "zh": "冈上肌腱从肩峰下方经过。小圆肌沿冈下肌下缘走行。"
+   },
+   "points": [
+    {
+     "en": "Supraspinatus tendon: beneath the acromion",
+     "zh": "冈上肌腱：经肩峰下方"
+    },
+    {
+     "en": "Teres minor: along the inferior border of the infraspinatus",
+     "zh": "小圆肌：沿冈下肌下缘"
+    }
+   ]
+  },
+  {
+   "id": "suprascapular-nerve-course",
+   "type": "recall",
+   "part": "innervation",
+   "covers": [
+    "suprascapular-nerve",
+    "brachial-plexus",
+    "suprascapular-notch",
+    "spinoglenoid-notch",
+    "scapular-spine",
+    "supraspinatus",
+    "infraspinatus"
+   ],
+   "from": "innervation",
+   "prompt": {
+    "en": "Trace the suprascapular nerve from its origin to the last muscle it supplies.",
+    "zh": "说出肩胛上神经从起点到最后支配的肌肉的走行。"
+   },
+   "answer": {
+    "en": "The suprascapular nerve arises from the superior trunk of the brachial plexus, usually carrying fibers from C5 and C6. It passes through the suprascapular notch beneath the superior transverse scapular ligament and supplies supraspinatus in the supraspinous fossa. It then passes around the lateral end of the scapular spine through the spinoglenoid notch to supply infraspinatus.",
+    "zh": "肩胛上神经起自臂丛上干，通常含 C5、C6 神经纤维。它从肩胛上横韧带下方穿过肩胛上切迹，在冈上窝支配冈上肌；随后绕过肩胛冈外侧端，经冈盂切迹支配冈下肌。"
+   },
+   "points": [
+    {
+     "en": "Origin: superior trunk, usually C5–C6",
+     "zh": "起点：臂丛上干，通常为 C5–C6"
+    },
+    {
+     "en": "Suprascapular notch, beneath the superior transverse scapular ligament",
+     "zh": "经肩胛上切迹，在肩胛上横韧带下方"
+    },
+    {
+     "en": "Supplies supraspinatus first",
+     "zh": "先支配冈上肌"
+    },
+    {
+     "en": "Around the lateral end of the scapular spine through the spinoglenoid notch to infraspinatus",
+     "zh": "绕肩胛冈外侧端、经冈盂切迹到冈下肌"
+    }
+   ]
+  },
+  {
+   "id": "axillary-nerve-course",
+   "type": "recall",
+   "part": "innervation",
+   "covers": [
+    "axillary-nerve",
+    "brachial-plexus",
+    "quadrangular-space",
+    "humerus",
+    "deltoid",
+    "teres-minor"
+   ],
+   "from": "innervation",
+   "prompt": {
+    "en": "Describe the course of the axillary nerve and what its two branches supply.",
+    "zh": "说出腋神经的走行，以及两条分支各支配什么。"
+   },
+   "answer": {
+    "en": "The axillary nerve arises from the posterior cord of the brachial plexus, mainly from C5 and C6. It passes posteriorly through the quadrangular space with the posterior circumflex humeral artery and winds around the surgical neck of the humerus deep to the deltoid. Its anterior branch supplies the anterior and middle parts of the deltoid. Its posterior branch supplies teres minor and the posterior part of the deltoid and continues as the superior lateral cutaneous nerve of the arm.",
+    "zh": "腋神经起自臂丛后束，主要含 C5、C6 神经纤维。它与旋肱后动脉一起向后穿过四边孔，在三角肌深面绕行肱骨外科颈。前支支配三角肌前部和中部；后支支配小圆肌及三角肌后部，并延续为臂外上侧皮神经。"
+   },
+   "points": [
+    {
+     "en": "Origin: posterior cord, mainly C5–C6",
+     "zh": "起点：臂丛后束，主要为 C5–C6"
+    },
+    {
+     "en": "Through the quadrangular space with the posterior circumflex humeral artery",
+     "zh": "与旋肱后动脉一起穿过四边孔"
+    },
+    {
+     "en": "Around the surgical neck of the humerus, deep to the deltoid",
+     "zh": "在三角肌深面绕肱骨外科颈"
+    },
+    {
+     "en": "Anterior branch: anterior and middle deltoid",
+     "zh": "前支：三角肌前部和中部"
+    },
+    {
+     "en": "Posterior branch: teres minor, posterior deltoid, superior lateral cutaneous nerve of the arm",
+     "zh": "后支：小圆肌、三角肌后部、臂外上侧皮神经"
+    }
+   ]
+  },
+  {
+   "id": "brachial-plexus-sources",
+   "type": "recall",
+   "part": "innervation",
+   "covers": [
+    "brachial-plexus",
+    "suprascapular-nerve",
+    "axillary-nerve"
+   ],
+   "from": "innervation",
+   "prompt": {
+    "en": "Name the five parts of the brachial plexus in order, and say which part the suprascapular, axillary and subscapular nerves come from.",
+    "zh": "按顺序说出臂丛的五个部分，并说出肩胛上神经、腋神经和肩胛下神经各从哪一部分发出。"
+   },
+   "answer": {
+    "en": "Roots → Trunks → Divisions → Cords → Branches. The anterior rami of C5 and C6 form the superior trunk; the suprascapular nerve branches directly from the superior trunk. The posterior divisions form the posterior cord, which gives off the axillary and subscapular nerves.",
+    "zh": "根 → 干 → 股 → 束 → 支。C5、C6 前支合成上干，肩胛上神经直接起自上干。后股组成后束，腋神经和肩胛下神经从后束发出。"
+   },
+   "points": [
+    {
+     "en": "Roots → Trunks → Divisions → Cords → Branches",
+     "zh": "根 → 干 → 股 → 束 → 支"
+    },
+    {
+     "en": "Suprascapular nerve: superior trunk",
+     "zh": "肩胛上神经：上干"
+    },
+    {
+     "en": "Axillary and subscapular nerves: posterior cord",
+     "zh": "腋神经、肩胛下神经：后束"
+    }
+   ]
+  },
+  {
+   "id": "cervical-levels",
+   "type": "reason",
+   "part": "innervation",
+   "covers": [
+    "brachial-plexus"
+   ],
+   "from": "innervation",
+   "prompt": {
+    "en": "An innervation label reads \"C5–C6\". Does it name two vertebrae? Why are there eight cervical nerves but only seven cervical vertebrae?",
+    "zh": "神经支配写着“C5–C6”，指的是两块椎骨吗？为什么颈神经有 8 对、颈椎只有 7 块？"
+   },
+   "answer": {
+    "en": "No. C5–C6 names the spinal nerve levels that contribute fibers to the nerve, not two vertebrae. C1–C7 nerves leave above the vertebra of the same number, and C8 leaves between C7 and T1, so there are eight cervical nerves but seven cervical vertebrae. The roots of the brachial plexus are the anterior rami of spinal nerves C5–T1.",
+    "zh": "不是。C5–C6 指向该神经贡献纤维的脊神经节段，不是两块椎骨。C1–C7 神经从同名椎骨上方穿出，C8 从 C7 与 T1 之间穿出，所以颈神经 8 对、颈椎 7 块。臂丛的根是 C5–T1 脊神经的前支。"
+   },
+   "points": [
+    {
+     "en": "C5–C6 = spinal nerve levels, not vertebrae",
+     "zh": "C5–C6 是脊神经节段，不是椎骨"
+    },
+    {
+     "en": "C1–C7 exit above the same-numbered vertebra; C8 exits between C7 and T1",
+     "zh": "C1–C7 从同名椎骨上方穿出；C8 从 C7 与 T1 之间穿出"
+    },
+    {
+     "en": "Plexus roots: anterior rami of C5–T1",
+     "zh": "臂丛的根：C5–T1 前支"
+    }
+   ]
+  },
+  {
+   "id": "deltoid-oina",
+   "type": "recall",
+   "part": "movement",
+   "covers": [
+    "deltoid",
+    "clavicle",
+    "acromion",
+    "scapular-spine",
+    "humerus",
+    "axillary-nerve"
+   ],
+   "record": "muscles/deltoid",
+   "ask": [
+    "origin",
+    "insertion",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "upper-trapezius-oina",
+   "type": "recall",
+   "part": "movement",
+   "covers": [
+    "upper-trapezius",
+    "clavicle"
+   ],
+   "record": "muscles/upper-trapezius",
+   "ask": [
+    "origin",
+    "insertion",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "lower-trapezius-oina",
+   "type": "recall",
+   "part": "movement",
+   "covers": [
+    "lower-trapezius",
+    "scapular-spine"
+   ],
+   "record": "muscles/lower-trapezius",
+   "ask": [
+    "origin",
+    "insertion",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "serratus-anterior-oina",
+   "type": "recall",
+   "part": "movement",
+   "covers": [
+    "serratus-anterior",
+    "medial-border-of-scapula",
+    "inferior-angle"
+   ],
+   "record": "muscles/serratus-anterior",
+   "ask": [
+    "origin",
+    "insertion",
+    "innervation",
+    "actions"
+   ]
+  },
+  {
+   "id": "line-of-pull",
+   "type": "reason",
+   "part": "movement",
+   "covers": [
+    "supraspinatus",
+    "infraspinatus",
+    "teres-minor",
+    "subscapularis",
+    "glenohumeral-joint",
+    "greater-tubercle",
+    "lesser-tubercle"
+   ],
+   "from": "movement",
+   "prompt": {
+    "en": "From where each rotator cuff muscle passes relative to the glenohumeral joint, explain which movement it contributes to.",
+    "zh": "根据每块肩袖肌经过盂肱关节的位置，解释它参与哪个动作。"
+   },
+   "answer": {
+    "en": "Supraspinatus runs from the supraspinous fossa to the superior facet of the greater tubercle and contributes to abduction. Infraspinatus and teres minor pass behind the glenohumeral joint to the middle and inferior facets of the greater tubercle and contribute to external rotation. Subscapularis passes in front of the joint to the lesser tubercle and contributes to internal rotation. All four also stabilize the joint, and the actual movement also depends on joint position and other muscles.",
+    "zh": "冈上肌从冈上窝走向大结节上小面，参与外展。冈下肌和小圆肌经盂肱关节后方，止于大结节中、下小面，参与外旋。肩胛下肌经关节前方走向小结节，参与内旋。四块肌肉也都参与关节稳定，实际运动还取决于关节位置和其他肌肉。"
+   },
+   "points": [
+    {
+     "en": "Superior (supraspinatus) → abduction",
+     "zh": "上方（冈上肌）→ 外展"
+    },
+    {
+     "en": "Posterior (infraspinatus, teres minor) → external rotation",
+     "zh": "后方（冈下肌、小圆肌）→ 外旋"
+    },
+    {
+     "en": "Anterior (subscapularis) → internal rotation",
+     "zh": "前方（肩胛下肌）→ 内旋"
+    },
+    {
+     "en": "All four stabilize; movement also depends on position and other muscles",
+     "zh": "四块都参与稳定；动作还取决于体位和其他肌肉"
+    }
+   ]
+  },
+  {
+   "id": "force-couples",
+   "type": "recall",
+   "part": "movement",
+   "covers": [
+    "deltoid",
+    "upper-trapezius",
+    "lower-trapezius",
+    "serratus-anterior",
+    "scapula",
+    "humeral-head"
+   ],
+   "from": "movement",
+   "prompt": {
+    "en": "Name the two force couples of the shoulder and what each one does.",
+    "zh": "说出肩部的两组力偶，以及各自的作用。"
+   },
+   "answer": {
+    "en": "At the glenohumeral joint, the deltoid and the rotator cuff work together to elevate the arm while controlling the position of the humeral head. At the scapula, the upper and lower trapezius work with serratus anterior to rotate the scapula upward during arm elevation.",
+    "zh": "在盂肱关节，三角肌与肩袖协同抬臂，并控制肱骨头的位置。在肩胛骨，上、下斜方肌与前锯肌协作，在上举时使肩胛骨上旋。"
+   },
+   "points": [
+    {
+     "en": "Deltoid + rotator cuff: elevate the arm, control the humeral head",
+     "zh": "三角肌 + 肩袖：抬臂，控制肱骨头"
+    },
+    {
+     "en": "Upper + lower trapezius + serratus anterior: scapular upward rotation",
+     "zh": "上、下斜方肌 + 前锯肌：肩胛骨上旋"
+    }
+   ]
+  },
+  {
+   "id": "scapulohumeral-rhythm",
+   "type": "reason",
+   "part": "movement",
+   "covers": [
+    "scapula",
+    "clavicle",
+    "humerus",
+    "glenohumeral-joint"
+   ],
+   "from": "movement",
+   "prompt": {
+    "en": "Is the 2:1 scapulohumeral rhythm a fixed ratio? What happens in the scapula and humerus beyond 90° of elevation?",
+    "zh": "2∶1 的肩肱节律是固定比例吗？上举超过 90° 时，肩胛骨和肱骨在做什么？"
+   },
+   "answer": {
+    "en": "No. The 2:1 ratio is a teaching approximation, not a fixed ratio at every angle; scapular motion varies with the task, the plane of elevation and the individual. Beyond 90°, elevation involves continued scapular upward rotation and posterior tilt, humeral external rotation and clavicular motion. These contributions overlap rather than switching on and off in stages.",
+    "zh": "不是。2∶1 是教学概括，并不是每个角度都恒定的比例；肩胛骨运动随任务、上举平面和个体变化。超过 90° 后，肩胛骨继续上旋并后倾，肱骨外旋，锁骨也在运动。这些作用相互重叠，不是依次开关的阶段。"
+   },
+   "points": [
+    {
+     "en": "2:1 is an approximation, not fixed",
+     "zh": "2∶1 是概括，不是固定比例"
+    },
+    {
+     "en": "Varies with task, plane and individual",
+     "zh": "随任务、平面和个体变化"
+    },
+    {
+     "en": "Beyond 90°: scapular upward rotation and posterior tilt, humeral external rotation, clavicular motion",
+     "zh": "90° 以上：肩胛骨上旋和后倾、肱骨外旋、锁骨运动"
+    }
+   ]
+  },
+  {
+   "id": "trapezius-parts",
+   "type": "recall",
+   "part": "movement",
+   "covers": [
+    "upper-trapezius",
+    "middle-trapezius",
+    "lower-trapezius",
+    "acromion",
+    "scapular-spine"
+   ],
+   "from": "movement",
+   "prompt": {
+    "en": "What does each part of the trapezius do to the scapula, and which way does the middle part run?",
+    "zh": "斜方肌每一部分对肩胛骨起什么作用？中部纤维朝哪个方向走行？"
+   },
+   "answer": {
+    "en": "The upper part elevates the scapula, the middle part retracts it, and the lower part depresses its medial part. The middle trapezius runs horizontally to the acromion and the lateral part of the scapular spine. The upper and lower parts work with serratus anterior to rotate the scapula upward during arm elevation.",
+    "zh": "上部上提肩胛骨，中部使其后缩，下部使其内侧部下降。中斜方肌水平走向肩峰和肩胛冈外侧部。上部和下部与前锯肌协作，在上举时使肩胛骨上旋。"
+   },
+   "points": [
+    {
+     "en": "Upper: elevates",
+     "zh": "上部：上提"
+    },
+    {
+     "en": "Middle: retracts; runs horizontally to the acromion and lateral scapular spine",
+     "zh": "中部：后缩；水平走向肩峰和肩胛冈外侧部"
+    },
+    {
+     "en": "Lower: depresses the medial part",
+     "zh": "下部：使内侧部下降"
+    },
+    {
+     "en": "Upper + lower with serratus anterior: upward rotation",
+     "zh": "上部 + 下部与前锯肌：上旋"
+    }
+   ]
+  },
+  {
+   "id": "special-tests",
+   "type": "recall",
+   "part": "clinical",
+   "covers": [
+    "supraspinatus",
+    "infraspinatus",
+    "teres-minor",
+    "subscapularis"
+   ],
+   "from": "clinical",
+   "prompt": {
+    "en": "Match each rotator cuff muscle to its special tests.",
+    "zh": "说出每块肩袖肌对应的特殊检查。"
+   },
+   "answer": {
+    "en": "Supraspinatus: empty can test and drop arm test. Infraspinatus: resisted external rotation and the external rotation lag sign. Teres minor: Hornblower's sign. Subscapularis: lift-off test and belly-press test.",
+    "zh": "冈上肌：空罐试验和落臂试验。冈下肌：抗阻外旋和外旋滞后征。小圆肌：Hornblower 征。肩胛下肌：抬离试验和腹压试验。"
+   },
+   "points": [
+    {
+     "en": "Supraspinatus: empty can / drop arm",
+     "zh": "冈上肌：空罐 / 落臂"
+    },
+    {
+     "en": "Infraspinatus: resisted external rotation / external rotation lag sign",
+     "zh": "冈下肌：抗阻外旋 / 外旋滞后征"
+    },
+    {
+     "en": "Teres minor: Hornblower's sign",
+     "zh": "小圆肌：Hornblower 征"
+    },
+    {
+     "en": "Subscapularis: lift-off / belly-press",
+     "zh": "肩胛下肌：抬离 / 腹压"
+    }
+   ]
+  },
+  {
+   "id": "case-anterior-dislocation",
+   "type": "case",
+   "part": "clinical",
+   "covers": [
+    "axillary-nerve",
+    "subscapularis",
+    "teres-minor",
+    "deltoid",
+    "quadrangular-space"
+   ],
+   "from": "clinical",
+   "prompt": {
+    "en": "Case: after an anterior shoulder dislocation, which nerve and which rotator cuff muscle can be involved? Which special tests would you add, and why?",
+    "zh": "病例：肩关节前脱位后，可能累及哪条神经和哪块肩袖肌？你会加做哪些特殊检查，为什么？"
+   },
+   "answer": {
+    "en": "Anterior dislocation can involve the axillary nerve and the subscapularis. The axillary nerve supplies teres minor and the deltoid, so add Hornblower's sign for teres minor and check the deltoid. For subscapularis, add the lift-off and belly-press tests, which test internal rotation.",
+    "zh": "前脱位可累及腋神经和肩胛下肌。腋神经支配小圆肌和三角肌，所以加做小圆肌的 Hornblower 征，并检查三角肌。肩胛下肌加做抬离试验和腹压试验，它们检查内旋。"
+   },
+   "points": [
+    {
+     "en": "Axillary nerve and subscapularis",
+     "zh": "腋神经和肩胛下肌"
+    },
+    {
+     "en": "Axillary nerve → teres minor (Hornblower's sign) and deltoid",
+     "zh": "腋神经 → 小圆肌（Hornblower 征）和三角肌"
+    },
+    {
+     "en": "Subscapularis → lift-off / belly-press (internal rotation)",
+     "zh": "肩胛下肌 → 抬离 / 腹压（内旋）"
+    }
+   ]
+  },
+  {
+   "id": "case-scapular-winging",
+   "type": "case",
+   "part": "clinical",
+   "covers": [
+    "serratus-anterior",
+    "medial-border-of-scapula",
+    "scapula"
+   ],
+   "from": "clinical",
+   "prompt": {
+    "en": "Case: a person has scapular winging and difficulty elevating the arm. Which muscle is weak, which nerve supplies it, and why does elevation suffer?",
+    "zh": "病例：一个人出现翼状肩胛、手臂上举困难。哪块肌肉无力？由哪条神经支配？为什么上举会受影响？"
+   },
+   "answer": {
+    "en": "Serratus anterior weakness. It is supplied by the long thoracic nerve (C5–C7) and inserts onto the costal surface of the medial border of the scapula. Without it the scapula does not rotate upward enough, so the scapula wings and the arm is hard to elevate.",
+    "zh": "前锯肌无力。它由胸长神经（C5–C7）支配，止于肩胛骨内侧缘的肋面。它无力时肩胛骨上旋不足，于是出现翼状肩胛，手臂难以上举。"
+   },
+   "points": [
+    {
+     "en": "Serratus anterior",
+     "zh": "前锯肌"
+    },
+    {
+     "en": "Long thoracic nerve (C5–C7)",
+     "zh": "胸长神经（C5–C7）"
+    },
+    {
+     "en": "Insufficient scapular upward rotation → winging, poor elevation",
+     "zh": "肩胛上旋不足 → 翼状肩胛、上举困难"
+    }
+   ]
+  },
+  {
+   "id": "shrug-compensation",
+   "type": "reason",
+   "part": "clinical",
+   "covers": [
+    "upper-trapezius",
+    "lower-trapezius"
+   ],
+   "from": "clinical",
+   "prompt": {
+    "en": "What imbalance between the parts of the trapezius makes a person shrug when lifting the arm?",
+    "zh": "斜方肌哪两部分的失衡会让人抬手时耸肩？"
+   },
+   "answer": {
+    "en": "An overactive upper trapezius together with a weak lower trapezius: the person compensates by shrugging the shoulder.",
+    "zh": "上斜方肌过度活跃、下斜方肌无力时，会出现耸肩代偿。"
+   },
+   "points": [
+    {
+     "en": "Upper trapezius overactive",
+     "zh": "上斜方肌过度活跃"
+    },
+    {
+     "en": "Lower trapezius weak",
+     "zh": "下斜方肌无力"
+    }
+   ]
+  },
+  {
+   "id": "cuff-weakness-impingement",
+   "type": "reason",
+   "part": "clinical",
+   "covers": [
+    "supraspinatus",
+    "humeral-head",
+    "acromion",
+    "deltoid"
+   ],
+   "from": "clinical",
+   "prompt": {
+    "en": "Which tendon is most often involved in subacromial impingement, and how does rotator cuff weakness lead to subacromial pain?",
+    "zh": "肩峰下撞击最常累及哪条肌腱？肩袖无力怎样导致肩峰下疼痛？"
+   },
+   "answer": {
+    "en": "The supraspinatus tendon, which passes beneath the acromion. Rotator cuff weakness disturbs the deltoid–rotator cuff force couple, so the humeral head moves upward, the subacromial space narrows and pain follows.",
+    "zh": "冈上肌腱，它从肩峰下方经过。肩袖无力会破坏三角肌—肩袖力偶，肱骨头上移，肩峰下间隙变小，于是出现疼痛。"
+   },
+   "points": [
+    {
+     "en": "Supraspinatus tendon, beneath the acromion",
+     "zh": "冈上肌腱，在肩峰下方"
+    },
+    {
+     "en": "Deltoid–rotator cuff force couple fails",
+     "zh": "三角肌—肩袖力偶失衡"
+    },
+    {
+     "en": "Humeral head moves up → subacromial space → pain",
+     "zh": "肱骨头上移 → 肩峰下间隙 → 疼痛"
+    }
+   ]
+  },
+  {
+   "id": "palpate-scapular-spine",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "scapular-spine",
+    "acromion",
+    "medial-border-of-scapula",
+    "supraspinatus"
+   ],
+   "from": "clinical",
+   "prompt": {
+    "en": "On a partner, find the scapular spine and then the supraspinatus. Describe each step.",
+    "zh": "在同伴身上找到肩胛冈，再找到冈上肌。说出每一步。"
+   },
+   "answer": {
+    "en": "From the acromion, palpate medially until you feel a horizontal bony ridge and follow it to the medial border of the scapula: that is the scapular spine. Then press into the fossa above its midpoint (Bingfeng, SI12); with the arm at 15° of abduction, have the person abduct against resistance and feel the supraspinatus tighten.",
+    "zh": "从肩峰往内侧摸，摸到一条横的骨嵴，一直摸到肩胛骨内侧缘，这就是肩胛冈。然后在肩胛冈中点上方的窝里按下去（秉风，SI12）；让他手臂抗阻外展 15°，能摸到冈上肌收紧。"
+   },
+   "points": [
+    {
+     "en": "Acromion → medially along a horizontal ridge → medial border",
+     "zh": "肩峰 → 向内沿横嵴 → 内侧缘"
+    },
+    {
+     "en": "Fossa above the midpoint of the spine (SI12)",
+     "zh": "肩胛冈中点上方的窝（SI12）"
+    },
+    {
+     "en": "Resisted abduction at 15° → supraspinatus tightens",
+     "zh": "抗阻外展 15° → 冈上肌收紧"
+    }
+   ]
+  },
+  {
+   "id": "acu-si11",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "si11",
+    "infraspinatus",
+    "infraspinous-fossa",
+    "scapular-spine",
+    "inferior-angle"
+   ],
+   "record": "acupoints/si11",
+   "ask": [
+    "location",
+    "howToFind",
+    "layers",
+    "safety"
+   ]
+  },
+  {
+   "id": "acu-si12",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "si12",
+    "supraspinatus",
+    "supraspinous-fossa",
+    "scapular-spine",
+    "suprascapular-nerve",
+    "trapezius"
+   ],
+   "record": "acupoints/si12",
+   "ask": [
+    "location",
+    "howToFind",
+    "layers",
+    "safety"
+   ]
+  },
+  {
+   "id": "acu-si13",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "si13",
+    "scapular-spine",
+    "supraspinatus"
+   ],
+   "record": "acupoints/si13",
+   "ask": [
+    "location",
+    "howToFind",
+    "layers",
+    "safety"
+   ]
+  },
+  {
+   "id": "acu-li16",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "li16",
+    "clavicle",
+    "scapular-spine",
+    "supraspinatus"
+   ],
+   "record": "acupoints/li16",
+   "ask": [
+    "location",
+    "howToFind",
+    "layers",
+    "safety"
+   ]
+  },
+  {
+   "id": "acu-si10",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "si10",
+    "scapular-spine",
+    "infraspinatus",
+    "deltoid"
+   ],
+   "record": "acupoints/si10",
+   "ask": [
+    "location",
+    "layers"
+   ]
+  },
+  {
+   "id": "acu-si9",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "si9",
+    "teres-minor",
+    "teres-major",
+    "quadrangular-space",
+    "axillary-nerve"
+   ],
+   "record": "acupoints/si9",
+   "ask": [
+    "location",
+    "howToFind",
+    "layers",
+    "safety"
+   ]
+  },
+  {
+   "id": "acu-te14",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "te14",
+    "acromial-angle",
+    "greater-tubercle",
+    "deltoid"
+   ],
+   "record": "acupoints/te14",
+   "ask": [
+    "location",
+    "howToFind",
+    "layers"
+   ]
+  },
+  {
+   "id": "acu-li15",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "li15",
+    "acromion",
+    "greater-tubercle",
+    "deltoid",
+    "supraspinatus"
+   ],
+   "record": "acupoints/li15",
+   "ask": [
+    "location",
+    "howToFind",
+    "layers"
+   ]
+  },
+  {
+   "id": "acu-ht1",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "ht1",
+    "subscapularis",
+    "brachial-plexus"
+   ],
+   "record": "acupoints/ht1",
+   "ask": [
+    "location",
+    "howToFind",
+    "layers",
+    "safety"
+   ]
+  },
+  {
+   "id": "acu-jiaji-c5-c6",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "jiaji-c5-c6"
+   ],
+   "record": "acupoints/jiaji-c5-c6",
+   "ask": [
+    "location",
+    "safety"
+   ]
+  },
+  {
+   "id": "acu-st12",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "st12",
+    "brachial-plexus",
+    "clavicle"
+   ],
+   "record": "acupoints/st12",
+   "ask": [
+    "location",
+    "safety"
+   ]
+  },
+  {
+   "id": "acu-gb21",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "gb21",
+    "upper-trapezius",
+    "acromion"
+   ],
+   "record": "acupoints/gb21",
+   "ask": [
+    "location",
+    "safety"
+   ]
+  },
+  {
+   "id": "acu-gb23",
+   "type": "locate",
+   "part": "clinical",
+   "covers": [
+    "gb23",
+    "serratus-anterior"
+   ],
+   "record": "acupoints/gb23",
+   "ask": [
+    "location",
+    "safety"
+   ]
+  },
+  {
+   "id": "review-insertions",
+   "type": "recall",
+   "part": "review",
+   "covers": [
+    "supraspinatus",
+    "infraspinatus",
+    "teres-minor",
+    "subscapularis",
+    "greater-tubercle",
+    "lesser-tubercle"
+   ],
+   "record": "review/q-insertions",
+   "points": [
+    {
+     "en": "Greater tubercle: supraspinatus, infraspinatus, teres minor",
+     "zh": "大结节：冈上肌、冈下肌、小圆肌"
+    },
+    {
+     "en": "Superior → middle → inferior facet in that order",
+     "zh": "依次为上、中、下小面"
+    },
+    {
+     "en": "Lesser tubercle: subscapularis",
+     "zh": "小结节：肩胛下肌"
+    }
+   ]
+  },
+  {
+   "id": "review-external-rotators",
+   "type": "reason",
+   "part": "review",
+   "covers": [
+    "infraspinatus",
+    "teres-minor",
+    "suprascapular-nerve",
+    "axillary-nerve"
+   ],
+   "record": "review/q-external-rotators",
+   "points": [
+    {
+     "en": "Infraspinatus: suprascapular nerve",
+     "zh": "冈下肌：肩胛上神经"
+    },
+    {
+     "en": "Teres minor: axillary nerve",
+     "zh": "小圆肌：腋神经"
+    },
+    {
+     "en": "Same action does not mean same nerve",
+     "zh": "动作相同不代表神经相同"
+    }
+   ]
+  },
+  {
+   "id": "review-suprascapular-compression",
+   "type": "reason",
+   "part": "review",
+   "covers": [
+    "suprascapular-nerve",
+    "suprascapular-notch",
+    "spinoglenoid-notch",
+    "supraspinatus",
+    "infraspinatus"
+   ],
+   "record": "review/q-suprascapular-compression",
+   "points": [
+    {
+     "en": "Nerve order: suprascapular notch → supraspinatus → spinoglenoid notch → infraspinatus",
+     "zh": "神经顺序：肩胛上切迹 → 冈上肌 → 冈盂切迹 → 冈下肌"
+    },
+    {
+     "en": "Suprascapular notch: both muscles",
+     "zh": "肩胛上切迹：两块都受累"
+    },
+    {
+     "en": "Spinoglenoid notch: infraspinatus only",
+     "zh": "冈盂切迹：只有冈下肌"
+    }
+   ]
+  },
+  {
+   "id": "review-arm-elevation",
+   "type": "reason",
+   "part": "review",
+   "covers": [
+    "supraspinatus",
+    "serratus-anterior",
+    "upper-trapezius",
+    "lower-trapezius",
+    "glenohumeral-joint",
+    "humeral-head"
+   ],
+   "record": "review/q-arm-elevation",
+   "points": [
+    {
+     "en": "Cuff: stabilizes and rotates the humeral head",
+     "zh": "肩袖：稳定并旋转肱骨头"
+    },
+    {
+     "en": "Serratus anterior + upper and lower trapezius: scapular upward rotation",
+     "zh": "前锯肌 + 上、下斜方肌：肩胛上旋"
+    },
+    {
+     "en": "Humeral and scapular motion work together",
+     "zh": "肱骨与肩胛骨运动协同"
+    }
+   ]
+  }
+ ]
+}

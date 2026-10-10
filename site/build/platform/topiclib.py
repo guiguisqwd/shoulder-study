@@ -12,6 +12,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlencode, urlparse
 
+import questions
 import reading
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -639,6 +640,7 @@ def validate(manifest, content, topic_dir, models=None, root=ROOT, published_ove
                     for section, blocks in reading.resolved_sections(content) if section.get('id') in set(section_ids) & (set(five) | {'papers'})}
     check_structures(chapter_text, model_ids, [m.get('id') for m in content['muscles']])
     check_pronunciation(manifest, topic_dir, fail, require)
+    questions.check(manifest, content, topic_dir, fail, require, bi)   # QC-10 (AN-60 to AN-66, on trial)
     qa = content.get('qa', {})
     require(bool(qa.get('reviewedBy', '').strip()), 'Reviewer signoff is missing')
     require(valid_review_date(qa.get('reviewedOn', '')), 'A valid review date is required (YYYY-MM-DD)')
