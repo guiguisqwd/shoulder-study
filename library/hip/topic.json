@@ -6,14 +6,14 @@
     "zh": "髋关节"
   },
   "summary": {
-    "en": "Draft chapter in progress: hip joint and all hip-region muscles (gluteal, deep rotator, anterior, medial and posterior groups).",
-    "zh": "正在编写的草稿章节：髋关节与髋部全部肌群（臀肌、深层旋转肌、前群、内侧群、后群）。"
+    "en": "The hip joint and all hip-region muscles: gluteal, deep rotator, anterior, medial and posterior groups, with nerves, movement, clinical anatomy and review.",
+    "zh": "髋关节与髋部全部肌群：臀肌、深层旋转肌、前群、内侧群、后群，以及神经、运动、临床解剖与复习。"
   },
   "region": {
     "en": "Hip and pelvis",
     "zh": "髋部与骨盆"
   },
-  "status": "draft",
+  "status": "published",
   "adapter": "standard",
   "viewer": {
     "enabled": true,

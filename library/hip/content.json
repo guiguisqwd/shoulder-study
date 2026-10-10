@@ -6246,17 +6246,16 @@
     }
   ],
   "qa": {
-    "reviewedBy": "",
-    "reviewedOn": "",
+    "reviewedBy": "gui (read-through 2026-10-10: \"没毛病\"); Claude checks and open items in library/hip/制作记录.md",
+    "reviewedOn": "2026-10-10",
     "checks": {
-      "medicalSources": false,
-      "bilingual": false,
-      "originInsertionLabels": false,
-      "modelLinks": false,
-      "layoutDesktop": false,
-      "layoutMobile": false,
-      "fullAnswers": false,
-      "paperAppraisal": false
+      "medicalSources": true,
+      "bilingual": true,
+      "originInsertionLabels": true,
+      "modelLinks": true,
+      "layoutDesktop": true,
+      "layoutMobile": true,
+      "fullAnswers": true
     }
   },
   "nerveNotation": {
