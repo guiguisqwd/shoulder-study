@@ -3050,11 +3050,7 @@
         "en": "Anterior rami of the lumbar spinal nerves, usually L1–L3",
         "zh": "腰神经前支（通常为 L1–L3）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "psoas-major",
       "diagramIds": [
         "fig-07"
       ],
@@ -3063,7 +3059,8 @@
         "m2-teachme-anterior-thigh"
       ],
       "color": "#5f7f4f",
-      "letter": "PM"
+      "letter": "PM",
+      "modelUnavailableReason": null
     },
     {
       "id": "iliacus",
@@ -3091,11 +3088,7 @@
         "en": "Femoral nerve (usually L2–L4)",
         "zh": "股神经（通常为 L2–L4）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "iliacus",
       "diagramIds": [
         "fig-07"
       ],
@@ -3104,7 +3097,8 @@
         "m2-teachme-anterior-thigh"
       ],
       "color": "#7a9a5c",
-      "letter": "IL"
+      "letter": "IL",
+      "modelUnavailableReason": null
     },
     {
       "id": "sartorius",
@@ -3132,11 +3126,7 @@
         "en": "Femoral nerve (usually L2–L3)",
         "zh": "股神经（通常为 L2–L3）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "sartorius",
       "diagramIds": [
         "fig-08"
       ],
@@ -3145,7 +3135,8 @@
         "m2-teachme-anterior-thigh"
       ],
       "color": "#4f6b45",
-      "letter": "Sa"
+      "letter": "Sa",
+      "modelUnavailableReason": null
     },
     {
       "id": "rectus-femoris",
@@ -3173,11 +3164,7 @@
         "en": "Femoral nerve (usually L2–L4)",
         "zh": "股神经（通常为 L2–L4）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "rectus-femoris",
       "diagramIds": [
         "fig-08"
       ],
@@ -3186,7 +3173,8 @@
         "m2-teachme-anterior-thigh"
       ],
       "color": "#8fa86e",
-      "letter": "RF"
+      "letter": "RF",
+      "modelUnavailableReason": null
     },
     {
       "id": "pectineus",
@@ -3214,11 +3202,7 @@
         "en": "Usually dual: femoral nerve (usually L2–L3) as the main supply, with a branch of the obturator or accessory obturator nerve to the posterior part in some people",
         "zh": "常为双重支配：主要由股神经（通常为 L2–L3）支配，部分人群其后部另有闭孔神经或副闭孔神经分支支配"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "pectineus",
       "diagramIds": [
         "fig-09"
       ],
@@ -3227,7 +3211,8 @@
         "m2-teachme-anterior-thigh"
       ],
       "color": "#6f8fa8",
-      "letter": "Pe"
+      "letter": "Pe",
+      "modelUnavailableReason": null
     },
     {
       "id": "adductor-longus",
@@ -3255,11 +3240,7 @@
         "en": "Anterior division of the obturator nerve (usually L2–L4)",
         "zh": "闭孔神经前支（通常为 L2–L4）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "adductor-longus",
       "diagramIds": [
         "fig-09"
       ],
@@ -3268,7 +3249,8 @@
         "m2-teachme-medial-thigh"
       ],
       "color": "#4a6f96",
-      "letter": "AL"
+      "letter": "AL",
+      "modelUnavailableReason": null
     },
     {
       "id": "adductor-brevis",
@@ -3296,11 +3278,7 @@
         "en": "Obturator nerve (usually L2–L4)",
         "zh": "闭孔神经（通常为 L2–L4）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "adductor-brevis",
       "diagramIds": [
         "fig-09"
       ],
@@ -3309,7 +3287,8 @@
         "m2-teachme-medial-thigh"
       ],
       "color": "#5b82a8",
-      "letter": "AB"
+      "letter": "AB",
+      "modelUnavailableReason": null
     },
     {
       "id": "adductor-magnus",
@@ -3337,11 +3316,7 @@
         "en": "Dual: the adductor part is supplied by the obturator nerve (usually L2–L4), and the hamstring part by the tibial division of the sciatic nerve (usually L4)",
         "zh": "双重支配：收肌部由闭孔神经（通常为 L2–L4）支配，腘绳肌部由坐骨神经胫神经部（通常为 L4）支配"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "adductor-magnus",
       "diagramIds": [
         "fig-09"
       ],
@@ -3350,7 +3325,8 @@
         "m2-teachme-medial-thigh"
       ],
       "color": "#3c5a7d",
-      "letter": "AM"
+      "letter": "AM",
+      "modelUnavailableReason": null
     },
     {
       "id": "gracilis",
@@ -3378,11 +3354,7 @@
         "en": "Obturator nerve (usually L2–L3)",
         "zh": "闭孔神经（通常为 L2–L3）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "gracilis",
       "diagramIds": [
         "fig-09"
       ],
@@ -3391,7 +3363,8 @@
         "m2-teachme-medial-thigh"
       ],
       "color": "#7f9cba",
-      "letter": "Gr"
+      "letter": "Gr",
+      "modelUnavailableReason": null
     },
     {
       "id": "biceps-femoris",
@@ -3420,10 +3393,6 @@
         "zh": "长头由坐骨神经胫神经部支配，短头由坐骨神经腓总神经部支配，二者通常均为 L5–S2"
       },
       "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
       "diagramIds": [
         "fig-10"
       ],
@@ -3432,7 +3401,11 @@
         "m2-teachme-hamstrings"
       ],
       "color": "#4f7f7a",
-      "letter": "BF"
+      "letter": "BF",
+      "modelUnavailableReason": {
+        "en": "The 3D model shows the two heads as separate parts; open the long head or the short head from the links in the text.",
+        "zh": "3D 模型把两个头分开显示；请从正文里“长头”“短头”的链接打开。"
+      }
     },
     {
       "id": "semitendinosus",
@@ -3460,11 +3433,7 @@
         "en": "Tibial division of the sciatic nerve (usually L5–S2)",
         "zh": "坐骨神经胫神经部（通常为 L5–S2）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "semitendinosus",
       "diagramIds": [
         "fig-10"
       ],
@@ -3473,7 +3442,8 @@
         "m2-teachme-hamstrings"
       ],
       "color": "#6b8a87",
-      "letter": "ST"
+      "letter": "ST",
+      "modelUnavailableReason": null
     },
     {
       "id": "semimembranosus",
@@ -3501,11 +3471,7 @@
         "en": "Tibial division of the sciatic nerve (usually L5–S2)",
         "zh": "坐骨神经胫神经部（通常为 L5–S2）"
       },
-      "modelTermId": null,
-      "modelUnavailableReason": {
-        "en": "Not in the bundled 3D model yet; it will be added from the Z-Anatomy source.",
-        "zh": "随附 3D 模型暂无此肌肉，之后从 Z-Anatomy 源模型补入。"
-      },
+      "modelTermId": "semimembranosus",
       "diagramIds": [
         "fig-10"
       ],
@@ -3514,7 +3480,8 @@
         "m2-teachme-hamstrings"
       ],
       "color": "#7d8b8f",
-      "letter": "SM"
+      "letter": "SM",
+      "modelUnavailableReason": null
     }
   ],
   "landmarks": [
@@ -6614,5 +6581,23 @@
       "en": "Week of 2026-10-18. Figures are drawn on bones projected from the Z-Anatomy 3D model (CC BY-SA 4.0).",
       "zh": "2026-10-18 那一周的章节。配图画在由 Z-Anatomy 3D 模型（CC BY-SA 4.0）投影出的骨骼上。"
     }
-  }
+  },
+  "modelLinks": [
+    {
+      "en": "Long head of biceps femoris",
+      "term": "biceps-femoris-long-head"
+    },
+    {
+      "en": "Short head of biceps femoris",
+      "term": "biceps-femoris-short-head"
+    },
+    {
+      "en": "Long head",
+      "term": "biceps-femoris-long-head"
+    },
+    {
+      "en": "Short head",
+      "term": "biceps-femoris-short-head"
+    }
+  ]
 }

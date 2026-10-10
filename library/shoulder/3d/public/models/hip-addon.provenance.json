@@ -1,0 +1,362 @@
+{
+  "chapter": "hip",
+  "built": "2026-10-09",
+  "config": "library/hip/3d/atlas-addon.json",
+  "source": {
+    "repository": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+    "commit": "bb293be456f6d2245191f37752d14ec76894740d",
+    "zipSha256": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+    "blendSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+    "license": "CC BY-SA 4.0 (Z-Anatomy; derived from BodyParts3D, CC BY-SA 2.1 JP)"
+  },
+  "exporter": {
+    "upstream": "https://github.com/vixotic/Vanatome/blob/8185b3fa46a1dbefdd907390918c57954fd9b816/tools/anatomy/blender/export_batch.py",
+    "sha256": "bee6407e659a3da8b1abe66ef14914295f729d891533201f2eee2fb96ca09783",
+    "license": "MIT (Vanatome contributors); vendored unchanged"
+  },
+  "blenderVersion": "5.2.0 LTS",
+  "glbSha256": "6bbda4dcc9f6e69fa551d60cb378e992c41ab01e7d0d21abfb2f6a1f96aed1ed",
+  "glbBytes": 1475160,
+  "objectCount": 26,
+  "meshes": {
+    "adductor-brevis-muscles-adductor-brevis-left": {
+      "source": "Adductor brevis.l",
+      "minMetres": [
+        0.0195,
+        0.6655,
+        -0.0088
+      ],
+      "maxMetres": [
+        0.0985,
+        0.8418,
+        0.039
+      ]
+    },
+    "adductor-brevis-muscles-adductor-brevis-right": {
+      "source": "Adductor brevis.r",
+      "minMetres": [
+        -0.0985,
+        0.6655,
+        -0.0088
+      ],
+      "maxMetres": [
+        -0.0195,
+        0.8418,
+        0.039
+      ]
+    },
+    "adductor-longus-muscles-adductor-longus-left": {
+      "source": "Adductor longus.l",
+      "minMetres": [
+        0.0118,
+        0.5768,
+        -0.0068
+      ],
+      "maxMetres": [
+        0.0949,
+        0.8416,
+        0.0529
+      ]
+    },
+    "adductor-longus-muscles-adductor-longus-right": {
+      "source": "Adductor longus.r",
+      "minMetres": [
+        -0.0949,
+        0.5768,
+        -0.0068
+      ],
+      "maxMetres": [
+        -0.0118,
+        0.8416,
+        0.0529
+      ]
+    },
+    "adductor-magnus-muscles-adductor-magnus-left": {
+      "source": "Adductor magnus.l",
+      "minMetres": [
+        0.0128,
+        0.4627,
+        -0.0357
+      ],
+      "maxMetres": [
+        0.1103,
+        0.8204,
+        0.0167
+      ]
+    },
+    "adductor-magnus-muscles-adductor-magnus-right": {
+      "source": "Adductor magnus.r",
+      "minMetres": [
+        -0.1103,
+        0.4627,
+        -0.0357
+      ],
+      "maxMetres": [
+        -0.0128,
+        0.8204,
+        0.0167
+      ]
+    },
+    "biceps-femoris-muscles-long-head-of-biceps-femoris-left": {
+      "source": "Long head of biceps femoris.l",
+      "minMetres": [
+        0.0502,
+        0.3946,
+        -0.0765
+      ],
+      "maxMetres": [
+        0.1283,
+        0.82,
+        -0.0208
+      ]
+    },
+    "biceps-femoris-muscles-long-head-of-biceps-femoris-right": {
+      "source": "Long head of biceps femoris.r",
+      "minMetres": [
+        -0.1283,
+        0.3946,
+        -0.0765
+      ],
+      "maxMetres": [
+        -0.0502,
+        0.82,
+        -0.0208
+      ]
+    },
+    "biceps-femoris-muscles-short-head-of-biceps-femoris-left": {
+      "source": "Short head of biceps femoris.l",
+      "minMetres": [
+        0.0867,
+        0.4032,
+        -0.0561
+      ],
+      "maxMetres": [
+        0.1235,
+        0.7046,
+        -0.0142
+      ]
+    },
+    "biceps-femoris-muscles-short-head-of-biceps-femoris-right": {
+      "source": "Short head of biceps femoris.r",
+      "minMetres": [
+        -0.1235,
+        0.4032,
+        -0.0561
+      ],
+      "maxMetres": [
+        -0.0867,
+        0.7046,
+        -0.0142
+      ]
+    },
+    "gracilis-muscles-gracilis-muscle-left": {
+      "source": "Gracilis muscle.l",
+      "minMetres": [
+        0.0097,
+        0.3444,
+        -0.0481
+      ],
+      "maxMetres": [
+        0.0627,
+        0.837,
+        0.0424
+      ]
+    },
+    "gracilis-muscles-gracilis-muscle-right": {
+      "source": "Gracilis muscle.r",
+      "minMetres": [
+        -0.0627,
+        0.3444,
+        -0.0481
+      ],
+      "maxMetres": [
+        -0.0097,
+        0.837,
+        0.0424
+      ]
+    },
+    "iliacus-muscles-iliacus-muscle-left": {
+      "source": "Iliacus muscle.l",
+      "minMetres": [
+        0.0625,
+        0.7722,
+        -0.0374
+      ],
+      "maxMetres": [
+        0.1187,
+        1.0038,
+        0.0488
+      ]
+    },
+    "iliacus-muscles-iliacus-muscle-right": {
+      "source": "Iliacus muscle.r",
+      "minMetres": [
+        -0.1187,
+        0.7722,
+        -0.0374
+      ],
+      "maxMetres": [
+        -0.0625,
+        1.0038,
+        0.0488
+      ]
+    },
+    "pectineus-muscles-pectineus-muscle-left": {
+      "source": "Pectineus muscle.l",
+      "minMetres": [
+        0.0158,
+        0.7333,
+        -0.0046
+      ],
+      "maxMetres": [
+        0.0986,
+        0.8645,
+        0.056
+      ]
+    },
+    "pectineus-muscles-pectineus-muscle-right": {
+      "source": "Pectineus muscle.r",
+      "minMetres": [
+        -0.0986,
+        0.7333,
+        -0.0046
+      ],
+      "maxMetres": [
+        -0.0158,
+        0.8645,
+        0.056
+      ]
+    },
+    "psoas-major-muscles-psoas-major-left": {
+      "source": "Psoas major.l",
+      "minMetres": [
+        0.0082,
+        0.7755,
+        -0.0409
+      ],
+      "maxMetres": [
+        0.108,
+        1.1555,
+        0.037
+      ]
+    },
+    "psoas-major-muscles-psoas-major-right": {
+      "source": "Psoas major.r",
+      "minMetres": [
+        -0.108,
+        0.7755,
+        -0.0409
+      ],
+      "maxMetres": [
+        -0.0082,
+        1.1555,
+        0.037
+      ]
+    },
+    "rectus-femoris-muscles-rectus-femoris-muscle-left": {
+      "source": "Rectus femoris muscle.l",
+      "minMetres": [
+        0.0667,
+        0.3705,
+        -0.0089
+      ],
+      "maxMetres": [
+        0.1483,
+        0.9159,
+        0.0603
+      ]
+    },
+    "rectus-femoris-muscles-rectus-femoris-muscle-right": {
+      "source": "Rectus femoris muscle.r",
+      "minMetres": [
+        -0.1483,
+        0.3705,
+        -0.0089
+      ],
+      "maxMetres": [
+        -0.0667,
+        0.9159,
+        0.0603
+      ]
+    },
+    "sartorius-muscles-sartorius-muscle-left": {
+      "source": "Sartorius muscle.l",
+      "minMetres": [
+        0.0213,
+        0.3489,
+        -0.0326
+      ],
+      "maxMetres": [
+        0.1245,
+        0.948,
+        0.0576
+      ]
+    },
+    "sartorius-muscles-sartorius-muscle-right": {
+      "source": "Sartorius muscle.r",
+      "minMetres": [
+        -0.1245,
+        0.3489,
+        -0.0326
+      ],
+      "maxMetres": [
+        -0.0213,
+        0.948,
+        0.0576
+      ]
+    },
+    "semimembranosus-muscles-semimembranosus-muscle-left": {
+      "source": "Semimembranosus muscle.l",
+      "minMetres": [
+        0.0151,
+        0.3853,
+        -0.0692
+      ],
+      "maxMetres": [
+        0.0788,
+        0.8027,
+        -0.0141
+      ]
+    },
+    "semimembranosus-muscles-semimembranosus-muscle-right": {
+      "source": "Semimembranosus muscle.r",
+      "minMetres": [
+        -0.0788,
+        0.3853,
+        -0.0692
+      ],
+      "maxMetres": [
+        -0.0151,
+        0.8027,
+        -0.0141
+      ]
+    },
+    "semitendinosus-muscles-semitendinosus-muscle-left": {
+      "source": "Semitendinosus muscle.l",
+      "minMetres": [
+        0.0327,
+        0.3515,
+        -0.0755
+      ],
+      "maxMetres": [
+        0.0688,
+        0.8114,
+        -0.0173
+      ]
+    },
+    "semitendinosus-muscles-semitendinosus-muscle-right": {
+      "source": "Semitendinosus muscle.r",
+      "minMetres": [
+        -0.0688,
+        0.3515,
+        -0.0755
+      ],
+      "maxMetres": [
+        -0.0327,
+        0.8114,
+        -0.0173
+      ]
+    }
+  },
+  "mappingNotes": []
+}

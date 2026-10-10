@@ -1,0 +1,580 @@
+{
+  "schemaVersion": 1,
+  "atlasId": "vanatome-human",
+  "atlasVersion": "1.4.0",
+  "buildId": "994e6cc8ffbb212e",
+  "bundleId": "hip-addon",
+  "nodeCount": 26,
+  "structures": [
+    {
+      "id": "adductor-brevis-muscles",
+      "name": "Adductor Brevis",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -0.8244,
+        0.1058
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "adductor-brevis-muscles-adductor-brevis-left",
+      "name": "Adductor brevis.l",
+      "kind": "part",
+      "parentId": "adductor-brevis-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.413,
+        -0.8244,
+        0.1058
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "adductor-brevis-muscles-adductor-brevis-right",
+      "name": "Adductor brevis.r",
+      "kind": "part",
+      "parentId": "adductor-brevis-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.413,
+        -0.8244,
+        0.1058
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "adductor-longus-muscles",
+      "name": "Adductor Longus",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -1.1356,
+        0.1613
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "adductor-longus-muscles-adductor-longus-left",
+      "name": "Adductor longus.l",
+      "kind": "part",
+      "parentId": "adductor-longus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.3735,
+        -1.1356,
+        0.1613
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "adductor-longus-muscles-adductor-longus-right",
+      "name": "Adductor longus.r",
+      "kind": "part",
+      "parentId": "adductor-longus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.3735,
+        -1.1356,
+        0.1613
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "adductor-magnus-muscles",
+      "name": "Adductor Magnus",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -1.6093,
+        -0.0663
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "adductor-magnus-muscles-adductor-magnus-left",
+      "name": "Adductor magnus.l",
+      "kind": "part",
+      "parentId": "adductor-magnus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.4309,
+        -1.6093,
+        -0.0663
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "adductor-magnus-muscles-adductor-magnus-right",
+      "name": "Adductor magnus.r",
+      "kind": "part",
+      "parentId": "adductor-magnus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.4309,
+        -1.6093,
+        -0.0663
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "biceps-femoris-muscles",
+      "name": "Biceps Femoris",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -1.8489,
+        -0.3175
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "biceps-femoris-muscles-long-head-of-biceps-femoris-left",
+      "name": "Long head of biceps femoris.l",
+      "kind": "part",
+      "parentId": "biceps-femoris-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.6246,
+        -1.8489,
+        -0.3406
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "biceps-femoris-muscles-long-head-of-biceps-femoris-right",
+      "name": "Long head of biceps femoris.r",
+      "kind": "part",
+      "parentId": "biceps-femoris-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.6246,
+        -1.8489,
+        -0.3406
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "biceps-femoris-muscles-short-head-of-biceps-femoris-left",
+      "name": "Short head of biceps femoris.l",
+      "kind": "part",
+      "parentId": "biceps-femoris-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.7357,
+        -2.2229,
+        -0.2461
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "biceps-femoris-muscles-short-head-of-biceps-femoris-right",
+      "name": "Short head of biceps femoris.r",
+      "kind": "part",
+      "parentId": "biceps-femoris-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.7357,
+        -2.2229,
+        -0.2461
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "gracilis-muscles",
+      "name": "Gracilis",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -1.965,
+        -0.02
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "gracilis-muscles-gracilis-muscle-left",
+      "name": "Gracilis muscle.l",
+      "kind": "part",
+      "parentId": "gracilis-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.2532,
+        -1.965,
+        -0.02
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "gracilis-muscles-gracilis-muscle-right",
+      "name": "Gracilis muscle.r",
+      "kind": "part",
+      "parentId": "gracilis-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.2532,
+        -1.965,
+        -0.02
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "iliacus-muscles",
+      "name": "Iliacus",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.0,
+        0.1158,
+        0.0398
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "iliacus-muscles-iliacus-muscle-left",
+      "name": "Iliacus muscle.l",
+      "kind": "part",
+      "parentId": "iliacus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.6342,
+        0.1158,
+        0.0398
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "iliacus-muscles-iliacus-muscle-right",
+      "name": "Iliacus muscle.r",
+      "kind": "part",
+      "parentId": "iliacus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.6342,
+        0.1158,
+        0.0398
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "pectineus-muscles",
+      "name": "Pectineus",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -0.5075,
+        0.1797
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "pectineus-muscles-pectineus-muscle-left",
+      "name": "Pectineus muscle.l",
+      "kind": "part",
+      "parentId": "pectineus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.4002,
+        -0.5075,
+        0.1797
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "pectineus-muscles-pectineus-muscle-right",
+      "name": "Pectineus muscle.r",
+      "kind": "part",
+      "parentId": "pectineus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.4002,
+        -0.5075,
+        0.1797
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "psoas-major-muscles",
+      "name": "Psoas Major",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.0,
+        0.6586,
+        -0.0137
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "psoas-major-muscles-psoas-major-left",
+      "name": "Psoas major.l",
+      "kind": "part",
+      "parentId": "psoas-major-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.4064,
+        0.6586,
+        -0.0137
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "psoas-major-muscles-psoas-major-right",
+      "name": "Psoas major.r",
+      "kind": "part",
+      "parentId": "psoas-major-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.4064,
+        0.6586,
+        -0.0137
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "rectus-femoris-muscles",
+      "name": "Rectus Femoris",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -1.5978,
+        0.1798
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "rectus-femoris-muscles-rectus-femoris-muscle-left",
+      "name": "Rectus femoris muscle.l",
+      "kind": "part",
+      "parentId": "rectus-femoris-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.7527,
+        -1.5978,
+        0.1798
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "rectus-femoris-muscles-rectus-femoris-muscle-right",
+      "name": "Rectus femoris muscle.r",
+      "kind": "part",
+      "parentId": "rectus-femoris-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.7527,
+        -1.5978,
+        0.1798
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "sartorius-muscles",
+      "name": "Sartorius",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -1.5606,
+        0.0873
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "sartorius-muscles-sartorius-muscle-left",
+      "name": "Sartorius muscle.l",
+      "kind": "part",
+      "parentId": "sartorius-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.5102,
+        -1.5606,
+        0.0873
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "sartorius-muscles-sartorius-muscle-right",
+      "name": "Sartorius muscle.r",
+      "kind": "part",
+      "parentId": "sartorius-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.5102,
+        -1.5606,
+        0.0873
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "semimembranosus-muscles",
+      "name": "Semimembranosus",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -1.9418,
+        -0.2916
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "semimembranosus-muscles-semimembranosus-muscle-left",
+      "name": "Semimembranosus muscle.l",
+      "kind": "part",
+      "parentId": "semimembranosus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.3284,
+        -1.9418,
+        -0.2916
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "semimembranosus-muscles-semimembranosus-muscle-right",
+      "name": "Semimembranosus muscle.r",
+      "kind": "part",
+      "parentId": "semimembranosus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.3284,
+        -1.9418,
+        -0.2916
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "semitendinosus-muscles",
+      "name": "Semitendinosus",
+      "kind": "organ",
+      "parentId": "muscular-system",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.0,
+        -2.0301,
+        -0.3249
+      ],
+      "objectCount": 0
+    },
+    {
+      "id": "semitendinosus-muscles-semitendinosus-muscle-left",
+      "name": "Semitendinosus muscle.l",
+      "kind": "part",
+      "parentId": "semitendinosus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        0.3552,
+        -2.0301,
+        -0.3249
+      ],
+      "objectCount": 1
+    },
+    {
+      "id": "semitendinosus-muscles-semitendinosus-muscle-right",
+      "name": "Semitendinosus muscle.r",
+      "kind": "part",
+      "parentId": "semitendinosus-muscles",
+      "system": "muscular",
+      "layer": "muscular",
+      "selectable": true,
+      "position": [
+        -0.3552,
+        -2.0301,
+        -0.3249
+      ],
+      "objectCount": 1
+    }
+  ]
+}

@@ -369,11 +369,11 @@ class TopicTests(unittest.TestCase):
         self.assertNotIn('addons', catalog['second-topic']['viewer'])
         self.assertNotIn('addons', json.loads((path / 'topic.json').read_text())['viewer'])  # derived, never written back
 
-    def test_real_catalog_gives_the_shoulder_its_addon_and_leaves_hip_unchanged(self):
+    def test_real_catalog_gives_each_chapter_its_own_addon(self):
         with tempfile.TemporaryDirectory() as output:
             catalog = {t['id']: t for t in build(output=Path(output))}
         self.assertEqual(catalog['shoulder']['viewer']['addons'], ['shoulder'])
-        self.assertNotIn('addons', catalog['hip']['viewer'])
+        self.assertEqual(catalog['hip']['viewer']['addons'], ['hip'])
 
 
 if __name__ == '__main__': unittest.main()

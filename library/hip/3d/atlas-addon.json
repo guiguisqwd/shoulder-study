@@ -1,0 +1,455 @@
+{
+  "_note": {
+    "en": "Hip 3D add-on: the 12 hip-region muscles the bundled demo model lacks. Built by site/build/atlas/build-addon.py from the pinned Z-Anatomy source; checked by check-addon.py (CI). Ids come from the exporter (group id + source mesh name). Position checks below were written after measuring the exported meshes.",
+    "zh": "髋部 3D 附加模型：自带演示模型里没有的 12 块髋部肌肉。由 site/build/atlas/build-addon.py 从固定的 Z-Anatomy 源文件导出，check-addon.py 检查（CI 也跑）。ID 由导出脚本生成（组 id + 源网格名）。下面的位置检查是导出后按实测范围写的。"
+  },
+  "output": {
+    "glb": "public/models/z-anatomy-1.4.0-hip-addon.glb",
+    "metadata": "public/models/hip-addon.metadata.json",
+    "provenance": "public/models/hip-addon.provenance.json"
+  },
+  "batch": {
+    "description": "Hip-region muscles missing from the bundled z-anatomy-1.4.0 demo model.",
+    "groups": [
+      {
+        "id": "psoas-major-muscles",
+        "name": "Psoas Major",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Psoas major.l",
+          "Psoas major.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "iliacus-muscles",
+        "name": "Iliacus",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Iliacus muscle.l",
+          "Iliacus muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "sartorius-muscles",
+        "name": "Sartorius",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Sartorius muscle.l",
+          "Sartorius muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "rectus-femoris-muscles",
+        "name": "Rectus Femoris",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Rectus femoris muscle.l",
+          "Rectus femoris muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "pectineus-muscles",
+        "name": "Pectineus",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Pectineus muscle.l",
+          "Pectineus muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "adductor-longus-muscles",
+        "name": "Adductor Longus",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Adductor longus.l",
+          "Adductor longus.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "adductor-brevis-muscles",
+        "name": "Adductor Brevis",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Adductor brevis.l",
+          "Adductor brevis.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "adductor-magnus-muscles",
+        "name": "Adductor Magnus",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Adductor magnus.l",
+          "Adductor magnus.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "gracilis-muscles",
+        "name": "Gracilis",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Gracilis muscle.l",
+          "Gracilis muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "biceps-femoris-muscles",
+        "name": "Biceps Femoris",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Long head of biceps femoris.l",
+          "Long head of biceps femoris.r",
+          "Short head of biceps femoris.l",
+          "Short head of biceps femoris.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "semitendinosus-muscles",
+        "name": "Semitendinosus",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Semitendinosus muscle.l",
+          "Semitendinosus muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "semimembranosus-muscles",
+        "name": "Semimembranosus",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Semimembranosus muscle.l",
+          "Semimembranosus muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      }
+    ]
+  },
+  "checks": [
+    {
+      "structure": "psoas-major-muscles-psoas-major-{side}",
+      "rule": "topAbove",
+      "bone": "Vertebra L2",
+      "why": "arises from T12–L4 vertebral bodies, so it reaches above the upper lumbar spine"
+    },
+    {
+      "structure": "psoas-major-muscles-psoas-major-{side}",
+      "rule": "overlaps",
+      "bone": "Femur{side}",
+      "why": "inserts on the lesser trochanter",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "iliacus-muscles-iliacus-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the iliac fossa",
+      "tolerance": 0.005
+    },
+    {
+      "structure": "iliacus-muscles-iliacus-muscle-{side}",
+      "rule": "topBelow",
+      "bone": "Vertebra L3",
+      "why": "stays within the iliac fossa, below the lumbar origin of psoas"
+    },
+    {
+      "structure": "iliacus-muscles-iliacus-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Femur{side}",
+      "why": "inserts on the lesser trochanter with psoas",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "sartorius-muscles-sartorius-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the anterior superior iliac spine",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "sartorius-muscles-sartorius-muscle-{side}",
+      "rule": "bottomBelow",
+      "bone": "Femur{side}",
+      "why": "crosses the knee to the medial tibia (pes anserinus)"
+    },
+    {
+      "structure": "rectus-femoris-muscles-rectus-femoris-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the anterior inferior iliac spine",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "rectus-femoris-muscles-rectus-femoris-muscle-{side}",
+      "rule": "bottomBelow",
+      "bone": "Femur{side}",
+      "why": "reaches the patella and tibial tuberosity via the quadriceps tendon"
+    },
+    {
+      "structure": "pectineus-muscles-pectineus-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the pecten pubis",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "pectineus-muscles-pectineus-muscle-{side}",
+      "rule": "bottomAbove",
+      "bone": "Patella{side}",
+      "why": "ends on the pectineal line of the proximal femur"
+    },
+    {
+      "structure": "adductor-longus-muscles-adductor-longus-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the body of the pubis",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "adductor-longus-muscles-adductor-longus-{side}",
+      "rule": "bottomAbove",
+      "bone": "Patella{side}",
+      "why": "inserts on the middle third of the linea aspera"
+    },
+    {
+      "structure": "adductor-brevis-muscles-adductor-brevis-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the body and inferior ramus of the pubis",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "adductor-brevis-muscles-adductor-brevis-{side}",
+      "rule": "bottomAbove",
+      "bone": "Patella{side}",
+      "why": "inserts on the upper linea aspera"
+    },
+    {
+      "structure": "adductor-magnus-muscles-adductor-magnus-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the ischiopubic ramus and ischial tuberosity",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "adductor-magnus-muscles-adductor-magnus-{side}",
+      "rule": "bottomAbove",
+      "bone": "Tibia{side}",
+      "why": "hamstring part ends on the adductor tubercle of the femur, above the knee joint"
+    },
+    {
+      "structure": "gracilis-muscles-gracilis-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the body and inferior ramus of the pubis",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "gracilis-muscles-gracilis-muscle-{side}",
+      "rule": "bottomBelow",
+      "bone": "Femur{side}",
+      "why": "crosses the knee to the medial tibia (pes anserinus)"
+    },
+    {
+      "structure": "biceps-femoris-muscles-long-head-of-biceps-femoris-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the ischial tuberosity",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "biceps-femoris-muscles-long-head-of-biceps-femoris-{side}",
+      "rule": "bottomBelow",
+      "bone": "Femur{side}",
+      "why": "crosses the knee to the head of the fibula"
+    },
+    {
+      "structure": "biceps-femoris-muscles-short-head-of-biceps-femoris-{side}",
+      "rule": "topBelow",
+      "bone": "Hip bone{side}",
+      "why": "arises from the linea aspera, not from the pelvis"
+    },
+    {
+      "structure": "biceps-femoris-muscles-short-head-of-biceps-femoris-{side}",
+      "rule": "bottomBelow",
+      "bone": "Femur{side}",
+      "why": "joins the long head on the head of the fibula"
+    },
+    {
+      "structure": "semitendinosus-muscles-semitendinosus-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the ischial tuberosity",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "semitendinosus-muscles-semitendinosus-muscle-{side}",
+      "rule": "bottomBelow",
+      "bone": "Femur{side}",
+      "why": "crosses the knee to the medial tibia (pes anserinus)"
+    },
+    {
+      "structure": "semimembranosus-muscles-semimembranosus-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Hip bone{side}",
+      "why": "arises from the ischial tuberosity",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "semimembranosus-muscles-semimembranosus-muscle-{side}",
+      "rule": "bottomBelow",
+      "bone": "Femur{side}",
+      "why": "inserts on the posteromedial tibial condyle"
+    }
+  ],
+  "mappingNotes": [
+    {
+      "structure": "adductor-magnus-muscles-adductor-magnus",
+      "showAs": "Adductor magnus",
+      "zAnatomyName": "Adductor magnus",
+      "why": "Z-Anatomy also has a separate '(Adductor minimus)' mesh (the upper part of adductor magnus); it is not exported, as the chapter does not teach it separately."
+    },
+    {
+      "structure": "biceps-femoris-muscles",
+      "showAs": "Biceps femoris (long head, short head)",
+      "zAnatomyName": "Long head of biceps femoris / Short head of biceps femoris",
+      "why": "Two meshes in one group; names match the anatomy, confirmed by position (short head starts below the hip bone)."
+    },
+    {
+      "structure": "*",
+      "showAs": "",
+      "zAnatomyName": "",
+      "why": "Hemispheres: in the base skeletal model '.l' meshes lie at +x, and every exported '.l' muscle lies at +x too, so -left/-right ids match the skeleton. Measured 2026-10-09: hamstrings lie behind the femur (z < 0), adductor and anterior groups in front."
+    }
+  ]
+}

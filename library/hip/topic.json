@@ -174,6 +174,162 @@
           "right": "deep-gluteal-muscles-obturator-externus-right",
           "left": "deep-gluteal-muscles-obturator-externus-left"
         }
+      },
+      {
+        "id": "psoas-major",
+        "name": {
+          "en": "Psoas major",
+          "zh": "腰大肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "psoas-major-muscles-psoas-major-right",
+          "left": "psoas-major-muscles-psoas-major-left"
+        }
+      },
+      {
+        "id": "iliacus",
+        "name": {
+          "en": "Iliacus",
+          "zh": "髂肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "iliacus-muscles-iliacus-muscle-right",
+          "left": "iliacus-muscles-iliacus-muscle-left"
+        }
+      },
+      {
+        "id": "sartorius",
+        "name": {
+          "en": "Sartorius",
+          "zh": "缝匠肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "sartorius-muscles-sartorius-muscle-right",
+          "left": "sartorius-muscles-sartorius-muscle-left"
+        }
+      },
+      {
+        "id": "rectus-femoris",
+        "name": {
+          "en": "Rectus femoris",
+          "zh": "股直肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "rectus-femoris-muscles-rectus-femoris-muscle-right",
+          "left": "rectus-femoris-muscles-rectus-femoris-muscle-left"
+        }
+      },
+      {
+        "id": "pectineus",
+        "name": {
+          "en": "Pectineus",
+          "zh": "耻骨肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "pectineus-muscles-pectineus-muscle-right",
+          "left": "pectineus-muscles-pectineus-muscle-left"
+        }
+      },
+      {
+        "id": "adductor-longus",
+        "name": {
+          "en": "Adductor longus",
+          "zh": "长收肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "adductor-longus-muscles-adductor-longus-right",
+          "left": "adductor-longus-muscles-adductor-longus-left"
+        }
+      },
+      {
+        "id": "adductor-brevis",
+        "name": {
+          "en": "Adductor brevis",
+          "zh": "短收肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "adductor-brevis-muscles-adductor-brevis-right",
+          "left": "adductor-brevis-muscles-adductor-brevis-left"
+        }
+      },
+      {
+        "id": "adductor-magnus",
+        "name": {
+          "en": "Adductor magnus",
+          "zh": "大收肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "adductor-magnus-muscles-adductor-magnus-right",
+          "left": "adductor-magnus-muscles-adductor-magnus-left"
+        }
+      },
+      {
+        "id": "gracilis",
+        "name": {
+          "en": "Gracilis",
+          "zh": "股薄肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "gracilis-muscles-gracilis-muscle-right",
+          "left": "gracilis-muscles-gracilis-muscle-left"
+        }
+      },
+      {
+        "id": "semitendinosus",
+        "name": {
+          "en": "Semitendinosus",
+          "zh": "半腱肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "semitendinosus-muscles-semitendinosus-muscle-right",
+          "left": "semitendinosus-muscles-semitendinosus-muscle-left"
+        }
+      },
+      {
+        "id": "semimembranosus",
+        "name": {
+          "en": "Semimembranosus",
+          "zh": "半膜肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "semimembranosus-muscles-semimembranosus-muscle-right",
+          "left": "semimembranosus-muscles-semimembranosus-muscle-left"
+        }
+      },
+      {
+        "id": "biceps-femoris-long-head",
+        "name": {
+          "en": "Long head of biceps femoris",
+          "zh": "股二头肌长头"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "biceps-femoris-muscles-long-head-of-biceps-femoris-right",
+          "left": "biceps-femoris-muscles-long-head-of-biceps-femoris-left"
+        }
+      },
+      {
+        "id": "biceps-femoris-short-head",
+        "name": {
+          "en": "Short head of biceps femoris",
+          "zh": "股二头肌短头"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "biceps-femoris-muscles-short-head-of-biceps-femoris-right",
+          "left": "biceps-femoris-muscles-short-head-of-biceps-femoris-left"
+        }
       }
     ],
     "landmarks": []
@@ -339,7 +495,7 @@
         "innervation",
         "movement"
       ],
-      "modelTermId": null
+      "modelTermId": "psoas-major"
     },
     {
       "id": "iliacus",
@@ -353,7 +509,7 @@
         "innervation",
         "movement"
       ],
-      "modelTermId": null
+      "modelTermId": "iliacus"
     },
     {
       "id": "sartorius",
@@ -368,7 +524,7 @@
         "movement",
         "review"
       ],
-      "modelTermId": null
+      "modelTermId": "sartorius"
     },
     {
       "id": "rectus-femoris",
@@ -383,7 +539,7 @@
         "movement",
         "clinical"
       ],
-      "modelTermId": null
+      "modelTermId": "rectus-femoris"
     },
     {
       "id": "pectineus",
@@ -397,7 +553,7 @@
         "innervation",
         "movement"
       ],
-      "modelTermId": null
+      "modelTermId": "pectineus"
     },
     {
       "id": "adductor-longus",
@@ -412,7 +568,7 @@
         "movement",
         "clinical"
       ],
-      "modelTermId": null
+      "modelTermId": "adductor-longus"
     },
     {
       "id": "adductor-brevis",
@@ -426,7 +582,7 @@
         "innervation",
         "movement"
       ],
-      "modelTermId": null
+      "modelTermId": "adductor-brevis"
     },
     {
       "id": "adductor-magnus",
@@ -440,7 +596,7 @@
         "innervation",
         "movement"
       ],
-      "modelTermId": null
+      "modelTermId": "adductor-magnus"
     },
     {
       "id": "gracilis",
@@ -455,7 +611,7 @@
         "movement",
         "review"
       ],
-      "modelTermId": null
+      "modelTermId": "gracilis"
     },
     {
       "id": "biceps-femoris",
@@ -485,7 +641,7 @@
         "movement",
         "review"
       ],
-      "modelTermId": null
+      "modelTermId": "semitendinosus"
     },
     {
       "id": "semimembranosus",
@@ -499,7 +655,7 @@
         "innervation",
         "movement"
       ],
-      "modelTermId": null
+      "modelTermId": "semimembranosus"
     },
     {
       "id": "lumbar-plexus",
