@@ -37,6 +37,22 @@ export type DepthNearby = {
   direction: DepthDirection | null;
   closestPoint: VanatomeVector3;
 };
+/** A published source the layer order was compared with (opened and read on `accessed`). */
+export type DepthSource = { title: string; publisher: string; url: string; accessed: string; supports: DepthText };
+type DepthSourceMuscleBase = { match: string; english: string; chinese: string; anatomyIds: string[] };
+/** One muscle of a published layer description: on the probe (depth range) or not (closest approach of the axis). */
+export type DepthSourceMuscle =
+  | (DepthSourceMuscleBase & { onProbe: true; layerIds: string[]; entryCm: number; exitCm: number })
+  | (DepthSourceMuscleBase & { onProbe: false; closestPartId: string; closestPartEnglish: string; distanceToProbeCm: number; atProbeDepthCm: number; direction: DepthDirection });
+export type DepthSourceComparison = {
+  sequence: DepthText;
+  agreement: 'same-order' | 'differs';
+  muscles: DepthSourceMuscle[];
+  /** Muscles the probe crosses before the first bone that the description does not list. */
+  modelOnlyMuscles: { anatomyId: string; english: string; chinese: string; entryCm: number; exitCm: number }[];
+  notes: DepthText[];
+  sources: DepthSource[];
+};
 export type DepthEntry = {
   pointId: string;
   side: 'right' | 'left';
@@ -63,6 +79,8 @@ export type DepthEntry = {
   alsoInsideReference: string[];
   nearby: DepthNearby[];
   notModeled: { english: string; chinese: string; note: DepthText }[];
+  /** Present for points whose layer order was compared with published descriptions (SI11, SI12, SI9). */
+  sourceComparison?: DepthSourceComparison | null;
   limitations: DepthText[];
 };
 export type DepthData = {
@@ -91,6 +109,16 @@ const structureColors: Record<string, string> = {
   'rotator-cuff-muscles-infraspinatus-muscle': '#6ccaa4',
   'rotator-cuff-muscles-teres-minor-muscle': '#b69be3',
   'rotator-cuff-muscles-subscapularis-muscle': '#e6a2c6',
+  // Shoulder add-on muscles that appear on the probes or among nearby structures.
+  'trapezius-muscles-descending-part-of-trapezius-muscle': '#b8566c',
+  'trapezius-muscles-transverse-part-of-trapezius-muscle': '#c9637a',
+  'trapezius-muscles-ascending-part-of-trapezius-muscle': '#d9707f',
+  'serratus-anterior-muscles-serratus-anterior-muscle': '#b5c95f',
+  'triceps-brachii-muscles-long-head-of-triceps-brachii': '#62c3d6',
+  'teres-major-muscles-teres-major-muscle': '#8c9de6',
+  'latissimus-dorsi-muscles-latissimus-dorsi-muscle': '#7fb39a',
+  'levator-scapulae-muscles-levator-scapulae': '#c49ad6',
+  'biceps-brachii-muscles-long-head-of-biceps-brachii': '#e3b25a',
   'appendicular-skeleton-scapula': '#eadba8',
   'appendicular-skeleton-humerus': '#dccb92',
   'appendicular-skeleton-clavicle': '#efe2bb',

@@ -4,16 +4,21 @@
  *   node scripts/compute-acupoint-depth.mjs          # write public/acupoint-depth.json
  *   node scripts/compute-acupoint-depth.mjs --check  # recompute, compare with the file, run sanity checks
  *
- * Scope: geometry of the Z-Anatomy / Vanatome GLB meshes only. Skin, subcutaneous fat,
- * fascia, nerves, vessels and bursae are not in the model. The output is a study aid; it
- * is not a needling path, a needling depth or a clinically validated acupoint location.
+ * Scope: geometry of the Z-Anatomy / Vanatome GLB meshes only: the bundled muscular and
+ * skeletal atlases plus the shoulder add-on (z-anatomy-1.4.0-shoulder-addon.glb: trapezius,
+ * latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles, exported
+ * by site/build/atlas/ in the same coordinate frame). Skin, subcutaneous fat, fascia, nerves,
+ * vessels and bursae are not in the model. The output is a study aid; it is not a needling
+ * path, a needling depth or a clinically validated acupoint location.
  *
  * The GLB reader is dependency-free so the check can run without node_modules. It reads
- * node TRS transforms, float32 POSITION and uint8/16/32 indices (the only layouts these
- * files use) and applies the same Matrix4.compose arithmetic as three.js. `--check` proves
- * this by reproducing every ray count and surface distance stored in
- * public/geometry-validation.json, which validate-reference-geometry.mjs produced with
- * three.js GLTFLoader + Raycaster.
+ * node TRS/matrix transforms (including the add-on's mirrored left-side nodes: a 180° rotation
+ * with scale -1), non-normalized float32 POSITION with or without byteStride (the bundled
+ * atlases interleave at 24 bytes, the add-on packs at 12) and uint8/16/32 indices, and applies
+ * the same Matrix4.compose arithmetic as three.js. `--check` proves this by reproducing every
+ * ray count and surface distance stored in public/geometry-validation.json, which
+ * validate-reference-geometry.mjs produced with three.js GLTFLoader + Raycaster for meshes of
+ * all three files.
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { isDeepStrictEqual } from 'node:util';
@@ -27,7 +32,8 @@ const dataFile = new URL('src/data.ts', projectRoot);
 const modelFile = new URL('src/model.ts', projectRoot);
 const referencesTsFile = new URL('src/references.ts', projectRoot);
 const geometryValidationFile = new URL('public/geometry-validation.json', projectRoot);
-const modelFiles = ['z-anatomy-1.4.0-muscular.glb', 'z-anatomy-1.4.0-skeletal.glb'];
+const addonFile = 'z-anatomy-1.4.0-shoulder-addon.glb';
+const modelFiles = ['z-anatomy-1.4.0-muscular.glb', 'z-anatomy-1.4.0-skeletal.glb', addonFile];
 
 const SCHEMA_VERSION = 1;
 const REACH_M = 0.3; // Rays start 30 cm outside the reference, far outside the body surface.
@@ -46,30 +52,37 @@ const DIRECTION_TERM_MIN = 0.45; // Component of the unit vector needed to name 
  * Approach directions are written for the RIGHT side as outward unit vectors (pointing from
  * the reference toward the outside). The model is y-up, +z anterior, right side at x < 0 (see
  * axisConventions), so "lateral" on the right is -x; the left side mirrors x.
+ *
+ * outerSurface is the first modeled surface the nominal line must meet (an anatomy-ID prefix).
+ * patchScope 'part' takes the surface normal from that one mesh; 'muscle' pools every mesh of
+ * that muscle on the same side, for a muscle sheet the source model splits into parts.
  */
 const pointPlans = {
   SI11: {
     approach: { en: 'Posterior', zh: '后方' },
     nominalOutwardRight: [0, 0, -1],
     outerSurface: 'rotator-cuff-muscles-infraspinatus-muscle',
+    patchScope: 'part',
     rationale: {
-      en: 'Tianzong lies in the infraspinous fossa; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the infraspinatus) over the fossa.',
-      zh: '天宗位于冈下窝；探针自后方进入，并按模型外表面（冈下肌）法线调整为垂直于该处外表面。',
+      en: 'Tianzong lies in the infraspinous fossa; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the infraspinatus) over the fossa. In this model the edge of the lower trapezius lies just medial to the probe, so the probe meets the infraspinatus first.',
+      zh: '天宗位于冈下窝；探针自后方进入，并按模型外表面（冈下肌）法线调整为垂直于该处外表面。本模型中斜方肌下部的边缘恰在探针内侧，因此探针首先遇到冈下肌。',
     },
   },
   SI12: {
     approach: { en: 'Posterior', zh: '后方' },
     nominalOutwardRight: [0, 0, -1],
-    outerSurface: 'rotator-cuff-muscles-supraspinatus-muscle',
+    outerSurface: 'trapezius-muscles-',
+    patchScope: 'muscle',
     rationale: {
-      en: 'Bingfeng lies in the supraspinous fossa above the midpoint of the scapular spine; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the supraspinatus).',
-      zh: '秉风位于肩胛冈中点上方的冈上窝；探针自后方进入，并按模型外表面（冈上肌）法线调整为垂直于该处外表面。',
+      en: 'Bingfeng lies in the supraspinous fossa above the midpoint of the scapular spine; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface, which is now the trapezius covering the supraspinatus. The source model splits the trapezius into three meshes and the split passes this spot, so the surface normal is taken from all trapezius meshes of that side rather than from one part.',
+      zh: '秉风位于肩胛冈中点上方的冈上窝；探针自后方进入，并按模型外表面法线调整为垂直于该处外表面；现在该外表面是覆盖冈上肌的斜方肌。原始模型把斜方肌分成三个网格，分界线正好经过此处，因此表面法线取同侧全部斜方肌网格，而不是其中一部分。',
     },
   },
   SI9: {
     approach: { en: 'Posterior', zh: '后方' },
     nominalOutwardRight: [0, 0, -1],
     outerSurface: 'deltoid-muscles-',
+    patchScope: 'part',
     rationale: {
       en: 'Jianzhen lies posteroinferior to the shoulder joint; the probe enters from posterior and is turned to run perpendicular to the modeled outer surface (the posterior deltoid).',
       zh: '肩贞位于肩关节后下方；探针自后方进入，并按模型外表面（三角肌后部）法线调整为垂直于该处外表面。',
@@ -79,6 +92,7 @@ const pointPlans = {
     approach: { en: 'Lateral', zh: '外侧' },
     nominalOutwardRight: [-1, 0, 0],
     outerSurface: 'deltoid-muscles-',
+    patchScope: 'part',
     rationale: {
       en: 'Jianyu lies in the hollow between the anterolateral acromion and the greater tubercle; the probe starts from lateral and is turned to run perpendicular to the modeled outer surface (the deltoid). With the arm adducted in this model, that surface faces superolaterally, so the probe runs inferomedially toward the greater tubercle.',
       zh: '肩髃位于肩峰前外侧端与肱骨大结节之间的凹陷；探针自外侧开始，并按模型外表面（三角肌）法线调整为垂直于该处外表面。本模型上臂内收，该处外表面朝向外上方，因此探针向内下方指向大结节。',
@@ -88,6 +102,7 @@ const pointPlans = {
     approach: { en: 'Lateral', zh: '外侧' },
     nominalOutwardRight: [-1, 0, 0],
     outerSurface: 'deltoid-muscles-',
+    patchScope: 'part',
     rationale: {
       en: 'Jianliao lies between the posterolateral acromion and the greater tubercle; the probe starts from lateral and is turned to run perpendicular to the modeled outer surface (the deltoid). With the arm adducted in this model, that surface faces superolaterally and posteriorly.',
       zh: '肩髎位于肩峰后外侧角与肱骨大结节之间；探针自外侧开始，并按模型外表面（三角肌）法线调整为垂直于该处外表面。本模型上臂内收，该处外表面朝向外上后方。',
@@ -96,7 +111,7 @@ const pointPlans = {
 };
 
 /**
- * Structures that standard regional anatomy places in these layers but that this atlas does
+ * Structures that standard regional anatomy places in these layers but that this model does
  * not contain. Listed only where the relation is textbook-level and not point-specific depth.
  */
 const notModeledByPoint = {
@@ -105,13 +120,11 @@ const notModeledByPoint = {
     { english: 'Circumflex scapular vessels', chinese: '旋肩胛血管', note: { en: 'Supply the infraspinous region.', zh: '分布于冈下区。' } },
   ],
   SI12: [
-    { english: 'Trapezius', chinese: '斜方肌', note: { en: 'Covers the supraspinatus superficially; absent from this atlas, so the supraspinatus is the first modeled layer here.', zh: '覆盖于冈上肌浅面；本模型未包含，因此此处第一层建模结构是冈上肌。' } },
     { english: 'Suprascapular nerve and vessels', chinese: '肩胛上神经与血管', note: { en: 'Run in the supraspinous fossa deep to the supraspinatus.', zh: '在冈上肌深面行于冈上窝。' } },
   ],
   SI9: [
-    { english: 'Teres major', chinese: '大圆肌', note: { en: 'Lies inferior to the teres minor in this region.', zh: '在此区域位于小圆肌下方。' } },
-    { english: 'Triceps brachii, long head', chinese: '肱三头肌长头', note: { en: 'Passes between the teres minor and teres major.', zh: '穿行于小圆肌与大圆肌之间。' } },
     { english: 'Axillary nerve and posterior circumflex humeral vessels', chinese: '腋神经与旋肱后血管', note: { en: 'Pass through the quadrangular space (teres minor, teres major, long head of triceps, humerus).', zh: '穿过四边孔（小圆肌、大圆肌、肱三头肌长头、肱骨围成）。' } },
+    { english: 'Axillary fat, vessels and nerves', chinese: '腋窝脂肪、血管与神经', note: { en: 'The source layer description says a deep path here can reach the axilla; the space deep to the modeled muscles is empty in this model.', zh: '资料的层次描述称此处深刺可达腋腔；模型中肌肉深面的这一空间没有建模结构。' } },
   ],
   LI15: [
     { english: 'Subacromial (subdeltoid) bursa', chinese: '肩峰下（三角肌下）滑囊', note: { en: 'Lies between the deltoid and the supraspinatus tendon.', zh: '位于三角肌与冈上肌腱之间。' } },
@@ -119,12 +132,85 @@ const notModeledByPoint = {
   TE14: [],
 };
 const notModeledEverywhere = {
-  en: 'Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. This atlas also has no trapezius, latissimus dorsi, teres major or triceps brachii.',
-  zh: '模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊；本模型也没有斜方肌、背阔肌、大圆肌和肱三头肌。',
+  en: 'Skin, subcutaneous fat, fascia, nerves, vessels and bursae are not modeled. Muscles come from the bundled atlas plus the shoulder add-on (trapezius, latissimus dorsi, teres major, triceps brachii and other shoulder-region muscles); muscles outside both, such as the intercostal muscles, are not modeled.',
+  zh: '模型不含皮肤、皮下脂肪、筋膜、神经、血管和滑囊。肌肉来自自带模型和肩部附加模型（斜方肌、背阔肌、大圆肌、肱三头肌等肩部肌肉）；两者都没有的肌肉（如肋间肌）未建模。',
 };
 const thoracicWallNote = {
   en: 'Deep to the ribs lie the intercostal muscles, pleura and lung, which are not modeled.',
   zh: '肋的深面为肋间肌、胸膜和肺，模型未包含。',
+};
+
+/**
+ * The trapezius is one muscle sheet that the source model splits into three meshes, and the
+ * model's part boundaries are only approximate (atlas-addon.json mappingNotes: the lower mesh
+ * reaches up to about T2 at the midline). Where the probe enters one trapezius mesh close to
+ * another, the layer is named as the whole muscle and a note gives the mesh it entered.
+ */
+const SPLIT_SHEET_NEAR_CM = 0.5;
+const splitSheets = {
+  'trapezius-muscles-': {
+    whole: { english: 'Trapezius', chinese: '斜方肌' },
+    en: (crossed, other, distanceCm) => `The source model splits the trapezius into three meshes; here the probe enters the ${crossed} mesh ${distanceCm.toFixed(1)} cm from the ${other} mesh. The model's part boundaries are approximate, so this layer is named as the whole trapezius. Standard descriptions attach the middle fibres to the acromion and the superior crest of the scapular spine and the lower fibres to the medial end of the spine (Kenhub).`,
+    zh: (crossed, other, distanceCm) => `原始模型把斜方肌分成三个网格；探针在距${other}网格 ${distanceCm.toFixed(1)} cm 处进入${crossed}网格。模型中各部分的分界只是近似，因此这一层按整块斜方肌命名。标准描述中，中部纤维止于肩峰和肩胛冈上嵴，下部纤维止于肩胛冈内侧端（Kenhub）。`,
+  },
+};
+
+/**
+ * Published layer descriptions for the points, compared with the modeled probe. `muscles` are
+ * anatomy-ID prefixes (same side added at run time); each must match a mesh in the model.
+ * Only sources that were opened and read are listed (accessed 2026-10-09).
+ */
+const ACCESSED = '2026-10-09';
+const kenhubTrapezius = {
+  title: 'Trapezius muscle', publisher: 'Kenhub (Gordana Sendić; reviewed 2023-10-30)', url: 'https://www.kenhub.com/en/library/anatomy/trapezius-muscle', accessed: ACCESSED,
+  supports: { en: 'Transverse (middle) fibres insert on the medial margin of the acromion and the superior crest of the scapular spine; ascending (lower) fibres insert by an aponeurosis on a tubercle at the medial end of the spine.', zh: '横部（中部）纤维止于肩峰内侧缘和肩胛冈上嵴；升部（下部）纤维以腱膜止于肩胛冈内侧端的结节。' },
+};
+const sourceLayersByPoint = {
+  SI11: {
+    sequence: { en: 'Skin → subcutaneous tissue → trapezius fascia → trapezius → infraspinatus', zh: '皮肤 → 皮下组织 → 斜方肌筋膜 → 斜方肌 → 冈下肌' },
+    muscles: [
+      { match: 'trapezius-muscles-', english: 'Trapezius', chinese: '斜方肌' },
+      { match: 'rotator-cuff-muscles-infraspinatus-muscle', english: 'Infraspinatus', chinese: '冈下肌' },
+    ],
+    notes: [
+      { en: 'In this model the probe meets the infraspinatus without crossing the trapezius: the border of the lower trapezius runs just medial to the probe, outside the first modeled surface. The sources list the trapezius over the infraspinatus at Tianzong, so here the modeled trapezius border falls just short of covering the probe.', zh: '本模型中探针未穿过斜方肌即到达冈下肌：斜方肌下部的边缘就在探针内侧、第一个建模表面之外。资料在天宗处把斜方肌列在冈下肌浅面，模型中的斜方肌边缘在这里恰好没有盖到探针。' },
+    ],
+    sources: [
+      { title: '天宗穴 · 穴位解剖', publisher: '医学百科 (yixue.com), revision 43196', url: 'https://www.yixue.com/%E5%A4%A9%E5%AE%97%E7%A9%B4', accessed: ACCESSED, supports: { en: 'Layers under the point: skin, subcutaneous tissue, trapezius fascia, trapezius, infraspinatus.', zh: '穴下为皮肤、皮下组织、斜方肌筋膜、斜方肌、冈下肌。' } },
+      { title: 'Infraspinatus muscle', publisher: 'Kenhub (Gordana Sendić; reviewed 2023-11-03)', url: 'https://www.kenhub.com/en/library/anatomy/infraspinatus-muscle', accessed: ACCESSED, supports: { en: 'The infraspinatus lies on the dorsal surface of the scapula, deep to the trapezius and to parts of the deltoid and latissimus dorsi.', zh: '冈下肌位于肩胛骨背面，在斜方肌及部分三角肌、背阔肌的深面。' } },
+    ],
+  },
+  SI12: {
+    sequence: { en: 'Skin → subcutaneous tissue → trapezius fascia → trapezius → supraspinatus', zh: '皮肤 → 皮下组织 → 斜方肌筋膜 → 斜方肌 → 冈上肌' },
+    muscles: [
+      { match: 'trapezius-muscles-', english: 'Trapezius', chinese: '斜方肌' },
+      { match: 'rotator-cuff-muscles-supraspinatus-muscle', english: 'Supraspinatus', chinese: '冈上肌' },
+    ],
+    notes: [],
+    sources: [
+      { title: '秉风穴 · 穴位解剖', publisher: '医学百科 (yixue.com), revision 43050', url: 'https://www.yixue.com/%E7%A7%89%E9%A3%8E%E7%A9%B4', accessed: ACCESSED, supports: { en: 'Layers under the point: skin, subcutaneous tissue, trapezius fascia, trapezius, supraspinatus.', zh: '穴下为皮肤、皮下组织、斜方肌筋膜、斜方肌、冈上肌。' } },
+      { title: 'Supraspinatus muscle', publisher: 'Kenhub (Niamh Gorman; reviewed 2022-12-05)', url: 'https://www.kenhub.com/en/library/anatomy/supraspinatus-muscle', accessed: ACCESSED, supports: { en: 'The supraspinatus lies deep to the trapezius, superior to the spine of the scapula.', zh: '冈上肌位于斜方肌深面、肩胛冈上方。' } },
+      { title: 'Shoulder Pain: The Supraspinatous Muscle, Part 2', publisher: 'Acupuncture Today (Whitfield Reaves, Chad Bong; May 2010)', url: 'https://acupuncturetoday.com/article/32206-shoulder-pain-the-supraspinatous-muscle-part-2', accessed: ACCESSED, supports: { en: 'At SI 12 the path runs through the superficial layer of the trapezius to the supraspinatus, with the supraspinous fossa as the bony floor.', zh: '秉风处经斜方肌浅层到达冈上肌，冈上窝骨面为底。' } },
+      kenhubTrapezius,
+    ],
+  },
+  SI9: {
+    sequence: { en: 'Skin → subcutaneous tissue → deltoid fascia → deltoid (posterior part) → long head of triceps brachii → teres major → latissimus dorsi (tendon)', zh: '皮肤 → 皮下组织 → 三角肌筋膜 → 三角肌（后部） → 肱三头肌长头 → 大圆肌 → 背阔肌（腱）' },
+    muscles: [
+      { match: 'deltoid-muscles-', english: 'Deltoid', chinese: '三角肌' },
+      { match: 'triceps-brachii-muscles-long-head-of-triceps-brachii', english: 'Triceps brachii · long head', chinese: '肱三头肌长头' },
+      { match: 'teres-major-muscles-teres-major-muscle', english: 'Teres major', chinese: '大圆肌' },
+      { match: 'latissimus-dorsi-muscles-latissimus-dorsi-muscle', english: 'Latissimus dorsi', chinese: '背阔肌' },
+    ],
+    notes: [
+      { en: 'The model probe passes through the teres minor (the study reference) and then the long head of triceps; the teres major and latissimus dorsi lie inferior to it. This order matches the relations in the anatomy sources (teres minor deep to the deltoid and posterior to the long head of triceps; teres major anterior to the long head and inferior to the teres minor), but the source layer description for Jianzhen runs lower, through the teres major and latissimus dorsi.', zh: '模型探针穿过小圆肌（学习参照所在）后到达肱三头肌长头；大圆肌和背阔肌位于其下方。此顺序符合解剖资料中的关系（小圆肌在三角肌深面、肱三头肌长头后方；大圆肌在长头前方、小圆肌下方），但资料中肩贞的层次路径更低，经过大圆肌和背阔肌。' },
+    ],
+    sources: [
+      { title: '肩贞穴 · 穴位解剖', publisher: '医学百科 (yixue.com), revision 43051', url: 'https://www.yixue.com/%E8%82%A9%E8%B4%9E%E7%A9%B4', accessed: ACCESSED, supports: { en: 'Layers under the point: skin, subcutaneous tissue, deltoid fascia, deltoid, triceps brachii, teres major, latissimus dorsi; the path enters the posterior deltoid, then the long head of triceps, the teres major and the latissimus dorsi (tendon), and may reach the axilla.', zh: '穴下为皮肤、皮下组织、三角肌筋膜、三角肌、肱三头肌、大圆肌、背阔肌；针经三角肌后部，依次入肱三头肌长头、大圆肌和背阔肌（腱），可深达腋腔。' } },
+      { title: 'Triceps brachii', publisher: 'Radiopaedia', url: 'https://radiopaedia.org/articles/triceps-brachii?lang=gb', accessed: ACCESSED, supports: { en: 'The teres minor lies posterior to the long head of triceps near its origin; the teres major lies anterior to the long head.', zh: '小圆肌在肱三头肌长头起点附近位于其后方；大圆肌位于长头前方。' } },
+      { title: 'Anatomy, Shoulder and Upper Limb, Teres Minor Muscle', publisher: 'StatPearls (Pallavi Juneja, John B. Hubbard; updated 2023-05-08)', url: 'https://www.ncbi.nlm.nih.gov/books/NBK513324/', accessed: ACCESSED, supports: { en: 'The teres minor is deep to the deltoid; the long head of triceps runs inferior to it; the quadrangular space is bounded by the teres minor, teres major, long head of triceps and surgical neck of the humerus.', zh: '小圆肌位于三角肌深面；肱三头肌长头在其下方；四边孔由小圆肌、大圆肌、肱三头肌长头和肱骨外科颈围成。' } },
+    ],
+  },
 };
 
 const ordinals = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth'];
@@ -203,7 +289,8 @@ async function loadGlb(filename) {
       for (const primitive of json.meshes[node.mesh].primitives) {
         if ((primitive.mode ?? 4) !== 4) throw new Error(`${id}: only triangle primitives are supported`);
         const accessor = json.accessors[primitive.attributes.POSITION];
-        if (accessor.componentType !== 5126 || accessor.type !== 'VEC3') throw new Error(`${id}: unsupported POSITION layout`);
+        if (accessor.componentType !== 5126 || accessor.type !== 'VEC3' || accessor.normalized || accessor.sparse || accessor.bufferView === undefined) throw new Error(`${id}: unsupported POSITION layout`);
+        if (primitive.indices === undefined || primitive.extensions || primitive.targets) throw new Error(`${id}: only indexed primitives without extensions or morph targets are supported`);
         const view = json.bufferViews[accessor.bufferView];
         const stride = view.byteStride ?? 12;
         const base = (view.byteOffset ?? 0) + (accessor.byteOffset ?? 0);
@@ -338,21 +425,27 @@ function lineIntervals(structures, point, inward) {
   return { origin, intervals, irregular: irregular.sort((a, b) => a.firstHit - b.firstHit) };
 }
 
-/** Area-weighted outward normal of a structure's outward-facing triangles near `centre`. */
-function patchNormal(structure, centre, outwardHint, radius) {
-  const t = structure.tris;
+/** Area-weighted outward normal of the outward-facing triangles near `centre` of one or more structures. */
+function patchNormal(structureOrList, centre, outwardHint, radius) {
+  const list = Array.isArray(structureOrList) ? structureOrList : [structureOrList];
   let sum = [0, 0, 0], count = 0;
-  for (let i = 0; i < t.length; i += 9) {
-    const centroid = [(t[i] + t[i + 3] + t[i + 6]) / 3, (t[i + 1] + t[i + 4] + t[i + 7]) / 3, (t[i + 2] + t[i + 5] + t[i + 8]) / 3];
-    if (length(sub(centroid, centre)) > radius) continue;
-    const e1 = [t[i + 3] - t[i], t[i + 4] - t[i + 1], t[i + 5] - t[i + 2]], e2 = [t[i + 6] - t[i], t[i + 7] - t[i + 1], t[i + 8] - t[i + 2]];
-    const areaNormal = scale([e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0]], structure.orientation);
-    if (dot(areaNormal, outwardHint) <= 0) continue; // keep the surface facing the outside
-    sum = add(sum, areaNormal); count++;
+  for (const structure of list) {
+    const t = structure.tris;
+    for (let i = 0; i < t.length; i += 9) {
+      const centroid = [(t[i] + t[i + 3] + t[i + 6]) / 3, (t[i + 1] + t[i + 4] + t[i + 7]) / 3, (t[i + 2] + t[i + 5] + t[i + 8]) / 3];
+      if (length(sub(centroid, centre)) > radius) continue;
+      const e1 = [t[i + 3] - t[i], t[i + 4] - t[i + 1], t[i + 5] - t[i + 2]], e2 = [t[i + 6] - t[i], t[i + 7] - t[i + 1], t[i + 8] - t[i + 2]];
+      const areaNormal = scale([e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0]], structure.orientation);
+      if (dot(areaNormal, outwardHint) <= 0) continue; // keep the surface facing the outside
+      sum = add(sum, areaNormal); count++;
+    }
   }
-  if (!count) throw new Error(`${structure.id}: no outward-facing triangles near ${centre}`);
+  if (!count) throw new Error(`${list.map(s => s.id).join(', ')}: no outward-facing triangles near ${centre}`);
   return { normal: normalize(sum), triangles: count };
 }
+
+/** Every mesh of one side whose ID starts with `prefix` (all parts of a muscle). */
+const sameSideParts = (structures, prefix, side) => [...structures.values()].filter(s => s.id.startsWith(prefix) && s.id.endsWith(`-${side}`)).sort((a, b) => a.id.localeCompare(b.id));
 
 // ---------- names and directions ----------
 async function loadNameMaps() {
@@ -402,20 +495,22 @@ const isRib = id => /^skeleton-.*-rib-(right|left)$/.test(id);
 const isBone = (id, structures) => structures.get(id)?.system === 'skeletal';
 
 /** Steps 1–3: nominal line → outer-surface patch normal → final axis through the reference. */
-function axisFor(structures, P, nominalOutward, patchRadius, key) {
+function axisFor(structures, P, nominalOutward, patchRadius, key, plan, side) {
   const nominalInward = scale(nominalOutward, -1);
   // 1. The nominal line through the reference meets the outermost modeled surface at Q0.
   const nominal = lineIntervals(structures, P, nominalInward);
   const firstNominal = nominal.intervals[0];
   if (!firstNominal) throw new Error(`${key}: nominal line meets no modeled structure`);
+  if (!firstNominal.id.startsWith(plan.outerSurface)) throw new Error(`${key}: the nominal line first meets ${firstNominal.id}, not the planned outer surface ${plan.outerSurface}; review pointPlans`);
   const q0 = add(nominal.origin, scale(nominalInward, firstNominal.entry));
-  // 2. Outward surface normal of that structure around Q0 sets the axis; the axis passes through P.
-  const patch = patchNormal(structures.get(firstNominal.id), q0, nominalOutward, patchRadius);
+  // 2. Outward surface normal of that structure (or of every part of that muscle) around Q0 sets the axis; the axis passes through P.
+  const patchStructures = plan.patchScope === 'muscle' ? sameSideParts(structures, plan.outerSurface, side) : [structures.get(firstNominal.id)];
+  const patch = patchNormal(patchStructures, q0, nominalOutward, patchRadius);
   const inward = scale(patch.normal, -1);
   // 3. All crossings along the final axis; depth 0 is the first modeled surface.
   const line = lineIntervals(structures, P, inward);
   const surfaceT = line.intervals[0].entry;
-  return { nominalInward, firstNominal, q0, patch, inward, line, surfaceT, surfacePoint: add(line.origin, scale(inward, surfaceT)), referenceDepth: REACH_M - surfaceT };
+  return { nominalInward, firstNominal, q0, patch, patchStructures, inward, line, surfaceT, surfacePoint: add(line.origin, scale(inward, surfaceT)), referenceDepth: REACH_M - surfaceT };
 }
 
 /** Step 4: the layers worth listing, with the reason the list stops. */
@@ -424,8 +519,9 @@ function selectLayers(axis) {
   let deepestExit = 0, stopReason = 'no-further-structure';
   for (const interval of axis.line.intervals) {
     const entry = interval.entry - axis.surfaceT, exit = interval.exit - axis.surfaceT;
-    if (entry * 100 > MAX_LAYER_DEPTH_CM) { stopReason = 'max-depth'; break; }
+    // A long unmodeled gap is named as such, also when the next structure lies beyond the depth limit.
     if (selected.length && (entry - deepestExit) * 100 > GAP_STOP_CM && deepestExit >= axis.referenceDepth) { stopReason = 'unmodeled-gap'; break; }
+    if (entry * 100 > MAX_LAYER_DEPTH_CM) { stopReason = 'max-depth'; break; }
     selected.push({ interval, entry, exit, gapBefore: selected.length ? Math.max(0, entry - deepestExit) : 0, overlap: selected.length ? Math.max(0, Math.min(deepestExit, exit) - entry) : 0 });
     deepestExit = Math.max(deepestExit, exit);
     if (isRib(interval.id)) { stopReason = 'thoracic-wall'; break; }
@@ -441,15 +537,19 @@ function computeEntry(key, reference, structures, names) {
   const P = reference.position;
   const mirror = v => side === 'right' ? v : [-v[0], v[1], v[2]];
   const nominalOutward = normalize(mirror(plan.nominalOutwardRight));
-  const axis = axisFor(structures, P, nominalOutward, PATCH_RADIUS_M, key);
-  const { nominalInward, firstNominal, q0, patch, inward, line, surfacePoint, referenceDepth } = axis;
+  const axis = axisFor(structures, P, nominalOutward, PATCH_RADIUS_M, key, plan, side);
+  const { nominalInward, firstNominal, q0, patch, patchStructures, inward, line, surfacePoint, referenceDepth } = axis;
   const depthOf = t => t - axis.surfaceT;
-  const entryPatch = patchNormal(structures.get(line.intervals[0].id), surfacePoint, scale(inward, -1), PATCH_RADIUS_M);
+  const entryId = line.intervals[0].id;
+  const entryStructures = plan.patchScope === 'muscle' && entryId.startsWith(plan.outerSurface) ? patchStructures : [structures.get(entryId)];
+  const entryPatch = patchNormal(entryStructures, surfacePoint, scale(inward, -1), PATCH_RADIUS_M);
+  const pointAt = depthM => add(surfacePoint, scale(inward, depthM));
 
   // 4. Relevant layers (see method text in the output).
   const { selected, stopReason } = selectLayers(axis);
   const layers = selected.map(({ interval, entry, exit, gapBefore, overlap }) => {
-    const name = names(interval.id);
+    const split = isRib(interval.id) ? null : splitSheetNote(interval.id, pointAt(entry), structures, names);
+    const name = split?.name ?? names(interval.id);
     return {
       anatomyId: interval.id,
       english: name.english,
@@ -462,20 +562,20 @@ function computeEntry(key, reference, structures, names) {
       overlapsPreviousCm: cm(overlap),
       containsReference: entry < referenceDepth && referenceDepth < exit,
       normalsAgree: interval.normalsAgree,
-      ...(isRib(interval.id) ? { note: thoracicWallNote } : {}),
+      ...(isRib(interval.id) ? { note: thoracicWallNote } : split ? { note: split.note } : {}),
     };
   });
 
   // Sensitivity: the same construction with other surface-patch sizes.
   const variants = SENSITIVITY_RADII_M.map(radius => {
-    const alternative = axisFor(structures, P, nominalOutward, radius, key);
+    const alternative = axisFor(structures, P, nominalOutward, radius, key, plan, side);
     return { radius, referenceDepth: alternative.referenceDepth, sequence: selectLayers(alternative).selected.map(item => item.interval.id) };
   });
   const sequence = layers.map(layer => layer.anatomyId);
   const sensitivity = {
     patchRadiiCm: SENSITIVITY_RADII_M.map(cm),
     referenceDepthCm: { min: cm(Math.min(...variants.map(v => v.referenceDepth))), max: cm(Math.max(...variants.map(v => v.referenceDepth))) },
-    layerSequences: [...new Set(variants.map(v => v.sequence.map(id => names(id).english).join(' → ')))],
+    layerSequences: [...new Set(variants.map(v => v.sequence.map(id => layers.find(layer => layer.anatomyId === id)?.english ?? names(id).english).join(' → ')))],
     sameLayerSequence: variants.every(v => isDeepStrictEqual(v.sequence, sequence)),
   };
   const referenceLayer = layers.find(layer => layer.anatomyId === reference.anatomyId && layer.containsReference);
@@ -536,7 +636,7 @@ function computeEntry(key, reference, structures, names) {
       rationale: plan.rationale,
       method: 'outer-surface-normal',
       nominalOutward: roundVec(nominalOutward, 6),
-      nominalSurface: { anatomyId: firstNominal.id, point: roundVec(q0), patchRadiusCm: cm(PATCH_RADIUS_M), triangles: patch.triangles },
+      nominalSurface: { anatomyId: firstNominal.id, point: roundVec(q0), patchRadiusCm: cm(PATCH_RADIUS_M), triangles: patch.triangles, patchScope: plan.patchScope, patchStructures: patchStructures.map(item => item.id) },
       directionInward: roundVec(inward, 6),
       origin: roundVec(surfacePoint),
       originDescription: { en: 'First modeled surface along the axis (depth 0)', zh: '轴线上第一个建模表面（深度 0）' },
@@ -558,7 +658,73 @@ function computeEntry(key, reference, structures, names) {
     alsoInsideReference: alsoInside.sort(),
     nearby,
     notModeled: notModeledByPoint[pointId],
+    sourceComparison: compareWithSources(pointId, side, layers, { surfacePoint, inward, probeStartCm: -PROBE_OUTSIDE_CM }, structures, names),
     limitations,
+  };
+}
+
+/**
+ * For a layer that is one mesh of a split muscle sheet, entered next to another part: the whole
+ * muscle's name and a note naming the mesh. Null when the probe enters the mesh away from the split.
+ */
+function splitSheetNote(id, entryPoint, structures, names) {
+  const prefix = Object.keys(splitSheets).find(item => id.startsWith(item));
+  if (!prefix) return null;
+  const side = id.endsWith('-right') ? 'right' : 'left';
+  let nearest = null;
+  for (const other of sameSideParts(structures, prefix, side)) {
+    if (other.id === id) continue;
+    const { distance } = closestPoint(entryPoint, other.tris);
+    if (!nearest || distance < nearest.distance) nearest = { id: other.id, distance };
+  }
+  if (!nearest || nearest.distance * 100 > SPLIT_SHEET_NEAR_CM) return null;
+  const distanceCm = round(nearest.distance * 100, 1);
+  const crossed = names(id), other = names(nearest.id);
+  return { name: splitSheets[prefix].whole, note: {
+    en: splitSheets[prefix].en(crossed.english.toLowerCase(), other.english.toLowerCase(), distanceCm),
+    zh: splitSheets[prefix].zh(crossed.chinese || crossed.english, other.chinese || other.english, distanceCm),
+  } };
+}
+
+/**
+ * Compare the probe with a published layer description: each listed muscle is either on the
+ * probe (depth range) or not (closest approach of the axis between the probe start and the
+ * layer depth limit, with its direction).
+ */
+function compareWithSources(pointId, side, layers, axis, structures, names) {
+  const plan = sourceLayersByPoint[pointId];
+  if (!plan) return null;
+  const SAMPLE_CM = 0.05;
+  const muscles = plan.muscles.map(muscle => {
+    const parts = sameSideParts(structures, muscle.match, side);
+    if (!parts.length) throw new Error(`${pointId}-${side}: source muscle ${muscle.match} matches no mesh`);
+    const onProbe = layers.filter(layer => layer.anatomyId.startsWith(muscle.match));
+    const base = { match: muscle.match, english: muscle.english, chinese: muscle.chinese, anatomyIds: parts.map(part => part.id) };
+    if (onProbe.length) return { ...base, onProbe: true, layerIds: onProbe.map(layer => layer.anatomyId), entryCm: Math.min(...onProbe.map(l => l.entryCm)), exitCm: Math.max(...onProbe.map(l => l.exitCm)) };
+    let best = null;
+    for (let depthCm = axis.probeStartCm; depthCm <= MAX_LAYER_DEPTH_CM + 1e-9; depthCm = round(depthCm + SAMPLE_CM, 2)) {
+      const p = add(axis.surfacePoint, scale(axis.inward, depthCm / 100));
+      for (const part of parts) {
+        if (best && boxDistance(p, part) >= best.distance) continue;
+        const { distance, point } = closestPoint(p, part.tris);
+        if (!best || distance < best.distance) best = { distance, point, p, depthCm, id: part.id };
+      }
+    }
+    return { ...base, onProbe: false, closestPartId: best.id, closestPartEnglish: names(best.id).english, distanceToProbeCm: cm(best.distance), atProbeDepthCm: best.depthCm, direction: describeDirection(sub(best.point, best.p), side, axis.inward) };
+  });
+  const onProbeOrder = muscles.filter(m => m.onProbe);
+  const inSourceOrder = onProbeOrder.every((m, i) => !i || m.entryCm >= onProbeOrder[i - 1].entryCm);
+  const listed = muscles.flatMap(m => m.onProbe ? m.layerIds : []);
+  // Muscles the probe crosses before the first bone that the description does not list (the descriptions end at the bone).
+  const firstBoneEntry = layers.find(layer => layer.kind === 'bone')?.entryCm ?? Infinity;
+  const modelOnly = layers.filter(layer => layer.kind === 'muscle' && layer.entryCm < firstBoneEntry && !listed.includes(layer.anatomyId)).map(layer => ({ anatomyId: layer.anatomyId, english: layer.english, chinese: layer.chinese, entryCm: layer.entryCm, exitCm: layer.exitCm }));
+  return {
+    sequence: plan.sequence,
+    agreement: onProbeOrder.length === muscles.length && inSourceOrder ? 'same-order' : 'differs',
+    muscles,
+    modelOnlyMuscles: modelOnly,
+    notes: plan.notes ?? [],
+    sources: plan.sources,
   };
 }
 
@@ -571,9 +737,20 @@ async function readConstants() {
   return { modelVersion, referenceVersion };
 }
 
+async function modelFileHashes() {
+  const { createHash } = await import('node:crypto');
+  return Promise.all(modelFiles.map(async file => ({ file, sha256: createHash('sha256').update(await readFile(new URL(`public/models/${file}`, projectRoot))).digest('hex') })));
+}
+
 async function loadAll() {
-  const [muscular, skeletal] = await Promise.all(modelFiles.map(loadGlb));
-  return new Map([...muscular, ...skeletal]);
+  const structures = new Map();
+  for (const [filename, meshes] of (await Promise.all(modelFiles.map(async filename => [filename, await loadGlb(filename)])))) {
+    for (const [id, structure] of meshes) {
+      if (structures.has(id)) throw new Error(`${filename}: ${id} already comes from another model file`);
+      structures.set(id, { ...structure, file: filename });
+    }
+  }
+  return structures;
 }
 
 /** Determine the model axes from landmarks instead of assuming them; throws if any check fails. */
@@ -628,13 +805,15 @@ export async function computeDepth(structures) {
       positions: 'original-model-metres-y-up (before modelScale 7 and modelPosition [0, -6.1, 0])',
       distances: 'centimetres = original model metres × 100, measured along the probe axis from the first modeled surface (depth 0)',
     },
+    modelFiles: await modelFileHashes(),
     axisConventions: verifyAxisConventions(structures),
     method: {
-      axis: 'For each point a documented approach direction (posterior for SI11, SI12, SI9; lateral for LI15, TE14; mirrored for the left side) is cast through the model reference. Where that line first meets a modeled surface, the area-weighted outward normal of that structure\'s outward-facing triangles within 2.5 cm (a skin-scale patch) sets the probe direction, and the probe passes exactly through the reference. This approximates "perpendicular to the body surface" using the outer muscle surface, because skin is not modeled. The same construction with 1.5–3 cm patches is recorded under axis.sensitivity.',
+      axis: 'For each point a documented approach direction (posterior for SI11, SI12, SI9; lateral for LI15, TE14; mirrored for the left side) is cast through the model reference. Where that line first meets a modeled surface, the area-weighted outward normal of that structure\'s outward-facing triangles within 2.5 cm (a skin-scale patch) sets the probe direction, and the probe passes exactly through the reference. For SI12 that first surface is the trapezius, which the source model splits into three meshes along a boundary that passes the point, so the patch takes all trapezius meshes of that side (axis.nominalSurface.patchStructures). This approximates "perpendicular to the body surface" using the outer muscle surface, because skin is not modeled. The same construction with 1.5–3 cm patches is recorded under axis.sensitivity.',
       crossings: 'Rays start 30 cm outside the reference. Every triangle of every muscle and bone mesh is tested double-sided (Möller–Trumbore); hits closer than 1e-6 m along the ray are merged; per-structure hits are paired into entry/exit by parity and checked against outward triangle normals.',
-      layers: `Layers are listed from depth 0 until the axis crosses a rib (thoracic wall) or the humerus, or until the next modeled structure starts more than ${GAP_STOP_CM} cm beyond the deepest layer so far (after the reference), with an ${MAX_LAYER_DEPTH_CM} cm limit.`,
+      layers: `Layers are listed from depth 0 until the axis crosses a rib (thoracic wall) or the humerus, or until the next modeled structure starts more than ${GAP_STOP_CM} cm beyond the deepest layer so far (after the reference), with an ${MAX_LAYER_DEPTH_CM} cm limit. Where the axis enters one trapezius mesh within ${SPLIT_SHEET_NEAR_CM} cm of another, the layer is named as the whole trapezius (the source model's part boundaries are approximate) and its note names the mesh entered.`,
+      sourceComparison: `For SI11, SI12 and SI9 a published layer description (sources listed with each point, accessed ${ACCESSED}) is compared with the probe: each listed muscle is either on the probe, with its depth range, or not, with the closest approach of the axis between ${-PROBE_OUTSIDE_CM} cm and ${MAX_LAYER_DEPTH_CM} cm depth (sampled every 0.05 cm) and its direction. The comparison is a study note; neither the sources nor the model are clinical measurements.`,
       nearby: `For every other structure, the nearest surface point to the reference (exhaustive triangle search) within ${NEARBY_LIMIT_CM} cm. Direction names use the components of the unit vector reference→nearest point: the largest anatomical component and a second one if it is at least ${DIRECTION_TERM_MIN}; "deeper/more superficial along the probe" uses the component along the probe axis with the same threshold. A structure whose mesh also contains the reference (winding number) is listed as overlapping.`,
-      loaderCheck: 'npm script test:depth reproduces every ray count and surface distance in public/geometry-validation.json (made with three.js) before checking this file.',
+      loaderCheck: 'npm script test:depth reproduces every ray count and surface distance in public/geometry-validation.json (made with three.js, including the shoulder add-on meshes near each reference) before checking this file.',
     },
     points,
   };
@@ -645,7 +824,7 @@ async function crossCheckLoader(structures) {
   const validation = JSON.parse(await readFile(geometryValidationFile, 'utf8'));
   const directions = [[1, 0.131, 0.173], [-0.239, 1, 0.317], [0.419, -0.227, 1], [-1, 0.371, -0.193], [0.271, -1, 0.413], [-0.337, 0.233, -1], [0.521, 0.677, -0.439]].map(normalize);
   const problems = [];
-  let compared = 0;
+  let compared = 0, addonCompared = 0;
   for (const result of validation.results) {
     const side = result.id.endsWith('-right') ? 'right' : 'left';
     for (const [field, id] of [['muscle', result.anatomyId], ['scapula', `appendicular-skeleton-scapula-${side}`], ['humerus', `appendicular-skeleton-humerus-${side}`]]) {
@@ -660,8 +839,24 @@ async function crossCheckLoader(structures) {
         problems.push(`${result.id} ${field}: rays ${counts} vs ${result[field].rayIntersectionCounts}, distance ${distance} vs ${result[field].distanceToSurfaceMetres}`);
       }
     }
+    // Add-on meshes near this reference (both mirrored left and unmirrored right nodes are covered).
+    for (const measured of result.addonMeshes ?? []) {
+      const structure = structures.get(measured.anatomyId);
+      if (!structure || structure.file !== addonFile) { problems.push(`${result.id}: add-on mesh ${measured.anatomyId} not read from ${addonFile}`); continue; }
+      const counts = directions.map(direction => {
+        const hits = rayHits(result.position, direction, structure.tris, 1e-6).map(hit => hit.t);
+        return hits.filter((t, i) => i === 0 || t - hits[i - 1] > 1e-6).length;
+      });
+      const distance = Number(closestPoint(result.position, structure.tris).distance.toFixed(9));
+      compared++;
+      if (!isDeepStrictEqual(counts, measured.rayIntersectionCounts) || Math.abs(distance - measured.distanceToSurfaceMetres) > 2e-9) {
+        problems.push(`${result.id} ${measured.anatomyId}: rays ${counts} vs ${measured.rayIntersectionCounts}, distance ${distance} vs ${measured.distanceToSurfaceMetres}`);
+      }
+    }
+    addonCompared += result.addonMeshes?.length ?? 0;
   }
-  return { compared, problems };
+  if (!addonCompared) problems.push('public/geometry-validation.json has no add-on measurements: run `node scripts/validate-reference-geometry.mjs --write`');
+  return { compared, addonCompared, problems };
 }
 
 function sanityCheck(data) {
@@ -683,6 +878,19 @@ function sanityCheck(data) {
     expect(entry.axis.referenceOffsetMm <= 1, `${key}: axis misses the reference by ${entry.axis.referenceOffsetMm} mm`);
     expect(Math.abs(length(entry.axis.directionInward) - 1) < 1e-5, `${key}: axis direction is not a unit vector`);
     expect(entry.axis.nominalSurface.anatomyId.startsWith(pointPlans[entry.pointId].outerSurface), `${key}: the axis was set by ${entry.axis.nominalSurface.anatomyId}, not the documented outer surface ${pointPlans[entry.pointId].outerSurface}`);
+    const comparison = entry.sourceComparison;
+    expect(Boolean(comparison) === Boolean(sourceLayersByPoint[entry.pointId]), `${key}: source comparison missing or unexpected`);
+    if (comparison) {
+      expect(comparison.sources.length > 0 && comparison.sources.every(source => source.title && /^https:\/\//.test(source.url) && source.accessed && source.supports?.en && source.supports?.zh), `${key}: every compared source needs a title, https URL, access date and bilingual summary`);
+      for (const muscle of comparison.muscles) {
+        expect(muscle.anatomyIds.length > 0 && muscle.anatomyIds.every(id => id.endsWith(`-${entry.side}`)), `${key}: ${muscle.match} has no mesh on this side`);
+        if (muscle.onProbe) expect(muscle.layerIds.every(id => entry.layers.some(layer => layer.anatomyId === id)), `${key}: ${muscle.match} on-probe layers not in the layer list`);
+        else expect(muscle.distanceToProbeCm > 0 && !entry.layers.some(layer => layer.anatomyId.startsWith(muscle.match)), `${key}: ${muscle.match} is marked off the probe but crosses it`);
+      }
+    }
+    const notModeledNames = entry.notModeled.map(item => item.english.toLowerCase());
+    const modeledMuscleNames = entry.layers.concat(entry.nearby).filter(item => item.kind === 'muscle').map(item => item.english.toLowerCase().split(' · ')[0]);
+    expect(!notModeledNames.some(name => modeledMuscleNames.includes(name)), `${key}: a structure listed as not modeled is in the model`);
     const irregularInRange = entry.axis.irregularStructures.filter(item => item.firstHitCm <= entry.axis.probeEndCm);
     expect(irregularInRange.length === 0, `${key}: odd hit counts within the probe for ${irregularInRange.map(item => item.anatomyId).join(', ')}`);
     expect(entry.axis.probeEndCm > entry.referenceDepthCm, `${key}: probe ends before the reference`);
@@ -724,7 +932,7 @@ async function main() {
   console.log(JSON.stringify({
     passed: problems.length === 0,
     scope: 'Model geometry only; not a needling path, needling depth or clinical acupoint location.',
-    loaderCrossCheck: `${loader.compared - loader.problems.length}/${loader.compared} geometry-validation.json measurements reproduced`,
+    loaderCrossCheck: `${loader.compared - loader.problems.length}/${loader.compared} geometry-validation.json measurements reproduced (${loader.addonCompared} of them on shoulder add-on meshes)`,
     pointsChecked: Object.keys(data.points).length,
     problems,
   }, null, 2));

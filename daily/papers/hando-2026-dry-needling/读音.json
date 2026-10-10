@@ -1,0 +1,70 @@
+{
+  "_note": {
+    "en": "Pronunciation entries used only by the paper-reading section. Moved unchanged from library/shoulder/pronunciation.json on 2026-10-09 when paper reading left the shoulder chapter (CH-01, N-5).",
+    "zh": "只在论文阅读一节用到的读音条目。2026-10-09 论文阅读移出肩袖章节（CH-01、N-5）时，从 library/shoulder/pronunciation.json 原样移来。"
+  },
+  "terms": {
+    "Allocation concealment": [
+      "/ˌæləˈkeɪʃən kənˈsilmənt/",
+      "al-uh-KAY-shuhn kuhn-SEEL-muhnt",
+      "https://www.merriam-webster.com/dictionary/concealment"
+    ],
+    "Blinding": [
+      "/ˈblaɪndɪŋ/",
+      "BLYN-ding",
+      "https://www.merriam-webster.com/dictionary/blinding"
+    ],
+    "Confidence interval": [
+      "/ˈkɑnfədəns ˈɪntərvəl/",
+      "KAHN-fuh-duhns IN-ter-vuhl",
+      "https://www.merriam-webster.com/dictionary/interval"
+    ],
+    "Intention-to-treat": [
+      "/ɪnˈtɛnʃən tə trit/",
+      "in-TEN-shuhn tuh TREET",
+      "https://www.merriam-webster.com/dictionary/intention"
+    ],
+    "Multiplicity": [
+      "/ˌmʌltəˈplɪsəti/",
+      "mul-tuh-PLIS-uh-tee",
+      "https://www.merriam-webster.com/dictionary/multiplicity"
+    ],
+    "Odds ratio": [
+      "/ɑdz ˈreɪʃiˌoʊ/",
+      "AHDZ RAY-shee-oh",
+      "https://www.merriam-webster.com/dictionary/ratio"
+    ],
+    "Randomization": [
+      "/ˌrændəməˈzeɪʃən/",
+      "ran-duh-muh-ZAY-shuhn",
+      "https://www.merriam-webster.com/dictionary/randomization"
+    ],
+    "Sham": [
+      "/ʃæm/",
+      "SHAM",
+      "https://www.merriam-webster.com/dictionary/sham"
+    ],
+    "Shoulder Pain and Disability Index": [
+      "/ˈʃoʊldər peɪn ənd ˌdɪsəˈbɪləti ˈɪnˌdɛks/",
+      "SHOHL-der PAYN uhnd dis-uh-BIL-uh-tee IN-deks",
+      "https://www.merriam-webster.com/dictionary/disability"
+    ],
+    "Subacromial pain syndrome": [
+      "/ˌsʌbəˈkroʊmiəl peɪn ˈsɪnˌdroʊm/",
+      "sub-uh-KROH-mee-uhl PAYN SIN-drohm",
+      "https://www.merriam-webster.com/medical/subacromial"
+    ]
+  },
+  "names": {
+    "Allocation concealment": "分配隐藏",
+    "Blinding": "盲法",
+    "Confidence interval": "置信区间",
+    "Intention-to-treat": "意向治疗",
+    "Multiplicity": "多重比较",
+    "Odds ratio": "比值比",
+    "Randomization": "随机化",
+    "Sham": "假对照",
+    "Shoulder Pain and Disability Index": "肩痛与功能障碍指数",
+    "Subacromial pain syndrome": "肩峰下疼痛综合征"
+  }
+}

@@ -63,3 +63,20 @@
 .depth-details ul{margin:6px 0;padding-left:16px}
 .depth-details a{font-size:10px}
 .vanatome-probe-callout{font-family:inherit}
+/* Docked label column · 标注栏 (labelDock.ts): the note when labels don't fit; the R/L mark moves aside */
+.label-note{margin:10px 0 -4px;color:#d8c29c;font-size:11px;line-height:1.6}
+/* The R/L mark moves beside a long label column only when the scene is wide enough for it to clear the help text;
+   in a narrower scene the column reaches the mark, so it is hidden (the toolbar still shows the side and view). */
+.scene{container-type:inline-size}
+@container (min-width:520px){.orientation.beside-dock{right:200px}}
+@container (max-width:519.98px){.orientation.beside-dock{visibility:hidden}}
+/* Muscle layers · 肌肉图层 (shoulder add-on muscles) */
+.toolbar-end{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end;min-width:0;margin-left:auto}
+/* Keep Right/Left on one line; when the row is too narrow the view buttons and muscle switch wrap below instead. */
+.toolbar.has-end{flex-wrap:wrap}.side-switch{flex-shrink:0}.side-switch button{white-space:nowrap}
+.muscle-switch button{white-space:nowrap;min-width:150px}.muscle-switch button.active{background:#3c493b;color:#f4d6a5}
+.layerbar label{white-space:nowrap}
+.layer-more{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.layer-more-title{font-size:10px;letter-spacing:.4px;color:var(--muted)}
+.layerbar label.muscles-hidden{opacity:.55}
+@media(max-width:740px){.toolbar-end{display:contents}.toolbar .muscle-switch{order:1}.toolbar-end>.segments:first-child{order:2}.layerbar{row-gap:9px}.layer-more{gap:10px;row-gap:9px}.layer-more-title{flex-basis:100%}.muscle-switch button{min-width:0}}

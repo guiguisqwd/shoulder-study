@@ -18,10 +18,12 @@ export type StudyTopic = {
   summary: BilingualText;
   status: 'published' | 'draft';
   adapter: 'shoulder' | 'standard';
-  viewer: { enabled: boolean; defaultTerm: string | null; terms: TopicTerm[]; landmarks?: TopicLandmark[] };
+  /** addons: chapter 3D add-on models the viewer loads (library/<id>/3d/atlas-addon.json; set by the topic build). */
+  viewer: { enabled: boolean; defaultTerm: string | null; terms: TopicTerm[]; landmarks?: TopicLandmark[]; addons?: string[] };
   links?: { reading?: string };
 };
 export type TopicCatalog = { schemaVersion: 1; topics: StudyTopic[] };
+const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value && typeof value === 'object' && !Array.isArray(value));
@@ -50,13 +52,14 @@ export function parseTopicCatalog(value: unknown): TopicCatalog {
   if (!isRecord(value) || value.schemaVersion !== 1 || !Array.isArray(value.topics)) throw new Error('Unsupported topic catalog / 主题目录格式不受支持');
   const ids = new Set<string>();
   for (const item of value.topics) {
-    if (!isRecord(item) || typeof item.id !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.id)
+    if (!isRecord(item) || typeof item.id !== 'string' || !slug.test(item.id)
       || !isBilingual(item.title) || !isBilingual(item.summary)
       || !['published', 'draft'].includes(String(item.status)) || !['shoulder', 'standard'].includes(String(item.adapter))
       || !isRecord(item.viewer) || typeof item.viewer.enabled !== 'boolean'
       || !(item.viewer.defaultTerm === null || typeof item.viewer.defaultTerm === 'string')
       || !Array.isArray(item.viewer.terms) || !item.viewer.terms.every(isTerm)
-      || (item.viewer.landmarks !== undefined && (!Array.isArray(item.viewer.landmarks) || !item.viewer.landmarks.every(isLandmark)))) {
+      || (item.viewer.landmarks !== undefined && (!Array.isArray(item.viewer.landmarks) || !item.viewer.landmarks.every(isLandmark)))
+      || (item.viewer.addons !== undefined && (!Array.isArray(item.viewer.addons) || !item.viewer.addons.every(addon => typeof addon === 'string' && slug.test(addon))))) {
       throw new Error('Incomplete topic configuration / 主题配置不完整');
     }
     if (ids.has(item.id)) throw new Error(`Duplicate topic / 重复主题：${item.id}`);

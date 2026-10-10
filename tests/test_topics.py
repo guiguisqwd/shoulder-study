@@ -309,5 +309,71 @@ class TopicTests(unittest.TestCase):
         errors, _ = validate(m, c, path, self.models)
         self.assertTrue(any('PDF is missing' in e for e in errors)); self.assertTrue(any('stale' in e for e in errors))
 
+    # Chapter 3D add-ons (library/<id>/3d/atlas-addon.json): only the owning chapter's viewer loads one.
+    def test_catalog_includes_chapter_addons_with_their_chapter(self):
+        self.assertEqual(self.models['teres-major-muscles-teres-major-muscle-right'].get('addon'), 'shoulder')
+        self.assertEqual(self.models['trapezius-muscles'].get('addon'), 'shoulder')
+        self.assertIsNone(self.models['appendicular-skeleton-humerus-right'].get('addon'))
+        self.assertIsNone(self.models['rotator-cuff-muscles-supraspinatus-muscle-right'].get('addon'))
+
+    def addon_root(self, name, output=None, write_metadata=True, structures=None):
+        """A temporary repository root: the real base metadata plus one fake chapter add-on ('knee')."""
+        root = self.base / name
+        models = root / 'library/shoulder/3d/public/models'
+        models.mkdir(parents=True)
+        for system in ['skeletal', 'muscular']:
+            name = system + '.metadata.json'
+            (models / name).write_bytes((ROOT / 'library/shoulder/3d/public/models' / name).read_bytes())
+        output = output or {'glb': 'public/models/z-anatomy-1.4.0-knee-addon.glb', 'metadata': 'public/models/knee-addon.metadata.json',
+                            'provenance': 'public/models/knee-addon.provenance.json'}
+        write_json(root / 'library/knee/3d/atlas-addon.json', {'output': output})
+        if write_metadata:
+            write_json(models / 'knee-addon.metadata.json', {'structures': structures or [
+                {'id': 'popliteus-muscles', 'name': 'Popliteus', 'system': 'muscular', 'layer': 'muscular', 'parentId': 'muscular-system', 'objectCount': 0},
+                {'id': 'popliteus-muscles-popliteus-muscle-right', 'name': 'Popliteus muscle.r', 'system': 'muscular', 'layer': 'muscular', 'parentId': 'popliteus-muscles', 'objectCount': 1},
+                {'id': 'popliteus-muscles-popliteus-muscle-left', 'name': 'Popliteus muscle.l', 'system': 'muscular', 'layer': 'muscular', 'parentId': 'popliteus-muscles', 'objectCount': 1}]})
+        return root
+
+    def test_addon_catalog_reads_any_chapter_and_rejects_bad_declarations(self):
+        models = catalog_models(self.addon_root('valid'))
+        self.assertEqual(models['popliteus-muscles-popliteus-muscle-right']['addon'], 'knee')
+        self.assertIn('appendicular-skeleton-humerus-right', models)
+        with self.assertRaisesRegex(ValueError, 'metadata is missing'): catalog_models(self.addon_root('unbuilt', write_metadata=False))
+        with self.assertRaisesRegex(ValueError, 'output.metadata must be'):
+            catalog_models(self.addon_root('renamed', output={'glb': 'public/models/z-anatomy-1.4.0-knee-addon.glb', 'metadata': '../../outside.json'}))
+        with self.assertRaisesRegex(ValueError, 'duplicates an existing model id'):
+            catalog_models(self.addon_root('duplicate', structures=[{'id': 'appendicular-skeleton-humerus-right', 'name': 'Humerus.r', 'system': 'skeletal', 'objectCount': 1}]))
+
+    def test_viewer_terms_may_use_only_their_own_chapter_addon(self):
+        m, c, path = self.completed_fixture()
+        models = dict(self.models)
+        for side in ['right', 'left']:
+            models['popliteus-muscles-popliteus-muscle-' + side] = {'id': 'popliteus-muscles-popliteus-muscle-' + side, 'name': 'Popliteus muscle.' + side[0],
+                                                                    'system': 'muscular', 'objectCount': 1, 'addon': 'test-topic'}
+        own = copy.deepcopy(m)
+        own['viewer']['terms'].append({'id': 'popliteus', 'name': pair('Popliteus', '腘肌'), 'kind': 'muscle', 'structures': {
+            'right': 'popliteus-muscles-popliteus-muscle-right', 'left': 'popliteus-muscles-popliteus-muscle-left'}})
+        self.assertFalse([e for e in validate(own, c, path, models)[0] if 'add-on' in e])
+        borrowed = copy.deepcopy(m)
+        borrowed['viewer']['terms'].append({'id': 'teres-major', 'name': pair('Teres major', '大圆肌'), 'kind': 'muscle', 'structures': {
+            'right': 'teres-major-muscles-teres-major-muscle-right', 'left': 'teres-major-muscles-teres-major-muscle-left'}})
+        errors, _ = validate(borrowed, c, path, self.models)
+        self.assertIn('viewer term teres-major: teres-major-muscles-teres-major-muscle-right is in the shoulder chapter 3D add-on, which this topic does not load', errors)
+
+    def test_topic_with_its_own_addon_lists_it_for_the_viewer(self):
+        m, c, path = self.draft(); self.write_topic(m, c, path)
+        other, other_content, other_path = self.draft('second-topic'); self.write_topic(other, other_content, other_path)
+        write_json(path / '3d/atlas-addon.json', {'output': {}})
+        catalog = {t['id']: t for t in build(path.parent, self.base / 'public')}
+        self.assertEqual(catalog['test-topic']['viewer']['addons'], ['test-topic'])
+        self.assertNotIn('addons', catalog['second-topic']['viewer'])
+        self.assertNotIn('addons', json.loads((path / 'topic.json').read_text())['viewer'])  # derived, never written back
+
+    def test_real_catalog_gives_the_shoulder_its_addon_and_leaves_hip_unchanged(self):
+        with tempfile.TemporaryDirectory() as output:
+            catalog = {t['id']: t for t in build(output=Path(output))}
+        self.assertEqual(catalog['shoulder']['viewer']['addons'], ['shoulder'])
+        self.assertNotIn('addons', catalog['hip']['viewer'])
+
 
 if __name__ == '__main__': unittest.main()

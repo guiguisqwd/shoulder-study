@@ -3,6 +3,7 @@ import { loadAtlases, modelPosition, modelScale } from './model';
 import type { StudyTopic, TopicLandmark, TopicTerm } from './topics';
 import { VanatomeViewer } from './vendor/VanatomeViewer';
 import { getRelatedStructureIds } from './vendor/sceneBehavior';
+import { fitDockedLabels, useElementHeight, type DockCandidate } from './labelDock';
 import type { VanatomeAnnotation, VanatomeAtlas, VanatomeCameraRequest, VanatomeDisplayMode, VanatomeVector3 } from './vendor/types';
 
 type Side = 'right' | 'left';
@@ -34,7 +35,8 @@ export function StandardTopicViewer({ topic }: { topic: StudyTopic }) {
   const [view, setView] = useState<View>('front');
   const [freeView, setFreeView] = useState(false);
   const [displayMode, setDisplayMode] = useState<VanatomeDisplayMode>('xray');
-  const [allLabels, setAllLabels] = useState(true);
+  // Only the selected structure is labelled until All labels is ticked (gui, 2026-10-09).
+  const [allLabels, setAllLabels] = useState(false);
   const [showChinese, setShowChinese] = useState(true);
   const [bones, setBones] = useState(true);
   const [muscles, setMuscles] = useState(true);
@@ -44,6 +46,8 @@ export function StandardTopicViewer({ topic }: { topic: StudyTopic }) {
   const [cameraRequest, setCameraRequest] = useState<VanatomeCameraRequest | null>(null);
   const requestId = useRef(0);
   const initialFocusDone = useRef(false);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const sceneHeight = useElementHeight(sceneRef);
   const structures = useMemo(() => atlases.flatMap(atlas => atlas.structures), [atlases]);
   const structureIndex = useMemo(() => new Map(structures.map(structure => [structure.id, structure])), [structures]);
   const term = topic.viewer.terms.find(item => item.id === termId) || initialTerm;
@@ -63,36 +67,44 @@ export function StandardTopicViewer({ topic }: { topic: StudyTopic }) {
     const visibleIds = new Set(visibleTermIds.split('|').flatMap(id => [...(termStructures.get(id) || [])]));
     return structures.filter(structure => structure.objectCount && !visibleIds.has(structure.id)).map(structure => structure.id);
   }, [structures, termStructures, visibleTermIds]);
-  const annotations = useMemo(() => {
-    const labels = visibleTermIds.split('|').flatMap((id): VanatomeAnnotation[] => {
-    const item = topic.viewer.terms.find(candidate => candidate.id === id);
-    const structure = item && structureIndex.get(item.structures[side]);
-    return item && structure ? [{
-      id: `term:${item.id}`, label: `${item.name.en}${showChinese ? `\n${item.name.zh}` : ''}`,
-      position: structure.position.map((value, axis) => (value - modelPosition[axis]) / modelScale) as unknown as VanatomeVector3,
-      color: item.kind === 'bone' ? '#dfd2ad' : '#a6cbb9', showLabel: allLabels,
-    }] : [];
+  // Labels dock in a column beside the model; with All labels on and too many to fit, the selection comes first and a note says so.
+  const labelLayout = useMemo(() => {
+    const candidates: DockCandidate[] = visibleTermIds.split('|').flatMap((id, order): DockCandidate[] => {
+      const item = topic.viewer.terms.find(candidate => candidate.id === id);
+      const structure = item && structureIndex.get(item.structures[side]);
+      if (!item || !structure) return [];
+      const position = structure.position.map((value, axis) => (value - modelPosition[axis]) / modelScale) as unknown as VanatomeVector3;
+      return [{ annotation: { id: `term:${item.id}`, label: `${item.name.en}${showChinese ? `\n${item.name.zh}` : ''}`, position,
+        color: item.kind === 'bone' ? '#dfd2ad' : '#a6cbb9', showLabel: allLabels }, priority: item.id === termId ? 0.5 : 2 + order / 1000, y: position[1] }];
     });
     if (showLandmarks) for (const landmark of reviewedLandmarks) {
       const isVisible = visibleTermIds.split('|').some(id => termStructures.get(id)?.has(landmark.structures[side]));
       if (!isVisible || !landmark.positions || !structureIndex.has(landmark.structures[side])) continue;
-      labels.push({ id: `landmark:${landmark.id}`, label: `${landmark.name.en}${showChinese ? `\n${landmark.name.zh}` : ''}`,
-        position: landmark.positions[side], color: '#f1c16f', showLabel: allLabels });
+      candidates.push({ annotation: { id: `landmark:${landmark.id}`, label: `${landmark.name.en}${showChinese ? `\n${landmark.name.zh}` : ''}`,
+        position: landmark.positions[side], color: '#f1c16f', showLabel: allLabels }, priority: landmark.id === landmarkId ? 0 : 1, y: landmark.positions[side][1] });
     }
-    return labels.map((label, index) => ({ ...label, labelDockIndex: index, labelDockCount: labels.length }));
-  }, [visibleTermIds, topic.viewer.terms, structureIndex, side, showChinese, allLabels, showLandmarks, reviewedLandmarks, termStructures]);
+    // With All labels off, only the selected structure (and a selected landmark) is labelled and marked.
+    if (!allLabels) {
+      const selected = candidates.filter(item => item.priority <= 0.5).map(item => ({ ...item, annotation: { ...item.annotation, showLabel: true } }));
+      return { items: fitDockedLabels(selected, sceneHeight), total: selected.length };
+    }
+    return { items: fitDockedLabels(candidates, sceneHeight), total: candidates.length };
+  }, [visibleTermIds, topic.viewer.terms, structureIndex, side, showChinese, allLabels, showLandmarks, reviewedLandmarks, termStructures, termId, landmarkId, sceneHeight]);
+  const annotations = labelLayout.items;
   const initialTarget = useMemo((): VanatomeVector3 => {
     const id = initialTerm?.structures[initialQuery.get('side') === 'left' ? 'left' : 'right'];
     return (id && structureIndex.get(id)?.position) || [0, 0, 0];
   }, [structureIndex, initialTerm, initialQuery]);
   const initialPosition = useMemo((): VanatomeVector3 => [initialTarget[0] + 0.4, initialTarget[1] + 0.3, initialTarget[2] + 5], [initialTarget]);
 
+  const addonKey = (topic.viewer.addons ?? []).join('|');
   useEffect(() => {
     if (!topic.viewer.enabled || !topic.viewer.terms.length) return;
     let active = true;
-    loadAtlases().then(data => { if (active) setAtlases(data); }).catch(reason => { if (active) setError(String(reason)); });
+    // A chapter with its own add-on model (library/<id>/3d/atlas-addon.json) loads it beside the shared models.
+    loadAtlases(addonKey ? addonKey.split('|') : []).then(data => { if (active) setAtlases(data); }).catch(reason => { if (active) setError(String(reason)); });
     return () => { active = false; };
-  }, [topic.viewer.enabled, topic.viewer.terms.length]);
+  }, [topic.viewer.enabled, topic.viewer.terms.length, addonKey]);
   useEffect(() => {
     if (!ready || initialFocusDone.current || !selectedId || !availableTerms.some(item => item.id === termId)) return;
     initialFocusDone.current = true;
@@ -155,7 +167,7 @@ export function StandardTopicViewer({ topic }: { topic: StudyTopic }) {
         <section className="viewer-panel" aria-label={`${topic.title.en} 3D anatomy`}>
           <div className="toolbar"><div className="segments">{(['right', 'left'] as const).map(value => <button key={value} aria-pressed={side === value} onClick={() => changeSide(value)}>{value === 'right' ? 'Right · 右侧' : 'Left · 左侧'}</button>)}</div>
             <div className="segments">{views.map(item => <button key={item.id} aria-pressed={view === item.id && !freeView} onClick={() => changeView(item.id)}>{item.en}<small>{item.zh}</small></button>)}</div></div>
-          <div className="scene">
+          <div ref={sceneRef} className="scene">
             {atlases.length > 0 && !error && <VanatomeViewer atlases={atlases} modelScale={modelScale} modelPosition={modelPosition}
               initialCameraTarget={initialTarget} initialCameraPosition={initialPosition} cameraRequest={cameraRequest}
               enablePan minDistance={0.7} maxDistance={28} focusDistance={2.5} hiddenIds={hiddenIds}
@@ -173,8 +185,9 @@ export function StandardTopicViewer({ topic }: { topic: StudyTopic }) {
             {!atlases.length && !error && <div className="loading">Loading anatomy model… · 正在载入解剖模型…</div>}
             <div className="scene-caption"><span className="live-dot" />{term?.name.en}{showChinese && term ? ` · ${term.name.zh}` : ''}</div>
             <div className="scene-help">Drag to rotate · Scroll to zoom<br />拖动旋转 · 滚动缩放</div>
-            <div className="orientation">{side === 'right' ? 'R' : 'L'}<small>{freeView ? 'Free view · 自由视角' : views.find(item => item.id === view)?.en}</small></div>
+            <div className={`orientation${allLabels && annotations.length > 8 ? ' beside-dock' : ''}`}>{side === 'right' ? 'R' : 'L'}<small>{freeView ? 'Free view · 自由视角' : views.find(item => item.id === view)?.en}</small></div>
           </div>
+          {allLabels && labelLayout.items.length < labelLayout.total && <p className="label-note" role="status">{labelLayout.items.length} of {labelLayout.total} labels fit the view; select a structure or tick Isolate selection to see the rest. · 视图中可显示 {labelLayout.items.length}/{labelLayout.total} 个标注；点选结构或勾选“单独显示”可查看其余名称。</p>}
           <div className="layerbar"><div className="segments">{modes.map(mode => <button key={mode.id} aria-pressed={displayMode === mode.id} onClick={() => setDisplayMode(mode.id)}>{mode.en}<small>{mode.zh}</small></button>)}</div>
             {topic.viewer.terms.some(item => item.kind === 'bone') && <label><input type="checkbox" checked={bones} onChange={event => setBones(event.target.checked)} />Bones · 骨骼</label>}
             {topic.viewer.terms.some(item => item.kind === 'muscle') && <label><input type="checkbox" checked={muscles} onChange={event => setMuscles(event.target.checked)} />Muscles · 肌肉</label>}

@@ -504,10 +504,12 @@ def run_phase(phase, date):
         say(f"content or engine changed since the last run ({ph['fingerprint']} → {fp}); later steps will run again")
     ph["fingerprint"] = fp
     save_run(run)
+    ran = False
     for name, kind, code in PHASES[phase]:
         rec = step_rec(run, phase, name)
         if rec.get("status") == "done":
             continue
+        ran = True
         say(f"→ {phase}/{name}")
         try:
             rc = FUN[name](run, date)
@@ -519,12 +521,37 @@ def run_phase(phase, date):
             return rc
         if phase == "evening" and name == "author":
             fp = fingerprint(date); ph["fingerprint"] = fp; save_run(run)
+    if not ran and ph.get("finished"):  # everything was already done: leave the committed run record as it is
+        return verify(date, phase, save=False)
     ph["finished"] = now()
     save_run(run)
     return verify(date, phase)
 
 
-def verify(date, phase):
+def push_run_record(date):
+    """s_publish commits the pack before its own step, the phase's finish and the verify result are written to
+    the run record. Commit and push that record too, so the pushed record passes `verify` and the clone stays clean."""
+    files = [run_path(date).relative_to(REPO).as_posix(), (RUNS / "log.jsonl").relative_to(REPO).as_posix()]
+    dirty = bool(git("status", "--porcelain", "--", *files).stdout.strip())
+    ahead = git("rev-list", "--count", "origin/main..HEAD", check=False).stdout.strip() not in ("", "0")
+    if not dirty and not ahead:
+        return 0
+    if dirty:
+        git("add", "--", *files)
+        git("-c", "user.name=Claude", "-c", "user.email=noreply@anthropic.com", "commit", "-m",
+            f"Daily pack {date}: record the publish step in the run log\n\nCo-Authored-By: Claude <noreply@anthropic.com>")
+    try:  # also retries a run-record commit an earlier run could not push
+        git("fetch", "origin", "main")
+        git("rebase", "origin/main")
+        git("push", "origin", "HEAD:main")
+    except Exception as e:  # the pack itself is already pushed; this commit goes out with the next publish
+        git("rebase", "--abort", check=False)
+        say(f"note: the run-record commit for {date} is kept locally (push failed: {str(e)[-300:]}). "
+            "The pack itself is pushed; the next publish pushes this commit too. Mention it in the report.")
+    return 0
+
+
+def verify(date, phase, save=True):
     run = load_run(date)
     steps = run["phases"].get(phase, {}).get("steps", {})
     missing = []
@@ -539,8 +566,10 @@ def verify(date, phase):
     say(f"\nVERIFY {phase} {date}: " + ("ALL STEPS DONE" if not missing else f"{len(missing)} step(s) not done"))
     for m in missing:
         say("  ✗ " + str(m)[:600])
-    run["phases"].setdefault(phase, {})["verified"] = {"at": now(), "ok": not missing, "missing": missing}
-    save_run(run)
+    old = run["phases"].get(phase, {}).get("verified") or {}
+    if save and (old.get("ok") != (not missing) or old.get("missing") != missing):  # rewrite only when the result changes
+        run["phases"].setdefault(phase, {})["verified"] = {"at": now(), "ok": not missing, "missing": missing}
+        save_run(run)
     return 0 if not missing else 1
 
 
@@ -597,7 +626,10 @@ def main():
     a = ap.parse_args()
     if a.cmd == "evening":
         date = a.date or plan.tomorrow(tz=TZ)
-        sys.exit(run_phase("evening", date))
+        rc = run_phase("evening", date)
+        if rc == 0 and step_rec(load_run(date), "evening", "publish").get("status") == "done":
+            push_run_record(date)
+        sys.exit(rc)
     if a.cmd == "morning":
         date = a.date or plan.today(TZ).isoformat()
         sys.exit(run_phase("morning", date))

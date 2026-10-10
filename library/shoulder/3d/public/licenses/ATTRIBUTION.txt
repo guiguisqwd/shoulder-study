@@ -8,7 +8,7 @@ Created by Gauthier Kervyn (design, 3D, anatomy) and Marcin Zielinski
 (Python script), with additional authors and upstream assets documented by the
 project.
 
-Project source: https://github.com/Z-Anatomy/Models
+Project source: https://github.com/Z-Anatomy/Models-of-human-anatomy
 License: Creative Commons Attribution-ShareAlike 4.0 International
 License URL: https://creativecommons.org/licenses/by-sa/4.0/
 
@@ -23,3 +23,32 @@ The MIT license for Vanatome viewer code does not relicense these atlas assets.
 Preserve the relevant attribution, indicate modifications, and follow the
 applicable ShareAlike terms when redistributing adapted atlas material. Refer
 to ASSET-LICENSE.md and the upstream notices for further provenance.
+
+Shoulder add-on model (added by this project, 2026-10-09)
+
+public/models/z-anatomy-1.4.0-shoulder-addon.glb and its
+shoulder-addon.metadata.json and shoulder-addon.provenance.json are also
+adapted from “Z-Anatomy — The libre 3D atlas of anatomy” (CC BY-SA 4.0),
+whose models are derived from “BodyParts3D — The Database Center for Life
+Science” (CC BY-SA 2.1 Japan).
+
+Source: https://github.com/Z-Anatomy/Models-of-human-anatomy
+Commit: bb293be456f6d2245191f37752d14ec76894740d
+(Z-Anatomy.zip SHA-256 e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736;
+Startup.blend SHA-256 9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd)
+
+Exported with the Vanatome exporter tools/anatomy/blender/export_batch.py
+(MIT, Vanatome contributors; commit 8185b3fa46a1dbefdd907390918c57954fd9b816),
+run unchanged by site/build/atlas/ in the dpt-study repository.
+
+Changes made: selection of 42 muscle meshes (14 shoulder-region muscles, left
+and right) from Startup.blend; web export to GLB with structure identifiers;
+source materials replaced by one plain material per muscle group (base colour
+and roughness set in library/shoulder/3d/atlas-addon.json); UV maps removed;
+meshes with more than 2,500 polygons decimated to a ratio of 0.7; the
+Z-Anatomy names “Ascending part of trapezius muscle” and “Descending part of
+trapezius muscle” swapped before export so that the names follow Terminologia
+Anatomica (the provenance file keeps the original names).
+
+The add-on model is distributed under the same license, CC BY-SA 4.0:
+https://creativecommons.org/licenses/by-sa/4.0/

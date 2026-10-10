@@ -1,0 +1,612 @@
+{
+  "_note": {
+    "en": "Shoulder 3D add-on: muscles the bundled demo model lacks. Built by site/build/atlas/build-addon.py from the pinned Z-Anatomy source; checked by check-addon.py (CI). Ids come from the exporter (group id + source mesh name). Where a Z-Anatomy mesh name does not match the anatomy, renameSourceObjects corrects it before export, so ids follow Terminologia Anatomica; the provenance file keeps the original Z-Anatomy name.",
+    "zh": "肩部 3D 附加模型：自带演示模型里没有的肌肉。由 site/build/atlas/build-addon.py 从固定的 Z-Anatomy 源文件导出，check-addon.py 检查（CI 也跑）。ID 由导出脚本生成（组 id + 源网格名）。Z-Anatomy 网格名和解剖不符的，导出前用 renameSourceObjects 改正，所以 ID 按国际解剖学名词（TA）；provenance 文件保留 Z-Anatomy 原名。"
+  },
+  "output": {
+    "glb": "public/models/z-anatomy-1.4.0-shoulder-addon.glb",
+    "metadata": "public/models/shoulder-addon.metadata.json",
+    "provenance": "public/models/shoulder-addon.provenance.json"
+  },
+  "renameSourceObjects": {
+    "_why": "Z-Anatomy swaps the trapezius part names. Measured on 2026-10-09: the mesh it calls 'Ascending part' runs from above C7 (nuchal ligament, occiput) to the lateral clavicle, which is the descending (upper) part in Terminologia Anatomica; the mesh it calls 'Descending part' runs from about T12 to the medial scapular spine, which is the ascending (lower) part. The position checks below guard this.",
+    "Ascending part of trapezius muscle.l": "Descending part of trapezius muscle.l",
+    "Ascending part of trapezius muscle.r": "Descending part of trapezius muscle.r",
+    "Descending part of trapezius muscle.l": "Ascending part of trapezius muscle.l",
+    "Descending part of trapezius muscle.r": "Ascending part of trapezius muscle.r"
+  },
+  "batch": {
+    "description": "Shoulder-region muscles missing from the bundled z-anatomy-1.4.0 demo model.",
+    "groups": [
+      {
+        "id": "trapezius-muscles",
+        "name": "Trapezius",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Descending part of trapezius muscle.l",
+          "Descending part of trapezius muscle.r",
+          "Transverse part of trapezius muscle.l",
+          "Transverse part of trapezius muscle.r",
+          "Ascending part of trapezius muscle.l",
+          "Ascending part of trapezius muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "latissimus-dorsi-muscles",
+        "name": "Latissimus Dorsi",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Latissimus dorsi muscle.l",
+          "Latissimus dorsi muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "levator-scapulae-muscles",
+        "name": "Levator Scapulae",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Levator scapulae.l",
+          "Levator scapulae.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "rhomboid-muscles",
+        "name": "Rhomboids",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Rhomboid major muscle.l",
+          "Rhomboid major muscle.r",
+          "Rhomboid minor muscle.l",
+          "Rhomboid minor muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.62,
+            0.22,
+            0.24,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "pectoralis-major-muscles",
+        "name": "Pectoralis Major",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Clavicular head of pectoralis major muscle.l",
+          "Clavicular head of pectoralis major muscle.r",
+          "Sternocostal head of pectoralis major muscle.l",
+          "Sternocostal head of pectoralis major muscle.r",
+          "(Abdominal part of pectoralis major muscle).l",
+          "(Abdominal part of pectoralis major muscle).r"
+        ],
+        "material": {
+          "color": [
+            0.7,
+            0.28,
+            0.28,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "pectoralis-minor-muscles",
+        "name": "Pectoralis Minor",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Pectoralis minor muscle.l",
+          "Pectoralis minor muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.7,
+            0.28,
+            0.28,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "subclavius-muscles",
+        "name": "Subclavius",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Subclavius muscle.l",
+          "Subclavius muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.7,
+            0.28,
+            0.28,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "serratus-anterior-muscles",
+        "name": "Serratus Anterior",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Serratus anterior muscle.l",
+          "Serratus anterior muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.7,
+            0.28,
+            0.28,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "teres-major-muscles",
+        "name": "Teres Major",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Teres major muscle.l",
+          "Teres major muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.72,
+            0.26,
+            0.2,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "biceps-brachii-muscles",
+        "name": "Biceps Brachii",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Long head of biceps brachii.l",
+          "Long head of biceps brachii.r",
+          "Short head of biceps brachii.l",
+          "Short head of biceps brachii.r"
+        ],
+        "material": {
+          "color": [
+            0.64,
+            0.25,
+            0.2,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "triceps-brachii-muscles",
+        "name": "Triceps Brachii",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Long head of triceps brachii.l",
+          "Long head of triceps brachii.r",
+          "Lateral head of triceps brachii.l",
+          "Lateral head of triceps brachii.r",
+          "Medial head of triceps brachii.l",
+          "Medial head of triceps brachii.r"
+        ],
+        "material": {
+          "color": [
+            0.64,
+            0.25,
+            0.2,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "coracobrachialis-muscles",
+        "name": "Coracobrachialis",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Coracobrachialis muscle.l",
+          "Coracobrachialis muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.64,
+            0.25,
+            0.2,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      },
+      {
+        "id": "brachialis-muscles",
+        "name": "Brachialis",
+        "system": "muscular",
+        "expandSourceParts": true,
+        "sourceObjects": [
+          "Brachialis muscle.l",
+          "Brachialis muscle.r"
+        ],
+        "material": {
+          "color": [
+            0.64,
+            0.25,
+            0.2,
+            1.0
+          ],
+          "roughness": 0.48
+        },
+        "decimate": 0.7
+      }
+    ]
+  },
+  "mappingNotes": [
+    {
+      "structure": "trapezius-muscles-descending-part-of-trapezius-muscle",
+      "showAs": "Upper trapezius (descending part)",
+      "zAnatomyName": "Ascending part of trapezius muscle",
+      "why": "Renamed before export (renameSourceObjects). Guarded by 'topAbove Vertebra C7' and 'overlaps Clavicle'."
+    },
+    {
+      "structure": "trapezius-muscles-ascending-part-of-trapezius-muscle",
+      "showAs": "Lower trapezius (ascending part)",
+      "zAnatomyName": "Descending part of trapezius muscle",
+      "why": "Renamed before export (renameSourceObjects). Guarded by 'topBelow Vertebra C7', 'bottomBelow Vertebra T7' and 'overlaps Scapula'. Part boundary only approximate (measured 2026-10-09 in this GLB and the bundled skeletal GLB): at the midline this mesh runs from y 1.120 m (T12 spinous tip 1.120) up to y 1.414 m, between the T1 (1.426) and T2 (1.405) spinous tips, so it starts at about T2, while Kenhub gives T4–T12 and Elsevier T5–T12 for the ascending part; the transverse mesh spans y 1.370–1.451 m at the midline. Laterally this mesh lies over part of the supraspinatus in the supraspinous fossa, where the SI12 depth probe enters it 0.3 cm from the transverse mesh; acupoint-depth.json therefore names that layer Trapezius."
+    },
+    {
+      "structure": "trapezius-muscles-transverse-part-of-trapezius-muscle",
+      "showAs": "Middle trapezius (transverse part)",
+      "why": "Name and position agree."
+    }
+  ],
+  "checks": [
+    {
+      "structure": "trapezius-muscles-descending-part-of-trapezius-muscle-{side}",
+      "rule": "topAbove",
+      "bone": "Vertebra C7",
+      "why": "upper fibres rise above C7 to the nuchal ligament and occiput"
+    },
+    {
+      "structure": "trapezius-muscles-descending-part-of-trapezius-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Clavicle{side}",
+      "why": "upper fibres insert on the lateral third of the clavicle",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "trapezius-muscles-ascending-part-of-trapezius-muscle-{side}",
+      "rule": "topBelow",
+      "bone": "Vertebra C7",
+      "why": "lower fibres stay below the neck"
+    },
+    {
+      "structure": "trapezius-muscles-ascending-part-of-trapezius-muscle-{side}",
+      "rule": "bottomBelow",
+      "bone": "Vertebra T7",
+      "why": "lower fibres arise down to T12"
+    },
+    {
+      "structure": "trapezius-muscles-ascending-part-of-trapezius-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "lower fibres insert on the medial scapular spine",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "trapezius-muscles-transverse-part-of-trapezius-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Vertebra T1",
+      "why": "middle fibres arise from C7 to T3",
+      "tolerance": 0.02
+    },
+    {
+      "structure": "trapezius-muscles-transverse-part-of-trapezius-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "middle fibres insert on the acromion and scapular spine",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "latissimus-dorsi-muscles-latissimus-dorsi-muscle-{side}",
+      "rule": "bottomBelow",
+      "bone": "Vertebra L3",
+      "why": "arises from the lower thoracic spines, thoracolumbar fascia and iliac crest"
+    },
+    {
+      "structure": "latissimus-dorsi-muscles-latissimus-dorsi-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Humerus{side}",
+      "why": "inserts in the floor of the intertubercular groove",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "levator-scapulae-muscles-levator-scapulae-{side}",
+      "rule": "topAbove",
+      "bone": "Vertebra C3",
+      "why": "arises from the transverse processes of C1 to C4"
+    },
+    {
+      "structure": "levator-scapulae-muscles-levator-scapulae-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "inserts on the superior angle and medial border",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "rhomboid-muscles-rhomboid-major-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "inserts on the medial border below the spine",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "rhomboid-muscles-rhomboid-major-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Vertebra T3",
+      "why": "arises from the spinous processes of T2 to T5",
+      "tolerance": 0.02
+    },
+    {
+      "structure": "rhomboid-muscles-rhomboid-minor-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "inserts on the medial border at the spine",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "rhomboid-muscles-rhomboid-minor-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Vertebra T1",
+      "why": "arises from the spinous processes of C7 and T1",
+      "tolerance": 0.02
+    },
+    {
+      "structure": "pectoralis-major-muscles-clavicular-head-of-pectoralis-major-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Clavicle{side}",
+      "why": "arises from the medial half of the clavicle",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "pectoralis-major-muscles-clavicular-head-of-pectoralis-major-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Humerus{side}",
+      "why": "inserts on the lateral lip of the intertubercular groove",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "pectoralis-major-muscles-sternocostal-head-of-pectoralis-major-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Body of sternum",
+      "why": "arises from the sternum and upper costal cartilages",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "pectoralis-major-muscles-sternocostal-head-of-pectoralis-major-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Humerus{side}",
+      "why": "inserts on the lateral lip of the intertubercular groove",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "pectoralis-major-muscles-abdominal-part-of-pectoralis-major-muscle-{side}",
+      "rule": "bottomBelow",
+      "bone": "Body of sternum",
+      "why": "arises from the rectus sheath below the sternum"
+    },
+    {
+      "structure": "pectoralis-minor-muscles-pectoralis-minor-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "inserts on the coracoid process",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "pectoralis-minor-muscles-pectoralis-minor-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Fourth rib{side}",
+      "why": "arises from ribs 3 to 5",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "subclavius-muscles-subclavius-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Clavicle{side}",
+      "why": "inserts under the clavicle",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "subclavius-muscles-subclavius-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "First rib{side}",
+      "why": "arises from the first rib",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "serratus-anterior-muscles-serratus-anterior-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "inserts on the costal surface of the medial border",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "serratus-anterior-muscles-serratus-anterior-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Eighth rib{side}",
+      "why": "arises from ribs 1 to 8 or 9",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "teres-major-muscles-teres-major-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "arises near the inferior angle",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "teres-major-muscles-teres-major-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Humerus{side}",
+      "why": "inserts on the medial lip of the intertubercular groove",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "teres-major-muscles-teres-major-muscle-{side}",
+      "rule": "topBelow",
+      "bone": "Scapula{side}",
+      "why": "lies on the lower lateral scapula"
+    },
+    {
+      "structure": "biceps-brachii-muscles-long-head-of-biceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "long head arises from the supraglenoid tubercle",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "biceps-brachii-muscles-long-head-of-biceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Radius{side}",
+      "why": "inserts on the radial tuberosity",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "biceps-brachii-muscles-short-head-of-biceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "short head arises from the coracoid process",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "biceps-brachii-muscles-short-head-of-biceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Humerus{side}",
+      "why": "belly runs along the front of the arm; Z-Anatomy models the shared distal tendon with the long head, which reaches the radius",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "triceps-brachii-muscles-long-head-of-triceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "long head arises from the infraglenoid tubercle",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "triceps-brachii-muscles-long-head-of-triceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Ulna{side}",
+      "why": "inserts on the olecranon",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "triceps-brachii-muscles-lateral-head-of-triceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Humerus{side}",
+      "why": "arises from the posterior humerus above the radial groove",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "triceps-brachii-muscles-lateral-head-of-triceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Ulna{side}",
+      "why": "inserts on the olecranon",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "triceps-brachii-muscles-medial-head-of-triceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Humerus{side}",
+      "why": "arises from the posterior humerus below the radial groove",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "triceps-brachii-muscles-medial-head-of-triceps-brachii-{side}",
+      "rule": "overlaps",
+      "bone": "Ulna{side}",
+      "why": "inserts on the olecranon",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "coracobrachialis-muscles-coracobrachialis-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Scapula{side}",
+      "why": "arises from the coracoid process",
+      "tolerance": 0.01
+    },
+    {
+      "structure": "coracobrachialis-muscles-coracobrachialis-muscle-{side}",
+      "rule": "bottomAbove",
+      "bone": "Humerus{side}",
+      "why": "inserts on the middle of the medial humeral shaft"
+    },
+    {
+      "structure": "brachialis-muscles-brachialis-muscle-{side}",
+      "rule": "topBelow",
+      "bone": "Humerus{side}",
+      "why": "arises from the distal half of the anterior humerus"
+    },
+    {
+      "structure": "brachialis-muscles-brachialis-muscle-{side}",
+      "rule": "overlaps",
+      "bone": "Ulna{side}",
+      "why": "inserts on the coronoid process and ulnar tuberosity",
+      "tolerance": 0.01
+    }
+  ]
+}

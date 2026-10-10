@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactElement } from 'react';
 import { formatCm, structureColor } from './depth';
-import type { DepthEntry, DepthText } from './depth';
+import type { DepthEntry, DepthSourceComparison, DepthText } from './depth';
 
 const stopNotes: Record<string, DepthText> = {
   'thoracic-wall': { en: 'The list stops at the rib (thoracic wall).', zh: '列表到肋（胸壁）为止。' },
@@ -78,6 +78,7 @@ export function DepthSection({ entry, error, showChinese, customized, markerColo
       <h4 className="depth-subheading">Not in this model · 本模型未包含</h4>
       <ul className="depth-missing-list">{entry.notModeled.map(item => <li key={item.english}><b>{item.english}</b>{zh(item.chinese) && ` · ${item.chinese}`}<span>{item.note.en}{zh(` ${item.note.zh}`)}</span></li>)}</ul>
     </>}
+    {entry.sourceComparison && <SourceComparison comparison={entry.sourceComparison} showChinese={showChinese} />}
 
     <p className="depth-caption">Model-based study reference. Not a needling path or needling depth. 模型学习参照，不是进针路径或进针深度。</p>
     <p className="tiny">Distances are original model metres × 100 (cm), measured along the probe from the first modeled surface (depth 0). Skin and subcutaneous fat are not modeled, so a depth from the skin would be greater.{zh(' 距离为原始模型米数 × 100（厘米），沿探针从第一个建模表面（深度 0）量起。模型不含皮肤与皮下脂肪，从皮肤量起会更深。')}</p>
@@ -90,4 +91,32 @@ export function DepthSection({ entry, error, showChinese, customized, markerColo
       <a href="./acupoint-depth.json" target="_blank" rel="noreferrer">Depth data (JSON) · 深浅数据 ↗</a>
     </details>
   </section>;
+}
+
+/** The probe compared with a published layer description for the point (sources listed below it). */
+function SourceComparison({ comparison, showChinese }: { comparison: DepthSourceComparison; showChinese: boolean }) {
+  const zh = (text?: string) => (showChinese && text ? text : '');
+  const same = comparison.agreement === 'same-order';
+  return <>
+    <h4 className="depth-subheading">Compared with published layers · 与资料层次对照 <small>{same ? 'The listed muscles lie on the probe in the same order.' : 'The probe differs from the published layers.'}{zh(same ? ' 资料所列肌肉在探针上的顺序一致。' : ' 探针与资料层次不同。')}</small></h4>
+    <p className="tiny">{comparison.sequence.en}{showChinese && <><br />{comparison.sequence.zh}</>}</p>
+    <ul className="depth-nearby">
+      {comparison.muscles.map(muscle => <li key={muscle.match}>
+        <i style={{ background: structureColor(muscle.onProbe ? muscle.layerIds[0] : muscle.closestPartId, 'muscle') }} aria-hidden="true" />
+        <span className="depth-nearby-name"><b>{muscle.english}</b>{showChinese && muscle.chinese && <small>{muscle.chinese}</small>}</span>
+        <span className="depth-distance">{muscle.onProbe ? `${formatCm(muscle.entryCm)}–${formatCm(muscle.exitCm)} cm` : `${formatCm(muscle.distanceToProbeCm)} cm away`}</span>
+        <span className="depth-direction">{muscle.onProbe
+          ? <>On the probe{zh(' · 在探针上')}</>
+          : <>Not on the probe; nearest {muscle.atProbeDepthCm < 0 ? `${formatCm(-muscle.atProbeDepthCm)} cm outside the first modeled surface` : `at ${formatCm(muscle.atProbeDepthCm)} cm depth`}, {muscle.direction.en.toLowerCase()} of it{muscle.closestPartEnglish !== muscle.english ? ` (${muscle.closestPartEnglish})` : ''}{zh(` · 不在探针上；最近处${muscle.atProbeDepthCm < 0 ? `在第一个建模表面外 ${formatCm(-muscle.atProbeDepthCm)} cm` : `在深度 ${formatCm(muscle.atProbeDepthCm)} cm`}，位于探针${muscle.direction.zh}`)}</>}</span>
+      </li>)}
+    </ul>
+    {(comparison.modelOnlyMuscles.length > 0 || comparison.notes.length > 0) && <ul className="depth-missing-list">
+      {comparison.modelOnlyMuscles.map(muscle => <li key={muscle.anatomyId}><b>{muscle.english}</b>{zh(muscle.chinese) && ` · ${muscle.chinese}`} {formatCm(muscle.entryCm)}–{formatCm(muscle.exitCm)} cm<span>On the probe in this model but not in the published layers.{zh(' 在本模型探针上，但资料层次未列出。')}</span></li>)}
+      {comparison.notes.map(note => <li key={note.en}><span>{note.en}{zh(` ${note.zh}`)}</span></li>)}
+    </ul>}
+    <details className="depth-details">
+      <summary>Sources for the layers · 层次资料来源</summary>
+      <ul>{comparison.sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a> · {source.publisher} · accessed{zh(' · 查阅')} {source.accessed}<br />{source.supports.en}{zh(` ${source.supports.zh}`)}</li>)}</ul>
+    </details>
+  </>;
 }

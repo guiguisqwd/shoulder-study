@@ -1,0 +1,32 @@
+{
+  "_note": {
+    "en": "Pinned inputs for the 3D add-on exporter. The source .blend and the exporter are the same files Vanatome used for the bundled z-anatomy-1.4.0 models (see sourceBlendSha256 and exporterSha256 in its 1.4.0 manifest), so add-on meshes land in the same coordinate frame.",
+    "zh": "3D 附加模型导出用的固定输入。源 .blend 和导出脚本与 Vanatome 生成自带 z-anatomy-1.4.0 模型时用的是同一份（见其 1.4.0 manifest 的 sourceBlendSha256、exporterSha256），所以附加网格和现有模型在同一个坐标系里。"
+  },
+  "zAnatomy": {
+    "repository": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+    "commit": "bb293be456f6d2245191f37752d14ec76894740d",
+    "zipUrl": "https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/bb293be456f6d2245191f37752d14ec76894740d/Z-Anatomy.zip",
+    "zipBytes": 86734957,
+    "zipSha256": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+    "blendMember": "Z-Anatomy/Startup.blend",
+    "blendSha256": "9f08a17ea0115fed80b2a73ecdf0a1bc2ab2f6956f37c593ce23d513ea35afcd",
+    "license": "CC BY-SA 4.0 (Z-Anatomy; derived from BodyParts3D, CC BY-SA 2.1 JP)"
+  },
+  "exporter": {
+    "file": "site/build/atlas/export_batch.py",
+    "upstream": "https://github.com/vixotic/Vanatome/blob/8185b3fa46a1dbefdd907390918c57954fd9b816/tools/anatomy/blender/export_batch.py",
+    "sha256": "bee6407e659a3da8b1abe66ef14914295f729d891533201f2eee2fb96ca09783",
+    "license": "MIT (Vanatome contributors); vendored unchanged"
+  },
+  "blender": {
+    "pip": "bpy==5.2.0",
+    "python": "3.13",
+    "version": "5.2.0 LTS"
+  },
+  "frame": {
+    "atlasVersion": "1.4.0",
+    "buildId": "994e6cc8ffbb212e",
+    "metadataPosition": "[x*7, z*7 - 6.1, -y*7] of the Blender world-space centre (Vanatome release-lib.mjs)"
+  }
+}

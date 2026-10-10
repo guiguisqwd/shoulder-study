@@ -25,7 +25,7 @@ SECTIONS = [
 ]
 # CH-01 (2026-10-09): paper reading left the chapter and became daily content (N-5). Chapters made
 # before that still carry a trailing 'papers' section until their own threads move it out.
-LEGACY_PAPER_SECTION = {'shoulder', 'hip'}
+LEGACY_PAPER_SECTION = {'hip'}
 STRUCTURE_KINDS = ['muscle', 'nerve', 'bone', 'landmark', 'joint', 'acupoint', 'paper']
 QA_CHECKS = ['medicalSources', 'bilingual', 'originInsertionLabels', 'modelLinks',
              'layoutDesktop', 'layoutMobile', 'fullAnswers']
@@ -91,12 +91,38 @@ def inside(base, relative):
 
 
 def catalog_models(root=ROOT):
+    """Every 3D structure id -> its metadata entry: the shared muscular and skeletal models, plus each
+    chapter add-on declared by library/<chapter>/3d/atlas-addon.json (ST-7). Add-on entries carry
+    'addon': <chapter>, because only that chapter's viewer loads the add-on (topics.json viewer.addons)."""
+    root = Path(root)
+    app = root / 'library/shoulder/3d'  # the shared 3D app; add-on outputs are relative to it
     result = {}
     for system in ['skeletal', 'muscular']:
-        path = Path(root) / 'library/shoulder/3d/public/models' / (system + '.metadata.json')
-        for s in read_json(path)['structures']:
+        for s in read_json(app / 'public/models' / (system + '.metadata.json'))['structures']:
             result[s['id']] = s
+    for config_path in sorted((root / 'library').glob('*/3d/atlas-addon.json')):
+        chapter = config_path.parent.parent.name
+        config = read_json(config_path)
+        output = config.get('output') if isinstance(config, dict) else None
+        # The viewer (src/model.ts loadAtlases) finds an add-on by its chapter id, so the files must use these names.
+        expected = {'metadata': 'public/models/' + chapter + '-addon.metadata.json',
+                    'glb': 'public/models/z-anatomy-1.4.0-' + chapter + '-addon.glb'}
+        for key, relative in expected.items():
+            if not isinstance(output, dict) or output.get(key) != relative:
+                raise ValueError(chapter + ': atlas-addon.json output.' + key + ' must be ' + relative + ' (the 3D viewer loads that file)')
+        path = inside(app, expected['metadata'])
+        if not path.is_file():
+            raise ValueError(chapter + ': 3D add-on metadata is missing (' + expected['metadata'] + '); run site/build/atlas/build-addon.py ' + chapter)
+        for s in read_json(path)['structures']:
+            if s['id'] in result:
+                raise ValueError(chapter + ': 3D add-on structure ' + s['id'] + ' duplicates an existing model id')
+            result[s['id']] = dict(s, addon=chapter)
     return result
+
+
+def topic_addons(manifest, topic_dir):
+    """Add-on models a topic's viewer loads: its own chapter add-on, when library/<id>/3d/atlas-addon.json exists."""
+    return [manifest['id']] if (Path(topic_dir) / '3d/atlas-addon.json').is_file() else []
 
 
 def chapter_3d(topic_dir):
@@ -361,6 +387,8 @@ def validate(manifest, content, topic_dir, models=None, root=ROOT, published_ove
             structure = models.get(key)
             if not structure or structure.get('objectCount', 0) < 1:
                 fail(label + ': no renderable geometry for ' + side + ' ' + str(key)); continue
+            if structure.get('addon') not in (None, tid):
+                fail(label + ': ' + key + ' is in the ' + structure['addon'] + ' chapter 3D add-on, which this topic does not load'); continue
             expected_system = 'skeletal' if kind == 'bone' else 'muscular'
             if structure.get('system') != expected_system: fail(label + ': incorrect tissue mapping for ' + str(key))
             if key.endswith(('-right', '-left')) and not key.endswith('-' + side): fail(label + ': swapped anatomical side')
@@ -741,6 +769,8 @@ def build(topics_dir=None, output=None, root=ROOT):
         (target / 'reading.html').write_text(page, encoding='utf-8')
         (target / 'reading.md').write_text(markdown, encoding='utf-8')
         public_manifest = dict(manifest, links=links(manifest), missing=missing)
+        addons = topic_addons(manifest, path)
+        if addons: public_manifest['viewer'] = dict(manifest['viewer'], addons=addons)
         write_json(target / 'data.json', {'topic': public_manifest, 'content': content if manifest['status'] == 'published' else None})
         if manifest['adapter'] == 'standard' and manifest['status'] == 'published':
             for diagram in content['diagrams']:

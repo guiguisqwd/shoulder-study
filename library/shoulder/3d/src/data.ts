@@ -24,6 +24,28 @@ export const anatomyNames: Record<string, string> = {
   'appendicular-skeleton-scapula': '肩胛骨',
   'appendicular-skeleton-clavicle': '锁骨',
   'appendicular-skeleton-humerus': '肱骨',
+  // Shoulder add-on muscles (public/models/shoulder-addon.metadata.json)
+  'trapezius-muscles-descending-part-of-trapezius-muscle': '上斜方肌',
+  'trapezius-muscles-transverse-part-of-trapezius-muscle': '中斜方肌',
+  'trapezius-muscles-ascending-part-of-trapezius-muscle': '下斜方肌',
+  'latissimus-dorsi-muscles-latissimus-dorsi-muscle': '背阔肌',
+  'levator-scapulae-muscles-levator-scapulae': '肩胛提肌',
+  'rhomboid-muscles-rhomboid-major-muscle': '大菱形肌',
+  'rhomboid-muscles-rhomboid-minor-muscle': '小菱形肌',
+  'pectoralis-major-muscles-clavicular-head-of-pectoralis-major-muscle': '胸大肌 · 锁骨部',
+  'pectoralis-major-muscles-sternocostal-head-of-pectoralis-major-muscle': '胸大肌 · 胸肋部',
+  'pectoralis-major-muscles-abdominal-part-of-pectoralis-major-muscle': '胸大肌 · 腹部',
+  'pectoralis-minor-muscles-pectoralis-minor-muscle': '胸小肌',
+  'subclavius-muscles-subclavius-muscle': '锁骨下肌',
+  'serratus-anterior-muscles-serratus-anterior-muscle': '前锯肌',
+  'teres-major-muscles-teres-major-muscle': '大圆肌',
+  'biceps-brachii-muscles-long-head-of-biceps-brachii': '肱二头肌 · 长头',
+  'biceps-brachii-muscles-short-head-of-biceps-brachii': '肱二头肌 · 短头',
+  'triceps-brachii-muscles-long-head-of-triceps-brachii': '肱三头肌 · 长头',
+  'triceps-brachii-muscles-lateral-head-of-triceps-brachii': '肱三头肌 · 外侧头',
+  'triceps-brachii-muscles-medial-head-of-triceps-brachii': '肱三头肌 · 内侧头',
+  'coracobrachialis-muscles-coracobrachialis-muscle': '喙肱肌',
+  'brachialis-muscles-brachialis-muscle': '肱肌',
 };
 
 export const anatomyEnglish: Record<string, string> = {
@@ -37,7 +59,51 @@ export const anatomyEnglish: Record<string, string> = {
   'appendicular-skeleton-scapula': 'Scapula',
   'appendicular-skeleton-clavicle': 'Clavicle',
   'appendicular-skeleton-humerus': 'Humerus',
+  // Shoulder add-on muscles (public/models/shoulder-addon.metadata.json)
+  'trapezius-muscles-descending-part-of-trapezius-muscle': 'Upper trapezius',
+  'trapezius-muscles-transverse-part-of-trapezius-muscle': 'Middle trapezius',
+  'trapezius-muscles-ascending-part-of-trapezius-muscle': 'Lower trapezius',
+  'latissimus-dorsi-muscles-latissimus-dorsi-muscle': 'Latissimus dorsi',
+  'levator-scapulae-muscles-levator-scapulae': 'Levator scapulae',
+  'rhomboid-muscles-rhomboid-major-muscle': 'Rhomboid major',
+  'rhomboid-muscles-rhomboid-minor-muscle': 'Rhomboid minor',
+  'pectoralis-major-muscles-clavicular-head-of-pectoralis-major-muscle': 'Pectoralis major · clavicular head',
+  'pectoralis-major-muscles-sternocostal-head-of-pectoralis-major-muscle': 'Pectoralis major · sternocostal head',
+  'pectoralis-major-muscles-abdominal-part-of-pectoralis-major-muscle': 'Pectoralis major · abdominal part',
+  'pectoralis-minor-muscles-pectoralis-minor-muscle': 'Pectoralis minor',
+  'subclavius-muscles-subclavius-muscle': 'Subclavius',
+  'serratus-anterior-muscles-serratus-anterior-muscle': 'Serratus anterior',
+  'teres-major-muscles-teres-major-muscle': 'Teres major',
+  'biceps-brachii-muscles-long-head-of-biceps-brachii': 'Biceps brachii · long head',
+  'biceps-brachii-muscles-short-head-of-biceps-brachii': 'Biceps brachii · short head',
+  'triceps-brachii-muscles-long-head-of-triceps-brachii': 'Triceps brachii · long head',
+  'triceps-brachii-muscles-lateral-head-of-triceps-brachii': 'Triceps brachii · lateral head',
+  'triceps-brachii-muscles-medial-head-of-triceps-brachii': 'Triceps brachii · medial head',
+  'coracobrachialis-muscles-coracobrachialis-muscle': 'Coracobrachialis',
+  'brachialis-muscles-brachialis-muscle': 'Brachialis',
 };
+/** Muscle groups of the shoulder page's layer bar. Each lists the model group ids it shows (both sides). */
+export type MuscleGroupId = 'cuff' | 'deltoid' | 'back' | 'chest' | 'teres-major' | 'upper-arm';
+export const muscleGroups: { id: MuscleGroupId; en: string; zh: string; groupIds: string[]; initial: boolean }[] = [
+  { id: 'cuff', en: 'Rotator cuff', zh: '肩袖', groupIds: ['rotator-cuff-muscles'], initial: true },
+  { id: 'deltoid', en: 'Deltoid', zh: '三角肌', groupIds: ['deltoid-muscles'], initial: true },
+  // Shoulder add-on muscles: off until the learner turns them on or chooses one of their words.
+  { id: 'back', en: 'Back', zh: '背部', groupIds: ['trapezius-muscles', 'latissimus-dorsi-muscles', 'levator-scapulae-muscles', 'rhomboid-muscles'], initial: false },
+  { id: 'chest', en: 'Chest', zh: '胸部', groupIds: ['pectoralis-major-muscles', 'pectoralis-minor-muscles', 'subclavius-muscles', 'serratus-anterior-muscles'], initial: false },
+  { id: 'teres-major', en: 'Teres major', zh: '大圆肌', groupIds: ['teres-major-muscles'], initial: false },
+  { id: 'upper-arm', en: 'Upper arm', zh: '上臂', groupIds: ['biceps-brachii-muscles', 'triceps-brachii-muscles', 'coracobrachialis-muscles', 'brachialis-muscles'], initial: false },
+];
+export const initialMuscleGroups = Object.fromEntries(muscleGroups.map(group => [group.id, group.initial])) as Record<MuscleGroupId, boolean>;
+/** The model group id ('trapezius-muscles') of a group id, a part id or a part id with its side. */
+export function modelGroupOf(id: string): string | undefined {
+  return muscleGroups.flatMap(group => group.groupIds).find(groupId => id === groupId || id.startsWith(groupId + '-'));
+}
+/** The layer-bar group that shows a structure, if any. */
+export function muscleGroupOf(id: string): MuscleGroupId | undefined {
+  const groupId = modelGroupOf(id);
+  return groupId ? muscleGroups.find(group => group.groupIds.includes(groupId))?.id : undefined;
+}
+
 export const relatedEnglish: Record<string,string> = {
   SI11: 'Infraspinous fossa · Infraspinatus · Scapula',
   SI12: 'Supraspinous fossa · Supraspinatus · Spine of scapula',

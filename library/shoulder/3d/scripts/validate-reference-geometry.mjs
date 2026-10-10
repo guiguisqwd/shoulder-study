@@ -3,14 +3,22 @@
  * This checks geometric containment only. It does not validate clinical acupoint
  * location, needling depth, treatment efficacy, or anatomical model accuracy.
  * Run from any directory: node /path/to/project/scripts/validate-reference-geometry.mjs
+ * With --write it also stores the result in public/geometry-validation.json, which
+ * compute-acupoint-depth.mjs --check reproduces with its own GLB reader. Besides the labeled
+ * muscle, scapula and humerus, each result records the shoulder add-on meshes of the same side
+ * within 3 cm of the reference (three.js measurements for that cross-check); they do not
+ * change pass/fail.
  */
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { DoubleSide, Raycaster, Triangle, Vector3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 const projectRoot = new URL('../', import.meta.url);
 const referenceFile = new URL('src/model-references.json', projectRoot);
+const outputFile = new URL('public/geometry-validation.json', projectRoot);
+const addonFile = 'z-anatomy-1.4.0-shoulder-addon.glb';
+const ADDON_NEAR_M = 0.03;
 const tolerance = 1e-6; // Metres in the original GLB coordinate system.
 const directions = [
   [1, 0.131, 0.173], [-0.239, 1, 0.317], [0.419, -0.227, 1],
@@ -20,18 +28,18 @@ const directions = [
 const expectedKeys = ['SI11', 'SI12', 'SI9', 'LI15', 'TE14']
   .flatMap(id => ['right', 'left'].map(side => `${id}-${side}`));
 
-async function loadModel(filename, neededIds, meshes) {
+async function loadModel(filename, isNeeded, meshes) {
   const bytes = await readFile(new URL(`public/models/${filename}`, projectRoot));
   const buffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
   const gltf = await new GLTFLoader().parseAsync(buffer, '');
   gltf.scene.updateMatrixWorld(true);
   gltf.scene.traverse(mesh => {
     const id = mesh.userData.anatomyId;
-    if (!mesh.isMesh || !neededIds.has(id)) return;
+    if (!mesh.isMesh || !isNeeded(id)) return;
     for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
       material.side = DoubleSide;
     }
-    const entry = meshes.get(id) ?? { meshes: [], triangles: [] };
+    const entry = meshes.get(id) ?? { meshes: [], triangles: [], file: filename };
     entry.meshes.push(mesh);
     const positions = mesh.geometry.attributes.position;
     const indices = mesh.geometry.index;
@@ -111,10 +119,13 @@ async function main() {
   }
   const meshes = new Map();
   await Promise.all([
-    loadModel('z-anatomy-1.4.0-muscular.glb', neededIds, meshes),
-    loadModel('z-anatomy-1.4.0-skeletal.glb', neededIds, meshes),
+    loadModel('z-anatomy-1.4.0-muscular.glb', id => neededIds.has(id), meshes),
+    loadModel('z-anatomy-1.4.0-skeletal.glb', id => neededIds.has(id), meshes),
+    loadModel(addonFile, id => typeof id === 'string', meshes),
   ]);
   for (const id of neededIds) if (!meshes.has(id)) throw new Error(`Mesh missing: ${id}`);
+  const addonIds = [...meshes.keys()].filter(id => meshes.get(id).file === addonFile).sort();
+  if (!addonIds.length) throw new Error(`No meshes read from ${addonFile}`);
   const results = expectedKeys.map(key => {
     const reference = references[key];
     const side = key.endsWith('-right') ? 'right' : 'left';
@@ -123,18 +134,27 @@ async function main() {
     const scapula = inspectContainment(point, meshes.get(`appendicular-skeleton-scapula-${side}`));
     const humerus = inspectContainment(point, meshes.get(`appendicular-skeleton-humerus-${side}`));
     const passed = muscle.reliable && muscle.inside && scapula.reliable && !scapula.inside && humerus.reliable && !humerus.inside;
-    return { id: key, anatomyId: reference.anatomyId, position: reference.position, passed, muscle, scapula, humerus };
+    const addonMeshes = addonIds.filter(id => id.endsWith(`-${side}`)).map(id => ({ anatomyId: id, ...inspectContainment(point, meshes.get(id)) }))
+      .filter(item => item.distanceToSurfaceMetres <= ADDON_NEAR_M || item.inside)
+      .map(({ anatomyId, inside, unanimousRays, windingAgrees, windingNumber, rayIntersectionCounts, distanceToSurfaceMetres }) => ({ anatomyId, inside, unanimousRays, windingAgrees, windingNumber, rayIntersectionCounts, distanceToSurfaceMetres }));
+    return { id: key, anatomyId: reference.anatomyId, position: reference.position, passed, muscle, scapula, humerus, addonMeshes };
   });
   const passed = results.every(result => result.passed);
-  console.log(JSON.stringify({
+  const report = {
     passed,
     scope: 'Geometric containment only; this does not establish clinical acupoint accuracy.',
     referenceFile: fileURLToPath(referenceFile),
     method: 'Shared GLB coordinates; 7 skew-ray parity checks plus signed solid-angle winding number; double-sided triangles; 1e-6 m boundary tolerance.',
+    addonMeshesMethod: `addonMeshes: the same measurements for every ${addonFile} mesh of the same side whose surface lies within ${ADDON_NEAR_M * 100} cm of the reference (or contains it). Recorded so compute-acupoint-depth.mjs --check can reproduce them; they do not affect pass/fail.`,
     passedCount: results.filter(result => result.passed).length,
     totalCount: results.length,
     results,
-  }, null, 2));
+  };
+  console.log(JSON.stringify(report, null, 2));
+  if (process.argv.includes('--write')) {
+    if (!passed) throw new Error('Not writing public/geometry-validation.json: the check failed');
+    await writeFile(outputFile, JSON.stringify({ ...report, referenceFile: 'src/model-references.json' }, null, 2) + '\n');
+  }
   if (!passed) process.exitCode = 1;
 }
 
