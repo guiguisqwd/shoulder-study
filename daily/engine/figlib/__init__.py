@@ -5,3 +5,4 @@ from .fig import *
 from .chest import *
 from .arm import *
 from .common import *
+from .library import *

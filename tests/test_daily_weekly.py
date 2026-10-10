@@ -99,5 +99,20 @@ class WeeklyPack(unittest.TestCase):
         self.assertIn("no daily/papers/no-such-paper.json", errs)
 
 
+
+
+class LibraryFigureReuse(unittest.TestCase):
+    def test_copy_strips_displacement_filter(self):
+        import xml.etree.ElementTree as ET
+        from engine.figlib import copy_library_figure
+        name = "01-右肩的后面观与前面观"
+        self.assertIn("feDisplacementMap", (ROOT / "library" / "shoulder" / "figures" / (name + ".svg")).read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as d:
+            svg = copy_library_figure("shoulder", name, d, "04-test").read_text(encoding="utf-8")
+        self.assertNotIn("feDisplacementMap", svg)
+        self.assertNotIn('filter="url(', svg)
+        ET.fromstring(svg)
+
+
 if __name__ == "__main__":
     unittest.main()

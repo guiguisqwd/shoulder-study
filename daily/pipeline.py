@@ -160,7 +160,8 @@ def write_weekly_brief(date, info):
               f"1. `daily/days/{date}/content.json` — schema `dpt-daily-pack/2`, kind `supplement`, `week` {info['week']}, `chapter` `{info['chapter']}`, "
               f"`chapter_name` `{info['chapterName']}`. Each chapter carries `content`, `items`, `forms` as above plus the usual title/toc/goals/terms/blocks/bridge. "
               "Field and block definitions: `daily/CONTENT_SCHEMA.md` (v2 section)" + (f"; the last weekly pack is `daily/days/{prev[-1]}/content.json`." if prev else "."),
-              f"2. `daily/days/{date}/figures.py` — `build(out_dir)` drawing every figure in `content.figures` with `engine.figlib` (an empty build is fine when no figure is needed).",
+              f"2. `daily/days/{date}/figures.py` — `build(out_dir)` drawing every figure in `content.figures` with `engine.figlib` (an empty build is fine when no figure is needed). "
+              "To reuse a chapter figure (DL-03) call `copy_library_figure(chapter, name, out_dir, out_name)`; it strips the displacement filter the figure check rejects.",
               "3. Consolidation (O-x): take the facts from the chapter `library/" + info["chapter"] + "/content.json` (DL-01), do not rewrite them differently.",
               "   New content: N-1 acupoints in `content.acupoints` with `meridian` (AN-20 to AN-24); N-5 papers come from `daily/papers/<id>.json` (block `paper`);",
               "   N-2/N-3/N-4/N-6/N-7 need sources you actually opened (G-02); N-4 cases are teaching cases.",
