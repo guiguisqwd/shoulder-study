@@ -6,14 +6,14 @@
     "zh": "髋关节"
   },
   "summary": {
-    "en": "A draft topic with a verified bone-model preview. The learning course is not yet written.",
-    "zh": "已接入骨骼模型预览的草稿主题，完整学习课程尚未编写。"
+    "en": "The hip joint and all hip-region muscles: gluteal, deep rotator, anterior, medial and posterior groups, with nerves, movement, clinical anatomy and review.",
+    "zh": "髋关节与髋部全部肌群：臀肌、深层旋转肌、前群、内侧群、后群，以及神经、运动、临床解剖与复习。"
   },
   "region": {
     "en": "Hip and pelvis",
     "zh": "髋部与骨盆"
   },
-  "status": "draft",
+  "status": "published",
   "adapter": "standard",
   "viewer": {
     "enabled": true,
@@ -42,9 +42,1160 @@
           "right": "appendicular-skeleton-femur-right",
           "left": "appendicular-skeleton-femur-left"
         }
+      },
+      {
+        "id": "sacrum",
+        "name": {
+          "en": "Sacrum",
+          "zh": "骶骨"
+        },
+        "kind": "bone",
+        "structures": {
+          "right": "skeleton-sacrum",
+          "left": "skeleton-sacrum"
+        }
+      },
+      {
+        "id": "gluteus-maximus",
+        "name": {
+          "en": "Gluteus maximus",
+          "zh": "臀大肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "superficial-gluteal-muscles-gluteus-maximus-muscle-right",
+          "left": "superficial-gluteal-muscles-gluteus-maximus-muscle-left"
+        }
+      },
+      {
+        "id": "gluteus-medius",
+        "name": {
+          "en": "Gluteus medius",
+          "zh": "臀中肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "superficial-gluteal-muscles-gluteus-medius-muscle-right",
+          "left": "superficial-gluteal-muscles-gluteus-medius-muscle-left"
+        }
+      },
+      {
+        "id": "gluteus-minimus",
+        "name": {
+          "en": "Gluteus minimus",
+          "zh": "臀小肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "superficial-gluteal-muscles-gluteus-minimus-muscle-right",
+          "left": "superficial-gluteal-muscles-gluteus-minimus-muscle-left"
+        }
+      },
+      {
+        "id": "tensor-fasciae-latae",
+        "name": {
+          "en": "Tensor fasciae latae",
+          "zh": "阔筋膜张肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "superficial-gluteal-muscles-tensor-fasciae-latae-right",
+          "left": "superficial-gluteal-muscles-tensor-fasciae-latae-left"
+        }
+      },
+      {
+        "id": "piriformis",
+        "name": {
+          "en": "Piriformis",
+          "zh": "梨状肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "deep-gluteal-muscles-piriformis-muscle-right",
+          "left": "deep-gluteal-muscles-piriformis-muscle-left"
+        }
+      },
+      {
+        "id": "superior-gemellus",
+        "name": {
+          "en": "Superior gemellus",
+          "zh": "上孖肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "deep-gluteal-muscles-superior-gemellus-muscle-right",
+          "left": "deep-gluteal-muscles-superior-gemellus-muscle-left"
+        }
+      },
+      {
+        "id": "obturator-internus",
+        "name": {
+          "en": "Obturator internus",
+          "zh": "闭孔内肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "deep-gluteal-muscles-obturator-internus-right",
+          "left": "deep-gluteal-muscles-obturator-internus-left"
+        }
+      },
+      {
+        "id": "inferior-gemellus",
+        "name": {
+          "en": "Inferior gemellus",
+          "zh": "下孖肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "deep-gluteal-muscles-inferior-gemellus-muscle-right",
+          "left": "deep-gluteal-muscles-inferior-gemellus-muscle-left"
+        }
+      },
+      {
+        "id": "quadratus-femoris",
+        "name": {
+          "en": "Quadratus femoris",
+          "zh": "股方肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "deep-gluteal-muscles-quadratus-femoris-muscle-right",
+          "left": "deep-gluteal-muscles-quadratus-femoris-muscle-left"
+        }
+      },
+      {
+        "id": "obturator-externus",
+        "name": {
+          "en": "Obturator externus",
+          "zh": "闭孔外肌"
+        },
+        "kind": "muscle",
+        "structures": {
+          "right": "deep-gluteal-muscles-obturator-externus-right",
+          "left": "deep-gluteal-muscles-obturator-externus-left"
+        }
       }
     ],
     "landmarks": []
   },
-  "structures": []
+  "structures": [
+    {
+      "id": "gluteus-maximus",
+      "kind": "muscle",
+      "name": {
+        "en": "Gluteus maximus",
+        "zh": "臀大肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": "gluteus-maximus"
+    },
+    {
+      "id": "gluteus-medius",
+      "kind": "muscle",
+      "name": {
+        "en": "Gluteus medius",
+        "zh": "臀中肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": "gluteus-medius"
+    },
+    {
+      "id": "gluteus-minimus",
+      "kind": "muscle",
+      "name": {
+        "en": "Gluteus minimus",
+        "zh": "臀小肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": "gluteus-minimus"
+    },
+    {
+      "id": "tensor-fasciae-latae",
+      "kind": "muscle",
+      "name": {
+        "en": "Tensor fasciae latae",
+        "zh": "阔筋膜张肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": "tensor-fasciae-latae"
+    },
+    {
+      "id": "piriformis",
+      "kind": "muscle",
+      "name": {
+        "en": "Piriformis",
+        "zh": "梨状肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": "piriformis"
+    },
+    {
+      "id": "superior-gemellus",
+      "kind": "muscle",
+      "name": {
+        "en": "Superior gemellus",
+        "zh": "上孖肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation"
+      ],
+      "modelTermId": "superior-gemellus"
+    },
+    {
+      "id": "obturator-internus",
+      "kind": "muscle",
+      "name": {
+        "en": "Obturator internus",
+        "zh": "闭孔内肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement"
+      ],
+      "modelTermId": "obturator-internus"
+    },
+    {
+      "id": "inferior-gemellus",
+      "kind": "muscle",
+      "name": {
+        "en": "Inferior gemellus",
+        "zh": "下孖肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation"
+      ],
+      "modelTermId": "inferior-gemellus"
+    },
+    {
+      "id": "quadratus-femoris",
+      "kind": "muscle",
+      "name": {
+        "en": "Quadratus femoris",
+        "zh": "股方肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement"
+      ],
+      "modelTermId": "quadratus-femoris"
+    },
+    {
+      "id": "obturator-externus",
+      "kind": "muscle",
+      "name": {
+        "en": "Obturator externus",
+        "zh": "闭孔外肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement"
+      ],
+      "modelTermId": "obturator-externus"
+    },
+    {
+      "id": "psoas-major",
+      "kind": "muscle",
+      "name": {
+        "en": "Psoas major",
+        "zh": "腰大肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "iliacus",
+      "kind": "muscle",
+      "name": {
+        "en": "Iliacus",
+        "zh": "髂肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "sartorius",
+      "kind": "muscle",
+      "name": {
+        "en": "Sartorius",
+        "zh": "缝匠肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "rectus-femoris",
+      "kind": "muscle",
+      "name": {
+        "en": "Rectus femoris",
+        "zh": "股直肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "clinical"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "pectineus",
+      "kind": "muscle",
+      "name": {
+        "en": "Pectineus",
+        "zh": "耻骨肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "adductor-longus",
+      "kind": "muscle",
+      "name": {
+        "en": "Adductor longus",
+        "zh": "长收肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "clinical"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "adductor-brevis",
+      "kind": "muscle",
+      "name": {
+        "en": "Adductor brevis",
+        "zh": "短收肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "adductor-magnus",
+      "kind": "muscle",
+      "name": {
+        "en": "Adductor magnus",
+        "zh": "大收肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "gracilis",
+      "kind": "muscle",
+      "name": {
+        "en": "Gracilis",
+        "zh": "股薄肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "biceps-femoris",
+      "kind": "muscle",
+      "name": {
+        "en": "Biceps femoris",
+        "zh": "股二头肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "clinical"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "semitendinosus",
+      "kind": "muscle",
+      "name": {
+        "en": "Semitendinosus",
+        "zh": "半腱肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "semimembranosus",
+      "kind": "muscle",
+      "name": {
+        "en": "Semimembranosus",
+        "zh": "半膜肌"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "movement"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "lumbar-plexus",
+      "kind": "nerve",
+      "name": {
+        "en": "Lumbar plexus",
+        "zh": "腰丛"
+      },
+      "chapters": [
+        "innervation"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "sacral-plexus",
+      "kind": "nerve",
+      "name": {
+        "en": "Sacral plexus",
+        "zh": "骶丛"
+      },
+      "chapters": [
+        "innervation"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "femoral-nerve",
+      "kind": "nerve",
+      "name": {
+        "en": "Femoral nerve",
+        "zh": "股神经"
+      },
+      "chapters": [
+        "innervation",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "obturator-nerve",
+      "kind": "nerve",
+      "name": {
+        "en": "Obturator nerve",
+        "zh": "闭孔神经"
+      },
+      "chapters": [
+        "innervation",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "superior-gluteal-nerve",
+      "kind": "nerve",
+      "name": {
+        "en": "Superior gluteal nerve",
+        "zh": "臀上神经"
+      },
+      "chapters": [
+        "innervation",
+        "movement",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "inferior-gluteal-nerve",
+      "kind": "nerve",
+      "name": {
+        "en": "Inferior gluteal nerve",
+        "zh": "臀下神经"
+      },
+      "chapters": [
+        "innervation",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "sciatic-nerve",
+      "kind": "nerve",
+      "name": {
+        "en": "Sciatic nerve",
+        "zh": "坐骨神经"
+      },
+      "chapters": [
+        "innervation",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "nerve-to-quadratus-femoris",
+      "kind": "nerve",
+      "name": {
+        "en": "Nerve to quadratus femoris",
+        "zh": "股方肌神经"
+      },
+      "chapters": [
+        "innervation"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "nerve-to-obturator-internus",
+      "kind": "nerve",
+      "name": {
+        "en": "Nerve to obturator internus",
+        "zh": "闭孔内肌神经"
+      },
+      "chapters": [
+        "innervation"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "lateral-femoral-cutaneous-nerve",
+      "kind": "nerve",
+      "name": {
+        "en": "Lateral femoral cutaneous nerve",
+        "zh": "股外侧皮神经"
+      },
+      "chapters": [
+        "innervation",
+        "clinical"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "hip-bone",
+      "kind": "bone",
+      "name": {
+        "en": "Hip bone",
+        "zh": "髋骨"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": "hip-bone"
+    },
+    {
+      "id": "femur",
+      "kind": "bone",
+      "name": {
+        "en": "Femur",
+        "zh": "股骨"
+      },
+      "chapters": [
+        "anatomy",
+        "movement",
+        "review"
+      ],
+      "modelTermId": "femur"
+    },
+    {
+      "id": "sacrum",
+      "kind": "bone",
+      "name": {
+        "en": "Sacrum",
+        "zh": "骶骨"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation"
+      ],
+      "modelTermId": "sacrum"
+    },
+    {
+      "id": "ilium",
+      "kind": "landmark",
+      "name": {
+        "en": "Ilium",
+        "zh": "髂骨"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "ischium",
+      "kind": "landmark",
+      "name": {
+        "en": "Ischium",
+        "zh": "坐骨"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "pubis",
+      "kind": "landmark",
+      "name": {
+        "en": "Pubis",
+        "zh": "耻骨"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "iliac-crest",
+      "kind": "landmark",
+      "name": {
+        "en": "Iliac crest",
+        "zh": "髂嵴"
+      },
+      "chapters": [
+        "anatomy",
+        "clinical"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "anterior-superior-iliac-spine",
+      "kind": "landmark",
+      "name": {
+        "en": "Anterior superior iliac spine",
+        "zh": "髂前上棘"
+      },
+      "chapters": [
+        "anatomy",
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "ASIS"
+      ]
+    },
+    {
+      "id": "anterior-inferior-iliac-spine",
+      "kind": "landmark",
+      "name": {
+        "en": "Anterior inferior iliac spine",
+        "zh": "髂前下棘"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "AIIS"
+      ]
+    },
+    {
+      "id": "posterior-superior-iliac-spine",
+      "kind": "landmark",
+      "name": {
+        "en": "Posterior superior iliac spine",
+        "zh": "髂后上棘"
+      },
+      "chapters": [
+        "anatomy",
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "PSIS"
+      ]
+    },
+    {
+      "id": "iliac-fossa",
+      "kind": "landmark",
+      "name": {
+        "en": "Iliac fossa",
+        "zh": "髂窝"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "acetabulum",
+      "kind": "landmark",
+      "name": {
+        "en": "Acetabulum",
+        "zh": "髋臼"
+      },
+      "chapters": [
+        "anatomy",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "greater-sciatic-foramen",
+      "kind": "landmark",
+      "name": {
+        "en": "Greater sciatic foramen",
+        "zh": "坐骨大孔"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation",
+        "clinical"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "lesser-sciatic-foramen",
+      "kind": "landmark",
+      "name": {
+        "en": "Lesser sciatic foramen",
+        "zh": "坐骨小孔"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "obturator-foramen",
+      "kind": "landmark",
+      "name": {
+        "en": "Obturator foramen",
+        "zh": "闭孔"
+      },
+      "chapters": [
+        "anatomy",
+        "innervation"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "ischial-tuberosity",
+      "kind": "landmark",
+      "name": {
+        "en": "Ischial tuberosity",
+        "zh": "坐骨结节"
+      },
+      "chapters": [
+        "anatomy",
+        "clinical"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "pubic-tubercle",
+      "kind": "landmark",
+      "name": {
+        "en": "Pubic tubercle",
+        "zh": "耻骨结节"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "ischiopubic-ramus",
+      "kind": "landmark",
+      "name": {
+        "en": "Ischiopubic ramus",
+        "zh": "坐耻骨支"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "femoral-head",
+      "kind": "landmark",
+      "name": {
+        "en": "Femoral head",
+        "zh": "股骨头"
+      },
+      "chapters": [
+        "anatomy",
+        "movement"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "femoral-neck",
+      "kind": "landmark",
+      "name": {
+        "en": "Femoral neck",
+        "zh": "股骨颈"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "greater-trochanter",
+      "kind": "landmark",
+      "name": {
+        "en": "Greater trochanter",
+        "zh": "大转子"
+      },
+      "chapters": [
+        "anatomy",
+        "movement",
+        "clinical",
+        "review"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "lesser-trochanter",
+      "kind": "landmark",
+      "name": {
+        "en": "Lesser trochanter",
+        "zh": "小转子"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "intertrochanteric-crest",
+      "kind": "landmark",
+      "name": {
+        "en": "Intertrochanteric crest",
+        "zh": "转子间嵴"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "gluteal-tuberosity",
+      "kind": "landmark",
+      "name": {
+        "en": "Gluteal tuberosity",
+        "zh": "臀肌粗隆"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "linea-aspera",
+      "kind": "landmark",
+      "name": {
+        "en": "Linea aspera",
+        "zh": "股骨粗线"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "adductor-tubercle",
+      "kind": "landmark",
+      "name": {
+        "en": "Adductor tubercle",
+        "zh": "收肌结节"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "iliotibial-tract",
+      "kind": "landmark",
+      "name": {
+        "en": "Iliotibial tract",
+        "zh": "髂胫束"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "IT band"
+      ]
+    },
+    {
+      "id": "hip-joint",
+      "kind": "joint",
+      "name": {
+        "en": "Hip joint",
+        "zh": "髋关节"
+      },
+      "chapters": [
+        "anatomy",
+        "clinical"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "acetabular-labrum",
+      "kind": "joint",
+      "name": {
+        "en": "Acetabular labrum",
+        "zh": "髋臼唇"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "iliofemoral-ligament",
+      "kind": "joint",
+      "name": {
+        "en": "Iliofemoral ligament",
+        "zh": "髂股韧带"
+      },
+      "chapters": [
+        "anatomy",
+        "movement"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "pubofemoral-ligament",
+      "kind": "joint",
+      "name": {
+        "en": "Pubofemoral ligament",
+        "zh": "耻股韧带"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "ischiofemoral-ligament",
+      "kind": "joint",
+      "name": {
+        "en": "Ischiofemoral ligament",
+        "zh": "坐股韧带"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null
+    },
+    {
+      "id": "ligament-of-head-of-femur",
+      "kind": "joint",
+      "name": {
+        "en": "Ligament of the head of the femur",
+        "zh": "股骨头韧带"
+      },
+      "chapters": [
+        "anatomy"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "ligamentum teres"
+      ]
+    },
+    {
+      "id": "gb30",
+      "kind": "acupoint",
+      "name": {
+        "en": "Huantiao",
+        "zh": "环跳"
+      },
+      "chapters": [
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "GB30"
+      ]
+    },
+    {
+      "id": "gb29",
+      "kind": "acupoint",
+      "name": {
+        "en": "Juliao",
+        "zh": "居髎"
+      },
+      "chapters": [
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "GB29"
+      ]
+    },
+    {
+      "id": "bl54",
+      "kind": "acupoint",
+      "name": {
+        "en": "Zhibian",
+        "zh": "秩边"
+      },
+      "chapters": [
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "BL54"
+      ]
+    },
+    {
+      "id": "bl36",
+      "kind": "acupoint",
+      "name": {
+        "en": "Chengfu",
+        "zh": "承扶"
+      },
+      "chapters": [
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "BL36"
+      ]
+    },
+    {
+      "id": "bl37",
+      "kind": "acupoint",
+      "name": {
+        "en": "Yinmen",
+        "zh": "殷门"
+      },
+      "chapters": [
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "BL37"
+      ]
+    },
+    {
+      "id": "st31",
+      "kind": "acupoint",
+      "name": {
+        "en": "Biguan",
+        "zh": "髀关"
+      },
+      "chapters": [
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "ST31"
+      ]
+    },
+    {
+      "id": "st32",
+      "kind": "acupoint",
+      "name": {
+        "en": "Futu",
+        "zh": "伏兔"
+      },
+      "chapters": [
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "ST32"
+      ]
+    },
+    {
+      "id": "gb31",
+      "kind": "acupoint",
+      "name": {
+        "en": "Fengshi",
+        "zh": "风市"
+      },
+      "chapters": [
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "GB31"
+      ]
+    },
+    {
+      "id": "lr11",
+      "kind": "acupoint",
+      "name": {
+        "en": "Yinlian",
+        "zh": "阴廉"
+      },
+      "chapters": [
+        "clinical"
+      ],
+      "modelTermId": null,
+      "aliases": [
+        "LR11"
+      ]
+    }
+  ]
 }

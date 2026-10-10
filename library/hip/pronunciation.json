@@ -1,0 +1,426 @@
+{
+  "_note": "AN-07: American English IPA and a respelling with the stressed syllable in capitals, each checked against the linked dictionary page. Acupoint names carry tone-marked Hanyu Pinyin.",
+  "terms": {
+    "Gluteus maximus": [
+      "/ˈɡlutiəs ˈmæksəməs/",
+      "GLOO-tee-uhs MAK-suh-muhs",
+      "https://www.merriam-webster.com/medical/gluteus%20maximus"
+    ],
+    "Gluteus medius": [
+      "/ˈɡlutiəs ˈmidiəs/",
+      "GLOO-tee-uhs MEE-dee-uhs",
+      "https://www.merriam-webster.com/medical/gluteus%20medius"
+    ],
+    "Gluteus minimus": [
+      "/ˈɡlutiəs ˈmɪnəməs/",
+      "GLOO-tee-uhs MIN-uh-muhs",
+      "https://www.merriam-webster.com/medical/gluteus%20minimus"
+    ],
+    "Tensor fasciae latae": [
+      "/ˈtɛnsər ˈfæʃiˌi ˈleɪti/",
+      "TEN-ser FASH-ee-ee LAY-tee",
+      "https://www.merriam-webster.com/medical/tensor%20fasciae%20latae"
+    ],
+    "Piriformis": [
+      "/ˌpɪrəˈfɔrməs/",
+      "pir-uh-FOR-muhs",
+      "https://www.merriam-webster.com/medical/piriformis"
+    ],
+    "Superior gemellus": [
+      "/səˈpɪriər dʒəˈmɛləs/",
+      "suh-PEER-ee-er juh-MEL-uhs",
+      "https://www.merriam-webster.com/medical/gemellus"
+    ],
+    "Obturator internus": [
+      "/ˈɑbtjəˌreɪtər ɪnˈtɝnəs/",
+      "AHB-tyuh-ray-ter in-TUR-nuhs",
+      "https://www.merriam-webster.com/medical/obturator%20internus"
+    ],
+    "Inferior gemellus": [
+      "/ɪnˈfɪriər dʒəˈmɛləs/",
+      "in-FEER-ee-er juh-MEL-uhs",
+      "https://www.merriam-webster.com/medical/gemellus"
+    ],
+    "Quadratus femoris": [
+      "/kwɑˈdreɪtəs ˈfɛmərəs/",
+      "kwah-DRAY-tuhs FEM-uh-ruhs",
+      "https://www.merriam-webster.com/medical/quadratus%20femoris"
+    ],
+    "Obturator externus": [
+      "/ˈɑbtjəˌreɪtər ɛkˈstɝnəs/",
+      "AHB-tyuh-ray-ter ek-STUR-nuhs",
+      "https://www.merriam-webster.com/medical/obturator%20externus"
+    ],
+    "Psoas major": [
+      "/ˈsoʊəs ˈmeɪdʒər/",
+      "SOH-uhs MAY-jer",
+      "https://www.merriam-webster.com/medical/psoas"
+    ],
+    "Iliacus": [
+      "/ɪˈlaɪəkəs/",
+      "ih-LY-uh-kuhs",
+      "https://www.merriam-webster.com/medical/iliacus"
+    ],
+    "Sartorius": [
+      "/sɑrˈtɔriəs/",
+      "sar-TOR-ee-uhs",
+      "https://www.merriam-webster.com/medical/sartorius"
+    ],
+    "Rectus femoris": [
+      "/ˈrɛktəs ˈfɛmərəs/",
+      "REK-tuhs FEM-uh-ruhs",
+      "https://www.merriam-webster.com/medical/rectus%20femoris"
+    ],
+    "Pectineus": [
+      "/pɛkˈtɪniəs/",
+      "pek-TIN-ee-uhs",
+      "https://www.merriam-webster.com/medical/pectineus"
+    ],
+    "Adductor longus": [
+      "/əˈdʌktər ˈlɔŋɡəs/",
+      "uh-DUK-ter LAWNG-guhs",
+      "https://www.merriam-webster.com/medical/adductor%20longus"
+    ],
+    "Adductor brevis": [
+      "/əˈdʌktər ˈbrɛvəs/",
+      "uh-DUK-ter BREV-uhs",
+      "https://www.merriam-webster.com/medical/adductor%20brevis"
+    ],
+    "Adductor magnus": [
+      "/əˈdʌktər ˈmæɡnəs/",
+      "uh-DUK-ter MAG-nuhs",
+      "https://www.merriam-webster.com/medical/adductor%20magnus"
+    ],
+    "Gracilis": [
+      "/ˈɡræsələs/",
+      "GRAS-uh-luhs",
+      "https://www.merriam-webster.com/medical/gracilis"
+    ],
+    "Biceps femoris": [
+      "/ˈbaɪˌsɛps ˈfɛmərəs/",
+      "BY-seps FEM-uh-ruhs",
+      "https://www.merriam-webster.com/medical/biceps%20femoris"
+    ],
+    "Semitendinosus": [
+      "/ˌsɛmiˌtɛndəˈnoʊsəs/",
+      "sem-ee-ten-duh-NOH-suhs",
+      "https://www.merriam-webster.com/medical/semitendinosus"
+    ],
+    "Semimembranosus": [
+      "/ˌsɛmiˌmɛmbrəˈnoʊsəs/",
+      "sem-ee-mem-bruh-NOH-suhs",
+      "https://www.merriam-webster.com/medical/semimembranosus"
+    ],
+    "Lumbar plexus": [
+      "/ˈlʌmbər ˈplɛksəs/",
+      "LUM-ber PLEK-suhs",
+      "https://www.merriam-webster.com/medical/lumbar"
+    ],
+    "Sacral plexus": [
+      "/ˈsækrəl ˈplɛksəs/",
+      "SAK-ruhl PLEK-suhs",
+      "https://www.merriam-webster.com/medical/sacral"
+    ],
+    "Femoral nerve": [
+      "/ˈfɛmərəl nɝv/",
+      "FEM-uh-ruhl NURV",
+      "https://www.merriam-webster.com/medical/femoral"
+    ],
+    "Obturator nerve": [
+      "/ˈɑbtjəˌreɪtər nɝv/",
+      "AHB-tyuh-ray-ter NURV",
+      "https://www.merriam-webster.com/medical/obturator"
+    ],
+    "Superior gluteal nerve": [
+      "/səˈpɪriər ˈɡlutiəl nɝv/",
+      "suh-PEER-ee-er GLOO-tee-uhl NURV",
+      "https://www.merriam-webster.com/medical/gluteal"
+    ],
+    "Inferior gluteal nerve": [
+      "/ɪnˈfɪriər ˈɡlutiəl nɝv/",
+      "in-FEER-ee-er GLOO-tee-uhl NURV",
+      "https://www.merriam-webster.com/medical/gluteal"
+    ],
+    "Sciatic nerve": [
+      "/saɪˈætɪk nɝv/",
+      "sy-AT-ik NURV",
+      "https://www.merriam-webster.com/medical/sciatic"
+    ],
+    "Nerve to quadratus femoris": [
+      "/nɝv tə kwɑˈdreɪtəs ˈfɛmərəs/",
+      "NURV tuh kwah-DRAY-tuhs FEM-uh-ruhs",
+      "https://www.merriam-webster.com/medical/quadratus"
+    ],
+    "Nerve to obturator internus": [
+      "/nɝv tə ˈɑbtjəˌreɪtər ɪnˈtɝnəs/",
+      "NURV tuh AHB-tyuh-ray-ter in-TUR-nuhs",
+      "https://www.merriam-webster.com/medical/obturator"
+    ],
+    "Lateral femoral cutaneous nerve": [
+      "/ˈlætərəl ˈfɛmərəl kjuˈteɪniəs nɝv/",
+      "LAT-er-uhl FEM-uh-ruhl kyoo-TAY-nee-uhs NURV",
+      "https://www.merriam-webster.com/medical/cutaneous"
+    ],
+    "Hip bone": [
+      "/ˈhɪp ˌboʊn/",
+      "HIP-bohn",
+      "https://www.merriam-webster.com/medical/hipbone"
+    ],
+    "Femur": [
+      "/ˈfimər/",
+      "FEE-mer",
+      "https://www.merriam-webster.com/medical/femur"
+    ],
+    "Sacrum": [
+      "/ˈsækrəm/",
+      "SAK-ruhm",
+      "https://www.merriam-webster.com/medical/sacrum"
+    ],
+    "Ilium": [
+      "/ˈɪliəm/",
+      "IL-ee-uhm",
+      "https://www.merriam-webster.com/medical/ilium"
+    ],
+    "Ischium": [
+      "/ˈɪskiəm/",
+      "IS-kee-uhm",
+      "https://www.merriam-webster.com/medical/ischium"
+    ],
+    "Pubis": [
+      "/ˈpjubəs/",
+      "PYOO-buhs",
+      "https://www.merriam-webster.com/medical/pubis"
+    ],
+    "Iliac crest": [
+      "/ˈɪliˌæk krɛst/",
+      "IL-ee-ak KREST",
+      "https://www.merriam-webster.com/medical/iliac"
+    ],
+    "Anterior superior iliac spine": [
+      "/ænˈtɪriər səˈpɪriər ˈɪliˌæk spaɪn/",
+      "an-TEER-ee-er suh-PEER-ee-er IL-ee-ak SPYNE",
+      "https://www.merriam-webster.com/medical/iliac"
+    ],
+    "Anterior inferior iliac spine": [
+      "/ænˈtɪriər ɪnˈfɪriər ˈɪliˌæk spaɪn/",
+      "an-TEER-ee-er in-FEER-ee-er IL-ee-ak SPYNE",
+      "https://www.merriam-webster.com/medical/iliac"
+    ],
+    "Posterior superior iliac spine": [
+      "/poʊˈstɪriər səˈpɪriər ˈɪliˌæk spaɪn/",
+      "poh-STEER-ee-er suh-PEER-ee-er IL-ee-ak SPYNE",
+      "https://www.merriam-webster.com/medical/iliac"
+    ],
+    "Iliac fossa": [
+      "/ˈɪliˌæk ˈfɑsə/",
+      "IL-ee-ak FAH-suh",
+      "https://www.merriam-webster.com/medical/iliac"
+    ],
+    "Acetabulum": [
+      "/ˌæsəˈtæbjələm/",
+      "as-uh-TAB-yuh-luhm",
+      "https://www.merriam-webster.com/medical/acetabulum"
+    ],
+    "Greater sciatic foramen": [
+      "/ˈɡreɪtər saɪˈætɪk fəˈreɪmən/",
+      "GRAY-ter sy-AT-ik fuh-RAY-muhn",
+      "https://www.merriam-webster.com/medical/foramen"
+    ],
+    "Lesser sciatic foramen": [
+      "/ˈlɛsər saɪˈætɪk fəˈreɪmən/",
+      "LES-er sy-AT-ik fuh-RAY-muhn",
+      "https://www.merriam-webster.com/medical/foramen"
+    ],
+    "Obturator foramen": [
+      "/ˈɑbtjəˌreɪtər fəˈreɪmən/",
+      "AHB-tyuh-ray-ter fuh-RAY-muhn",
+      "https://www.merriam-webster.com/medical/obturator"
+    ],
+    "Ischial tuberosity": [
+      "/ˈɪskiəl ˌtubəˈrɑsəti/",
+      "IS-kee-uhl too-buh-RAH-suh-tee",
+      "https://www.merriam-webster.com/medical/ischium"
+    ],
+    "Pubic tubercle": [
+      "/ˈpjubɪk ˈtubərkəl/",
+      "PYOO-bik TOO-ber-kuhl",
+      "https://www.merriam-webster.com/medical/pubic"
+    ],
+    "Ischiopubic ramus": [
+      "/ˌɪskioʊˈpjubɪk ˈreɪməs/",
+      "is-kee-oh-PYOO-bik RAY-muhs",
+      "https://www.merriam-webster.com/medical/ischiopubic"
+    ],
+    "Femoral head": [
+      "/ˈfɛmərəl hɛd/",
+      "FEM-uh-ruhl HED",
+      "https://www.merriam-webster.com/medical/femoral"
+    ],
+    "Femoral neck": [
+      "/ˈfɛmərəl nɛk/",
+      "FEM-uh-ruhl NEK",
+      "https://www.merriam-webster.com/medical/femoral"
+    ],
+    "Greater trochanter": [
+      "/ˈɡreɪtər troʊˈkæntər/",
+      "GRAY-ter troh-KAN-ter",
+      "https://www.merriam-webster.com/medical/trochanter"
+    ],
+    "Lesser trochanter": [
+      "/ˈlɛsər troʊˈkæntər/",
+      "LES-er troh-KAN-ter",
+      "https://www.merriam-webster.com/medical/trochanter"
+    ],
+    "Intertrochanteric crest": [
+      "/ˌɪntərˌtroʊkənˈtɛrɪk krɛst/",
+      "in-ter-troh-kuhn-TER-ik KREST",
+      "https://www.merriam-webster.com/medical/intertrochanteric"
+    ],
+    "Gluteal tuberosity": [
+      "/ˈɡlutiəl ˌtubəˈrɑsəti/",
+      "GLOO-tee-uhl too-buh-RAH-suh-tee",
+      "https://www.merriam-webster.com/medical/gluteal"
+    ],
+    "Linea aspera": [
+      "/ˈlɪniə ˈæspərə/",
+      "LIN-ee-uh AS-puh-ruh",
+      "https://www.merriam-webster.com/medical/linea%20aspera"
+    ],
+    "Adductor tubercle": [
+      "/əˈdʌktər ˈtubərkəl/",
+      "uh-DUK-ter TOO-ber-kuhl",
+      "https://www.merriam-webster.com/medical/adductor"
+    ],
+    "Iliotibial tract": [
+      "/ˌɪlioʊˈtɪbiəl trækt/",
+      "il-ee-oh-TIB-ee-uhl TRAKT",
+      "https://www.merriam-webster.com/medical/iliotibial"
+    ],
+    "Hip joint": [
+      "/hɪp dʒɔɪnt/",
+      "HIP JOYNT",
+      "https://www.merriam-webster.com/dictionary/hip"
+    ],
+    "Acetabular labrum": [
+      "/ˌæsəˈtæbjələr ˈleɪbrəm/",
+      "as-uh-TAB-yuh-ler LAY-bruhm",
+      "https://www.merriam-webster.com/medical/acetabular"
+    ],
+    "Iliofemoral ligament": [
+      "/ˌɪlioʊˈfɛmərəl ˈlɪɡəmənt/",
+      "il-ee-oh-FEM-uh-ruhl LIG-uh-muhnt",
+      "https://www.merriam-webster.com/medical/iliofemoral"
+    ],
+    "Pubofemoral ligament": [
+      "/ˌpjuboʊˈfɛmərəl ˈlɪɡəmənt/",
+      "pyoo-boh-FEM-uh-ruhl LIG-uh-muhnt",
+      "https://www.merriam-webster.com/medical/pubofemoral%20ligament"
+    ],
+    "Ischiofemoral ligament": [
+      "/ˌɪskioʊˈfɛmərəl ˈlɪɡəmənt/",
+      "is-kee-oh-FEM-uh-ruhl LIG-uh-muhnt",
+      "https://www.merriam-webster.com/medical/ischiofemoral"
+    ],
+    "Ligament of the head of the femur": [
+      "/ˈlɪɡəmənt əv ðə hɛd əv ðə ˈfimər/",
+      "LIG-uh-muhnt uhv thuh HED uhv thuh FEE-mer",
+      "https://www.merriam-webster.com/medical/femur"
+    ],
+    "Abduction": [
+      "/æbˈdʌkʃən/",
+      "ab-DUK-shuhn",
+      "https://www.merriam-webster.com/dictionary/abduction"
+    ],
+    "Adduction": [
+      "/əˈdʌkʃən/",
+      "uh-DUK-shuhn",
+      "https://www.merriam-webster.com/medical/adduction"
+    ],
+    "Flexion": [
+      "/ˈflɛkʃən/",
+      "FLEK-shuhn",
+      "https://www.merriam-webster.com/dictionary/flexion"
+    ],
+    "Extension": [
+      "/ɪkˈstɛnʃən/",
+      "ik-STEN-shuhn",
+      "https://www.merriam-webster.com/dictionary/extension"
+    ],
+    "Internal rotation": [
+      "/ɪnˈtɝnəl roʊˈteɪʃən/",
+      "in-TUR-nuhl roh-TAY-shuhn",
+      "https://www.merriam-webster.com/dictionary/rotation"
+    ],
+    "External rotation": [
+      "/ɛkˈstɝnəl roʊˈteɪʃən/",
+      "ek-STUR-nuhl roh-TAY-shuhn",
+      "https://www.merriam-webster.com/dictionary/rotation"
+    ],
+    "Trendelenburg sign": [
+      "/ˈtrɛndələnˌbɝɡ saɪn/",
+      "TREN-duhl-uhn-burg SYNE",
+      "https://www.merriam-webster.com/medical/Trendelenburg%20position"
+    ],
+    "Iliopsoas": [
+      "/ˌɪlioʊˈsoʊəs/",
+      "il-ee-oh-SOH-uhs",
+      "https://www.merriam-webster.com/medical/iliopsoas"
+    ],
+    "Hamstrings": [
+      "/ˈhæmˌstrɪŋz/",
+      "HAM-stringz",
+      "https://www.merriam-webster.com/medical/hamstring"
+    ],
+    "Quadriceps femoris": [
+      "/ˈkwɑdrəˌsɛps ˈfɛmərəs/",
+      "KWAH-druh-seps FEM-uh-ruhs",
+      "https://www.merriam-webster.com/medical/quadriceps"
+    ],
+    "Coxa": [
+      "/ˈkɑksə/",
+      "KAHK-suh",
+      "https://www.merriam-webster.com/medical/coxa"
+    ],
+    "Femoroacetabular impingement": [
+      "/ˌfɛməroʊˌæsəˈtæbjələr ɪmˈpɪndʒmənt/",
+      "fem-uh-roh-as-uh-TAB-yuh-ler im-PINJ-muhnt",
+      "https://www.merriam-webster.com/medical/acetabular"
+    ],
+    "Greater trochanteric pain syndrome": [
+      "/ˈɡreɪtər ˌtroʊkənˈtɛrɪk peɪn ˈsɪnˌdroʊm/",
+      "GRAY-ter troh-kuhn-TER-ik PAYN SIN-drohm",
+      "https://www.merriam-webster.com/medical/trochanteric"
+    ],
+    "Meralgia paresthetica": [
+      "/məˈrældʒiə ˌpɛrəsˈθɛtɪkə/",
+      "muh-RAL-jee-uh pair-uhs-THET-ih-kuh",
+      "https://www.merriam-webster.com/medical/meralgia%20paresthetica"
+    ],
+    "Gait cycle": [
+      "/ɡeɪt ˈsaɪkəl/",
+      "GAYT SY-kuhl",
+      "https://www.merriam-webster.com/dictionary/gait"
+    ],
+    "Stance phase": [
+      "/stæns feɪz/",
+      "STANS FAYZ",
+      "https://www.merriam-webster.com/dictionary/stance"
+    ],
+    "Swing phase": [
+      "/swɪŋ feɪz/",
+      "SWING FAYZ",
+      "https://www.merriam-webster.com/dictionary/swing"
+    ]
+  },
+  "pinyin": {
+    "Huantiao": "Huántiào",
+    "Juliao": "Jūliáo",
+    "Zhibian": "Zhìbiān",
+    "Chengfu": "Chéngfú",
+    "Yinmen": "Yīnmén",
+    "Biguan": "Bìguān",
+    "Futu": "Fútù",
+    "Fengshi": "Fēngshì",
+    "Yinlian": "Yīnlián"
+  }
+}

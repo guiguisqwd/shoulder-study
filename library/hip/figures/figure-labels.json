@@ -1,0 +1,172 @@
+{
+ "03": [
+  [
+   "gluteus-maximus",
+   "posterior ilium, sacrum and coccyx",
+   "髂骨后部、骶骨和尾骨",
+   "iliotibial tract and gluteal tuberosity",
+   "髂胫束和臀肌粗隆"
+  ]
+ ],
+ "04": [
+  [
+   "gluteus-medius",
+   "outer ilium between anterior and posterior gluteal lines",
+   "髂骨外面臀前线与臀后线之间",
+   "lateral surface of greater trochanter",
+   "大转子外侧面"
+  ],
+  [
+   "gluteus-minimus",
+   "outer ilium between anterior and inferior gluteal lines",
+   "髂骨外面臀前线与臀下线之间",
+   "anterior border of greater trochanter",
+   "大转子前缘"
+  ]
+ ],
+ "05": [
+  [
+   "tensor-fasciae-latae",
+   "ASIS and anterior iliac crest",
+   "髂前上棘和髂嵴前部",
+   "iliotibial tract → Gerdy's tubercle",
+   "髂胫束 → Gerdy 结节"
+  ]
+ ],
+ "06": [
+  [
+   "piriformis",
+   "anterior sacrum (S2–S4)",
+   "骶骨前面（S2–S4）",
+   "apex of greater trochanter",
+   "大转子尖"
+  ],
+  [
+   "superior-gemellus",
+   "ischial spine",
+   "坐骨棘",
+   "medial greater trochanter",
+   "大转子内侧面"
+  ],
+  [
+   "obturator-internus",
+   "inner obturator membrane",
+   "闭孔膜内面",
+   "medial greater trochanter",
+   "大转子内侧面"
+  ],
+  [
+   "inferior-gemellus",
+   "upper ischial tuberosity",
+   "坐骨结节上部",
+   "medial greater trochanter",
+   "大转子内侧面"
+  ],
+  [
+   "quadratus-femoris",
+   "lateral ischial tuberosity",
+   "坐骨结节外侧缘",
+   "quadrate tubercle",
+   "股方肌结节"
+  ],
+  [
+   "obturator-externus",
+   "outer obturator membrane",
+   "闭孔膜外面",
+   "trochanteric fossa",
+   "转子窝"
+  ]
+ ],
+ "07": [
+  [
+   "psoas-major",
+   "T12–L4 bodies, discs, transverse processes",
+   "T12–L4 椎体、椎间盘、横突",
+   "lesser trochanter",
+   "小转子"
+  ],
+  [
+   "iliacus",
+   "iliac fossa and inner iliac crest",
+   "髂窝和髂嵴内唇",
+   "lesser trochanter (shared tendon)",
+   "小转子（共同肌腱）"
+  ]
+ ],
+ "08": [
+  [
+   "sartorius",
+   "ASIS",
+   "髂前上棘",
+   "pes anserinus (medial tibia)",
+   "鹅足（胫骨内侧面）"
+  ],
+  [
+   "rectus-femoris",
+   "AIIS and above the acetabulum",
+   "髂前下棘和髋臼上沟",
+   "patella → tibial tuberosity",
+   "髌骨 → 胫骨粗隆"
+  ]
+ ],
+ "09": [
+  [
+   "pectineus",
+   "pecten of superior pubic ramus",
+   "耻骨上支耻骨梳",
+   "pectineal line of femur",
+   "股骨耻骨肌线"
+  ],
+  [
+   "adductor-longus",
+   "body of pubis",
+   "耻骨体",
+   "middle third of linea aspera",
+   "股骨粗线中 1/3"
+  ],
+  [
+   "gracilis",
+   "body and inferior ramus of pubis",
+   "耻骨体和耻骨下支",
+   "pes anserinus",
+   "鹅足"
+  ],
+  [
+   "adductor-brevis",
+   "body and inferior ramus of pubis",
+   "耻骨体和耻骨下支",
+   "upper linea aspera",
+   "股骨粗线上部"
+  ],
+  [
+   "adductor-magnus",
+   "ischiopubic ramus, ischial tuberosity",
+   "坐耻骨支、坐骨结节",
+   "linea aspera, adductor tubercle",
+   "股骨粗线、收肌结节"
+  ]
+ ],
+ "10": [
+  [
+   "biceps-femoris",
+   "ischial tuberosity (long head)",
+   "坐骨结节（长头）",
+   "head of fibula",
+   "腓骨头"
+  ],
+  [
+   "semitendinosus",
+   "ischial tuberosity",
+   "坐骨结节",
+   "pes anserinus",
+   "鹅足"
+  ],
+  [
+   "semimembranosus",
+   "ischial tuberosity (upper lateral)",
+   "坐骨结节上外侧",
+   "posterior medial tibial condyle",
+   "胫骨内侧髁后面"
+  ]
+ ]
+}
