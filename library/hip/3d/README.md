@@ -2,7 +2,7 @@
 
 按 `standards/library/steps.md` 的 ST-7，每一章都有自己的 3D 部分。
 
-现状（2026-10-09）：
+现状（2026-10-10）：
 
 - 网页借用肩部章节的 3D 程序（`library/shoulder/3d/`，`?topic=hip&term=femur`）。结构映射写在 `../topic.json` 的 `viewer` 里：髋骨、股骨、骶骨和自带模型里已有的 10 块臀部肌肉。
 - 自带模型缺的 12 块肌肉（腰大肌、髂肌、缝匠肌、股直肌、耻骨肌、长收肌、短收肌、大收肌、股薄肌、股二头肌长头和短头、半腱肌、半膜肌）由共用导出脚本生成附加模型。gui 2026-10-09 同意补（AN-43）。清单是本目录的 `atlas-addon.json`，产物在 `library/shoulder/3d/public/models/` 的 `z-anatomy-1.4.0-hip-addon.glb`、`hip-addon.metadata.json`、`hip-addon.provenance.json`。
