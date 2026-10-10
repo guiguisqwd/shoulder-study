@@ -69,6 +69,30 @@ python3 site/build/new-topic.py --id knee --en 'Knee joint' --zh 膝关节
 
 同一脚本还检查英文在前（QC-05）：`content.json` 里每对 `{en, zh}` 英文格只放英文、中文格放中文。
 
+### 题库（ST-10 的输出，【试用】AN-60）
+
+每章在 `library/<id>/questions.json` 写题库。一道题有三种写法：
+
+```json
+{
+  "schema": "dpt-question-bank/1",
+  "chapter": "shoulder",
+  "questions": [
+    {"id": "supraspinatus-oina", "type": "recall", "part": "anatomy", "covers": ["supraspinatus", "greater-tubercle"],
+     "record": "muscles/supraspinatus", "ask": ["origin", "insertion", "innervation", "actions"]},
+    {"id": "review-insertions", "type": "recall", "part": "review", "covers": ["greater-tubercle"],
+     "record": "review/q-insertions", "points": [{"en": "...", "zh": "..."}, {"en": "...", "zh": "..."}]},
+    {"id": "force-couples", "type": "recall", "part": "movement", "covers": ["deltoid"], "from": "movement",
+     "prompt": {"en": "...", "zh": "..."}, "answer": {"en": "...", "zh": "..."}, "points": [{"en": "...", "zh": "..."}, {"en": "...", "zh": "..."}]}
+  ]
+}
+```
+
+- `record` 指向 `content.json` 里已有的记录：`muscles/<id>`、`acupoints/<id>` 用 `ask` 选要问的字段（肌肉：`origin`、`insertion`、`course`、`innervation`、`actions`；穴位：`location`、`howToFind`、`layers`、`target`、`safety`），题面、答案和评分要点由脚本生成；`review/<id>` 取第 5 部分那道问答，另配 `points`。
+- 没有现成记录的题自己写 `prompt`、`answer`、2–5 条 `points`，并用 `from` 写明答案出自哪一部分（`anatomy`、`innervation`、`movement`、`clinical`、`review`）。
+- `type`：`recall`、`term`、`locate`、`reason`、`case`；`part`：这道题归在哪一部分；`covers`：考到的结构清单 `id`。
+- `python3 site/build/platform/questions.py library/<id> --markdown` 打印全部题目和答案。其他程序（每日包、复习中心）用同一文件里的 `expand()` 取统一格式的题：`id`、`type`、`part`、`covers`、`prompt`、`answer`、`points`、`from`、`sources`。
+
 ### 正文块（`sections[].blocks`）
 
 每章的 `blocks` 按顺序排版，同一份内容生成网页和 Markdown（`site/build/platform/reading.py`）。双语值都写 `{"en", "zh"}`；文字里可用 `**粗体**` 和 `[来源名](https://…)`。解剖名称不要手写 3D 链接：结构清单里的名称和 `modelLinks` 里的名称在生成时自动链接。
