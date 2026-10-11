@@ -1,0 +1,13 @@
+{
+ "reviewer": "claude",
+ "verdict": "pass",
+ "viewed": [
+  "top.png",
+  "chapter-chapter-1.png",
+  "chapter-chapter-2.png",
+  "mobile-top.png"
+ ],
+ "notes": "Chapter-day pack, no figures. Desktop top: header, study plan, chapter heading (English first, then Chinese), goals and the chapter link render cleanly; nothing cut off. Week table: all 12 rows for 10-12..10-17 present, content / items / forms columns readable, hover-term underlines on muscle and bone names; dates wrap onto two lines (\"2026-10-12 周 / 一\") but stay readable. Last rows and the mark-done button visible. Mobile: no horizontal overflow, header meta wraps, plan blocks stack. Known content-side points left as they are (asked the user 2026-10-09, no change requested): the text says five parts (standards DL-10 / CH-01) while the shoulder chapter page has six sections; the Key terms box is empty on a chapter day; the form column shows codes AN-03 and DL-15; the hero title is Chinese first with English after, as in the shared template.",
+ "fixed": [],
+ "page_sha": "1200eb74198df9df"
+}

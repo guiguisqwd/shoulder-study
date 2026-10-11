@@ -1,0 +1,168 @@
+{
+ "date": "2026-10-11",
+ "phases": {
+  "evening": {
+   "steps": {
+    "plan": {
+     "status": "done",
+     "at": "2026-10-11T01:08:44+00:00",
+     "evidence": {
+      "kind": "chapter_day",
+      "week": 1,
+      "chapter": "shoulder",
+      "entries": []
+     }
+    },
+    "author": {
+     "status": "done",
+     "at": "2026-10-11T01:08:44+00:00",
+     "evidence": {
+      "content": "daily/days/2026-10-11/content.json",
+      "figures": "daily/days/2026-10-11/figures.py",
+      "fingerprint": "76e299f22dd42d20"
+     }
+    },
+    "figures": {
+     "status": "done",
+     "at": "2026-10-11T01:08:44+00:00",
+     "evidence": {
+      "svgs": []
+     }
+    },
+    "validate": {
+     "status": "done",
+     "at": "2026-10-11T01:08:44+00:00",
+     "evidence": "schema dpt-daily-pack/2: 0 problems"
+    },
+    "build": {
+     "status": "done",
+     "at": "2026-10-11T01:08:44+00:00",
+     "evidence": {
+      "date": "2026-10-11",
+      "out": "2026-10-11-第1周-章节日-肩袖",
+      "chapters": 1,
+      "figure_occurrences": 0,
+      "figures": [],
+      "model_links": [
+       "humerus",
+       "infraspinatus",
+       "scapula",
+       "subscapularis",
+       "supraspinatus",
+       "teres-minor"
+      ],
+      "html_bytes": 43349
+     }
+    },
+    "qa": {
+     "status": "done",
+     "at": "2026-10-11T01:08:50+00:00",
+     "evidence": {
+      "figures": 0,
+      "say_buttons": 0,
+      "mobile_scroll_width": 390,
+      "flashcards": 0,
+      "views": 4
+     }
+    },
+    "visual_review": {
+     "status": "done",
+     "at": "2026-10-11T01:09:09+00:00",
+     "evidence": {
+      "viewed": 4,
+      "notes": "Chapter-day pack, no figures. Desktop top: header, study plan, chapter heading (English first, then Chinese), goals and the chapter link render cleanly; nothing cut off. Week table: all 12 rows for 10-12..10-17 present, content / items / forms columns readable, hover-term underlines on muscle and bone names; dates wrap onto two lines (\"2026-10-12 周 / 一\") but stay readable. Last rows and the mark-done button visible. Mobile: no horizontal overflow, header meta wraps, plan blocks stack. Known cont",
+      "fixed": []
+     }
+    },
+    "site": {
+     "status": "done",
+     "at": "2026-10-11T01:09:09+00:00",
+     "evidence": {
+      "entries": 4,
+      "learned_acupoints": 16,
+      "learned_muscles": 13,
+      "page": "site/public/daily/2026-10-11/index.html"
+     }
+    },
+    "cards": {
+     "status": "done",
+     "at": "2026-10-11T01:09:09+00:00",
+     "evidence": {
+      "cards": 37,
+      "acupoints": 28,
+      "muscles": 9,
+      "due_on_2026-10-11": 8
+     }
+    }
+   },
+   "started": "2026-10-11T01:08:44+00:00",
+   "fingerprint": "76e299f22dd42d20"
+  }
+ },
+ "history": [
+  {
+   "at": "2026-10-11T01:08:44+00:00",
+   "phase": "evening",
+   "step": "plan",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-11T01:08:44+00:00",
+   "phase": "evening",
+   "step": "author",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-11T01:08:44+00:00",
+   "phase": "evening",
+   "step": "figures",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-11T01:08:44+00:00",
+   "phase": "evening",
+   "step": "validate",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-11T01:08:44+00:00",
+   "phase": "evening",
+   "step": "build",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-11T01:08:50+00:00",
+   "phase": "evening",
+   "step": "qa",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-11T01:08:50+00:00",
+   "phase": "evening",
+   "step": "visual_review",
+   "status": "waiting"
+  },
+  {
+   "at": "2026-10-11T01:09:09+00:00",
+   "phase": "evening",
+   "step": "visual_review",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-11T01:09:09+00:00",
+   "phase": "evening",
+   "step": "site",
+   "status": "done"
+  },
+  {
+   "at": "2026-10-11T01:09:09+00:00",
+   "phase": "evening",
+   "step": "cards",
+   "status": "done"
+  }
+ ],
+ "kind": "chapter_day",
+ "week": 1,
+ "chapter": "shoulder",
+ "out": "2026-10-11-第1周-章节日-肩袖"
+}

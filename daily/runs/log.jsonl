@@ -86,3 +86,13 @@
 {"date": "2026-10-12", "at": "2026-10-09T14:21:39+00:00", "phase": "evening", "step": "site", "status": "done"}
 {"date": "2026-10-12", "at": "2026-10-09T14:21:39+00:00", "phase": "evening", "step": "cards", "status": "done"}
 {"date": "2026-10-12", "at": "2026-10-09T14:21:44+00:00", "phase": "evening", "step": "publish", "status": "done"}
+{"date": "2026-10-11", "at": "2026-10-11T01:08:44+00:00", "phase": "evening", "step": "plan", "status": "done"}
+{"date": "2026-10-11", "at": "2026-10-11T01:08:44+00:00", "phase": "evening", "step": "author", "status": "done"}
+{"date": "2026-10-11", "at": "2026-10-11T01:08:44+00:00", "phase": "evening", "step": "figures", "status": "done"}
+{"date": "2026-10-11", "at": "2026-10-11T01:08:44+00:00", "phase": "evening", "step": "validate", "status": "done"}
+{"date": "2026-10-11", "at": "2026-10-11T01:08:44+00:00", "phase": "evening", "step": "build", "status": "done"}
+{"date": "2026-10-11", "at": "2026-10-11T01:08:50+00:00", "phase": "evening", "step": "qa", "status": "done"}
+{"date": "2026-10-11", "at": "2026-10-11T01:08:50+00:00", "phase": "evening", "step": "visual_review", "status": "waiting", "error": "['no visual-review.json newer than qa.json']"}
+{"date": "2026-10-11", "at": "2026-10-11T01:09:09+00:00", "phase": "evening", "step": "visual_review", "status": "done"}
+{"date": "2026-10-11", "at": "2026-10-11T01:09:09+00:00", "phase": "evening", "step": "site", "status": "done"}
+{"date": "2026-10-11", "at": "2026-10-11T01:09:09+00:00", "phase": "evening", "step": "cards", "status": "done"}

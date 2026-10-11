@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-11",
+  "out": "2026-10-11-第1周-章节日-肩袖",
+  "chapters": 1,
+  "figure_occurrences": 0,
+  "figures": [],
+  "model_links": [
+    "humerus",
+    "infraspinatus",
+    "scapula",
+    "subscapularis",
+    "supraspinatus",
+    "teres-minor"
+  ],
+  "html_bytes": 43349
+}

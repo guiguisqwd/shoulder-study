@@ -72,6 +72,31 @@
    "md": "daily/2026-10-12/2026-10-12-第1周-试用-肩带四穴与肩袖四肌.md"
   },
   {
+   "date": "2026-10-11",
+   "day": null,
+   "week": 1,
+   "chapter": "shoulder",
+   "kind": "chapter_day",
+   "out": "2026-10-11-第1周-章节日-肩袖",
+   "title": {
+    "zh": "本周章节：肩袖",
+    "en": "This week's chapter: Rotator cuff"
+   },
+   "acupoints": [],
+   "muscles": [],
+   "tags": {
+    "vertical": [
+     "解剖学"
+    ],
+    "horizontal": [
+     "每周章节"
+    ]
+   },
+   "figures": 0,
+   "path": "daily/2026-10-11/index.html",
+   "md": "daily/2026-10-11/2026-10-11-第1周-章节日-肩袖.md"
+  },
+  {
    "date": "2026-10-08",
    "day": 2,
    "week": null,
