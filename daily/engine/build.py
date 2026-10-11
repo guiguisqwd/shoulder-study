@@ -3,7 +3,7 @@
 import html, json, re, xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
-from .paths import TEMPLATES, DATA, APP_SRC, LOCAL_3D, build_dir, out_name
+from .paths import TEMPLATES, DATA, APP_SRC, LOCAL_3D, SITE_BASE, build_dir, out_name
 from .render import render_sections, chapter_url
 from . import plan
 
@@ -129,7 +129,7 @@ def build(date):
                                                      else f"第 {c['week']} 周 {plan.weekday_zh(date)}｜{c['title']['zh']}" if weekly(c) else c["title"]["zh"]),
            "{{DESCRIPTION}}": html.escape(c.get("description", ""), quote=True),
            "{{SKIP}}": f'<a class="skip" href="#{first["id"]}">跳到{first.get("skip_label", first["toc"][1])}</a>',
-           "{{BRAND}}": f'<div class="brand">{brand}<small>{c.get("brand_sub") or c["title"]["zh"]}</small></div>',
+           "{{BRAND}}": f'<a class="home-link" href="{SITE_BASE}study.html">← Study home · 学习首页</a><div class="brand">{brand}<small>{c.get("brand_sub") or c["title"]["zh"]}</small></div>',
            "{{TOC}}": toc_html(c), "{{NCH}}": str(len(c["chapters"])), "{{HEADER}}": header_html(c),
            "{{FOOTER}}": c.get("footer") or f"DPT 基础 · {c['date']} · 定位依据 GB/T 12346；层次为学习用的简化描述，不代表进针方向或深度。",
            "{{KEY}}": f"dpt-day-{c['date']}:",

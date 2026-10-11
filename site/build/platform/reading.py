@@ -642,7 +642,7 @@ def render_page(ch):
     body = ''.join(chapters_html) + pron_html
     document = ('<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
                 f'<title>{esc(title["en"])} · {esc(title["zh"])}</title><meta name="description" content="{description}"><style>\n{css}\n</style></head><body>'
-                f'<a class="skip" href="#{esc(first)}">Skip to the chapters · 跳到正文</a><div class="layout"><aside class="sidebar"><div class="brand">{esc(title["en"])}<small>{esc(title["zh"])}</small></div>'
+                f'<a class="skip" href="#{esc(first)}">Skip to the chapters · 跳到正文</a><div class="layout"><aside class="sidebar"><a class="home-link" href="{esc(ch.model_base)}study.html">← Study home · 学习首页</a><div class="brand">{esc(title["en"])}<small>{esc(title["zh"])}</small></div>'
                 f'<div class="nav-label">Reading order · 阅读顺序</div><nav class="toc" aria-label="Chapters · 章节目录">{toc}</nav>{sidebar_note}</aside>'
                 f'<main class="main">{header}{ch.link_text(body)}{footer}</main></div>{SCRIPT}</body></html>\n')
     md_head = f'# {title["en"]}｜{title["zh"]}'
