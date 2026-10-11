@@ -1,5 +1,12 @@
 # DPT study · 解剖学习
 
+> **一眼看懂**
+> - **这是什么**：gui 的 DPT 双语学习站，含解剖知识库（肩袖、髋关节）、3D 模型和每天的学习包。
+> - **在线打开**：[学习首页](https://guiguisqwd.github.io/dpt-study/study.html) · [每日学习包](https://guiguisqwd.github.io/dpt-study/daily/)（GitHub Pages，推送 `main` 后自动更新）
+> - **状态**：公开，每天都有更新。
+> - **相关仓库**：[push-hub](https://github.com/guiguisqwd/push-hub)（把每日学习包推送给你并存档） · [guiguisqwd.github.io](https://github.com/guiguisqwd/guiguisqwd.github.io)（个人主页，含全部仓库目录）
+
+
 gui 的 DPT 学习仓库。内容分两大块，网站只负责把它们拼起来给人看：
 
 | 块 | 位置 | 是什么 |
